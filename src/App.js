@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 //import CubeD from "./components/CubeD";
 //import Home from "./components/Home";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import CubePage from "./components/CubeD"
+import CubePage from "./components/CubeD";
 
 const App = () => {
     const [isOpen, setIsOpen] = useState(false);

@@ -11,6 +11,7 @@ import {
     SideBtnWrap,
 } from "./SidebarElements";
 import { Link } from "react-router-dom";
+import { SignInBut } from "../BasicElements";
 
 const Sidebar = (props) => {
     return (
@@ -28,7 +29,7 @@ const Sidebar = (props) => {
                         <SidebarLink to="/signup">Sign Up</SidebarLink>
                     </SidebarMenu>
                     <SideBtnWrap>
-                        <SidebarRoute to="/signin">Sign In</SidebarRoute>
+                        <SignInBut to="/signin">Sign In</SignInBut>
                     </SideBtnWrap>
                 </SidebarWrapper>
             </SidebarContainer>

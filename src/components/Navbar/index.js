@@ -12,6 +12,7 @@ import {
     NavBtn,
     NavBtnLink,
 } from "./NavbarElements";
+import { SignInBut } from "../BasicElements";
 
 const Navbar = ({ toggle }) => {
     return (
@@ -34,7 +35,7 @@ const Navbar = ({ toggle }) => {
                         </NavItem>
                     </NavMenu>
                     <NavBtn>
-                        <NavBtnLink to="/signin">Sign In</NavBtnLink>
+                        <SignInBut to="/signin">Sign In</SignInBut>
                     </NavBtn>
                 </NavbarContainer>
             </Nav>
