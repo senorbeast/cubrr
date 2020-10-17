@@ -76,14 +76,16 @@ export const SolutionI = styled.div`
 export const InTextArea1 = styled.textarea`
     display: grid;
     height: 100%;
-    font-size: 2.5rem;
-    background-color: white;
-    background: papayawhip;
-    border-radius: 1.75rem;
-    padding: 1rem 2rem 1rem;
+    font-size: 2.3rem;
+    background-color: #ccd96c;
+    //background: papayawhip;
+    border-radius: 1.2rem;
+    padding: 1rem 1rem 1rem;
     grid-row: span 2 / auto;
-    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+    //box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
     resize: none;
+    outline: none;
+    border: none;
     @media screen and (max-width: 768px) {
         grid-column: span 3 / auto;
         grid-row: span 2 / auto;
@@ -91,25 +93,32 @@ export const InTextArea1 = styled.textarea`
     &:hover {
         filter: contrast(100%);
     }
+    &:focus {
+        outline: none;
+    }
 `;
 
 export const InTextArea2 = styled.textarea`
     display: grid;
     height: 100%;
-    font-size: 2.5rem;
-    background-color: white;
-    background: papayawhip;
-    border-radius: 1.75rem;
-    padding: 1rem 2rem 1rem;
+    font-size: 2.3rem;
+    background: #6cd99b;
+    border-radius: 1.2rem;
+    padding: 1rem 1rem 1rem;
     grid-row: span 3 / auto;
-    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+    //box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
     resize: none;
+    outline: none;
+    border: none;
     @media screen and (max-width: 768px) {
         grid-column: span 3 / auto;
         grid-row: span 3 / auto;
     }
     &:hover {
         filter: contrast(100%);
+    }
+    &:focus {
+        outline: none;
     }
 `;
 
