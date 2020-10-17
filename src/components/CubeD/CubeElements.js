@@ -2,53 +2,71 @@ import styled from "styled-components";
 import { Link as LinkR } from "react-router-dom";
 //import { Link as LinkS } from "react-scroll";
 
-export const CubeContainer = styled.li`
-    background-color: white;
-    border-radius: 0.25rem;
-    height: 80vh;
-    width: 70%;
-    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+export const CardContainer = styled.section`
+    display: grid;
+    gap: 1rem;
+    border: 1rem;
+    background-color: grey;
     color: #000;
-    flex-wrap: wrap;
-
+    grid-template-columns: repeat(3, 1fr);
+    height: 90vh;
     @media screen and (max-width: 768px) {
-        width: 80vh;
+        height: 180vh;
     }
-
-    &:hover {
-        filter: contrast(100%);
-    }
+    //justify-content: space-evenly;
+    //grid-template-columns:repeat(2
 `;
 
-export const ScrambleI = styled.li`
+export const CubeContainer = styled.div`
+    display: grid;
     background-color: white;
-    border-radius: 0.25rem;
-    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
-    display: flex;
-    height: 40vh;
-    flex-wrap: wrap;
-    flex-direction: column;
-    overflow: hidden;
-    color: #000;
+    grid-row: span 2 / auto;
+    grid-column: span 2 / auto;
+    @media screen and (max-width: 768px) {
+        grid-row: span 2 / auto;
+        grid-column: span 3 / auto;
+    }
+
     &:hover {
         filter: contrast(100%);
     }
 `;
 
-export const SolutionI = styled.li`
+export const ScrambleI = styled.div`
+    display: grid;
     background-color: white;
-    border-radius: 0.25rem;
-    height: 40vh;
-    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    overflow: hidden;
-    color: #000;
+    @media screen and (max-width: 768px) {
+        grid-column: span 3 / auto;
+    }
+
     &:hover {
         filter: contrast(100%);
     }
 `;
+
+export const SolutionI = styled.div`
+    display: grid;
+    background-color: white;
+
+    background-color: blue;
+    @media screen and (max-width: 768px) {
+        grid-column: span 3 / auto;
+    }
+    &:hover {
+        filter: contrast(100%);
+    }
+`;
+
+// export const SolutionI = styled.li`
+//     background-color: white;
+//     border-radius: 0.25rem;
+//     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+//     display: flex;
+//     flex-wrap: wrap;
+//     flex-direction: column;
+//     overflow: hidden;
+//     color: #000;
+//     &:hover {
+//         filter: contrast(100%);
+//     }
+// `;
