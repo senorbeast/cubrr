@@ -10,7 +10,7 @@ export const CardContainer = styled.section`
     color: #000;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(14, 1fr);
-    height: 88vh;
+    height: 87vh;
 
     @media screen and (max-width: 768px) {
         height: 180vh;
@@ -29,7 +29,7 @@ export const CubeContainer = styled.div`
     border-radius: 1.75rem;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
     @media screen and (max-width: 768px) {
-        grid-row: span 7 / auto;
+        grid-row: span 14 / auto;
         grid-column: span 3 / auto;
     }
 
@@ -48,7 +48,7 @@ export const ScrambleI = styled.div`
     grid-template-rows: repeat(4, 1fr);
     @media screen and (max-width: 768px) {
         grid-column: span 3 / auto;
-        grid-row: span 3 / auto;
+        grid-row: span 6 / auto;
     }
 
     &:hover {
@@ -66,7 +66,7 @@ export const SolutionI = styled.div`
     grid-template-rows: repeat(5, 1fr);
     @media screen and (max-width: 768px) {
         grid-column: span 3 / auto;
-        grid-row: span 4 / auto;
+        grid-row: span 8 / auto;
     }
     &:hover {
         filter: contrast(100%);
