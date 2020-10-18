@@ -7,7 +7,7 @@ import {
     InTextArea1,
     InTextArea2,
 } from "./CubeElements";
-//import { CubeD } from './VirtualCube';
+import * as CubeD from "./cube.js";
 
 function CubePage() {
     const [newScra, setnewScra] = useState("");
@@ -27,10 +27,9 @@ function CubePage() {
     return (
         <>
             <CardContainer>
-                <CubeContainer>
+                <CubeContainer id="gansair">
                     <h1>Virtual Cube </h1>
-                    <textarea type="Text" />
-                    {/* <CubeD /> */}
+                    <CubeD />
                 </CubeContainer>
                 <ScrambleI>
                     <h1>Scramble </h1>
