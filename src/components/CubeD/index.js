@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     CardContainer,
     CubeContainer,
@@ -13,6 +13,17 @@ function CubePage() {
     const [newScra, setnewScra] = useState("");
     const [newSol, setnewSol] = useState("");
 
+    useEffect(() => {
+        if (newScra != "") {
+            console.log("Noice", newScra[-1]);
+        }
+        window.history.pushState(
+            "object or string",
+            "",
+            "/cube/?scramble=" + newScra
+        );
+    }, [newScra]);
+
     return (
         <>
             <CardContainer>
@@ -25,8 +36,7 @@ function CubePage() {
                     <h1>Scramble </h1>
                     <InTextArea1
                         type="Text"
-                        onKeyDown={handleChangeScra}
-                        onKeyUp={handleChangeScra}
+                        onChange={handleChangeScra}
                         placeholder="Enter the Scramble Here :)"
                     />
                 </ScrambleI>
@@ -34,7 +44,7 @@ function CubePage() {
                     <h1>Solutions </h1>
                     <InTextArea2
                         type="Text"
-                        onClick={handleChangeSol}
+                        onKeyup={handleChangeSol}
                         onInput={handleChangeSol}
                         placeholder="Enter the Solution Here :)"
                     />
@@ -46,11 +56,6 @@ function CubePage() {
     function handleChangeScra(event) {
         setnewScra(event.target.value);
         console.log("Scramble:", newScra);
-        window.history.pushState(
-            "object or string",
-            "",
-            "/?scramble=" + newScra
-        );
     }
 
     function handleChangeSol(event) {
