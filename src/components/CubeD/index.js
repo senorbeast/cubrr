@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
     CardContainer,
     CubeContainer,
@@ -7,11 +7,14 @@ import {
     InTextArea1,
     InTextArea2,
 } from "./CubeElements";
-import * as CubeD from "./cube.js";
+//import CubeD from "./cube.js";
+import Trial from "./trial";
 
 function CubePage() {
     const [newScra, setnewScra] = useState("");
     const [newSol, setnewSol] = useState("");
+
+    let newRef = useRef();
 
     useEffect(() => {
         if (newScra != "") {
@@ -22,14 +25,15 @@ function CubePage() {
             "",
             "/cube/?scramble=" + newScra
         );
-    }, [newScra]);
+    }, [newScra, newRef]);
 
     return (
         <>
             <CardContainer>
-                <CubeContainer id="gansair">
+                <CubeContainer>
                     <h1>Virtual Cube </h1>
-                    <CubeD />
+                    {/* <CubeD /> */}
+                    <Trial />
                 </CubeContainer>
                 <ScrambleI>
                     <h1>Scramble </h1>

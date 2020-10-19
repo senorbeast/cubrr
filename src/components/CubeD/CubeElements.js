@@ -18,6 +18,12 @@ export const CardContainer = styled.section`
     //justify-content: space-evenly;
     //grid-template-columns:repeat(2
 `;
+// export const CubeD = styled.canvas`
+//     display: grid;
+//     height: 400;
+//     width: 400;
+//     background-color: grey;
+// `;
 
 export const CubeContainer = styled.div`
     display: grid;
@@ -28,6 +34,7 @@ export const CubeContainer = styled.div`
     color: green;
     border-radius: 1.75rem;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+
     @media screen and (max-width: 768px) {
         grid-row: span 7 / auto;
         grid-column: span 3 / auto;
