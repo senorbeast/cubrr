@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const SignInBut = styled(Link)`
     border-radius: 50px;
-    background: #01bf71;
+    background: #ee6f57;
     white-space: nowrap;
     padding: 15px 48px;
     color: #010606;

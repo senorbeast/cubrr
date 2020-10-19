@@ -18,18 +18,13 @@ export const CardContainer = styled.section`
     //justify-content: space-evenly;
     //grid-template-columns:repeat(2
 `;
-// export const CubeD = styled.canvas`
-//     display: grid;
-//     height: 400;
-//     width: 400;
-//     background-color: grey;
-// `;
 
 export const CubeContainer = styled.div`
     display: grid;
     background-color: white;
     grid-row: span 14 / auto;
     grid-column: span 2 / auto;
+    grid-template-rows: repeat(8, 1fr);
     padding: 1rem 2rem 1rem;
     color: green;
     border-radius: 1.75rem;
@@ -43,6 +38,13 @@ export const CubeContainer = styled.div`
     &:hover {
         filter: contrast(100%);
     }
+`;
+
+export const TrialStyle = styled.div`
+    display: grid;
+    grid-row: span 6 / auto;
+
+    background-color: grey;
 `;
 
 export const ScrambleI = styled.div`

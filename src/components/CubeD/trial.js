@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import { TrialStyle } from "./CubeElements";
 
 import { OrbitControls } from "../../../node_modules/three/examples/jsm/controls/OrbitControls";
 // /import Stats from '/jsm/libs/stats.module.js';
@@ -34,10 +35,26 @@ class Trial extends Component {
         camera.position.y = 1;
         camera.position.x = 0;
         camera.lookat = (0, 0, 0);
+
+        let width = this.mount.clientWidth;
+        let height = this.mount.clientHeight;
+
+        let mapDimensions = this.mount.getBoundingClientRect();
+
+        console.log("Width", width, "height", height);
         /* adding webgl renderer */
         var renderer = new THREE.WebGLRenderer({ alpha: true });
         renderer.setClearColor(0xe9ebb3);
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(width, height);
+
+        this.camera = new THREE.PerspectiveCamera(
+            75,
+            mapDimensions.width / mapDimensions.height,
+            0.1,
+            1000
+        );
+        renderer.setSize(mapDimensions.width, mapDimensions.height);
+
         // use ref as a mount point of the Three.js scene instead of the document.body
         this.mount.appendChild(renderer.domElement);
 
@@ -690,12 +707,13 @@ class Trial extends Component {
         window.addEventListener(
             "resize",
             () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.aspect = width / height;
                 camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-                render();
+                renderer.setSize(width, height);
+                renderer.render(scene, camera);
+                console.log("Widnows rezie", width, height);
             },
-            false
+            true
         );
 
         //const stats = Stats();
@@ -829,15 +847,17 @@ class Trial extends Component {
             requestAnimationFrame(animate);
 
             var currentURL = window.location.href;
-            console.log("URLLLL", currentURL);
+            //console.log("URLLLL", currentURL);
             var scramble_arr = currentURL.split("?");
-            if (scramble_arr.length == 3) {
-                var scramble = scramble_arr[1].split("=");
-                console.log(scramble_arr[2]);
-                var button = scramble_arr[2].split("=");
-                var url_scramble = scramble[1].replace(/%20/g, "");
-                url_scra1 = url_scramble.replace(/%27/g, "'");
-                compare(url_scra1.split(""), current_cube, button[1]);
+            if (scramble_arr.length == 2) {
+                if (scramble_arr[1].length > 8) {
+                    var scramble = scramble_arr[1].split("=");
+                    //console.log(scramble_arr[2]);
+                    //var button = scramble_arr[2].split("=");
+                    var url_scramble = scramble[1].replace(/%20/g, "");
+                    url_scra1 = url_scramble.replace(/%27/g, "'");
+                    compare(url_scra1.split(""), current_cube, 0);
+                }
             }
 
             /* --THIS PART IS WRITTEN SO THAT THE LAYER ROTATES BY 9 DEG EVERY TIME TILL IT REACHES 90 DEG AND THEN STOPS-- */
@@ -871,12 +891,15 @@ class Trial extends Component {
 
             renderer.render(scene, camera);
         }
+        let divStyle = {
+            color: "blue",
+        };
 
         init();
         animate();
     }
     render() {
-        return <div ref={(ref) => (this.mount = ref)} />;
+        return <TrialStyle ref={(ref) => (this.mount = ref)} />;
     }
 }
 export default Trial;

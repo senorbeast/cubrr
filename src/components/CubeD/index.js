@@ -11,21 +11,25 @@ import {
 import Trial from "./trial";
 
 function CubePage() {
-    const [newScra, setnewScra] = useState("");
+    let [newScra, setnewScra] = useState();
     const [newSol, setnewSol] = useState("");
-
-    let newRef = useRef();
+    let [inScra, setinScra] = useState();
 
     useEffect(() => {
-        if (newScra != "") {
-            console.log("Noice", newScra[-1]);
+        if (newScra != undefined) {
+            window.history.pushState(
+                "object or string",
+                "",
+                "/cube/?scramble=" + newScra
+            );
         }
-        window.history.pushState(
-            "object or string",
-            "",
-            "/cube/?scramble=" + newScra
-        );
-    }, [newScra, newRef]);
+    }, [newScra]);
+    useEffect(() => {
+        let urlstr = window.location.href;
+        let splitedurl = urlstr.split("=");
+        //console.log("HERERERE ", splitedurl[1]);
+        setinScra(splitedurl[1]);
+    }, [window.location.href]);
 
     return (
         <>
@@ -38,16 +42,17 @@ function CubePage() {
                 <ScrambleI>
                     <h1>Scramble </h1>
                     <InTextArea1
+                        id="Scramblespls"
                         type="Text"
-                        onChange={handleChangeScra}
+                        onKeyUp={handleChangeScra}
                         placeholder="Enter the Scramble Here :)"
+                        //value={inScra}
                     />
                 </ScrambleI>
                 <SolutionI>
                     <h1>Solutions </h1>
                     <InTextArea2
                         type="Text"
-                        onKeyup={handleChangeSol}
                         onInput={handleChangeSol}
                         placeholder="Enter the Solution Here :)"
                     />
