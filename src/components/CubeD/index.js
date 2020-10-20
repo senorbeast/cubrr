@@ -11,7 +11,7 @@ import {
 import Trial from "./trial";
 
 function CubePage() {
-    let [newScra, setnewScra] = useState();
+    let [newScra, setnewScra] = useState(); //using to store the scramble and push it to URL and also to store the initial URl and show in Scramble
     const [newSol, setnewSol] = useState("");
     let [inScra, setinScra] = useState();
 
@@ -25,10 +25,17 @@ function CubePage() {
         }
     }, [newScra]);
     useEffect(() => {
+        /*Runs only once now */ /*Used to copy the scramble in URL to Scramble Text Area*/
         let urlstr = window.location.href;
         let splitedurl = urlstr.split("=");
-        //console.log("HERERERE ", splitedurl[1]);
-        setinScra(splitedurl[1]);
+        if (splitedurl[1] != undefined) {
+            //Runs only if there is some scramble in the URL (so no replace error)
+            let aftereq = splitedurl[1];
+            let scra = aftereq.replace(/%20/g, " "); // (/  /g) to replace globally here it means to replace all values
+            let scra2 = scra.replace(/%27/g, "'");
+
+            setnewScra(scra2);
+        }
     }, [window.location.href]);
 
     return (
@@ -42,11 +49,10 @@ function CubePage() {
                 <ScrambleI>
                     <h1>Scramble </h1>
                     <InTextArea1
-                        id="Scramblespls"
                         type="Text"
                         onKeyUp={handleChangeScra}
                         placeholder="Enter the Scramble Here :)"
-                        //value={inScra}
+                        defaultValue={newScra}
                     />
                 </ScrambleI>
                 <SolutionI>
