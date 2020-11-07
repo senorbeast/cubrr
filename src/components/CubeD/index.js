@@ -11,8 +11,8 @@ import {
 import Trial from "./trial";
 
 function CubePage() {
-    let [newScra, setnewScra] = useState();
     const [newSol, setnewSol] = useState("");
+    let [newScra, setnewScra] = useState(); //using to store the scramble and push it to URL and also to store the initial URl and show in Scramble
     let [inScra, setinScra] = useState();
 
     useEffect(() => {
@@ -24,11 +24,19 @@ function CubePage() {
             );
         }
     }, [newScra]);
+
     useEffect(() => {
+        /*Runs only once now */ /*Used to copy the scramble in URL to Scramble Text Area*/
         let urlstr = window.location.href;
         let splitedurl = urlstr.split("=");
-        //console.log("HERERERE ", splitedurl[1]);
-        setinScra(splitedurl[1]);
+        if (splitedurl[1] != undefined) {
+            //Runs only if there is some scramble in the URL (so no replace error)
+            let aftereq = splitedurl[1];
+            let scra = aftereq.replace(/%20/g, " "); // (/  /g) to replace globally here it means to replace all values
+            let scra2 = scra.replace(/%27/g, "'");
+
+            setnewScra(scra2);
+        }
     }, [window.location.href]);
 
     return (
@@ -46,7 +54,7 @@ function CubePage() {
                         type="Text"
                         onKeyUp={handleChangeScra}
                         placeholder="Enter the Scramble Here :)"
-                        //value={inScra}
+                        defaultValue={newScra}
                     />
                 </ScrambleI>
                 <SolutionI>
@@ -61,6 +69,16 @@ function CubePage() {
         </>
     );
 
+    function handleChangeScra(event) {
+        var key = event.keyCode || event.charCode;
+        if (key == 8 || key == 46) {
+            setnewScra(event.target.value);
+            //Code to run after backspace or del in scramble
+        } else {
+            setnewScra(event.target.value);
+            console.log("Scramble:", newScra);
+        }
+    }
     function handleChangeScra(event) {
         setnewScra(event.target.value);
         console.log("Scramble:", newScra);
