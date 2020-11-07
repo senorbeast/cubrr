@@ -1,0 +1,38 @@
+/* setting the position of camera */
+        camera.position.z = 2;
+        camera.position.y = 1;
+        camera.position.x = 0;
+        camera.lookat = (0, 0, 0);
+        /* Setting the position and size of render*/
+        let width = this.mount.clientWidth;
+        let height = this.mount.clientHeight;
+        let mapDimensions = this.mount.getBoundingClientRect();
+        console.log("Width", width, "height", height);
+        /* adding webgl renderer */
+        var renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setClearColor(0xe9ebb3);
+        renderer.setSize(width, height);
+
+        // this.camera = new THREE.PerspectiveCamera(
+        //     75,
+        //     mapDimensions.width / mapDimensions.height,
+        //     0.1,
+        //     1000
+        //);
+        // renderer.setSize(mapDimensions.width, mapDimensions.height);
+        // use ref as a mount point of the Three.js scene instead of the document.body
+        this.mount.appendChild(renderer.domElement);
+        /* Setting the position and size of render*/
+
+        /*
+        window.addEventListener(
+            "resize",
+            () => {
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+                renderer.setSize(width, height);
+                render();
+            },
+            false
+        );
+        */

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import createjs from "../../../node_modules/createjs-module/createjs";
 import { TrialStyle } from "./CubeElements";
+import gsap from "gsap";
 
 import { OrbitControls } from "../../../node_modules/three/examples/jsm/controls/OrbitControls";
 // /import Stats from '/jsm/libs/stats.module.js';
@@ -36,23 +37,25 @@ class Trial extends Component {
         camera.position.y = 1;
         camera.position.x = 0;
         camera.lookat = (0, 0, 0);
+
         /* Setting the position and size of render*/
         let width = this.mount.clientWidth;
         let height = this.mount.clientHeight;
         let mapDimensions = this.mount.getBoundingClientRect();
-        console.log("Width", width, "height", height);
+
+        console.log("Width", width, "height", height, mapDimensions);
         /* adding webgl renderer */
         var renderer = new THREE.WebGLRenderer({ alpha: true });
         renderer.setClearColor(0xe9ebb3);
         renderer.setSize(width, height);
 
-        this.camera = new THREE.PerspectiveCamera(
-            75,
-            mapDimensions.width / mapDimensions.height,
-            0.1,
-            1000
-        );
-        renderer.setSize(mapDimensions.width, mapDimensions.height);
+        // this.camera = new THREE.PerspectiveCamera(
+        //     75,
+        //     mapDimensions.width / mapDimensions.height,
+        //     0.1,
+        //     1000
+        //);
+        // renderer.setSize(mapDimensions.width, mapDimensions.height);
         // use ref as a mount point of the Three.js scene instead of the document.body
         this.mount.appendChild(renderer.domElement);
         /* Setting the position and size of render*/
@@ -89,9 +92,16 @@ class Trial extends Component {
         var td1 = 0;
         var current_cube = [];
         var url_scra1 = "a";
-        var angle = 0;
+        var todo_moves = [];
+        var mov1 = 0;
+        var scramble_timeline = gsap.timeline({ defaults: { duration: 0.3 } });
+        var rd = 0;
+        var ru = 0;
+        var rf = 0;
+        var rb = 0;
+        var rr = 0;
+        var rl = 0;
 
-        var m = 0;
         const MathUtils = {
             DEG2RAD: function (deg) {
                 return (Math.PI / 180) * deg;
@@ -125,67 +135,6 @@ class Trial extends Component {
                 for (var j = 0; j < 3; j++) {
                     space = (0.5 + padding) * j;
                     for (var k = 0; k < 3; k++) {
-                        /*----CREATION OF EVERY CUBIE IN RUBIKS CUBE-----*/
-                        //geometry of every cube
-                        // var boxGeom = new THREE.BoxGeometry(0.5, 0.5, 0.5, 50, 40, 30);
-                        // //material used for every cube
-                        // var boxMat = new THREE.MeshLambertMaterial();
-                        // boxMat.onBeforeCompile = shader => {
-                        //   shader.uniforms.boxSize = {
-                        //   value: new THREE.Vector3(
-                        //    boxGeom.parameters.width,
-                        //    boxGeom.parameters.height,
-                        //    boxGeom.parameters.depth
-                        //  ).multiplyScalar(0.5)
-                        //  };
-                        //  shader.uniforms.radius = settings.radius;
-                        //  shader.vertexShader = `
-                        //  uniform vec3 boxSize;
-                        //  uniform float radius;
-                        //  ` + shader.vertexShader;
-                        //  shader.vertexShader = shader.vertexShader.replace(
-                        //    `#include <begin_vertex>`,
-                        //    `#include <begin_vertex>
-
-                        //    float maxRadius = clamp(radius, 0.0, min(boxSize.x, min(boxSize.y, boxSize.z)));
-                        //    vec3 signs = sign(position);
-
-                        //    vec3 subBox = boxSize - vec3(maxRadius);
-
-                        //    vec3 absPos = abs(transformed);
-                        //    // xy
-                        //    vec2 sub = absPos.xy - subBox.xy;
-                        //    if (absPos.x > subBox.x && absPos.y > subBox.y && absPos.z <= subBox.z) {
-                        //      transformed.xy = normalize(sub) * maxRadius + subBox.xy;
-                        //      transformed.xy *= signs.xy;
-                        //    }
-                        //    // xz
-                        //    sub = absPos.xz - subBox.xz;
-                        //    if (absPos.x > subBox.x && absPos.z > subBox.z && absPos.y <= subBox.y) {
-                        //      transformed.xz = normalize(sub) * maxRadius + subBox.xz;
-                        //      transformed.xz *= signs.xz;
-                        //    }
-                        //    // yz
-                        //    sub = absPos.yz - subBox.yz;
-                        //    if (absPos.y > subBox.y && absPos.z > subBox.z && absPos.x <= subBox.x) {
-                        //      transformed.yz = normalize(sub) * maxRadius + subBox.yz;
-                        //      transformed.yz *= signs.yz;
-                        //    }
-
-                        //    // corner
-                        //    if (all(greaterThan(absPos, subBox))){
-                        //      vec3 sub3 = absPos - subBox;
-                        //      transformed = (normalize(sub3) * maxRadius + subBox) * signs;
-                        //    }
-
-                        //    // re-compute normals for correct shadows and reflections
-                        //    objectNormal = all(equal(position, transformed)) ? normal : normalize(position - transformed);
-                        //    transformedNormal = normalMatrix * objectNormal;
-
-                        //    `
-                        //  );
-                        // };
-
                         //mesh created for every cube
                         var cube2 = new THREE.Mesh(
                             new THREE.BoxGeometry(0.5, 0.5, 0.5),
@@ -259,7 +208,7 @@ class Trial extends Component {
         function event(key) {
             //TIME GAP CALCULATION OF KEY PRESS SO THAT CONTINOUS PRESS IS DETECTED SINCE THIS CAN LEAD TO INDEFINITE ROTATION OF LAYER
             td = Math.abs(key.timeStamp - td1);
-            if (td > 300) {
+            if (td > 0.5) {
                 if (key.keyCode == "118") {
                     layer_rotate(-1, "D", 1);
                 }
@@ -340,35 +289,34 @@ class Trial extends Component {
                 scene.add(pivot);
                 /* --ANTICLOCKWISE-- */
                 if (number == 1) {
+                    //console.log("D", pivot);
                     if (dir == -1) {
-                        createjs.Tween.get(pivot.rotation).to(
-                            { y: pivot.rotation.y + Math.PI / 2 },
-                            300,
-                            createjs.Ease.linear
-                        );
-                        m = m + 1;
+                        // createjs.Tween.get(pivot.rotation).to( { y: pivot.rotation.y + Math.PI/2 } , 0.5 , createjs.Ease.linear).call(Complete)
+                        scramble_timeline.to(pivot.rotation, {
+                            y: pivot.rotation.y + Math.PI / 2,
+                        });
                         pivot.updateMatrixWorld();
                         fd = 1;
+                        rd = rd + Math.PI / 2;
                     }
                     /* --CLOCKWISE-- */
                     if (dir == 1) {
-                        createjs.Tween.get(pivot.rotation).to(
-                            { y: pivot.rotation.y - Math.PI / 2 },
-                            300,
-                            createjs.Ease.linear
-                        );
+                        // createjs.Tween.get(pivot.rotation).to( { y: pivot.rotation.y - Math.PI/2 } , 0.5 , createjs.Ease.linear).call(Complete)
+                        scramble_timeline.to(pivot.rotation, {
+                            y: pivot.rotation.y - Math.PI / 2,
+                        });
                         pivot.updateMatrixWorld();
                         fe = 1;
+                        rd = rd - Math.PI / 2;
                     }
                 }
                 if (number == 2) {
-                    createjs.Tween.get(pivot.rotation).to(
-                        { y: pivot.rotation.y + Math.PI },
-                        300,
-                        createjs.Ease.linear
-                    );
+                    scramble_timeline.to(pivot.rotation, {
+                        y: pivot.rotation.y + Math.PI,
+                    });
                     pivot.updateMatrixWorld();
                     fe = 10;
+                    rd = rd + Math.PI;
                 }
             } else if (layer == "U") {
                 for (var qi = 0; qi < 27; qi++) {
@@ -385,34 +333,30 @@ class Trial extends Component {
                 /* --ANTICLOCKWISE-- */
                 if (number == 1) {
                     if (dir == -1) {
-                        createjs.Tween.get(pivot1.rotation).to(
-                            { y: pivot1.rotation.y + Math.PI / 2 },
-                            300,
-                            createjs.Ease.linear
-                        );
-
+                        // createjs.Tween.get(pivot1.rotation).to( { y: pivot1.rotation.y + Math.PI/2 } , 0.5 , createjs.Ease.linear).call(Complete)
+                        scramble_timeline.to(pivot1.rotation, {
+                            y: ru + Math.PI / 2,
+                        });
                         pivot1.updateMatrixWorld();
                         fd = 2;
+                        ru = ru + Math.PI / 2;
                     }
                     /* --CLOCKWISE-- */
                     if (dir == 1) {
-                        createjs.Tween.get(pivot1.rotation).to(
-                            { y: pivot1.rotation.y - Math.PI / 2 },
-                            300,
-                            createjs.Ease.linear
-                        );
-
+                        //  createjs.Tween.get(pivot1.rotation).to( { y: pivot1.rotation.y - Math.PI/2 } , 0.5 , createjs.Ease.linear).call(Complete)
+                        scramble_timeline.to(pivot1.rotation, {
+                            y: ru - Math.PI / 2,
+                        });
                         pivot1.updateMatrixWorld();
                         fe = 2;
+                        ru = ru + Math.PI / 2;
                     }
                 }
                 if (number == 2) {
-                    createjs.Tween.get(pivot1.rotation).to(
-                        { y: pivot1.rotation.y + Math.PI },
-                        300,
-                        createjs.Ease.linear
-                    );
+                    scramble_timeline.to(pivot1.rotation, { y: ru + Math.PI });
+                    //  createjs.Tween.get(pivot1.rotation).to( { y: pivot1.rotation.y + Math.PI } , 0.5 , createjs.Ease.linear).call(Complete)
                     fe = 11;
+                    ru = ru + Math.PI;
                 }
             } else if (layer == "F") {
                 for (var qi = 0; qi < 27; qi++) {
@@ -429,34 +373,31 @@ class Trial extends Component {
                 /* --ANTICLOCKWISE-- */
                 if (number == 1) {
                     if (dir == -1) {
-                        createjs.Tween.get(pivot2.rotation).to(
-                            { z: pivot2.rotation.z - Math.PI / 2 },
-                            300,
-                            createjs.Ease.linear
-                        );
-
+                        // createjs.Tween.get(pivot2.rotation).to( { z: pivot2.rotation.z - Math.PI/2 } , 0.5 , createjs.Ease.linear).call(Complete)
+                        scramble_timeline.to(pivot2.rotation, {
+                            z: rf + Math.PI / 2,
+                        });
                         pivot2.updateMatrixWorld();
                         fd = 3;
+                        rf = rf + Math.PI / 2;
                     }
                     /* --CLOCKWISE-- */
                     if (dir == 1) {
-                        createjs.Tween.get(pivot2.rotation).to(
-                            { z: pivot2.rotation.z + Math.PI / 2 },
-                            300,
-                            createjs.Ease.linear
-                        );
+                        scramble_timeline.to(pivot2.rotation, {
+                            z: rf - Math.PI / 2,
+                        });
+                        // createjs.Tween.get(pivot2.rotation).to( { z: pivot2.rotation.z + Math.PI/2 } , 0.5 , createjs.Ease.linear).call(Complete)
                         pivot2.updateMatrixWorld();
                         fe = 3;
+                        rf = rf - Math.PI / 2;
                     }
                 }
                 if (number == 2) {
-                    createjs.Tween.get(pivot2.rotation).to(
-                        { z: pivot2.rotation.z + Math.PI },
-                        300,
-                        createjs.Ease.linear
-                    );
+                    scramble_timeline.to(pivot2.rotation, { z: rf + Math.PI });
+                    // createjs.Tween.get(pivot2.rotation).to( { z: pivot2.rotation.z + Math.PI } , 0.5 , createjs.Ease.linear).call(Complete)
                     pivot2.updateMatrixWorld();
                     fe = 12;
+                    rf = rf + Math.PI;
                 }
             } else if (layer == "B") {
                 for (var qi = 0; qi < 27; qi++) {
@@ -473,79 +414,80 @@ class Trial extends Component {
                 /* --ANTICLOCKWISE-- */
                 if (number == 1) {
                     if (dir == -1) {
-                        createjs.Tween.get(pivot3.rotation).to(
-                            { z: pivot3.rotation.z - Math.PI / 2 },
-                            300,
-                            createjs.Ease.linear
-                        );
+                        scramble_timeline.to(pivot3.rotation, {
+                            z: rb - Math.PI / 2,
+                        });
+                        // createjs.Tween.get(pivot3.rotation).to( { z: pivot3.rotation.z - Math.PI/2 } , 0.5 , createjs.Ease.linear).call(Complete)
                         pivot3.updateMatrixWorld();
                         fd = 4;
+                        rb = rb - Math.PI / 2;
                     }
                     /* --CLOCKWISE-- */
                     if (dir == 1) {
-                        createjs.Tween.get(pivot3.rotation).to(
-                            { z: pivot3.rotation.z + Math.PI / 2 },
-                            300,
-                            createjs.Ease.linear
-                        );
+                        scramble_timeline.to(pivot3.rotation, {
+                            z: rb + Math.PI / 2,
+                        });
+                        // createjs.Tween.get(pivot3.rotation).to( { z: pivot3.rotation.z + Math.PI/2 } , 0.5 , createjs.Ease.linear).call(Complete)
                         pivot3.updateMatrixWorld();
                         fe = 4;
+                        rb = rb + Math.PI / 2;
                     }
                 }
                 if (number == 2) {
-                    createjs.Tween.get(pivot3.rotation).to(
-                        { z: pivot3.rotation.z + Math.PI },
-                        300,
-                        createjs.Ease.linear
-                    );
+                    scramble_timeline.to(pivot3.rotation, { z: rb + Math.PI });
+                    // createjs.Tween.get(pivot3.rotation).to( { z: pivot3.rotation.z + Math.PI } , 0.5 , createjs.Ease.linear).call(Complete)
                     pivot3.updateMatrixWorld();
                     fe = 13;
+                    rb = rb + Math.PI;
                 }
             } else if (layer == "R") {
                 for (var qi = 0; qi < 27; qi++) {
                     meshs[qi].getWorldPosition(v1);
 
                     if (Math.round(v1.x * 100) / 100 == 0.5 + padding) {
-                        layer_arr[qf1] = qi;
+                        //console.log(qi);
                         //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
                         pivot4.attach(meshs[qi]);
                         qf1 += 1;
+                        //console.log(pivot4);
                     }
                 }
                 scene.add(pivot4);
 
                 /* --ANTICLOCKWISE-- */
                 if (number == 1) {
+                    //console.log("R", pivot4);
+
                     if (dir == -1) {
-                        createjs.Tween.get(pivot4.rotation).to(
-                            { x: pivot4.rotation.x + Math.PI / 2 },
-                            300,
-                            createjs.Ease.linear
-                        );
+                        scramble_timeline.to(pivot4.rotation, {
+                            x: pivot4.rotation.x + Math.PI / 2,
+                        });
+                        // createjs.Tween.get(pivot4.rotation).to( { x: pivot4.rotation.x + Math.PI/2 } , 0.5 , createjs.Ease.linear).call(Complete)
 
                         pivot4.updateMatrixWorld();
                         fd = 5;
+                        rr = rr + Math.PI / 2;
                     }
                     /* --CLOCKWISE-- */
                     if (dir == 1) {
-                        createjs.Tween.get(pivot4.rotation).to(
-                            { x: pivot4.rotation.x - Math.PI / 2 },
-                            300,
-                            createjs.Ease.linear
-                        );
+                        scramble_timeline.to(pivot4.rotation, {
+                            x: pivot4.rotation.x - Math.PI / 2,
+                        });
+                        // createjs.Tween.get(pivot4.rotation).to( { x: pivot4.rotation.x - Math.PI/2 } , 0.5 , createjs.Ease.linear).call(Complete)
                         pivot4.updateMatrixWorld();
                         fe = 5;
+                        rr = rr - Math.PI / 2;
                     }
                 }
 
                 if (number == 2) {
-                    createjs.Tween.get(pivot4.rotation).to(
-                        { x: pivot4.rotation.x + Math.PI },
-                        300,
-                        createjs.Ease.linear
-                    );
+                    scramble_timeline.to(pivot4.rotation, {
+                        x: pivot4.rotation.x + Math.PI,
+                    });
+                    // createjs.Tween.get(pivot4.rotation).to( { x: pivot4.rotation.x + Math.PI } , 0.5 , createjs.Ease.linear).call(Complete)
                     pivot4.updateMatrixWorld();
                     fe = 14;
+                    rr = rr + Math.PI;
                 }
             } else if (layer == "L") {
                 for (var qi = 0; qi < 27; qi++) {
@@ -562,34 +504,32 @@ class Trial extends Component {
                 /* --ANTICLOCKWISE-- */
                 if (number == 1) {
                     if (dir == -1) {
-                        createjs.Tween.get(pivot5.rotation).to(
-                            { x: pivot5.rotation.x + Math.PI / 2 },
-                            300,
-                            createjs.Ease.linear
-                        );
+                        scramble_timeline.to(pivot5.rotation, {
+                            x: rl + Math.PI / 2,
+                        });
+                        // createjs.Tween.get(pivot5.rotation).to( { x: pivot5.rotation.x + Math.PI/2 } , 0.5 , createjs.Ease.linear).call(Complete)
                         pivot5.updateMatrixWorld();
                         fd = 6;
+                        rl = rl + Math.PI / 2;
                     }
                     /* --CLOCKWISE-- */
                     if (dir == 1) {
-                        createjs.Tween.get(pivot5.rotation).to(
-                            { x: pivot5.rotation.x - Math.PI / 2 },
-                            300,
-                            createjs.Ease.linear
-                        );
+                        scramble_timeline.to(pivot5.rotation, {
+                            x: rl - Math.PI / 2,
+                        });
+                        //  createjs.Tween.get(pivot5.rotation).to( { x: pivot5.rotation.x - Math.PI/2 } , 0.5 , createjs.Ease.linear).call(Complete)
                         pivot5.updateMatrixWorld();
                         fe = 6;
+                        rl = rl - Math.PI / 2;
                     }
                 }
 
                 if (number == 2) {
-                    createjs.Tween.get(pivot5.rotation).to(
-                        { x: pivot5.rotation.x + Math.PI },
-                        300,
-                        createjs.Ease.linear
-                    );
+                    scramble_timeline.to(pivot5.rotation, { x: rl + Math.PI });
+                    //  createjs.Tween.get(pivot5.rotation).to( { x: pivot5.rotation.x + Math.PI } , 0.5 , createjs.Ease.linear).call(Complete)
                     pivot5.updateMatrixWorld();
                     fe = 15;
+                    rl = rl + Math.PI;
                 }
             } else if (layer == "M") {
                 for (var qi = 0; qi < 27; qi++) {
@@ -608,10 +548,10 @@ class Trial extends Component {
                     createjs.Tween.get(pivotm.rotation)
                         .to(
                             { x: pivotm.rotation.x - Math.PI / 2 },
-                            300,
+                            0.5,
                             createjs.Ease.linear
                         )
-                        .wait(300);
+                        .wait(0.5);
                     pivotm.updateMatrixWorld();
                     fd = 7;
                 }
@@ -620,10 +560,10 @@ class Trial extends Component {
                     createjs.Tween.get(pivotm.rotation)
                         .to(
                             { x: pivotm.rotation.x + Math.PI / 2 },
-                            300,
+                            0.5,
                             createjs.Ease.linear
                         )
-                        .wait(300);
+                        .wait(0.5);
                     pivotm.updateMatrixWorld();
                     fe = 7;
                 }
@@ -643,7 +583,7 @@ class Trial extends Component {
                 if (dir == -1) {
                     createjs.Tween.get(pivots.rotation).to(
                         { z: pivots.rotation.z - Math.PI / 2 },
-                        300,
+                        0.5,
                         createjs.Ease.linear
                     );
                     pivots.updateMatrixWorld();
@@ -653,7 +593,7 @@ class Trial extends Component {
                 if (dir == 1) {
                     createjs.Tween.get(pivots.rotation).to(
                         { z: pivots.rotation.z + Math.PI / 2 },
-                        300,
+                        0.5,
                         createjs.Ease.linear
                     );
                     pivots.updateMatrixWorld();
@@ -675,7 +615,7 @@ class Trial extends Component {
                 if (dir == -1) {
                     createjs.Tween.get(pivote.rotation).to(
                         { y: pivote.rotation.y - Math.PI / 2 },
-                        300,
+                        0.5,
                         createjs.Ease.linear
                     );
                     pivote.updateMatrixWorld();
@@ -685,22 +625,22 @@ class Trial extends Component {
                 if (dir == 1) {
                     createjs.Tween.get(pivote.rotation).to(
                         { y: pivote.rotation.y + Math.PI / 2 },
-                        300,
+                        0.5,
                         createjs.Ease.linear
                     );
                     pivote.updateMatrixWorld();
                     fe = 9;
                 }
             }
-            //console.log(v2)
+            ////console.log(v2)
         }
 
         window.addEventListener(
             "resize",
             () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.aspect = width / height;
                 camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setSize(width, height);
                 render();
             },
             false
@@ -709,34 +649,61 @@ class Trial extends Component {
         //const stats = Stats();
         //document.body.appendChild(stats.dom);
         /* --THIS STOPS THE CODE FOR N milliseconds WHICH HELPS US GIVE A SENSE OF MOTION DURING ROTATION OF LAYERS -- */
+        // function sleep(milliseconds) {
+        //   const date = Date.now();
+        //   let currentDate = null;
+        //   do {
+        //     currentDate = Date.now();
+        //   } while (currentDate - date < milliseconds);
+        // }
         function sleep(milliseconds) {
-            const date = Date.now();
-            let currentDate = null;
-            do {
-                currentDate = Date.now();
-            } while (currentDate - date < milliseconds);
+            var start = new Date().getTime();
+            for (var i = 0; i < 1e7; i++) {
+                if (new Date().getTime() - start > milliseconds) {
+                    break;
+                }
+            }
         }
-
         function onDocumentMouseMove(event) {
             event.preventDefault();
             //groupU.rotateY(1.5707963268 );
-            //flag = 1;
             mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
             mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
         }
+
         function user_rotate(moves) {
-            console.log("mov", moves);
-            var mov1 = 0;
+            ////console.log(moves);
 
             while (mov1 <= moves.length - 1) {
-                console.log(mov1);
                 var num = moves[mov1];
                 var num1 = num.split("_");
-                layer_rotate(num1[0], num1[1], num1[2]);
+                layer_rotate(Number(num1[0]), num1[1], num1[2]);
                 mov1 = mov1 + 1;
             }
+
+            if (mov1 == moves.length) {
+                current_cube = url_scra1.split("");
+                mov1 = 0;
+            }
         }
+        // function mkc_rotate(moves1)
+        // {
+        //   var num = moves1[mov1]
+        //   var num1 = num.split("_")
+        //   layer_rotate( num1[0] , num1[1] , num1[2] )
+        //   mov1 = mov1 + 1
+
+        //   if( mov1 == moves1.length )
+        //     {
+        //       ////console.log("duc")
+        //       mov1 = 0
+        //       current_cube = url_scra1.split('')
+
+        //     }
+        // }
         function compare(url, cube, but) {
+            ////console.log("url", url);
+            ////console.log("cur", cube);
             if (but == 1) {
                 var kl = 0;
                 var cube_play = [];
@@ -749,16 +716,16 @@ class Trial extends Component {
                         kl = kl + 1;
                     }
                 }
-                console.log("button", cube_play);
+                ////console.log("button", cube_play);
             }
-            if (url.length > cube.length) {
-                console.log("url", url);
-                // console.log(cube.length)
+            if (
+                url.length > cube.length &&
+                scramble_timeline.isActive() == false
+            ) {
+                // //console.log(cube.length)
                 var current_move = url.slice(cube.length);
-                console.log(scramble_read(current_move, url, cube, but));
-                console.log("cur", current_move);
+
                 user_rotate(scramble_read(current_move, url, cube, but));
-                current_cube = url_scra1.split("");
             }
         }
         function animate() {
@@ -785,15 +752,12 @@ class Trial extends Component {
             var scramble_arr = currentURL.split("?");
             if (scramble_arr.length == 3) {
                 var scramble = scramble_arr[1].split("=");
-                console.log(scramble_arr[2]);
+
                 var button = scramble_arr[2].split("=");
                 var url_scramble = scramble[1].replace(/%20/g, "");
                 url_scra1 = url_scramble.replace(/%27/g, "'");
                 compare(url_scra1.split(""), current_cube, button[1]);
             }
-
-            console.log(m);
-            /* --THIS PART IS WRITTEN SO THAT THE LAYER ROTATES BY 9 DEG EVERY TIME TILL IT REACHES 90 DEG AND THEN STOPS-- */
 
             controls.update();
 
