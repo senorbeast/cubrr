@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import createjs from "../../../node_modules/createjs-module/createjs";
 import { TrialStyle } from "./CubeElements";
 
 import { OrbitControls } from "../../../node_modules/three/examples/jsm/controls/OrbitControls";
@@ -35,12 +36,10 @@ class Trial extends Component {
         camera.position.y = 1;
         camera.position.x = 0;
         camera.lookat = (0, 0, 0);
-
+        /* Setting the position and size of render*/
         let width = this.mount.clientWidth;
         let height = this.mount.clientHeight;
-
         let mapDimensions = this.mount.getBoundingClientRect();
-
         console.log("Width", width, "height", height);
         /* adding webgl renderer */
         var renderer = new THREE.WebGLRenderer({ alpha: true });
@@ -54,9 +53,9 @@ class Trial extends Component {
             1000
         );
         renderer.setSize(mapDimensions.width, mapDimensions.height);
-
         // use ref as a mount point of the Three.js scene instead of the document.body
         this.mount.appendChild(renderer.domElement);
+        /* Setting the position and size of render*/
 
         var controls = new OrbitControls(camera, renderer.domElement);
         var layer_arr = [];
@@ -90,6 +89,9 @@ class Trial extends Component {
         var td1 = 0;
         var current_cube = [];
         var url_scra1 = "a";
+        var angle = 0;
+
+        var m = 0;
         const MathUtils = {
             DEG2RAD: function (deg) {
                 return (Math.PI / 180) * deg;
@@ -249,10 +251,6 @@ class Trial extends Component {
                 meshs[F[f]].geometry.faces[9].color = green;
             }
 
-            //adding x,y,z axes to the scene
-            //  var axes = new THREE.AxesHelper(20);
-            //  scene.add(axes)
-
             /* --EVENT LISTENER FOR KEY PRESS-- */
             window.addEventListener("keypress", event);
         }
@@ -343,31 +341,31 @@ class Trial extends Component {
                 /* --ANTICLOCKWISE-- */
                 if (number == 1) {
                     if (dir == -1) {
-                        rotate_anticlockwise();
-
-                        pivot.rotateOnWorldAxis(
-                            new THREE.Vector3(0, 1, 0),
-                            MathUtils.DEG2RAD(9)
+                        createjs.Tween.get(pivot.rotation).to(
+                            { y: pivot.rotation.y + Math.PI / 2 },
+                            300,
+                            createjs.Ease.linear
                         );
+                        m = m + 1;
                         pivot.updateMatrixWorld();
                         fd = 1;
                     }
                     /* --CLOCKWISE-- */
                     if (dir == 1) {
-                        rotate_clockwise();
-                        pivot.rotateOnWorldAxis(
-                            new THREE.Vector3(0, 1, 0),
-                            MathUtils.DEG2RAD(-9)
+                        createjs.Tween.get(pivot.rotation).to(
+                            { y: pivot.rotation.y - Math.PI / 2 },
+                            300,
+                            createjs.Ease.linear
                         );
                         pivot.updateMatrixWorld();
                         fe = 1;
                     }
                 }
                 if (number == 2) {
-                    rotate_clockwise();
-                    pivot.rotateOnWorldAxis(
-                        new THREE.Vector3(0, 1, 0),
-                        MathUtils.DEG2RAD(-9)
+                    createjs.Tween.get(pivot.rotation).to(
+                        { y: pivot.rotation.y + Math.PI },
+                        300,
+                        createjs.Ease.linear
                     );
                     pivot.updateMatrixWorld();
                     fe = 10;
@@ -387,33 +385,33 @@ class Trial extends Component {
                 /* --ANTICLOCKWISE-- */
                 if (number == 1) {
                     if (dir == -1) {
-                        rotate_anticlockwise();
-
-                        pivot1.rotateOnWorldAxis(
-                            new THREE.Vector3(0, 1, 0),
-                            MathUtils.DEG2RAD(9)
+                        createjs.Tween.get(pivot1.rotation).to(
+                            { y: pivot1.rotation.y + Math.PI / 2 },
+                            300,
+                            createjs.Ease.linear
                         );
+
                         pivot1.updateMatrixWorld();
                         fd = 2;
                     }
                     /* --CLOCKWISE-- */
                     if (dir == 1) {
-                        rotate_clockwise();
-                        pivot1.rotateOnWorldAxis(
-                            new THREE.Vector3(0, 1, 0),
-                            MathUtils.DEG2RAD(-9)
+                        createjs.Tween.get(pivot1.rotation).to(
+                            { y: pivot1.rotation.y - Math.PI / 2 },
+                            300,
+                            createjs.Ease.linear
                         );
+
                         pivot1.updateMatrixWorld();
                         fe = 2;
                     }
                 }
                 if (number == 2) {
-                    rotate_clockwise();
-                    pivot1.rotateOnWorldAxis(
-                        new THREE.Vector3(0, 1, 0),
-                        MathUtils.DEG2RAD(-9)
+                    createjs.Tween.get(pivot1.rotation).to(
+                        { y: pivot1.rotation.y + Math.PI },
+                        300,
+                        createjs.Ease.linear
                     );
-                    pivot1.updateMatrixWorld();
                     fe = 11;
                 }
             } else if (layer == "F") {
@@ -431,31 +429,31 @@ class Trial extends Component {
                 /* --ANTICLOCKWISE-- */
                 if (number == 1) {
                     if (dir == -1) {
-                        rotate_anticlockwise();
-
-                        pivot2.rotateOnWorldAxis(
-                            new THREE.Vector3(0, 0, 1),
-                            MathUtils.DEG2RAD(9)
+                        createjs.Tween.get(pivot2.rotation).to(
+                            { z: pivot2.rotation.z - Math.PI / 2 },
+                            300,
+                            createjs.Ease.linear
                         );
+
                         pivot2.updateMatrixWorld();
                         fd = 3;
                     }
                     /* --CLOCKWISE-- */
                     if (dir == 1) {
-                        rotate_clockwise();
-                        pivot2.rotateOnWorldAxis(
-                            new THREE.Vector3(0, 0, 1),
-                            MathUtils.DEG2RAD(-9)
+                        createjs.Tween.get(pivot2.rotation).to(
+                            { z: pivot2.rotation.z + Math.PI / 2 },
+                            300,
+                            createjs.Ease.linear
                         );
                         pivot2.updateMatrixWorld();
                         fe = 3;
                     }
                 }
                 if (number == 2) {
-                    rotate_clockwise();
-                    pivot2.rotateOnWorldAxis(
-                        new THREE.Vector3(0, 0, 1),
-                        MathUtils.DEG2RAD(-9)
+                    createjs.Tween.get(pivot2.rotation).to(
+                        { z: pivot2.rotation.z + Math.PI },
+                        300,
+                        createjs.Ease.linear
                     );
                     pivot2.updateMatrixWorld();
                     fe = 12;
@@ -475,31 +473,30 @@ class Trial extends Component {
                 /* --ANTICLOCKWISE-- */
                 if (number == 1) {
                     if (dir == -1) {
-                        rotate_anticlockwise();
-
-                        pivot3.rotateOnWorldAxis(
-                            new THREE.Vector3(0, 0, 1),
-                            MathUtils.DEG2RAD(9)
+                        createjs.Tween.get(pivot3.rotation).to(
+                            { z: pivot3.rotation.z - Math.PI / 2 },
+                            300,
+                            createjs.Ease.linear
                         );
                         pivot3.updateMatrixWorld();
                         fd = 4;
                     }
                     /* --CLOCKWISE-- */
                     if (dir == 1) {
-                        rotate_clockwise();
-                        pivot3.rotateOnWorldAxis(
-                            new THREE.Vector3(0, 0, 1),
-                            MathUtils.DEG2RAD(-9)
+                        createjs.Tween.get(pivot3.rotation).to(
+                            { z: pivot3.rotation.z + Math.PI / 2 },
+                            300,
+                            createjs.Ease.linear
                         );
                         pivot3.updateMatrixWorld();
                         fe = 4;
                     }
                 }
                 if (number == 2) {
-                    rotate_clockwise();
-                    pivot3.rotateOnWorldAxis(
-                        new THREE.Vector3(0, 0, 1),
-                        MathUtils.DEG2RAD(-9)
+                    createjs.Tween.get(pivot3.rotation).to(
+                        { z: pivot3.rotation.z + Math.PI },
+                        300,
+                        createjs.Ease.linear
                     );
                     pivot3.updateMatrixWorld();
                     fe = 13;
@@ -516,25 +513,25 @@ class Trial extends Component {
                     }
                 }
                 scene.add(pivot4);
-                console.log("num", number);
+
                 /* --ANTICLOCKWISE-- */
                 if (number == 1) {
                     if (dir == -1) {
-                        rotate_anticlockwise();
-
-                        pivot4.rotateOnWorldAxis(
-                            new THREE.Vector3(1, 0, 0),
-                            MathUtils.DEG2RAD(9)
+                        createjs.Tween.get(pivot4.rotation).to(
+                            { x: pivot4.rotation.x + Math.PI / 2 },
+                            300,
+                            createjs.Ease.linear
                         );
+
                         pivot4.updateMatrixWorld();
                         fd = 5;
                     }
                     /* --CLOCKWISE-- */
                     if (dir == 1) {
-                        rotate_clockwise();
-                        pivot4.rotateOnWorldAxis(
-                            new THREE.Vector3(1, 0, 0),
-                            MathUtils.DEG2RAD(-9)
+                        createjs.Tween.get(pivot4.rotation).to(
+                            { x: pivot4.rotation.x - Math.PI / 2 },
+                            300,
+                            createjs.Ease.linear
                         );
                         pivot4.updateMatrixWorld();
                         fe = 5;
@@ -542,10 +539,10 @@ class Trial extends Component {
                 }
 
                 if (number == 2) {
-                    rotate_clockwise();
-                    pivot4.rotateOnWorldAxis(
-                        new THREE.Vector3(1, 0, 0),
-                        MathUtils.DEG2RAD(-9)
+                    createjs.Tween.get(pivot4.rotation).to(
+                        { x: pivot4.rotation.x + Math.PI },
+                        300,
+                        createjs.Ease.linear
                     );
                     pivot4.updateMatrixWorld();
                     fe = 14;
@@ -565,20 +562,20 @@ class Trial extends Component {
                 /* --ANTICLOCKWISE-- */
                 if (number == 1) {
                     if (dir == -1) {
-                        rotate_anticlockwise();
-                        pivot5.rotateOnWorldAxis(
-                            new THREE.Vector3(1, 0, 0),
-                            MathUtils.DEG2RAD(9)
+                        createjs.Tween.get(pivot5.rotation).to(
+                            { x: pivot5.rotation.x + Math.PI / 2 },
+                            300,
+                            createjs.Ease.linear
                         );
                         pivot5.updateMatrixWorld();
                         fd = 6;
                     }
                     /* --CLOCKWISE-- */
                     if (dir == 1) {
-                        rotate_clockwise();
-                        pivot5.rotateOnWorldAxis(
-                            new THREE.Vector3(1, 0, 0),
-                            MathUtils.DEG2RAD(-9)
+                        createjs.Tween.get(pivot5.rotation).to(
+                            { x: pivot5.rotation.x - Math.PI / 2 },
+                            300,
+                            createjs.Ease.linear
                         );
                         pivot5.updateMatrixWorld();
                         fe = 6;
@@ -586,10 +583,10 @@ class Trial extends Component {
                 }
 
                 if (number == 2) {
-                    rotate_clockwise();
-                    pivot5.rotateOnWorldAxis(
-                        new THREE.Vector3(1, 0, 0),
-                        MathUtils.DEG2RAD(-9)
+                    createjs.Tween.get(pivot5.rotation).to(
+                        { x: pivot5.rotation.x + Math.PI },
+                        300,
+                        createjs.Ease.linear
                     );
                     pivot5.updateMatrixWorld();
                     fe = 15;
@@ -608,21 +605,25 @@ class Trial extends Component {
                 scene.add(pivotm);
                 /* --ANTICLOCKWISE-- */
                 if (dir == -1) {
-                    rotate_anticlockwise();
-                    pivotm.rotateOnWorldAxis(
-                        new THREE.Vector3(1, 0, 0),
-                        MathUtils.DEG2RAD(9)
-                    );
+                    createjs.Tween.get(pivotm.rotation)
+                        .to(
+                            { x: pivotm.rotation.x - Math.PI / 2 },
+                            300,
+                            createjs.Ease.linear
+                        )
+                        .wait(300);
                     pivotm.updateMatrixWorld();
                     fd = 7;
                 }
                 /* --CLOCKWISE-- */
                 if (dir == 1) {
-                    rotate_clockwise();
-                    pivotm.rotateOnWorldAxis(
-                        new THREE.Vector3(1, 0, 0),
-                        MathUtils.DEG2RAD(-9)
-                    );
+                    createjs.Tween.get(pivotm.rotation)
+                        .to(
+                            { x: pivotm.rotation.x + Math.PI / 2 },
+                            300,
+                            createjs.Ease.linear
+                        )
+                        .wait(300);
                     pivotm.updateMatrixWorld();
                     fe = 7;
                 }
@@ -640,20 +641,20 @@ class Trial extends Component {
                 scene.add(pivots);
                 /* --ANTICLOCKWISE-- */
                 if (dir == -1) {
-                    rotate_anticlockwise();
-                    pivots.rotateOnWorldAxis(
-                        new THREE.Vector3(0, 0, 1),
-                        MathUtils.DEG2RAD(9)
+                    createjs.Tween.get(pivots.rotation).to(
+                        { z: pivots.rotation.z - Math.PI / 2 },
+                        300,
+                        createjs.Ease.linear
                     );
                     pivots.updateMatrixWorld();
                     fd = 8;
                 }
                 /* --CLOCKWISE-- */
                 if (dir == 1) {
-                    rotate_clockwise();
-                    pivots.rotateOnWorldAxis(
-                        new THREE.Vector3(0, 0, 1),
-                        MathUtils.DEG2RAD(-9)
+                    createjs.Tween.get(pivots.rotation).to(
+                        { z: pivots.rotation.z + Math.PI / 2 },
+                        300,
+                        createjs.Ease.linear
                     );
                     pivots.updateMatrixWorld();
                     fe = 8;
@@ -672,20 +673,20 @@ class Trial extends Component {
                 scene.add(pivote);
                 /* --ANTICLOCKWISE-- */
                 if (dir == -1) {
-                    rotate_anticlockwise();
-                    pivote.rotateOnWorldAxis(
-                        new THREE.Vector3(0, 1, 0),
-                        MathUtils.DEG2RAD(9)
+                    createjs.Tween.get(pivote.rotation).to(
+                        { y: pivote.rotation.y - Math.PI / 2 },
+                        300,
+                        createjs.Ease.linear
                     );
                     pivote.updateMatrixWorld();
                     fd = 9;
                 }
                 /* --CLOCKWISE-- */
                 if (dir == 1) {
-                    rotate_clockwise();
-                    pivote.rotateOnWorldAxis(
-                        new THREE.Vector3(0, 1, 0),
-                        MathUtils.DEG2RAD(-9)
+                    createjs.Tween.get(pivote.rotation).to(
+                        { y: pivote.rotation.y + Math.PI / 2 },
+                        300,
+                        createjs.Ease.linear
                     );
                     pivote.updateMatrixWorld();
                     fe = 9;
@@ -693,27 +694,16 @@ class Trial extends Component {
             }
             //console.log(v2)
         }
-        /* --THIS WILL ADD THE ANGLE BY 9 DEG-- */
-        function rotate_anticlockwise() {
-            gg = gg + 9;
-            gd = gd + 9;
-        }
-        /* --THIS WILL SUBTRACT THE ANGLE BY 9 DEG-- */
-        function rotate_clockwise() {
-            gf = gf - 9;
-            ge = ge - 9;
-        }
 
         window.addEventListener(
             "resize",
             () => {
-                camera.aspect = width / height;
+                camera.aspect = window.innerWidth / window.innerHeight;
                 camera.updateProjectionMatrix();
-                renderer.setSize(width, height);
-                renderer.render(scene, camera);
-                console.log("Widnows rezie", width, height);
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                render();
             },
-            true
+            false
         );
 
         //const stats = Stats();
@@ -730,69 +720,20 @@ class Trial extends Component {
         function onDocumentMouseMove(event) {
             event.preventDefault();
             //groupU.rotateY(1.5707963268 );
-            let flag = 1;
+            //flag = 1;
             mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
             mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
         }
-        function user_rotate(execute_arr) {
-            var lay = [];
-            var num, num1;
-            lay = execute_arr;
-            console.log("lay", lay);
-            if (fl == 0) {
-                num = lay[ei];
-                num1 = num.split("_");
-                console.log("num1", num1);
-                if (Number(num1[2]) == 1) {
-                    if (Number(num1[0]) == 1) {
-                        if ((gf != -90) & (fl == 0) & (co != 5)) {
-                            sleep(10);
+        function user_rotate(moves) {
+            console.log("mov", moves);
+            var mov1 = 0;
 
-                            layer_rotate(
-                                Number(num1[0]),
-                                num1[1],
-                                Number(num1[2])
-                            );
-                            co = co + 1;
-                        }
-                    }
-
-                    if (Number(num1[0]) == -1) {
-                        if ((gg != 90) & (fl == 0) & (co != 5)) {
-                            sleep(10);
-
-                            layer_rotate(
-                                Number(num1[0]),
-                                num1[1],
-                                Number(num1[2])
-                            );
-                            co = co + 1;
-                        }
-                    }
-                }
-                if ((ei == lay.length - 1) & (co == 5)) {
-                    layer_rotate(Number(num1[0]), num1[1], Number(num1[2]));
-                }
-
-                if (co == 5) {
-                    ei = ei + 1;
-                    console.log(ei);
-                    co = 0;
-                    gf = 0;
-                    gg = 0;
-                }
-
-                if (ei == lay.length) {
-                    gf = 0;
-                    gg = 0;
-                    // ge = 0
-                    // gd = 0
-                    fl = 0;
-                    ei = 0;
-                    // fe = 0
-                    // fd = 0
-                    current_cube = url_scra1.split("");
-                }
+            while (mov1 <= moves.length - 1) {
+                console.log(mov1);
+                var num = moves[mov1];
+                var num1 = num.split("_");
+                layer_rotate(num1[0], num1[1], num1[2]);
+                mov1 = mov1 + 1;
             }
         }
         function compare(url, cube, but) {
@@ -812,18 +753,12 @@ class Trial extends Component {
             }
             if (url.length > cube.length) {
                 console.log("url", url);
-                console.log(cube.length);
+                // console.log(cube.length)
                 var current_move = url.slice(cube.length);
                 console.log(scramble_read(current_move, url, cube, but));
                 console.log("cur", current_move);
                 user_rotate(scramble_read(current_move, url, cube, but));
-            } else if (url.length < cube.length) {
-                var current_mov = cube.slice(url.length);
-                console.log("url", url);
-                console.log("cube", cube);
-                console.log("cur", current_mov);
-                console.log("rev", current_mov.reverse());
-                user_rotate(scramble_read(current_mov, url, cube));
+                current_cube = url_scra1.split("");
             }
         }
         function animate() {
@@ -847,37 +782,18 @@ class Trial extends Component {
             requestAnimationFrame(animate);
 
             var currentURL = window.location.href;
-            //console.log("URLLLL", currentURL);
             var scramble_arr = currentURL.split("?");
-            if (scramble_arr.length == 2) {
-                if (scramble_arr[1].length > 8) {
-                    var scramble = scramble_arr[1].split("=");
-                    //console.log(scramble_arr[2]);
-                    //var button = scramble_arr[2].split("=");
-                    var url_scramble = scramble[1].replace(/%20/g, "");
-                    url_scra1 = url_scramble.replace(/%27/g, "'");
-                    compare(url_scra1.split(""), current_cube, 0);
-                }
+            if (scramble_arr.length == 3) {
+                var scramble = scramble_arr[1].split("=");
+                console.log(scramble_arr[2]);
+                var button = scramble_arr[2].split("=");
+                var url_scramble = scramble[1].replace(/%20/g, "");
+                url_scra1 = url_scramble.replace(/%27/g, "'");
+                compare(url_scra1.split(""), current_cube, button[1]);
             }
 
+            console.log(m);
             /* --THIS PART IS WRITTEN SO THAT THE LAYER ROTATES BY 9 DEG EVERY TIME TILL IT REACHES 90 DEG AND THEN STOPS-- */
-            if ((gd != 90) & (fd != 0)) {
-                sleep(10);
-                layer_rotate(-1, layer_li[fd - 1], 1);
-            }
-            if (gd == 90) {
-                gd = 0;
-                fd = 0;
-            }
-            if ((ge != -90) & (fe != 0)) {
-                sleep(10);
-                layer_rotate(1, layer_li[fe - 1], 1);
-            }
-
-            if (ge == -90) {
-                ge = 0;
-                fe = 0;
-            }
 
             controls.update();
 
@@ -891,9 +807,6 @@ class Trial extends Component {
 
             renderer.render(scene, camera);
         }
-        let divStyle = {
-            color: "blue",
-        };
 
         init();
         animate();
