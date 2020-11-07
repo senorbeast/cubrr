@@ -11,10 +11,8 @@ import {
 import Trial from "./trial";
 
 function CubePage() {
-<<<<<<< HEAD
-=======
     let [newScra, setnewScra] = useState(); //using to store the scramble and push it to URL and also to store the initial URl and show in Scramble
->>>>>>> 6348d1babe162c3153068feb9200d9680c3cc6e2
+
     const [newSol, setnewSol] = useState("");
     let [newScra, setnewScra] = useState(); //using to store the scramble and push it to URL and also to store the initial URl and show in Scramble
     let [inScra, setinScra] = useState();
