@@ -8,12 +8,27 @@ import {
     InTextArea2,
 } from "./CubeElements";
 //import CubeD from "./cube.js";
-import Trial from "./trial";
+import VCube from "./VCube";
+
+function debounce(fn, ms) {
+    let timer;
+    return (_) => {
+        clearTimeout(timer);
+        timer = setTimeout((_) => {
+            timer = null;
+            fn.apply(this, arguments);
+        }, ms);
+    };
+}
 
 function CubePage() {
     const [newSol, setnewSol] = useState("");
     let [newScra, setnewScra] = useState(); //using to store the scramble and push it to URL and also to store the initial URl and show in Scramble
     let [inScra, setinScra] = useState();
+    const [dimensions, setDimensions] = useState({
+        height: window.innerHeight,
+        width: window.innerWidth,
+    });
 
     useEffect(() => {
         if (newScra != undefined) {
@@ -39,13 +54,33 @@ function CubePage() {
         }
     }, [window.location.href]);
 
+    useEffect(() => {
+        //Refresh component after resize
+        const debouncedHandleResize = debounce(function handleResize() {
+            setDimensions({
+                height: window.innerHeight,
+                width: window.innerWidth,
+            });
+        }, 1000);
+        window.addEventListener("resize", debouncedHandleResize);
+        return (_) => {
+            window.removeEventListener("resize", debouncedHandleResize);
+        };
+    });
+
     return (
         <>
             <CardContainer>
                 <CubeContainer>
-                    <h1>Virtual Cube </h1>
-                    {/* <CubeD /> */}
-                    <Trial />
+                    <h1>
+                        Virtual Cube Rendered at {dimensions.width} x{" "}
+                        {dimensions.height}
+                    </h1>
+                    <VCube
+                        width={dimensions.width}
+                        height={dimensions.height}
+                    />
+                    <h1>Play Pause </h1>
                 </CubeContainer>
                 <ScrambleI>
                     <h1>Scramble </h1>

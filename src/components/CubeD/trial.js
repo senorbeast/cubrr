@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import createjs from "../../../node_modules/createjs-module/createjs";
 import { TrialStyle } from "./CubeElements";
@@ -37,10 +37,11 @@ class Trial extends Component {
         camera.position.y = 1;
         camera.position.x = 0;
         camera.lookat = (0, 0, 0);
-
         /* Setting the position and size of render*/
         let width = this.mount.clientWidth;
         let height = this.mount.clientHeight;
+        //let width = this.props.width * 0.606;
+        //let height = this.props.height * 0.606;
         let mapDimensions = this.mount.getBoundingClientRect();
 
         console.log("Width", width, "height", height, mapDimensions);
@@ -641,9 +642,10 @@ class Trial extends Component {
                 camera.aspect = width / height;
                 camera.updateProjectionMatrix();
                 renderer.setSize(width, height);
+                console.log("Yoooo", width, height);
                 render();
             },
-            false
+            true
         );
 
         //const stats = Stats();
@@ -776,7 +778,19 @@ class Trial extends Component {
         animate();
     }
     render() {
-        return <TrialStyle ref={(ref) => (this.mount = ref)} />;
+        return (
+            <>
+                <TrialStyle
+                    height={this.props.height}
+                    width={this.props.width}
+                    ref={(ref) => (this.mount = ref)}
+                />
+                <h1>
+                    Virtual Cube Rendered at {this.props.height} x{" "}
+                    {this.props.width}
+                </h1>
+            </>
+        );
     }
 }
 export default Trial;
