@@ -50,11 +50,10 @@ class Trial extends Component {
         var meshs = [];
         var fl = 0;
 
-        /* setting the position of camera */
-
         /* Setting the position and size of render*/
         let width = this.mount.clientWidth;
         let height = this.mount.clientHeight;
+        /* setting the position of camera */
         var camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 100);
         camera.position.z = 3;
         camera.position.y = 1;
@@ -63,20 +62,12 @@ class Trial extends Component {
         //let width = this.props.width * 0.606;
         //let height = this.props.height * 0.606;
         let mapDimensions = this.mount.getBoundingClientRect();
-
         console.log("Width", width, "height", height, mapDimensions);
         /* adding webgl renderer */
         var renderer = new THREE.WebGLRenderer({ alpha: true });
         renderer.setClearColor("#4E6C88");
         renderer.setSize(width, height);
 
-        // this.camera = new THREE.PerspectiveCamera(
-        //     75,
-        //     mapDimensions.width / mapDimensions.height,
-        //     0.1,
-        //     1000
-        //);
-        // renderer.setSize(mapDimensions.width, mapDimensions.height);
         // use ref as a mount point of the Three.js scene instead of the document.body
         this.mount.appendChild(renderer.domElement);
         /* Setting the position and size of render*/
