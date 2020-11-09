@@ -67,7 +67,7 @@ class Trial extends Component {
         console.log("Width", width, "height", height, mapDimensions);
         /* adding webgl renderer */
         var renderer = new THREE.WebGLRenderer({ alpha: true });
-        renderer.setClearColor("#3e3f42");
+        renderer.setClearColor("#4E6C88");
         renderer.setSize(width, height);
 
         // this.camera = new THREE.PerspectiveCamera(
