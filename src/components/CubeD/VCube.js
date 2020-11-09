@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Trial from "./trial";
 
 const VCube = (props) => {
+    const [state, setstate] = useState(1);
+    useEffect(() => {
+        setstate((state) => state + 1);
+    }, [props]);
     return (
         <>
-            <Trial height={props.height} width={props.width} />
+            <Trial refreshValue={state} width={props.width} />
         </>
     );
 };

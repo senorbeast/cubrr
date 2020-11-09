@@ -9,6 +9,29 @@ import { OrbitControls } from "../../../node_modules/three/examples/jsm/controls
 import * as THREE from "three";
 import { scramble_read } from "./cube_scramble_read_v3";
 class Trial extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            refreshing: false,
+            refreshValue: props.refreshValue,
+        };
+        console.log(this.state.resetState);
+    }
+
+    refreshScreen = () => {
+        this.setState({ refreshing: true });
+        this.setState(({ refreshValue }) => ({
+            refreshValue: refreshValue + 1,
+        }));
+        console.log("Screen refreshed!");
+        this.setState({ refreshing: false });
+    };
+
+    // useEffect({
+    //    height = this.props.height
+
+    // }, [height])
+
     componentDidMount() {
         var raycaster = new THREE.Raycaster(); //raycaster object
         var mouse = new THREE.Vector2(); //to get the location of mouse
@@ -26,20 +49,17 @@ class Trial extends Component {
         mouse.y = 100;
         var meshs = [];
         var fl = 0;
-        var camera = new THREE.PerspectiveCamera(
-            75,
-            window.innerWidth / window.innerHeight,
-            0.1,
-            100
-        );
+
         /* setting the position of camera */
-        camera.position.z = 2;
-        camera.position.y = 1;
-        camera.position.x = 0;
-        camera.lookat = (0, 0, 0);
+
         /* Setting the position and size of render*/
         let width = this.mount.clientWidth;
         let height = this.mount.clientHeight;
+        var camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 100);
+        camera.position.z = 3;
+        camera.position.y = 1;
+        camera.position.x = 0;
+        camera.lookat = (0, 0, 0);
         //let width = this.props.width * 0.606;
         //let height = this.props.height * 0.606;
         let mapDimensions = this.mount.getBoundingClientRect();
@@ -47,7 +67,7 @@ class Trial extends Component {
         console.log("Width", width, "height", height, mapDimensions);
         /* adding webgl renderer */
         var renderer = new THREE.WebGLRenderer({ alpha: true });
-        renderer.setClearColor(0xe9ebb3);
+        renderer.setClearColor("#3e3f42");
         renderer.setSize(width, height);
 
         // this.camera = new THREE.PerspectiveCamera(
@@ -639,7 +659,7 @@ class Trial extends Component {
         window.addEventListener(
             "resize",
             () => {
-                camera.aspect = width / height;
+                camera.aspect = 2 / 1;
                 camera.updateProjectionMatrix();
                 renderer.setSize(width, height);
                 console.log("Yoooo", width, height);
@@ -780,15 +800,8 @@ class Trial extends Component {
     render() {
         return (
             <>
-                <TrialStyle
-                    height={this.props.height}
-                    width={this.props.width}
-                    ref={(ref) => (this.mount = ref)}
-                />
-                <h1>
-                    Virtual Cube Rendered at {this.props.height} x{" "}
-                    {this.props.width}
-                </h1>
+                <TrialStyle ref={(ref) => (this.mount = ref)} />
+                <h1>Refresh when this changes {this.props.refreshValue}</h1>
             </>
         );
     }

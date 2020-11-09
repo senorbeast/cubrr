@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 export const SignInBut = styled(Link)`
     border-radius: 50px;
-    background: #ee6f57;
+    background: ${(props) => props.theme.highlight};
     white-space: nowrap;
     padding: 15px 48px;
-    color: #010606;
+    color: ${(props) => props.theme.highopp};
     font-size: 1.1rem;
     outline: none;
     border: none;
@@ -16,7 +16,7 @@ export const SignInBut = styled(Link)`
 
     &:hover {
         transition: all 0.2s ease-in-out;
-        background: #fff;
-        color: #010606;
+        background: ${(props) => props.theme.primary};
+        color: ${(props) => props.theme.priopp};
     }
 `;

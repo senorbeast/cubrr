@@ -6,11 +6,12 @@ export const CardContainer = styled.section`
     display: grid;
     padding: 0.9rem 0.9rem 0.9rem 0.9rem;
     gap: 1rem;
-    background-color: #bdbbbb;
-    color: #000;
+    background-color: ${(props) => props.theme.secondary};
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(14, 1fr);
     height: 87vh;
+    color: ${(props) => props.theme.priopp};
+    transition: all 0.5s ease-in-out;
 
     @media screen and (max-width: 768px) {
         height: 180vh;
@@ -21,14 +22,15 @@ export const CardContainer = styled.section`
 
 export const CubeContainer = styled.div`
     display: grid;
-    background-color: white;
+    background-color: ${(props) => props.theme.primary};
     grid-row: span 14 / auto;
     grid-column: span 2 / auto;
     grid-template-rows: repeat(8, 1fr);
     padding: 1rem 2rem 1rem;
-    color: green;
+    color: ${(props) => props.theme.priopp};
     border-radius: 1.75rem;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+    transition: all 0.5s ease;
 
     @media screen and (max-width: 768px) {
         grid-row: span 7 / auto;
@@ -43,18 +45,21 @@ export const CubeContainer = styled.div`
 export const TrialStyle = styled.div`
     display: grid;
     grid-row: span 6 / auto;
-
-    background-color: grey;
+    border: none;
+    margin: none;
+    box-shadow: none;
+    background-color: ${(props) => props.theme.primary};
 `;
 
 export const ScrambleI = styled.div`
     display: grid;
-    background-color: #ccd96c;
+    background-color: ${(props) => props.theme.primary};
     border-radius: 1.75rem;
     padding: 1rem 2rem 1rem;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
     grid-row: span 6 / auto;
     grid-template-rows: repeat(4, 1fr);
+    transition: all 0.5s ease;
     @media screen and (max-width: 768px) {
         grid-column: span 3 / auto;
         grid-row: span 3 / auto;
@@ -67,12 +72,13 @@ export const ScrambleI = styled.div`
 
 export const SolutionI = styled.div`
     display: grid;
-    background-color: #6cd99b;
+    background-color: ${(props) => props.theme.primary};
     border-radius: 1.75rem;
     grid-row: span 8 / auto;
     padding: 1rem 2rem 1rem;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
     grid-template-rows: repeat(5, 1fr);
+    transition: all 0.5s ease;
     @media screen and (max-width: 768px) {
         grid-column: span 3 / auto;
         grid-row: span 4 / auto;
@@ -86,11 +92,13 @@ export const InTextArea1 = styled.textarea`
     display: grid;
     height: 100%;
     font-size: 2.3rem;
-    background-color: #ccd96c;
+    background-color: ${(props) => props.theme.primary};
+    color: ${(props) => props.theme.priopp};
     //background: papayawhip;
     border-radius: 1.2rem;
     padding: 1rem 1rem 1rem;
     grid-row: span 2 / auto;
+    transition: all 0.5s ease;
     //box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
     resize: none;
     outline: none;
@@ -111,10 +119,12 @@ export const InTextArea2 = styled.textarea`
     display: grid;
     height: 100%;
     font-size: 2.3rem;
-    background: #6cd99b;
+    background: ${(props) => props.theme.primary};
+    color: ${(props) => props.theme.priopp};
     border-radius: 1.2rem;
     padding: 1rem 1rem 1rem;
     grid-row: span 3 / auto;
+    transition: all 0.5s ease;
     //box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
     resize: none;
     outline: none;
@@ -130,17 +140,3 @@ export const InTextArea2 = styled.textarea`
         outline: none;
     }
 `;
-
-// export const SolutionI = styled.li`
-//     background-color: white;
-//     border-radius: 0.25rem;
-//     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
-//     display: flex;
-//     flex-wrap: wrap;
-//     flex-direction: column;
-//     overflow: hidden;
-//     color: #000;
-//     &:hover {
-//         filter: contrast(100%);
-//     }
-// `;

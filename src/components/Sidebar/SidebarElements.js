@@ -66,3 +66,11 @@ export const SideBtnWrap = styled.div`
     display: flex;
     justify-content: center;
 `;
+export const ThemeBtn = styled.ul`
+    display: flex;
+    //align-items: center;
+    text-decoration: none;
+    justify-content: center;
+    cursor: pointer;
+    //height: 50px;
+`;
