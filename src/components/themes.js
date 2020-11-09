@@ -10,12 +10,16 @@ export const lightT = {
     secopp: "#88899E",
     highlight: "#141259",
     highopp: "#F2B705",
+    prialt: "#ccd96c",
+    secalt: "#6cd99b",
 };
 export const darkT = {
-    primary: "#000",
+    primary: "#011C40",
     priopp: "#fff",
     secondary: "#88899E",
     secopp: "#D9D9D9",
     highlight: "#F2B705",
     highopp: "#141259",
+    prialt: "#032859",
+    secalt: "#011126 ",
 };

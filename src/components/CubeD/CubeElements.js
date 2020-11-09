@@ -53,7 +53,7 @@ export const TrialStyle = styled.div`
 
 export const ScrambleI = styled.div`
     display: grid;
-    background-color: ${(props) => props.theme.primary};
+    background-color: ${(props) => props.theme.prialt};
     border-radius: 1.75rem;
     padding: 1rem 2rem 1rem;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
@@ -72,7 +72,7 @@ export const ScrambleI = styled.div`
 
 export const SolutionI = styled.div`
     display: grid;
-    background-color: ${(props) => props.theme.primary};
+    background-color: ${(props) => props.theme.secalt};
     border-radius: 1.75rem;
     grid-row: span 8 / auto;
     padding: 1rem 2rem 1rem;
@@ -92,7 +92,7 @@ export const InTextArea1 = styled.textarea`
     display: grid;
     height: 100%;
     font-size: 2.3rem;
-    background-color: ${(props) => props.theme.primary};
+    background-color: ${(props) => props.theme.prialt};
     color: ${(props) => props.theme.priopp};
     //background: papayawhip;
     border-radius: 1.2rem;
@@ -119,7 +119,7 @@ export const InTextArea2 = styled.textarea`
     display: grid;
     height: 100%;
     font-size: 2.3rem;
-    background: ${(props) => props.theme.primary};
+    background: ${(props) => props.theme.secalt};
     color: ${(props) => props.theme.priopp};
     border-radius: 1.2rem;
     padding: 1rem 1rem 1rem;
