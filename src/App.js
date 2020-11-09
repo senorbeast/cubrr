@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 //import CubeD from "./components/CubeD";
@@ -8,15 +8,25 @@ import { ThemeProvider } from "styled-components";
 import * as themes from "./components/themes.js";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CubePage from "./components/CubeD";
+import { reactLocalStorage } from "reactjs-localstorage";
+//import storage from "local-storage-fallback";
+
+function getInitialTheme() {
+    let savedTheme = reactLocalStorage.get("theme", "lightT", true);
+    return savedTheme;
+}
 
 const App = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [theme, setTheme] = useState("lightT");
+    const [theme, setTheme] = useState(getInitialTheme);
 
-    console.log("Got the theme herw", theme);
     const toggle = () => {
         setIsOpen(!isOpen);
     };
+
+    useEffect(() => {
+        reactLocalStorage.set("theme", theme);
+    }, [theme]);
     return (
         <>
             <ThemeProvider theme={themes[theme]}>
