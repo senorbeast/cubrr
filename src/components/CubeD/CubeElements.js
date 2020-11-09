@@ -11,10 +11,10 @@ export const CardContainer = styled.section`
     grid-template-rows: repeat(14, 1fr);
     height: 87vh;
     color: ${(props) => props.theme.priopp};
-    transition: all 0.5s ease-in-out;
+    transition: all 0.3s ease-in-out;
 
     @media screen and (max-width: 768px) {
-        height: 180vh;
+        height: 160vh;
     }
     //justify-content: space-evenly;
     //grid-template-columns:repeat(2
