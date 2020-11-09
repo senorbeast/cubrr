@@ -20,3 +20,8 @@ export const SignInBut = styled(Link)`
         color: ${(props) => props.theme.priopp};
     }
 `;
+
+export const MTTag = styled.div`
+    display: grid;
+    height: 3rem;
+`;

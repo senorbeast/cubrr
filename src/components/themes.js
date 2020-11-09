@@ -4,7 +4,7 @@
 //     }`;
 
 export const lightT = {
-    primary: "#4E6C88",
+    primary: "#fff",
     priopp: "#000",
     secondary: "#D9D9D9",
     secopp: "#88899E",
@@ -14,12 +14,12 @@ export const lightT = {
     secalt: "#6cd99b",
 };
 export const darkT = {
-    primary: "#4E6C88",
+    primary: "#032859",
     priopp: "#fff",
     secondary: "#88899E",
     secopp: "#D9D9D9",
     highlight: "#F2B705",
     highopp: "#141259",
-    prialt: "#032859",
+    prialt: "#12234D",
     secalt: "#011126 ",
 };

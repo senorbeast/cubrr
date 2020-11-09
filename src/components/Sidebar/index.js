@@ -13,7 +13,7 @@ import {
     ThemeBtn,
 } from "./SidebarElements";
 import { Link } from "react-router-dom";
-import { SignInBut } from "../BasicElements";
+import { SignInBut, MTTag } from "../BasicElements";
 
 const Sidebar = (props) => {
     function changeTheme() {
@@ -38,11 +38,13 @@ const Sidebar = (props) => {
                             Algs Trainer
                         </SidebarLink>
                         <SidebarLink to="/signup">Sign Up</SidebarLink>
-                        <ThemeBtn onClick={changeTheme}>{icon}</ThemeBtn>
                     </SidebarMenu>
+
                     <SideBtnWrap>
                         <SignInBut to="/signin">Sign In</SignInBut>
                     </SideBtnWrap>
+                    <MTTag></MTTag>
+                    <ThemeBtn onClick={changeTheme}>{icon}</ThemeBtn>
                 </SidebarWrapper>
             </SidebarContainer>
         </>
