@@ -141,6 +141,33 @@ export const InTextArea2 = styled.textarea`
     }
 `;
 
+export const PlayBtn = styled.div`
+    border: 0;
+    background: transparent;
+    box-sizing: border-box;
+    width: 0;
+    height: 74px;
+
+    border-color: transparent transparent transparent ${(props) => props.theme.priopp};
+    transition: 300ms all ease;
+    cursor: pointer;
+  
+    // play state
+    border-style: solid;
+    border-width: 37px 0 37px 60px;
+    color: ${(props) => props.theme.priopp};
+    // &.paused {
+    //   border-style: double;
+    //   border-width: 0px 0 0px 60px;
+    // }
+  
+    &:hover {
+      border-color: transparent transparent transparent ${(props) => props.theme.priopp};
+      transition: 300ms all ease;
+    }
+  }
+`; 
+
 export const PauseBtn = styled.div`
 border: 0;
 background: transparent;
