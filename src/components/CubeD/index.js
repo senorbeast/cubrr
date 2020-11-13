@@ -6,6 +6,9 @@ import {
     SolutionI,
     InTextArea1,
     InTextArea2,
+    PlayBtn,
+    PauseBtn,
+    ThemeBtn,
 } from "./CubeElements";
 //import CubeD from "./cube.js";
 import VCube from "./VCube";
@@ -29,7 +32,7 @@ function CubePage() {
         height: window.innerHeight,
         width: window.innerWidth,
     });
-
+    const[play,setplay] = useState(false)
     useEffect(() => {
         if (newScra != undefined) {
             window.history.pushState(
@@ -67,6 +70,9 @@ function CubePage() {
             window.removeEventListener("resize", debouncedHandleResize);
         };
     });
+    
+    const icon =
+        play == true ? <PlayBtn/> : <PauseBtn/>;
 
     return (
         <>
@@ -80,7 +86,8 @@ function CubePage() {
                         width={dimensions.width}
                         height={dimensions.height}
                     />
-                    <h1>Play Pause </h1>
+                    <ThemeBtn onClick={toggleplay}>{icon}</ThemeBtn>
+                    <h1>Play value = {play.toString()}</h1>
                 </CubeContainer>
                 <ScrambleI>
                     <h1>Scramble </h1>
