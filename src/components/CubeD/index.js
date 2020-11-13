@@ -129,6 +129,9 @@ function CubePage() {
         setnewSol(event.target.value);
         console.log("Solution:", newSol);
     }
+    function toggleplay(){
+        setplay(!play)
+    }
 }
 
 export default CubePage;
