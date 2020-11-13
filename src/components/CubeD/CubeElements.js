@@ -140,3 +140,40 @@ export const InTextArea2 = styled.textarea`
         outline: none;
     }
 `;
+
+export const PauseBtn = styled.div`
+border: 0;
+background: transparent;
+box-sizing: border-box;
+width: 0;
+height: 74px;
+
+border-color: transparent transparent transparent ${(props) => props.theme.priopp};
+transition: 300ms all ease;
+cursor: pointer;
+
+color: ${(props) => props.theme.priopp};
+
+
+
+  border-style: double;
+  border-width: 0px 0 0px 60px;
+
+
+&:hover {
+  border-color: transparent transparent transparent ${(props) => props.theme.priopp};
+  transition: 300ms fade;
+}
+}
+`;
+
+export const ThemeBtn = styled.ul`
+    display: flex;
+    align-items: center;
+    height: 50px;
+    cursor: pointer;
+    &:hover {
+        color: ${(props) => props.theme.highlight};
+        transition: 0.8s ease-in-out;
+    }
+`;
