@@ -25,7 +25,7 @@ function debounce(fn, ms) {
 }
 
 function CubePage() {
-    const [newSol, setnewSol] = useState("");
+    const [newSol, setnewSol] = useState();
     let [newScra, setnewScra] = useState(); //using to store the scramble and push it to URL and also to store the initial URl and show in Scramble
     let [inScra, setinScra] = useState();
     const [dimensions, setDimensions] = useState({
@@ -38,10 +38,10 @@ function CubePage() {
             window.history.pushState(
                 "object or string",
                 "",
-                "/cube/?scramble=" + newScra
+                "/cube/?scramble=" + newScra + "?solution=" + newSol +"?play="+play +"?"
             );
         }
-    }, [newScra]);
+    }, [newScra,newSol,play]);
 
     useEffect(() => {
         /*Runs only once now */ /*Used to copy the scramble in URL to Scramble Text Area*/
@@ -50,10 +50,22 @@ function CubePage() {
         if (splitedurl[1] != undefined) {
             //Runs only if there is some scramble in the URL (so no replace error)
             let aftereq = splitedurl[1];
-            let scra = aftereq.replace(/%20/g, " "); // (/  /g) to replace globally here it means to replace all values
+            let scramble = aftereq.split("?")
+            let scra = scramble[0].replace(/%20/g, " "); // (/  /g) to replace globally here it means to replace all values
             let scra2 = scra.replace(/%27/g, "'");
 
             setnewScra(scra2);
+        }
+        //Same for solution
+        if (splitedurl[2] != undefined) {
+            //Runs only if there is some scramble in the URL (so no replace error)
+            let aftereq = splitedurl[2];
+            let scramble = aftereq.split("?")
+            let scra = scramble[0].replace(/%20/g, " "); // (/  /g) to replace globally here it means to replace all values
+            let scra2 = scra.replace(/%27/g, "'");
+
+            setnewSol(scra2);
+
         }
     }, [window.location.href]);
 
@@ -70,9 +82,11 @@ function CubePage() {
             window.removeEventListener("resize", debouncedHandleResize);
         };
     });
-    
+
+
     const icon =
         play == true ? <PlayBtn/> : <PauseBtn/>;
+
 
     return (
         <>
@@ -83,11 +97,14 @@ function CubePage() {
                         {dimensions.height}
                     </h1>
                     <VCube
+                        play = {play}
                         width={dimensions.width}
                         height={dimensions.height}
                     />
                     <ThemeBtn onClick={toggleplay}>{icon}</ThemeBtn>
                     <h1>Play value = {play.toString()}</h1>
+                    
+
                 </CubeContainer>
                 <ScrambleI>
                     <h1>Scramble </h1>
@@ -102,8 +119,9 @@ function CubePage() {
                     <h1>Solutions </h1>
                     <InTextArea2
                         type="Text"
-                        onInput={handleChangeSol}
+                        onKeyUp={handleChangeSol}
                         placeholder="Enter the Solution Here :)"
+                        defaultValue={newSol}
                     />
                 </SolutionI>
             </CardContainer>
