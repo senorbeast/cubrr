@@ -85,7 +85,7 @@ function CubePage() {
 
 
     const icon =
-        play == true ? <PlayBtn/> : <PauseBtn/>;
+        play == false ? <PlayBtn/> : <PauseBtn/>;
 
 
     return (
