@@ -27,12 +27,13 @@ function debounce(fn, ms) {
 function CubePage() {
     const [newSol, setnewSol] = useState();
     let [newScra, setnewScra] = useState(); //using to store the scramble and push it to URL and also to store the initial URl and show in Scramble
-    let [inScra, setinScra] = useState();
+    let [iter, setiter] = useState(1);
     const [dimensions, setDimensions] = useState({
         height: window.innerHeight,
         width: window.innerWidth,
     });
     const[play,setplay] = useState(false)
+
     useEffect(() => {
         if (newScra != undefined) {
             window.history.pushState(
@@ -43,7 +44,7 @@ function CubePage() {
         }
     }, [newScra,newSol,play]);
 
-    useEffect(() => {
+    useEffect(() => {//TODO: This can be made efficient by storing the previous values of scramble and solution and running this only when there is a change in scramble and solution
         /*Runs only once now */ /*Used to copy the scramble in URL to Scramble Text Area*/
         let urlstr = window.location.href;
         let splitedurl = urlstr.split("=");
@@ -67,6 +68,7 @@ function CubePage() {
             setnewSol(scra2);
 
         }
+        setiter(iter+1)
     }, [window.location.href]);
 
     useEffect(() => {
@@ -102,7 +104,7 @@ function CubePage() {
                         height={dimensions.height}
                     />
                     <ThemeBtn onClick={toggleplay}>{icon}</ThemeBtn>
-                    <h1>Play value = {play.toString()}</h1>
+                    <h1>Play value = {play.toString()} iter={iter}</h1>
                     
 
                 </CubeContainer>
