@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 //import CubeD from "./components/CubeD";
 import Home from "./components/Home";
 import AlgsTrainer from "./components/AlgsTrainer";
+import Signup from "./components/Signup";
 import { ThemeProvider } from "styled-components";
 import * as themes from "./components/themes.js";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -46,6 +47,7 @@ const App = () => {
                             exact
                             component={AlgsTrainer}
                         />
+                        <Route path="/signin" exact component={Signup} />
                     </Switch>
                 </Router>
             </ThemeProvider>

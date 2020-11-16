@@ -25,33 +25,40 @@ function debounce(fn, ms) {
 }
 
 function CubePage() {
-    const [newSol, setnewSol] = useState();
+    const [newSol, setnewSol] = useState("");
     let [newScra, setnewScra] = useState(); //using to store the scramble and push it to URL and also to store the initial URl and show in Scramble
     let [iter, setiter] = useState(1);
     const [dimensions, setDimensions] = useState({
         height: window.innerHeight,
         width: window.innerWidth,
     });
-    const[play,setplay] = useState(false)
+    const [play, setplay] = useState(false);
 
     useEffect(() => {
         if (newScra != undefined) {
             window.history.pushState(
                 "object or string",
                 "",
-                "/cube/?scramble=" + newScra + "?solution=" + newSol +"?play="+play +"?"
+                "/cube/?scramble=" +
+                    newScra +
+                    "?solution=" +
+                    newSol +
+                    "?play=" +
+                    play +
+                    "?"
             );
         }
-    }, [newScra,newSol,play]);
+    }, [newScra, newSol, play]);
 
-    useEffect(() => {//TODO: This can be made efficient by storing the previous values of scramble and solution and running this only when there is a change in scramble and solution
+    useEffect(() => {
+        //TODO: This can be made efficient by storing the previous values of scramble and solution and running this only when there is a change in scramble and solution
         /*Runs only once now */ /*Used to copy the scramble in URL to Scramble Text Area*/
         let urlstr = window.location.href;
         let splitedurl = urlstr.split("=");
         if (splitedurl[1] != undefined) {
             //Runs only if there is some scramble in the URL (so no replace error)
             let aftereq = splitedurl[1];
-            let scramble = aftereq.split("?")
+            let scramble = aftereq.split("?");
             let scra = scramble[0].replace(/%20/g, " "); // (/  /g) to replace globally here it means to replace all values
             let scra2 = scra.replace(/%27/g, "'");
 
@@ -61,14 +68,13 @@ function CubePage() {
         if (splitedurl[2] != undefined) {
             //Runs only if there is some scramble in the URL (so no replace error)
             let aftereq = splitedurl[2];
-            let scramble = aftereq.split("?")
+            let scramble = aftereq.split("?");
             let scra = scramble[0].replace(/%20/g, " "); // (/  /g) to replace globally here it means to replace all values
             let scra2 = scra.replace(/%27/g, "'");
 
             setnewSol(scra2);
-
         }
-        setiter(iter+1)
+        setiter(iter + 1);
     }, [window.location.href]);
 
     useEffect(() => {
@@ -85,10 +91,7 @@ function CubePage() {
         };
     });
 
-
-    const icon =
-        play == false ? <PlayBtn/> : <PauseBtn/>;
-
+    const icon = play == false ? <PlayBtn /> : <PauseBtn />;
 
     return (
         <>
@@ -99,14 +102,14 @@ function CubePage() {
                         {dimensions.height}
                     </h1>
                     <VCube
-                        play = {play}
+                        play={play}
                         width={dimensions.width}
                         height={dimensions.height}
                     />
                     <ThemeBtn onClick={toggleplay}>{icon}</ThemeBtn>
-                    <h1>Play value = {play.toString()} iter={iter}</h1>
-                    
-
+                    <h1>
+                        Play value = {play.toString()} iter={iter}
+                    </h1>
                 </CubeContainer>
                 <ScrambleI>
                     <h1>Scramble </h1>
@@ -149,8 +152,8 @@ function CubePage() {
         setnewSol(event.target.value);
         console.log("Solution:", newSol);
     }
-    function toggleplay(){
-        setplay(!play)
+    function toggleplay() {
+        setplay(!play);
     }
 }
 
