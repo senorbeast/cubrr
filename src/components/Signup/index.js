@@ -1,13 +1,14 @@
-import React from "react";
-import GoogleBtn from "./GoogleBtn";
+import React from 'react';
+import LoginHooks from './LoginHooks';
+import LogoutHooks from './LogoutHooks';
 
 const Signup = () => {
-    return (
-        <div>
-            <h1>Sign in nosi</h1>
-            <GoogleBtn />
-        </div>
-    );
+	return (
+		<div>
+			<LoginHooks />
+			<LogoutHooks />
+		</div>
+	);
 };
 
 export default Signup;
