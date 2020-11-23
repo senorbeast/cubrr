@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import gsap from "gsap";
+
 function animation_sequence( scene ,meshs,camera )
 
 {
@@ -28,10 +29,10 @@ function animation_sequence( scene ,meshs,camera )
     timeline.add(tween,"anime1")
     var tween1 = gsap.to(pivot.rotation,{y:2*Math.PI})
     timeline.add(tween1,"anime1")
-    var tween2 = gsap.to(pivot.position, { y:v2.y }) 
+    var tween2 = gsap.to(pivot.position, { y:v2.y,ease:"strong.inOut" }) 
     timeline.add(tween2,"anime2")
-    var tween3 = gsap.fromTo(pivot.rotation, {y: 2*Math.PI}, {y: 4*Math.PI})
-    timeline.add(tween3,"anime2")
+    var tween3 = gsap.fromTo(pivot.rotation, {y: 2*Math.PI}, {y: 4*Math.PI ,ease:"sine"})
+    timeline.add(tween3,"anime3")
     
         for ( var i = 0 ; i < meshs.length; i++)
         {
@@ -39,12 +40,12 @@ function animation_sequence( scene ,meshs,camera )
             v2 .x = Math.round(v2.x)
             v2 .y = Math.round(v2.y)
             v2 .z = Math.round(v2.z)
-            var tween4 = gsap.to(meshs[i].position, { duration: 0.3,x:v2.x+10*(v2.x) ,y:v2.y+10*(v2.y) , z:v2.z+10*(v2.z) })
+            var tween4 = gsap.to(meshs[i].position, { duration: 0.3,x:v2.x+Math.floor(Math.random() * 12)*(v2.x) ,y:v2.y+Math.floor(Math.random() * 12)*(v2.y) , z:v2.z+Math.floor(Math.random() * 12)*(v2.z) ,ease:"sine"})
             timeline.add(tween4,"anime3",)
         }
         
-        var tween5 = gsap.to(pivot.rotation, { duration: 3,x:Math.PI ,y:Math.PI,z:Math.PI})
-        timeline.add(tween5)
+        var tween5 = gsap.to(pivot.rotation, { duration: 3,x:Math.PI ,y:Math.PI,z:Math.PI,ease:"sine"})
+        timeline.add(tween5,"anime4")
         
     
         for ( var k = 0 ; k < meshs.length; k++)
@@ -52,14 +53,14 @@ function animation_sequence( scene ,meshs,camera )
             var x1 = Math.round(positions[k].x)
             var y1 = Math.round(positions[k].y)
             var z1 = Math.round(positions[k].z)
-            var tween6 = gsap.to(meshs[k].position, { duration: 0.5,x:x1 ,y:y1 , z:z1 })
+            var tween6 = gsap.to(meshs[k].position, { duration: 3,x:x1 ,y:y1 , z:z1 ,ease:"sine"})
             timeline.add(tween6,"anime4",)
         }
 
         for ( var k = 0 ; k < meshs.length; k++)
         {
             
-            var tween7 = gsap.to(meshs[k].material, { duration: 0.3,opacity : 0.1 })
+            var tween7 = gsap.to(meshs[k].material, { duration: 0.3,opacity : 0.2 })
             timeline.add(tween7,"anime5",)
         }
     
@@ -89,8 +90,31 @@ function animation_sequence( scene ,meshs,camera )
            }
            
        }
+       for ( var k = 0 ; k < meshs.length; k++)
+        {
+            
+            var tween10 = gsap.to(meshs[k].material, { duration: 0.3,opacity : 0.1 })
+            timeline.add(tween10,"anime9",)
+        }
+        for ( var p = 0 ;p< edges.length;p++)
+       {
+           var tween8 = gsap.to(meshs[edges[p]].material, { duration: 3,opacity : 1 })
+           timeline.add(tween8,"anime10",)
+       }
+       for ( var k = 0 ; k < meshs.length; k++)
+        {
+            
+            var tween10 = gsap.to(meshs[k].material, { duration: 0.3,opacity : 0.1 })
+            timeline.add(tween10,"anime11",)
+        }
+        for ( var p = 0 ;p< corners.length;p++)
+       {
+           var tween8 = gsap.to(meshs[corners[p]].material, { duration: 3,opacity : 1 })
+           timeline.add(tween8,"anime12",)
+       }
+       
        timeline.play()
-    
+       timeline.repeat(-1)
        
     
 }
