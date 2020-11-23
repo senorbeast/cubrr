@@ -40,12 +40,12 @@ function CubePage() {
                 "object or string",
                 "",
                 "/cube/?scramble=" +
-                    newScra +
-                    "?solution=" +
-                    newSol +
-                    "?play=" +
-                    play +
-                    "?"
+                newScra +
+                "?solution=" +
+                newSol +
+                "?play=" +
+                play +
+                "?"
             );
         }
     }, [newScra, newSol, play]);
@@ -107,9 +107,6 @@ function CubePage() {
                         height={dimensions.height}
                     />
                     <ThemeBtn onClick={toggleplay}>{icon}</ThemeBtn>
-                    <h1>
-                        Play value = {play.toString()} iter={iter}
-                    </h1>
                 </CubeContainer>
                 <ScrambleI>
                     <h1>Scramble </h1>
