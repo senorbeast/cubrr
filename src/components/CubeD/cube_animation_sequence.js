@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import gsap from "gsap";
 
-function animation_sequence( scene ,meshs,camera )
+function animation_sequence( scene ,meshs,core,camera )
 
 {
     var edges = [1,3,5,7,9,11,15,17,19,21,23,25,13]
@@ -9,7 +9,7 @@ function animation_sequence( scene ,meshs,camera )
     var centre = [4,10,12,14,16,22,13]
     var pivot = new THREE.Object3D()
     var positions = []
-    
+    var core_grp = new THREE.Object3D()
     var v4 = new THREE.Vector3()
     for ( var j = 0 ; j < meshs.length ; j++)
     {
@@ -21,6 +21,11 @@ function animation_sequence( scene ,meshs,camera )
     {
         pivot.attach(meshs[i])
     }
+    for (var i = 0 ; i< core.length ;i++)
+    {
+        core_grp.attach(core[i])
+    }
+    scene.add(core_grp)
     scene.add(pivot)
     
     var v2 = new THREE.Vector3()
@@ -40,13 +45,17 @@ function animation_sequence( scene ,meshs,camera )
             v2 .x = Math.round(v2.x)
             v2 .y = Math.round(v2.y)
             v2 .z = Math.round(v2.z)
-            var tween4 = gsap.to(meshs[i].position, { duration: 0.3,x:v2.x+Math.floor(Math.random() * 12)*(v2.x) ,y:v2.y+Math.floor(Math.random() * 12)*(v2.y) , z:v2.z+Math.floor(Math.random() * 12)*(v2.z) ,ease:"sine"})
+            var tween4 = gsap.to(meshs[i].position, { duration: 0.7,x:v2.x+Math.floor(Math.random() * 12)*(v2.x) ,y:v2.y+Math.floor(Math.random() * 12)*(v2.y) , z:v2.z+Math.floor(Math.random() * 12)*(v2.z) ,ease:"sine"})
             timeline.add(tween4,"anime3",)
         }
         
         var tween5 = gsap.to(pivot.rotation, { duration: 3,x:Math.PI ,y:Math.PI,z:Math.PI,ease:"sine"})
         timeline.add(tween5,"anime4")
         
+        var tween11 = gsap.to(core_grp.rotation, { duration: 3,x:2*Math.PI ,y:2*Math.PI , z:2*Math.PI ,ease:"sine"})
+        timeline.add(tween11,"anime4",)
+        
+
     
         for ( var k = 0 ; k < meshs.length; k++)
         {
