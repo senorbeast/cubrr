@@ -250,7 +250,6 @@ class Trial extends Component {
     return (
       <>
         <TrialStyle ref={(ref) => (this.mount = ref)} />
-        <h1>Refresh when this changes {this.props.refreshValue}</h1>
       </>
     );
   }

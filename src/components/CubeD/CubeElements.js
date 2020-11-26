@@ -48,7 +48,8 @@ export const TrialStyle = styled.div`
     border: none;
     margin: none;
     box-shadow: none;
-    background-color: ${(props) => props.theme.primary};
+    border-radius: 1.75rem;
+    background-color: ${(props) => props.theme.priopp};
 `;
 
 export const ScrambleI = styled.div`
@@ -141,66 +142,30 @@ export const InTextArea2 = styled.textarea`
     }
 `;
 
-export const PlayBtn = styled.div`
-    border: 0;
-    background: transparent;
-    box-sizing: border-box;
-    width: 0;
-    height: 74px;
-
-    border-color: transparent transparent transparent ${(props) => props.theme.priopp};
-    transition: 300ms all ease;
-    cursor: pointer;
-  
-    // play state
-    border-style: solid;
-    border-width: 37px 0 37px 60px;
-    color: ${(props) => props.theme.priopp};
-    // &.paused {
-    //   border-style: double;
-    //   border-width: 0px 0 0px 60px;
-    // }
-  
-    &:hover {
-      border-color: transparent transparent transparent ${(props) => props.theme.priopp};
-      transition: 300ms all ease;
-    }
-  }
-`; 
-
-export const PauseBtn = styled.div`
-border: 0;
-background: transparent;
-box-sizing: border-box;
-width: 0;
-height: 74px;
-
-border-color: transparent transparent transparent ${(props) => props.theme.priopp};
-transition: 300ms all ease;
-cursor: pointer;
-
-color: ${(props) => props.theme.priopp};
-
-
-
-  border-style: double;
-  border-width: 0px 0 0px 60px;
-
-
-&:hover {
-  border-color: transparent transparent transparent ${(props) => props.theme.priopp};
-  transition: 300ms fade;
-}
-}
-`;
-
-export const ThemeBtn = styled.ul`
-    display: flex;
+export const ThemeBtn = styled.div`
+    display:block;
     align-items: center;
-    height: 50px;
+    height: 2rem;
     cursor: pointer;
     &:hover {
         color: ${(props) => props.theme.highlight};
-        transition: 0.8s ease-in-out;
+        transition: 0.4s ease-in-out;
+    }
+    &:focus {
+        color: ${(props) => props.theme.highlight};
+        transition: 0.4s ease-in-out;
     }
 `;
+
+export const ButtonArea = styled.div`
+    display:grid;
+    grid-template-columns: repeat(7,1fr);
+    font-size:5rem;
+    margin-top:0.7rem;
+    margin-bottom:1rem;
+    @media screen and (max-width: 768px) {
+        font-size:3rem;
+        
+    }
+`;
+

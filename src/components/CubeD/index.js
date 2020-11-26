@@ -6,10 +6,13 @@ import {
     SolutionI,
     InTextArea1,
     InTextArea2,
-    PlayBtn,
-    PauseBtn,
     ThemeBtn,
+    ButtonArea,
 } from "./CubeElements";
+import { FiCodesandbox} from "react-icons/fi";
+import { WiRefresh} from "react-icons/wi";
+import {CgChevronDoubleRight,CgChevronDoubleLeft, CgChevronRight,CgChevronLeft} from "react-icons/cg";
+import { ImPlay2,ImPause } from "react-icons/im";
 //import CubeD from "./cube.js";
 import VCube from "./VCube";
 
@@ -91,14 +94,14 @@ function CubePage() {
         };
     });
 
-    const icon = play == false ? <PlayBtn /> : <PauseBtn />;
+    const icon = play == false ? <ImPlay2/> : <ImPause/>;
 
     return (
         <>
             <CardContainer>
                 <CubeContainer>
                     <h1>
-                        Virtual Cube Rendered at {dimensions.width} x{" "}
+                        Virtual Cube  {dimensions.width} x{" "}
                         {dimensions.height}
                     </h1>
                     <VCube
@@ -106,7 +109,15 @@ function CubePage() {
                         width={dimensions.width}
                         height={dimensions.height}
                     />
-                    <ThemeBtn onClick={toggleplay}>{icon}</ThemeBtn>
+                    <ButtonArea>
+                        <ThemeBtn ><WiRefresh/></ThemeBtn>
+                        <ThemeBtn ><CgChevronDoubleLeft/></ThemeBtn>
+                        <ThemeBtn ><CgChevronLeft/></ThemeBtn>
+                        <ThemeBtn onClick={toggleplay}>{icon}</ThemeBtn>
+                        <ThemeBtn><CgChevronRight/></ThemeBtn>
+                        <ThemeBtn ><CgChevronDoubleRight/></ThemeBtn>
+                         <ThemeBtn ><FiCodesandbox/></ThemeBtn>
+                    </ButtonArea>
                 </CubeContainer>
                 <ScrambleI>
                     <h1>Scramble </h1>
