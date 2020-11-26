@@ -34,7 +34,7 @@ export const SidebarWrapper = styled.div`
     color: #fff;
 `;
 
-export const SidebarMenu = styled.ul`
+export const SidebarMenu = styled.div`
     display: grid;
     grid-template-columns: 4fr;
     text-align: center;
@@ -66,15 +66,17 @@ export const SideBtnWrap = styled.div`
     display: flex;
     justify-content: center;
     position: relative;
-    left: 1.3rem;
+    text-align: center;
 `;
-export const ThemeBtn = styled.ul`
+export const ThemeBtn = styled.div`
     display: flex;
     ${(props) => props.theme.priopp}
     //align-items: center;
-    text-decoration: none;
-
+    align-items: center;
+    text-decoration:none;
     justify-content: center;
+    text-align: center;
+    position: relative;
     cursor: pointer;
     //height: 50px;
     &:hover {

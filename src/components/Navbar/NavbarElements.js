@@ -94,11 +94,12 @@ export const NavBtn = styled.nav`
         display: none;
     }
 `;
-export const ThemeBtn = styled.ul`
-    display: flex;
+export const ThemeBtn = styled.div`
+    display:flex;
     align-items: center;
     height: 50px;
     cursor: pointer;
+    text-decoration:none;
     &:hover {
         color: ${(props) => props.theme.highlight};
         transition: 0.2s ease-in-out;
