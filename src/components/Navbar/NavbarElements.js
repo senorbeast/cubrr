@@ -4,7 +4,7 @@ import { Link as LinkR } from "react-router-dom";
 
 export const Nav = styled.nav`
     background: ${(props) => props.theme.highopp};
-    height: 80px;
+    height: 5rem;
     /* margin-top: -80px; */
     display: flex;
     justify-content: center;
@@ -21,13 +21,14 @@ export const Nav = styled.nav`
 
 export const NavbarContainer = styled.div`
     display: flex;
-    justify-content: space-between;
-    height: 80px;
+    justify-content: space-evenly;
+   // height: 80px;
     z-index: 1;
     width: 100%;
     padding: 0 24px;
-    max-width: 1100px;
+   // max-width: 1100px;
 `;
+
 export const NavLogo = styled(LinkR)`
     color: ${(props) => props.theme.priopp};
     justify-self: flex-start;
@@ -40,6 +41,7 @@ export const NavLogo = styled(LinkR)`
     text-decoration: none;
     transition: all 0.5s ease;
 `;
+
 export const MobileIcon = styled.div`
     display: none;
 
@@ -55,6 +57,7 @@ export const MobileIcon = styled.div`
         transition: all 0.5s ease;
     }
 `;
+
 export const NavMenu = styled.ul`
     display: flex;
     align-items: center;
@@ -67,8 +70,10 @@ export const NavMenu = styled.ul`
         display: none;
     }
 `;
+
 export const NavItem = styled.li`
-    height: 75px; /*  for border-bottom*/
+    height: 4.65rem; /*  for border-bottom*/
+    
 `;
 
 export const NavLinks = styled(LinkR)`
@@ -94,14 +99,24 @@ export const NavBtn = styled.nav`
         display: none;
     }
 `;
-export const ThemeBtn = styled.div`
+
+export const ThemeBtnN = styled.div`
     display:flex;
     align-items: center;
-    height: 50px;
+    height: 3rem;
     cursor: pointer;
+    width:3rem;
+    border-radius:50%;
+    justify-content:center;
     text-decoration:none;
+    margin-left:0.4rem;
+    margin-right:0.4rem;
+    font-size:1.8rem;
+    color: ${(props) => props.theme.priopp};
+    background-color:${(props) => props.theme.prialt};
     &:hover {
         color: ${(props) => props.theme.highlight};
+        filter:brightness(1.2);
         transition: 0.2s ease-in-out;
     }
 `;

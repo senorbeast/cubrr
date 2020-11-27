@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import logo from './cubelogo.jpg';
 import { FaBars, FaSun, FaMoon } from "react-icons/fa";
+import { SiNintendogamecube } from "react-icons/si";
+import { HiChevronDown } from "react-icons/hi";
+import { MdStyle } from "react-icons/md";
 import {
     Nav,
     NavbarContainer,
@@ -11,7 +15,7 @@ import {
     NavLinks,
     NavBtn,
     NavBtnLink,
-    ThemeBtn,
+    ThemeBtnN,
 } from "./NavbarElements";
 import { SignInBut } from "../BasicElements";
 
@@ -47,7 +51,10 @@ const Navbar = (props) => {
                     <SignInBut to="/signin">Sign In</SignInBut>
                 </NavBtn>
                 <NavMenu>
-                    <ThemeBtn onClick={changeTheme}>{icon}</ThemeBtn>
+                    <ThemeBtnN onClick={changeTheme}><MdStyle/></ThemeBtnN>
+                    <ThemeBtnN onClick={changeTheme}>{icon}</ThemeBtnN>
+                    <ThemeBtnN onClick={changeTheme}><HiChevronDown/></ThemeBtnN>
+                    <ThemeBtnN onClick={changeTheme}><SiNintendogamecube/></ThemeBtnN>
                 </NavMenu>
             </NavbarContainer>
         </Nav>

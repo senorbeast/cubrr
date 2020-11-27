@@ -109,7 +109,7 @@ function CubePage() {
                         width={dimensions.width}
                         height={dimensions.height}
                     />
-                    <ButtonArea>
+                    <ButtonArea mode={modes[mode]}>
                         <ThemeBtn ><WiRefresh/></ThemeBtn>
                         <ThemeBtn ><CgChevronDoubleLeft/></ThemeBtn>
                         <ThemeBtn ><CgChevronLeft/></ThemeBtn>

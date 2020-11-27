@@ -159,7 +159,7 @@ export const ThemeBtn = styled.div`
 
 export const ButtonArea = styled.div`
     display:grid;
-    grid-template-columns: repeat(7,1fr);
+    grid-template-columns: repeat(${(props) => props.mode.nobuts},1fr);
     font-size:5rem;
     margin-top:0.7rem;
     margin-bottom:1rem;
