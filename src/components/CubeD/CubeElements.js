@@ -24,8 +24,8 @@ export const CubeContainer = styled.div`
     display: grid;
     background-color: ${(props) => props.theme.primary};
     grid-row: span 14 / auto;
-    grid-column: span 2 / auto;
-    grid-template-rows: repeat(8, 1fr);
+    grid-column: span ${(props) => props.mode.cubecols}/ auto;
+    grid-template-rows: repeat(8, 1fr); //for the child tags
     padding: 1rem 2rem 1rem;
     color: ${(props) => props.theme.priopp};
     border-radius: 1.75rem;
@@ -53,7 +53,7 @@ export const TrialStyle = styled.div`
 `;
 
 export const ScrambleI = styled.div`
-    display: grid;
+    display: ${(props) => props.mode.none};
     background-color: ${(props) => props.theme.prialt};
     border-radius: 1.75rem;
     padding: 1rem 2rem 1rem;
@@ -72,7 +72,7 @@ export const ScrambleI = styled.div`
 `;
 
 export const SolutionI = styled.div`
-    display: grid;
+    display: ${(props) => props.mode.none};
     background-color: ${(props) => props.theme.secalt};
     border-radius: 1.75rem;
     grid-row: span 8 / auto;

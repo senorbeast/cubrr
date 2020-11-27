@@ -9,6 +9,7 @@ import {
     ThemeBtn,
     ButtonArea,
 } from "./CubeElements";
+import * as modes from "./modes.js";
 import { FiCodesandbox} from "react-icons/fi";
 import { WiRefresh} from "react-icons/wi";
 import {CgChevronDoubleRight,CgChevronDoubleLeft, CgChevronRight,CgChevronLeft} from "react-icons/cg";
@@ -30,12 +31,12 @@ function debounce(fn, ms) {
 function CubePage() {
     const [newSol, setnewSol] = useState("");
     let [newScra, setnewScra] = useState(); //using to store the scramble and push it to URL and also to store the initial URl and show in Scramble
-    let [iter, setiter] = useState(1);
     const [dimensions, setDimensions] = useState({
         height: window.innerHeight,
         width: window.innerWidth,
     });
     const [play, setplay] = useState(false);
+    const [mode, setMode] = useState('scraM');
 
     useEffect(() => {
         if (newScra != undefined) {
@@ -77,7 +78,6 @@ function CubePage() {
 
             setnewSol(scra2);
         }
-        setiter(iter + 1);
     }, [window.location.href]);
 
     useEffect(() => {
@@ -98,8 +98,8 @@ function CubePage() {
 
     return (
         <>
-            <CardContainer>
-                <CubeContainer>
+            <CardContainer mode={modes[mode]}>
+                <CubeContainer mode={modes[mode]}>
                     <h1>
                         Virtual Cube  {dimensions.width} x{" "}
                         {dimensions.height}
@@ -113,13 +113,13 @@ function CubePage() {
                         <ThemeBtn ><WiRefresh/></ThemeBtn>
                         <ThemeBtn ><CgChevronDoubleLeft/></ThemeBtn>
                         <ThemeBtn ><CgChevronLeft/></ThemeBtn>
-                        <ThemeBtn onClick={toggleplay}>{icon}</ThemeBtn>
+                        <ThemeBtn onClick={togglePlay}>{icon}</ThemeBtn>
                         <ThemeBtn><CgChevronRight/></ThemeBtn>
                         <ThemeBtn ><CgChevronDoubleRight/></ThemeBtn>
-                         <ThemeBtn ><FiCodesandbox/></ThemeBtn>
+                         <ThemeBtn onClick={toggleMode}><FiCodesandbox/></ThemeBtn>
                     </ButtonArea>
                 </CubeContainer>
-                <ScrambleI>
+                <ScrambleI mode={modes[mode]}>
                     <h1>Scramble </h1>
                     <InTextArea1
                         type="Text"
@@ -128,7 +128,7 @@ function CubePage() {
                         defaultValue={newScra}
                     />
                 </ScrambleI>
-                <SolutionI>
+                <SolutionI mode={modes[mode]}>
                     <h1>Solutions </h1>
                     <InTextArea2
                         type="Text"
@@ -160,9 +160,15 @@ function CubePage() {
         setnewSol(event.target.value);
         console.log("Solution:", newSol);
     }
-    function toggleplay() {
+    function togglePlay() {
         setplay(!play);
     }
+    function toggleMode(){
+        let modeto = mode == "fullM" ? "scraM" : "fullM";
+        setMode(modeto);
+     
+    }
 }
+
 
 export default CubePage;
