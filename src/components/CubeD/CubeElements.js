@@ -5,11 +5,14 @@ import { Link as LinkR } from "react-router-dom";
 export const CardContainer = styled.section`
     display: grid;
     padding: 0.9rem 0.9rem 0.9rem 0.9rem;
+    //position: absolute;
+    margin:0;
+    margin-left:5rem;
     gap: 1rem;
+    height:calc(100vh - 6.8rem); //spaces around - sign are fking required
     background-color: ${(props) => props.theme.secondary};
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(14, 1fr);
-    height: 87vh;
     color: ${(props) => props.theme.priopp};
     transition: all 0.3s ease-in-out;
 
