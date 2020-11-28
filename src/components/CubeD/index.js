@@ -37,7 +37,7 @@ function CubePage() {
         width: window.innerWidth,
     });
     const [play, setplay] = useState(false);
-    const [mode, setMode] = useState('scraM');
+    const [mode, setMode] = useState('fullM');
 
     useEffect(() => {
         if (newScra != undefined) {
@@ -99,14 +99,14 @@ function CubePage() {
 
     return (
         <>
-        <SideNav/>
+        
             <CardContainer mode={modes[mode]}>
-                
+                <SideNav/>
                 <CubeContainer mode={modes[mode]}>
-                    <h1>
+                    {/* <h1>
                         Virtual Cube  {dimensions.width} x{" "}
                         {dimensions.height}
-                    </h1>
+                    </h1> */}
                     <VCube
                         play={play}
                         width={dimensions.width}

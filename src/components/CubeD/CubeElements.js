@@ -7,7 +7,6 @@ export const CardContainer = styled.section`
     padding: 0.9rem 0.9rem 0.9rem 0.9rem;
     //position: absolute;
     margin:0;
-    margin-left:5rem;
     gap: 1rem;
     height:calc(100vh - 6.8rem); //spaces around - sign are fking required
     background-color: ${(props) => props.theme.secondary};
@@ -25,11 +24,12 @@ export const CardContainer = styled.section`
 
 export const CubeContainer = styled.div`
     display: grid;
+    margin-left:5.9rem;
     background-color: ${(props) => props.theme.primary};
     grid-row: span 14 / auto;
     grid-column: span ${(props) => props.mode.cubecols}/ auto;
     grid-template-rows: repeat(8, 1fr); //for the child tags
-    padding: 1rem 2rem 1rem;
+    padding: 2rem 2rem 1rem;
     color: ${(props) => props.theme.priopp};
     border-radius: 1.75rem;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
@@ -38,6 +38,7 @@ export const CubeContainer = styled.div`
     @media screen and (max-width: 768px) {
         grid-row: span 7 / auto;
         grid-column: span 3 / auto;
+        margin-left:0rem;
     }
 
     &:hover {
@@ -47,7 +48,7 @@ export const CubeContainer = styled.div`
 
 export const TrialStyle = styled.div`
     display: grid;
-    grid-row: span 6 / auto;
+    grid-row: span 7 / auto;
     border: none;
     margin: none;
     box-shadow: none;
