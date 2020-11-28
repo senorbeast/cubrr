@@ -38,16 +38,16 @@ const App = () => {
                         theme={theme}
                         setTheme={setTheme}
                     />
-                    <Navbar toggle={toggle} theme={theme} setTheme={setTheme} />
+                    {/* <Navbar toggle={toggle} theme={theme} setTheme={setTheme} /> */}
                     <Switch>
-                        <Route path="/" exact component={Home} />
-                        <Route path="/cube" exact component={CubePage} />
+                        <Route path="/" exact render={() => <Home toggle={toggle} theme={theme} setTheme={setTheme}/>}/>
+                        <Route path="/cube" exact render={() => <CubePage toggle={toggle} theme={theme} setTheme={setTheme}/>}/>
                         <Route
                             path="/algstrainer"
                             exact
-                            component={AlgsTrainer}
+                            render={() => <AlgsTrainer toggle={toggle} theme={theme} setTheme={setTheme}/>}
                         />
-                        <Route path="/signin" exact component={Signup} />
+                        <Route path="/signin" exact render={() => <Signup toggle={toggle} theme={theme} setTheme={setTheme}/>}/>
                     </Switch>
                 </Router>
             </ThemeProvider>

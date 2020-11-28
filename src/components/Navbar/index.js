@@ -43,9 +43,6 @@ const Navbar = (props) => {
                     <NavItem>
                         <NavLinks to="/algstrainer">Algs Trainer</NavLinks>
                     </NavItem>
-                    <NavItem>
-                        <NavLinks to="/signup">Sign Up</NavLinks>
-                    </NavItem>
                 </NavMenu>
                 <NavBtn>
                     <SignInBut to="/signin">Sign In</SignInBut>

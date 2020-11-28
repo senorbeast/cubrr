@@ -8,7 +8,7 @@ export const CardContainer = styled.section`
     //position: absolute;
     margin:0;
     gap: 1rem;
-    height:calc(100vh - 6.8rem); //spaces around - sign are fking required
+    height:calc(100vh - 1.8rem); //spaces around - sign are fking required
     background-color: ${(props) => props.theme.secondary};
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(14, 1fr);
