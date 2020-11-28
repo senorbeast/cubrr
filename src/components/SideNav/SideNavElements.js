@@ -56,6 +56,7 @@ export const SideNavItemBtn = styled(LinkR)`
     margin-top:0.4rem;
     margin-bottom:0.4rem;
     justify-content:center;
+    font-size:1.6rem;
     align-items:center;
     background-color:${(props) => props.theme.prialt};
     color: ${(props) => props.theme.priopp};
@@ -64,6 +65,11 @@ export const SideNavItemBtn = styled(LinkR)`
         color: ${(props) => props.theme.highlight};
         filter:brightness(1.2);
         transition: 0.2s ease-in-out;
+        
+    }
+     &:last-child {
+        margin-top: auto;
+
     }
 `;
 

@@ -29,7 +29,7 @@ function debounce(fn, ms) {
     };
 }
 
-function CubePage() {
+function CubePage(props) {
     const [newSol, setnewSol] = useState("");
     let [newScra, setnewScra] = useState(); //using to store the scramble and push it to URL and also to store the initial URl and show in Scramble
     const [dimensions, setDimensions] = useState({
@@ -101,7 +101,7 @@ function CubePage() {
         <>
         
             <CardContainer mode={modes[mode]}>
-                <SideNav/>
+                <SideNav toggle={props.toggle} theme={props.theme} setTheme={props.setTheme} />
                 <CubeContainer mode={modes[mode]}>
                     {/* <h1>
                         Virtual Cube  {dimensions.width} x{" "}
