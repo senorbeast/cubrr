@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import SideNav from '../SideNav'
 import {
     CardContainer,
     CubeContainer,
@@ -98,7 +99,9 @@ function CubePage() {
 
     return (
         <>
+        <SideNav/>
             <CardContainer mode={modes[mode]}>
+                
                 <CubeContainer mode={modes[mode]}>
                     <h1>
                         Virtual Cube  {dimensions.width} x{" "}
