@@ -33,11 +33,12 @@ export const SideNavItem = styled.div`
     margin-bottom:0.4rem;
     justify-content:center;
     align-items:center;
-    background-color:${(props) => props.theme.prialt};
-    color: ${(props) => props.theme.priopp};
+    background-color:${(props) => props.theme.highopp};
+    color: ${(props) => props.theme.highlight};
     
       &:hover {
-        color: ${(props) => props.theme.highlight};
+        color: ${(props) => props.theme.primary};
+        background-color:${(props) => props.theme.priopp};
         filter:brightness(1.2);
         transition: 0.2s ease-in-out;
     }
@@ -58,11 +59,12 @@ export const SideNavItemBtn = styled(LinkR)`
     justify-content:center;
     font-size:1.6rem;
     align-items:center;
-    background-color:${(props) => props.theme.prialt};
-    color: ${(props) => props.theme.priopp};
+    background-color:${(props) => props.theme.highopp};
+    color: ${(props) => props.theme.highlight};
     
       &:hover {
-        color: ${(props) => props.theme.highlight};
+        color: ${(props) => props.theme.primary};
+        background-color:${(props) => props.theme.priopp};
         filter:brightness(1.2);
         transition: 0.2s ease-in-out;
         

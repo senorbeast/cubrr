@@ -37,7 +37,7 @@ function CubePage(props) {
         width: window.innerWidth,
     });
     const [play, setplay] = useState(false);
-    const [mode, setMode] = useState('fullM');
+    const [mode, setMode] = useState('scraM');
 
     useEffect(() => {
         if (newScra != undefined) {
