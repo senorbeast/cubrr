@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Trial from "./trial";
+import Trial from "./trial1";
 
 const VCube = (props) => {
     const [state, setstate] = useState(1);
