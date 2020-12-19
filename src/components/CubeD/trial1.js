@@ -232,13 +232,13 @@ export const Trial = () => {
                     fast_execute(scene, meshs, padding, moves6);
                 }
             }
-            // if (  animation_flag == 0 )
-            //   { var myvar
-            //     console.log(meshs)
-            //     myvar = setTimeout(animation_sequence(scene, meshs,core,camera) ,1500)
-            //     animation_flag = 1
+            if (  animation_flag == 0 )
+              { var myvar
+                console.log(meshs)
+                myvar = setTimeout(animation_sequence(scene, meshs,core,camera) ,1500)
+                animation_flag = 1
 
-            //   }
+              }
             if (play == "true") {
                 console.log("true");
                 face_plane_make(
