@@ -41,8 +41,13 @@ export const Trial = () => {
     const [isAnimating, setAnimating] = useState(true);
     const controls = useRef(null);
     const [width, height] = useWindowSize();
+    const [count, setCount] = useState(0);
 
     useEffect(() => {
+        console.log(count);
+
+        console.log(count);
+        setCount(count + 1);
         let width = mount.current.clientWidth;
         let height = mount.current.clientHeight;
         let frameId;
@@ -80,7 +85,8 @@ export const Trial = () => {
         const animate = () => {
             cube.rotation.x += 0.01;
             cube.rotation.y += 0.01;
-
+            console.log(count);
+            setCount(count + 1);
             renderScene();
             frameId = window.requestAnimationFrame(animate);
         };
@@ -102,16 +108,16 @@ export const Trial = () => {
 
         controls.current = { start, stop };
 
-        return () => {
-            stop();
-            window.removeEventListener("resize", handleResize);
-            mount.current.removeChild(renderer.domElement);
+        // return () => {
+        //     stop();
+        //     window.removeEventListener("resize", handleResize);
+        //     mount.current.removeChild(renderer.domElement);
 
-            scene.remove(cube);
-            geometry.dispose();
-            material.dispose();
-        };
-    });
+        //     scene.remove(cube);
+        //     geometry.dispose();
+        //     material.dispose();
+        // };
+    }, []);
 
     useEffect(() => {
         if (isAnimating) {

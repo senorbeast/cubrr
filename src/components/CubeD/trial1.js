@@ -39,11 +39,13 @@ function useWindowSize() {
 
 export const Trial = () => {
     const mount = useRef(null);
-    const [isAnimating, setAnimating] = useState(true);
-    const controls = useRef(null);
+    const [count, setCount] = useState(0);
     const [width, height] = useWindowSize();
 
     useEffect(() => {
+        console.log(count);
+        setCount(count + 1);
+        console.log(count);
         let width = mount.current.clientWidth;
         let height = mount.current.clientHeight;
         let frameId;
@@ -265,7 +267,6 @@ export const Trial = () => {
             }
 
             renderScene();
-            frameId = window.requestAnimationFrame(animate);
         };
 
         const start = () => {
@@ -280,21 +281,18 @@ export const Trial = () => {
         };
 
         mount.current.appendChild(renderer.domElement);
-        window.addEventListener("resize", handleResize);
+        //window.addEventListener("resize", handleResize);
         start();
 
         controls.current = { start, stop };
 
         return () => {
-            stop();
+            //stop();
             window.removeEventListener("resize", handleResize);
-            mount.current.removeChild(renderer.domElement);
-
-            // scene.remove(cube);
-            // // geometry.dispose();
-            // // material.dispose();
+            //mount.current.removeChild(renderer.domElement);
+            //scene.remove(cube);
         };
-    });
+    }, []);
 
     // useEffect(() => {
     //     if (isAnimating) {
@@ -303,12 +301,10 @@ export const Trial = () => {
     //         controls.current.stop();
     //     }
     // }, [isAnimating]);
+
     return (
         <>
-            <TrialStyle
-                ref={mount}
-                onClick={() => setAnimating(!isAnimating)}
-            />
+            <TrialStyle ref={mount} />
         </>
     );
 };
