@@ -18,6 +18,7 @@ import { fast_execute } from "./cube_fast_execute.js";
 import { cube_color } from "./cubelet_colors.js";
 import { layer_group } from "./cubelet_group.js";
 import { animate_execute } from "./cube_animate_execute.js";
+import {draw_text} from "./cube_text.js"
 import { face_plane_make } from "./cube_face_plane.js";
 import { OrbitControls } from "../../../node_modules/three/examples/jsm/controls/OrbitControls";
 // /import Stats from '/jsm/libs/stats.module.js';
@@ -234,8 +235,11 @@ export const Trial = () => {
             }
             if (  animation_flag == 0 )
               { var myvar
-                console.log(meshs)
-                myvar = setTimeout(animation_sequence(scene, meshs,core,camera) ,1500)
+                camera.position.x = 300 
+                camera.position.y = 200
+                camera.position.z = 1000 
+                myvar = setTimeout(draw_text(scene,"Cubista ",renderer ) ,1500)
+                const line2 = setTimeout(draw_text(scene,"Nobista", renderer) ,2500)
                 animation_flag = 1
 
               }
@@ -253,7 +257,7 @@ export const Trial = () => {
                 );
             }
             if (play == "false") {
-                console.log("true");
+                
                 face_plane_make(
                     face_plane,
                     "false",
