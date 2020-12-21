@@ -240,7 +240,6 @@ export const Trial = () => {
 
             //   }
             if (play == "true") {
-                console.log("true");
                 face_plane_make(
                     face_plane,
                     "true",
@@ -253,7 +252,6 @@ export const Trial = () => {
                 );
             }
             if (play == "false") {
-                console.log("true");
                 face_plane_make(
                     face_plane,
                     "false",

@@ -6,9 +6,9 @@ export const CardContainer = styled.section`
     display: grid;
     padding: 0.9rem 0.9rem 0.9rem 0.9rem;
     //position: absolute;
-    margin:0;
+    margin: 0;
     gap: 1rem;
-    height:calc(100vh - 1.8rem); //spaces around - sign are fking required
+    height: calc(100vh - 1.8rem); //spaces around - sign are fking required
     background-color: ${(props) => props.theme.secondary};
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(14, 1fr);
@@ -24,10 +24,10 @@ export const CardContainer = styled.section`
 
 export const CubeContainer = styled.div`
     display: grid;
-    margin-left:5.9rem;
+    margin-left: 5.9rem;
     background-color: ${(props) => props.theme.primary};
     grid-row: span 14 / auto;
-    grid-column: span ${(props) => props.mode.cubecols}/ auto;
+    grid-column: span ${(props) => props.mode.cubecols} / auto;
     grid-template-rows: repeat(8, 1fr); //for the child tags
     padding: 2rem 2rem 1rem;
     color: ${(props) => props.theme.priopp};
@@ -38,7 +38,7 @@ export const CubeContainer = styled.div`
     @media screen and (max-width: 768px) {
         grid-row: span 7 / auto;
         grid-column: span 3 / auto;
-        margin-left:0rem;
+        margin-left: 0rem;
     }
 
     &:hover {
@@ -54,6 +54,25 @@ export const TrialStyle = styled.div`
     box-shadow: none;
     border-radius: 1.75rem;
     background-color: ${(props) => props.theme.priopp};
+`;
+
+export const AlgsCard = styled.div`
+    display: ${(props) => props.mode.alg};
+    background-color: ${(props) => props.theme.primary};
+    border-radius: 1.75rem;
+    padding: 1rem 2rem 1rem;
+    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+    grid-row: span 14 / auto;
+    grid-template-rows: repeat(9, 1fr);
+    transition: all 0.5s ease;
+    @media screen and (max-width: 768px) {
+        grid-column: span 3 / auto;
+        grid-row: span 7 / auto;
+    }
+
+    &:hover {
+        filter: contrast(100%);
+    }
 `;
 
 export const ScrambleI = styled.div`
@@ -147,7 +166,7 @@ export const InTextArea2 = styled.textarea`
 `;
 
 export const ThemeBtn = styled.div`
-    display:block;
+    display: block;
     align-items: center;
     height: 2rem;
     cursor: pointer;
@@ -162,14 +181,12 @@ export const ThemeBtn = styled.div`
 `;
 
 export const ButtonArea = styled.div`
-    display:grid;
-    grid-template-columns: repeat(${(props) => props.mode.nobuts},1fr);
-    font-size:5rem;
-    margin-top:0.7rem;
-    margin-bottom:1rem;
+    display: grid;
+    grid-template-columns: repeat(${(props) => props.mode.nobuts}, 1fr);
+    font-size: 5rem;
+    margin-top: 0.7rem;
+    margin-bottom: 1rem;
     @media screen and (max-width: 768px) {
-        font-size:3rem;
-        
+        font-size: 3rem;
     }
 `;
-
