@@ -43,11 +43,11 @@ export const SideNavItem = styled.div`
     }
     &:last-child {
         margin-top: auto;
-        filter: brightness(2);
+        filter: brightness(1.4);
     }
 `;
 
-export const SideNavItemBtn = styled.div`
+export const SideNavItemBtn = styled(LinkR)`
     height: 3rem;
     width: 3rem;
     border-radius: 50%;

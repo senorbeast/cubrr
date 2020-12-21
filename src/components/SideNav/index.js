@@ -33,7 +33,7 @@ const SideNav = (props) => {
                 <SideNavItem>4</SideNavItem>
                 <SideNavItem>5</SideNavItem>
                 <SideNavItem>6</SideNavItem>
-                <SideNavItemBtn onClick={changeTheme}>{icon}</SideNavItemBtn>
+                <SideNavItem onClick={changeTheme}>{icon}</SideNavItem>
             </SideNavMenu>
         </SideNavContainer>
     );
