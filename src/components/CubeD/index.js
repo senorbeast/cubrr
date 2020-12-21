@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import SideNav from '../SideNav'
+import SideNav from "../SideNav";
 import {
     CardContainer,
     CubeContainer,
+    AlgsCard,
     ScrambleI,
     SolutionI,
     InTextArea1,
@@ -11,10 +12,15 @@ import {
     ButtonArea,
 } from "./CubeElements";
 import * as modes from "./modes.js";
-import { FiCodesandbox} from "react-icons/fi";
-import { WiRefresh} from "react-icons/wi";
-import {CgChevronDoubleRight,CgChevronDoubleLeft, CgChevronRight,CgChevronLeft} from "react-icons/cg";
-import { ImPlay2,ImPause } from "react-icons/im";
+import { FiCodesandbox } from "react-icons/fi";
+import { WiRefresh } from "react-icons/wi";
+import {
+    CgChevronDoubleRight,
+    CgChevronDoubleLeft,
+    CgChevronRight,
+    CgChevronLeft,
+} from "react-icons/cg";
+import { ImPlay2, ImPause } from "react-icons/im";
 //import CubeD from "./cube.js";
 import VCube from "./VCube";
 
@@ -37,7 +43,7 @@ function CubePage(props) {
         width: window.innerWidth,
     });
     const [play, setplay] = useState(false);
-    const [mode, setMode] = useState('scraM');
+    const [mode, setMode] = useState("scraM"); //for fullscreen mode and Scra/Sol mode
 
     useEffect(() => {
         if (newScra != undefined) {
@@ -45,12 +51,12 @@ function CubePage(props) {
                 "object or string",
                 "",
                 "/cube/?scramble=" +
-                newScra +
-                "?solution=" +
-                newSol +
-                "?play=" +
-                play +
-                "?"
+                    newScra +
+                    "?solution=" +
+                    newSol +
+                    "?play=" +
+                    play +
+                    "?"
             );
         }
     }, [newScra, newSol, play]);
@@ -95,13 +101,20 @@ function CubePage(props) {
         };
     });
 
-    const icon = play == false ? <ImPlay2/> : <ImPause/>;
+    const icon = play == false ? <ImPlay2 /> : <ImPause />;
 
     return (
         <>
-        
-            <CardContainer mode={modes[mode]}>
-                <SideNav toggle={props.toggle} theme={props.theme} setTheme={props.setTheme} />
+            <CardContainer
+                mode={modes[mode]} //Passing mode object to mode
+            >
+                <SideNav
+                    toggle={props.toggle}
+                    theme={props.theme}
+                    setTheme={props.setTheme}
+                    mode={mode} //Passing mode name to mode
+                    setMode={setMode}
+                />
                 <CubeContainer mode={modes[mode]}>
                     {/* <h1>
                         Virtual Cube  {dimensions.width} x{" "}
@@ -113,15 +126,30 @@ function CubePage(props) {
                         height={dimensions.height}
                     />
                     <ButtonArea mode={modes[mode]}>
-                        <ThemeBtn ><WiRefresh/></ThemeBtn>
-                        <ThemeBtn ><CgChevronDoubleLeft/></ThemeBtn>
-                        <ThemeBtn ><CgChevronLeft/></ThemeBtn>
+                        <ThemeBtn>
+                            <WiRefresh />
+                        </ThemeBtn>
+                        <ThemeBtn>
+                            <CgChevronDoubleLeft />
+                        </ThemeBtn>
+                        <ThemeBtn>
+                            <CgChevronLeft />
+                        </ThemeBtn>
                         <ThemeBtn onClick={togglePlay}>{icon}</ThemeBtn>
-                        <ThemeBtn><CgChevronRight/></ThemeBtn>
-                        <ThemeBtn ><CgChevronDoubleRight/></ThemeBtn>
-                         <ThemeBtn onClick={toggleMode}><FiCodesandbox/></ThemeBtn>
+                        <ThemeBtn>
+                            <CgChevronRight />
+                        </ThemeBtn>
+                        <ThemeBtn>
+                            <CgChevronDoubleRight />
+                        </ThemeBtn>
+                        <ThemeBtn onClick={toggleMode}>
+                            <FiCodesandbox />
+                        </ThemeBtn>
                     </ButtonArea>
                 </CubeContainer>
+                <AlgsCard mode={modes[mode]}>
+                    <h1>Algs here </h1>
+                </AlgsCard>
                 <ScrambleI mode={modes[mode]}>
                     <h1>Scramble </h1>
                     <InTextArea1
@@ -166,12 +194,10 @@ function CubePage(props) {
     function togglePlay() {
         setplay(!play);
     }
-    function toggleMode(){
+    function toggleMode() {
         let modeto = mode == "fullM" ? "scraM" : "fullM";
         setMode(modeto);
-     
     }
 }
-
 
 export default CubePage;

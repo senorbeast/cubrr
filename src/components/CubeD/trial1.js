@@ -18,7 +18,7 @@ import { fast_execute } from "./cube_fast_execute.js";
 import { cube_color } from "./cubelet_colors.js";
 import { layer_group } from "./cubelet_group.js";
 import { animate_execute } from "./cube_animate_execute.js";
-import {draw_text} from "./cube_text.js"
+import { draw_text } from "./cube_text.js";
 import { face_plane_make } from "./cube_face_plane.js";
 import { OrbitControls } from "../../../node_modules/three/examples/jsm/controls/OrbitControls";
 // /import Stats from '/jsm/libs/stats.module.js';
@@ -244,7 +244,6 @@ export const Trial = () => {
 
             //   }
             if (play == "true") {
-                console.log("true");
                 face_plane_make(
                     face_plane,
                     "true",
@@ -257,7 +256,6 @@ export const Trial = () => {
                 );
             }
             if (play == "false") {
-                
                 face_plane_make(
                     face_plane,
                     "false",
