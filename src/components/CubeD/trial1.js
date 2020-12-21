@@ -12,7 +12,7 @@ import gsap from "gsap";
 
 // import Stats from '/jsm/libs/stats.module.js';
 import { animation_sequence } from "./cube_animation_sequence.js";
-//import { beginner_cross } from "./cube_beg_cross.js";
+import { beg_cross } from "./cube_beg_cross.js";
 import { cubelets_form } from "./cubelets.js";
 import { fast_execute } from "./cube_fast_execute.js";
 import { cube_color } from "./cubelet_colors.js";
@@ -233,16 +233,16 @@ export const Trial = () => {
                     fast_execute(scene, meshs, padding, moves6);
                 }
             }
-            if (  animation_flag == 0 )
-              { var myvar
-                camera.position.x = 300 
-                camera.position.y = 200
-                camera.position.z = 1000 
-                myvar = setTimeout(draw_text(scene,"Cubista ",renderer ) ,1500)
-                const line2 = setTimeout(draw_text(scene,"Nobista", renderer) ,2500)
-                animation_flag = 1
+            // if (  animation_flag == 0 )
+            //   { var myvar
+            //     camera.position.x = 300 
+            //     camera.position.y = 200
+            //     camera.position.z = 1000 
+            //     myvar = setTimeout(beg_cross(scene,meshs ) ,1500)
+            //     // const line2 = setTimeout(draw_text(scene,"Nobista", renderer) ,2500)
+            //     animation_flag = 1
 
-              }
+            //   }
             if (play == "true") {
                 console.log("true");
                 face_plane_make(
