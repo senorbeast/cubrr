@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "./components/Sidebar";
-import Navbar from "./components/Navbar";
 //import CubeD from "./components/CubeD";
 import Home from "./components/Home";
 import AlgsTrainer from "./components/AlgsTrainer";
@@ -40,14 +39,50 @@ const App = () => {
                     />
                     {/* <Navbar toggle={toggle} theme={theme} setTheme={setTheme} /> */}
                     <Switch>
-                        <Route path="/" exact render={() => <Home toggle={toggle} theme={theme} setTheme={setTheme}/>}/>
-                        <Route path="/cube" exact render={() => <CubePage toggle={toggle} theme={theme} setTheme={setTheme}/>}/>
+                        <Route
+                            path="/"
+                            exact
+                            render={() => (
+                                <Home
+                                    toggle={toggle}
+                                    theme={theme}
+                                    setTheme={setTheme}
+                                />
+                            )}
+                        />
+                        <Route
+                            path="/cube"
+                            exact
+                            render={() => (
+                                <CubePage
+                                    toggle={toggle}
+                                    theme={theme}
+                                    setTheme={setTheme}
+                                />
+                            )}
+                        />
                         <Route
                             path="/algstrainer"
                             exact
-                            render={() => <AlgsTrainer toggle={toggle} theme={theme} setTheme={setTheme}/>}
+                            render={() => (
+                                <AlgsTrainer
+                                    toggle={toggle}
+                                    theme={theme}
+                                    setTheme={setTheme}
+                                />
+                            )}
                         />
-                        <Route path="/signin" exact render={() => <Signup toggle={toggle} theme={theme} setTheme={setTheme}/>}/>
+                        <Route
+                            path="/signin"
+                            exact
+                            render={() => (
+                                <Signup
+                                    toggle={toggle}
+                                    theme={theme}
+                                    setTheme={setTheme}
+                                />
+                            )}
+                        />
                     </Switch>
                 </Router>
             </ThemeProvider>
