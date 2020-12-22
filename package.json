@@ -14,6 +14,10 @@
     "canvas-txt": "^3.0.0",
     "createjs-module": "^0.8.3",
     "graphql": "^15.4.0",
+<<<<<<< HEAD
+=======
+    "graphql-tag": "^2.11.0",
+>>>>>>> 36e28aaddf908f8f04ff8fdfe372113074c7bd25
     "gsap": "^3.5.1",
     "mime": "^2.4.7",
     "orbit-controls": "^1.2.4",
