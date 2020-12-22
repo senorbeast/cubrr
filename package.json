@@ -13,6 +13,7 @@
     "apollo-link-http": "^1.5.17",
     "canvas-txt": "^3.0.0",
     "createjs-module": "^0.8.3",
+    "graphql": "^15.4.0",
     "gsap": "^3.5.1",
     "mime": "^2.4.7",
     "orbit-controls": "^1.2.4",
