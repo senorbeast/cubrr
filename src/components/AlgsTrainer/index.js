@@ -1,16 +1,10 @@
 import React from "react";
 import Navbar from "../Navbar";
 import Container from "@material-ui/core/Container";
-import { ButtonSC, TypographySC } from "../BasicElements";
+import { TypographySC } from "../BasicElements";
 import { AlgsPage } from "./AlgsPage";
 import { AlgHome } from "./AlgHome";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    useParams,
-    useRouteMatch,
-} from "react-router-dom";
+import { Switch, Route, useRouteMatch } from "react-router-dom";
 
 function AlgsTrainer(props) {
     let { path, url } = useRouteMatch();
