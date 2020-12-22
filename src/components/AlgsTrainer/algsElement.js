@@ -13,7 +13,7 @@ export const CardContainer = styled.section`
     gap: 1rem;
     background-color: ${(props) => props.theme.secondary};
     color: ${(props) => props.theme.priopp};
-    height: calc(100vh - 6.8rem);
+    //height: calc(100vh - 6.8rem);
     transition: all 0.3s ease-in-out;
     align-content: flex-start;
     @media screen and (max-width: 768px) {

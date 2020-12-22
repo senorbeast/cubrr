@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../Navbar";
 import Container from "@material-ui/core/Container";
+import { CardContainer } from "./AlgsElement";
 import { TypographySC } from "../BasicElements";
 import { AlgsPage } from "./AlgsPage";
 import { AlgHome } from "./AlgHome";
@@ -18,14 +19,16 @@ function AlgsTrainer(props) {
             />
             <Container maxWidth="lg">
                 <TypographySC component="div">
-                    <Switch>
-                        <Route exact path={`${url}`}>
-                            <AlgHome />
-                        </Route>
-                        <Route exact path={`${url}/PLL`}>
-                            <AlgsPage />
-                        </Route>
-                    </Switch>
+                    <CardContainer>
+                        <Switch>
+                            <Route exact path={`${url}`}>
+                                <AlgHome />
+                            </Route>
+                            <Route exact path={`${url}/PLL`}>
+                                <AlgsPage />
+                            </Route>
+                        </Switch>
+                    </CardContainer>
                 </TypographySC>
             </Container>
         </div>

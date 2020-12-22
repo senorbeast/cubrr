@@ -10,11 +10,9 @@ export const AlgsPage = (props) => {
         console.log(data);
     }
     return (
-        <div>
-            <div>
-                <h1>Algs from Database</h1>
-            </div>
-        </div>
+        <>
+            <h1>Algs from Database</h1>
+        </>
     );
 };
 

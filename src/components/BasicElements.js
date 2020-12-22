@@ -6,7 +6,7 @@ import { Typography } from "@material-ui/core";
 export const TypographySC = styled(Typography)`
     && {
         color: ${(props) => props.theme.priopp};
-        background-color: ${(props) => props.theme.primary};
+        background-color: ${(props) => props.theme.secondary};
         height: calc(100vh - 5rem);
         padding: 1px 0px 0px 0px;
         margin: -1px 0px 0px 0px;
