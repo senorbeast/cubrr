@@ -6,18 +6,14 @@ function draw_text(scene , text , renderer,ctx,c,reload)
   
     c.height = 300 
     c.width = 750
-    ctx.clearRect(0,0,c.width,c.height);
+    //ctx.clearRect(0,0,c.width,c.height);
     ctx.fillStyle = 'white'
     
     var txt = text
-    var re = reload
+    
     canvasTxt.font = 'Bahnschrift SemiBold'
     canvasTxt.fontSize = 70
     canvasTxt.fontWeight = 'bold'
-   
-        
-
-    
     canvasTxt.drawText(ctx, txt, 0, -50, 750,300)
     
     let guide_text_1 = new THREE.CanvasTexture(c);
