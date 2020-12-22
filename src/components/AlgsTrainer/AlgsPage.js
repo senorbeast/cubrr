@@ -4,7 +4,9 @@ import Navbar from "../Navbar";
 export const AlgsPage = (props) => {
     return (
         <div>
-            <p>PLL page here</p>
+            <div>
+                <h1>Algs from Database</h1>
+            </div>
         </div>
     );
 };
