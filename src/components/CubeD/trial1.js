@@ -132,6 +132,8 @@ export const Trial = () => {
         // gap between the layers
         var padding = pad;
         // radius of the fillet used on corners of cube
+        var c = document.createElement("canvas")
+        var ctx = c.getContext("2d")
         const tx1 = document.createElement("canvas").getContext("2d");
         tx1.font = "150pt poppins ";
         tx1.fillText("F", 100, 140);
@@ -233,16 +235,16 @@ export const Trial = () => {
                     fast_execute(scene, meshs, padding, moves6);
                 }
             }
-            // if (  animation_flag == 0 )
-            //   { var myvar
-            //     camera.position.x = 300 
-            //     camera.position.y = 200
-            //     camera.position.z = 1000 
-            //     myvar = setTimeout(beg_cross(scene,meshs ) ,1500)
-            //     // const line2 = setTimeout(draw_text(scene,"Nobista", renderer) ,2500)
-            //     animation_flag = 1
+            if (  animation_flag == 0 )
+              { var myvar
+                camera.position.x = 300 
+                camera.position.y = 200
+                camera.position.z = 1000 
+                myvar = setTimeout(beg_cross(scene,meshs,ctx,c,padding,renderer) ,1500)
+                // const line2 = setTimeout(draw_text(scene,"Nobista", renderer) ,2500)
+                animation_flag = 1
 
-            //   }
+              }
             if (play == "true") {
                 face_plane_make(
                     face_plane,

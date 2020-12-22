@@ -1,18 +1,25 @@
 import * as THREE from "three";
 import canvasTxt from 'canvas-txt'
-function draw_text(scene , text , renderer)
+function draw_text(scene , text , renderer,ctx,c,reload)
 {
     
-    const c = document.createElement("canvas")
-    const ctx = c.getContext("2d")
+  
     c.height = 300 
     c.width = 750
+    ctx.clearRect(0,0,c.width,c.height);
     ctx.fillStyle = 'white'
-    const txt = 'WELCOME CUBERS TO CUBING COMMUNITY'
+    
+    var txt = text
+    var re = reload
     canvasTxt.font = 'Bahnschrift SemiBold'
     canvasTxt.fontSize = 70
     canvasTxt.fontWeight = 'bold'
+   
+        
+
+    
     canvasTxt.drawText(ctx, txt, 0, -50, 750,300)
+    
     let guide_text_1 = new THREE.CanvasTexture(c);
     guide_text_1.anisotropy = renderer.capabilities.getMaxAnisotropy();
     const geometry = new THREE.PlaneGeometry(500, 150, 0);
@@ -21,5 +28,11 @@ function draw_text(scene , text , renderer)
     plane.position.set(400,0,-150)
     plane.material.map = guide_text_1
     scene.add(plane)
+    
+    
+       
+
+    
+    
 }
 export{draw_text}
