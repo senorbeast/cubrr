@@ -23,6 +23,8 @@ export const CardContainer = styled.section`
 export const SetCard = styled(LinkR)`
     display: grid;
     background-color: ${(props) => props.theme.primary};
+    color: ${(props) => props.theme.priopp};
+    text-decoration: none;
     border-radius: 1.75rem;
     padding: 1rem 2rem 1rem;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);

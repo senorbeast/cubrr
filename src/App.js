@@ -63,7 +63,6 @@ const App = () => {
                         />
                         <Route
                             path="/algstrainer"
-                            exact
                             render={() => (
                                 <AlgsTrainer
                                     toggle={toggle}

@@ -1,14 +1,20 @@
 import React from "react";
 import Navbar from "../Navbar";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { ButtonSC, TypographySC } from "../BasicElements";
-import Button from "@material-ui/core/Button";
-import { CardContainer, SetCard, HeadCard } from "./algsElement";
+import { AlgsPage } from "./AlgsPage";
+import { AlgHome } from "./AlgHome";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    useParams,
+    useRouteMatch,
+} from "react-router-dom";
 
 function AlgsTrainer(props) {
-    console.log("Run this", props.theme);
+    let { path, url } = useRouteMatch();
+    console.log("Run this", path, url);
     return (
         <div>
             <Navbar
@@ -18,29 +24,14 @@ function AlgsTrainer(props) {
             />
             <Container maxWidth="lg">
                 <TypographySC component="div">
-                    <CardContainer>
-                        <HeadCard>
-                            <h1>Algorithm database</h1>
-                        </HeadCard>
-                        <SetCard to="/algstrainer/PLL">
-                            <h1>PLL</h1>
-                        </SetCard>
-                        <SetCard to="/">
-                            <h1>Card</h1>
-                        </SetCard>
-                        <SetCard to="/">
-                            <h1>Card</h1>
-                        </SetCard>
-                        <SetCard to="/">
-                            <h1>Card</h1>
-                        </SetCard>
-                        <SetCard to="/">
-                            <h1>Card</h1>
-                        </SetCard>
-                        <SetCard to="/">
-                            <h1>Card</h1>
-                        </SetCard>
-                    </CardContainer>
+                    <Switch>
+                        <Route exact path={`${url}`}>
+                            <AlgHome />
+                        </Route>
+                        <Route exact path={`${url}/PLL`}>
+                            <AlgsPage />
+                        </Route>
+                    </Switch>
                 </TypographySC>
             </Container>
         </div>
