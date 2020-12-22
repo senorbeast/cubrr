@@ -1,5 +1,22 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
+import { Typography } from "@material-ui/core";
+
+export const TypographySC = styled(Typography)`
+    && {
+        color: ${(props) => props.theme.priopp};
+        background-color: ${(props) => props.theme.primary};
+        height: calc(100vh - 5rem);
+    }
+`;
+
+export const ButtonSC = styled(Button)`
+    && {
+        color: ${(props) => props.theme.highopp};
+        background-color: ${(props) => props.theme.highlight};
+    }
+`;
 
 export const SignInBut = styled(Link)`
     border-radius: 50px;
