@@ -41,11 +41,13 @@ function beg_cross(scene , meshs ,ctx ,c ,padding,renderer )
     
         
     cross_time.play()
-    function animate_cross()
+    async function animate_cross()
     {
         var sol = animate_read(["F","'","U","'","F","'","L","R","'","B","'","R","D","'","R","D"],["F","'","U","'","F","'","L","R","'","B","'","R","D","'","R","D"],[],0)
         console.log(sol)
-        animate_execute(scene,meshs,sol,padding);
+        
+        let result = await animate_execute(scene,meshs,sol,padding);
+        console.log(result);
 
     }
     

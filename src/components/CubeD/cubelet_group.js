@@ -152,11 +152,11 @@ function layer_group(scene , meshs , layer , padding ,dir , number )
        if (Math.round(v1.x) == (50 + padding))
        {
          
-         console.log(qi)
+      
          //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
          pivot4.attach(meshs[qi])
      
-         console.log(pivot4)   
+         
       
        }
          
