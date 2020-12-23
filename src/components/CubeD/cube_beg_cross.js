@@ -6,9 +6,9 @@ import { fast_execute } from "./cube_fast_execute.js";
 function beg_cross(scene , meshs ,ctx ,c ,padding,renderer )
 {
     
-    var scramble = scramble_read(["B","'","D","'","U","2","L","2","B","2","D","'","F","2","L","2","R","2","U","L","2","F","2","L","'","B","'","L","D","'","L","R","U","'","L","'"],["B","'","D","'","U","2","L","2","B","2","D","'","F","2","L","2","R","2","U","L","2","F","2","L","'","B","'","L","D","'","L","R","U","'","L","'"],[],1)
+    var scramble = scramble_read(["R", "U", "2", "F", "'", "R", "2", "B", "D", "2", "U", "2", "B", "L", "2", "R", "2", "U", "2", "B", "2", "F", "'", "U", "B", "'", "F", "'", "L", "R", "F", "'", "U", "R", "2"],["R", "U", "2", "F", "'", "R", "2", "B", "D", "2", "U", "2", "B", "L", "2", "R", "2", "U", "2", "B", "2", "F", "'", "U", "B", "'", "F", "'", "L", "R", "F", "'", "U", "R", "2"],[],0)
     fast_execute(scene,meshs,padding,scramble)
-    var white_edges = [19,21,22,23,25]
+    var white_edges = [4,10,12,13,14,16,19,21,22,23,25]
     var cube = new THREE.Object3D();
     var cross = new THREE.Object3D();
     for (var i = 0 ; i< white_edges.length ;i++)
@@ -23,9 +23,7 @@ function beg_cross(scene , meshs ,ctx ,c ,padding,renderer )
     scene.add(cross);
 
     var cross_time = gsap.timeline({duration:2})
-    var tween1 = gsap.to(cube.rotation,{x:Math.PI , duration :1 ,onStart:draw_text,onStartParams:[scene,"First lets scramble the cube",renderer,ctx,c,1],onComplete:clear_text()})
-    
-    
+    var tween1 = gsap.to(cube.rotation,{x:Math.PI , duration :1 ,onStart:draw_text,onStartParams:[scene,"First lets scramble the cube",renderer,ctx,c,1]})
     cross_time.add(tween1,"anime1")
     for (var k = 0; k < meshs.length ; k++ )
     {
@@ -39,10 +37,7 @@ function beg_cross(scene , meshs ,ctx ,c ,padding,renderer )
     }
         
     cross_time.play()
-    function clear_text()
-    {
-        ctx.clearRect(0,0,c.width,c.height);
-    }
+  
 
 }
 export{beg_cross}

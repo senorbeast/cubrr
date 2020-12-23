@@ -220,7 +220,7 @@ export const Trial = () => {
                 current_move = scramble.slice(cube.length);
                 current_soln = soln.slice(cube_sol.length);
                 if (scramble.length > cube.length) {
-                    // console.log(current_move)
+                     console.log(scramble)
                     moves = scramble_read(current_move, scramble, cube, 0);
                     console.log(moves);
 
