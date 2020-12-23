@@ -1,3 +1,6 @@
 {
-    "python.pythonPath": "C:\\Users\\hrish\\AppData\\Local\\Programs\\Python\\Python39-32\\python.exe"
+    "python.pythonPath": "C:\\Users\\hrish\\AppData\\Local\\Programs\\Python\\Python39-32\\python.exe",
+    "files.associations": {
+        "map": "cpp"
+    }
 }
