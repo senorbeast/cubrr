@@ -23,6 +23,7 @@ import {
 import { ImPlay2, ImPause } from "react-icons/im";
 //import CubeD from "./cube.js";
 import VCube from "./VCube";
+import { FullCard } from "./FullCard";
 
 function debounce(fn, ms) {
     let timer;
@@ -148,7 +149,7 @@ function CubePage(props) {
                     </ButtonArea>
                 </CubeContainer>
                 <AlgsCard mode={modes[mode]}>
-                    <h1>Algs here </h1>
+                    <FullCard />
                 </AlgsCard>
                 <ScrambleI mode={modes[mode]}>
                     <h1>Scramble </h1>
