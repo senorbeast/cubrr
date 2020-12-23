@@ -3,12 +3,12 @@ import * as THREE from "three";
 import gsap from "gsap";
 import {layer_group} from './cubelet_group.js'
 var mov1 = 0
-function animate_execute (scene , meshs, soln , padding)
+async function animate_execute (scene , meshs, soln , padding)
 {      
       mov1 = 0
      
-      rotate(scene,meshs,soln,padding)
-
+      let res = await rotate(scene,meshs,soln,padding)
+      return res;
 }
 
 function comp(scene , meshs , soln ,padding)
@@ -30,7 +30,7 @@ function comp1(scene,meshs,soln,padding)
     
 }
 
-function rotate(scene,meshs,soln,padding)
+async function rotate(scene,meshs,soln,padding)
 {
     var moves2 = soln[mov1]
     var moves3 = moves2.split("_")
@@ -50,7 +50,7 @@ function rotate(scene,meshs,soln,padding)
     {
       gsap.to(moves1[0].rotation, {duration:0.3 , x: moves1[0].rotation.x + (moves1[2]) ,onComplete:comp(scene , meshs ,soln , padding )});
     }
-
+   return 2;
 }
 
 export {animate_execute}

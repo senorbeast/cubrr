@@ -1,8 +1,10 @@
 import * as THREE from "three";
 import gsap from "gsap";
 import { draw_text } from "./cube_text.js";
-import { scramble_read } from "./cube_scramble_read_v3";
+import { animate_read } from "./cube_animate_read_3.js";
+import {scramble_read} from "./cube_scramble_read_v3.js"
 import { fast_execute } from "./cube_fast_execute.js";
+import {animate_execute} from "./cube_animate_execute.js";
 function beg_cross(scene , meshs ,ctx ,c ,padding,renderer )
 {
     
@@ -22,7 +24,7 @@ function beg_cross(scene , meshs ,ctx ,c ,padding,renderer )
     scene.add(cube);
     scene.add(cross);
 
-    var cross_time = gsap.timeline({duration:2})
+    var cross_time = gsap.timeline({duration:2,onComplete:animate_cross})
     var tween1 = gsap.to(cube.rotation,{x:Math.PI , duration :1 ,onStart:draw_text,onStartParams:[scene,"First lets scramble the cube",renderer,ctx,c,1]})
     cross_time.add(tween1,"anime1")
     for (var k = 0; k < meshs.length ; k++ )
@@ -35,9 +37,21 @@ function beg_cross(scene , meshs ,ctx ,c ,padding,renderer )
         var tween3 = gsap.to(meshs[white_edges[p]].material,{duration:1 , opacity:1})
         cross_time.add(tween3,"anime3") 
     }
+
+    
         
     cross_time.play()
-  
+    async function animate_cross()
+    {
+        var sol = animate_read(["F","'","U","'","F","'","L","R","'","B","'","R","D","'","R","D"],["F","'","U","'","F","'","L","R","'","B","'","R","D","'","R","D"],[],0)
+        console.log(sol)
+        
+        let result = await animate_execute(scene,meshs,sol,padding);
+        console.log(result);
+
+    }
+    
+    
 
 }
 export{beg_cross}
