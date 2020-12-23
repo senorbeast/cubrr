@@ -2,16 +2,17 @@ import React from "react";
 import Navbar from "../Navbar";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import { AlgCardContainer, HeadCard} from "./AlgsElement";
+import { AlgCardContainer, HeadCard } from "./AlgsElement";
 import AlgCard from "./AlgCard";
 
 export const AlgsPage = (props) => {
     const { loading, data } = useQuery(FETCH_PLL_Query);
     return (
         <>
-         
             <AlgCardContainer>
-            <HeadCard><h1>Algs from Database</h1></HeadCard>
+                <HeadCard>
+                    <h1>Algs from Database</h1>
+                </HeadCard>
                 {loading ? (
                     <h1>Loading PLLs.....</h1>
                 ) : (
@@ -32,6 +33,7 @@ const FETCH_PLL_Query = gql`
             id
             recogn
             alglist {
+                id
                 alg
                 rating {
                     username
