@@ -22,11 +22,11 @@ export const Nav = styled.nav`
 export const NavbarContainer = styled.div`
     display: flex;
     justify-content: space-evenly;
-   // height: 80px;
+    // height: 80px;
     z-index: 1;
     width: 100%;
     padding: 0 24px;
-   // max-width: 1100px;
+    // max-width: 1100px;
 `;
 
 export const NavLogo = styled(LinkR)`
@@ -73,7 +73,6 @@ export const NavMenu = styled.ul`
 
 export const NavItem = styled.li`
     height: 4.65rem; /*  for border-bottom*/
-    
 `;
 
 export const NavLinks = styled(LinkR)`
@@ -101,22 +100,43 @@ export const NavBtn = styled.nav`
 `;
 
 export const ThemeBtnN = styled.div`
-    display:flex;
+    display: flex;
     align-items: center;
     height: 3rem;
     cursor: pointer;
-    width:3rem;
-    border-radius:50%;
-    justify-content:center;
-    text-decoration:none;
-    margin-left:0.4rem;
-    margin-right:0.4rem;
-    font-size:1.8rem;
+    width: 3rem;
+    border-radius: 50%;
+    justify-content: center;
+    text-decoration: none;
+    margin-left: 0.4rem;
+    margin-right: 0.4rem;
+    font-size: 1.8rem;
     color: ${(props) => props.theme.priopp};
-    background-color:${(props) => props.theme.prialt};
+    background-color: ${(props) => props.theme.prialt};
     &:hover {
         color: ${(props) => props.theme.highlight};
-        filter:brightness(1.2);
+        filter: brightness(1.2);
+        transition: 0.2s ease-in-out;
+    }
+`;
+
+export const LinkItemBtn = styled(LinkR)`
+    display: flex;
+    align-items: center;
+    height: 3rem;
+    cursor: pointer;
+    width: 3rem;
+    border-radius: 50%;
+    justify-content: center;
+    text-decoration: none;
+    margin-left: 0.4rem;
+    margin-right: 0.4rem;
+    font-size: 1.8rem;
+    color: ${(props) => props.theme.priopp};
+    background-color: ${(props) => props.theme.prialt};
+    &:hover {
+        color: ${(props) => props.theme.highlight};
+        filter: brightness(1.2);
         transition: 0.2s ease-in-out;
     }
 `;

@@ -9,6 +9,7 @@ import {
 import { BiHomeHeart } from "react-icons/bi";
 import { FaSun, FaMoon } from "react-icons/fa";
 import { VscBook } from "react-icons/vsc";
+import { TiThList } from "react-icons/ti";
 
 const SideNav = (props) => {
     function changeTheme() {
@@ -29,7 +30,9 @@ const SideNav = (props) => {
                 <SideNavItem onClick={algModeT}>
                     <VscBook size={25} />
                 </SideNavItem>
-                <SideNavItem>3</SideNavItem>
+                <SideNavItemBtn to="/algstrainer">
+                    <TiThList />
+                </SideNavItemBtn>
                 <SideNavItem>4</SideNavItem>
                 <SideNavItem>5</SideNavItem>
                 <SideNavItem>6</SideNavItem>
