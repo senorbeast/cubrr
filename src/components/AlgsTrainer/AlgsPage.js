@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../Navbar";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import { AlgCardContainer, HeadCard } from "./AlgsElement";
+import { AlgCardContainer, HeadCard } from "./algsElement";
 import AlgCard from "./AlgCard";
 
 export const AlgsPage = (props) => {
