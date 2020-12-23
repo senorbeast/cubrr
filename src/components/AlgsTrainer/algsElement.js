@@ -77,6 +77,20 @@ export const AlgCardContainer = styled.div`
         filter: contrast(100%);
     }
 `;
+export const FlexRow = styled.div`
+    display: flex;
+    flex-direction: row;
+`;
+
+export const SubContainer = styled.div`
+    display: flex;
+    flex-grow: 1;
+`;
+export const SubContainer2 = styled.div`
+    display: flex;
+    flex-direction: column;
+    flex-grow: 3;
+`;
 
 export const EachAlgCard = styled.div`
     display: flex;
