@@ -5,6 +5,10 @@ import Home from "./components/Home";
 import AlgsTrainer from "./components/AlgsTrainer";
 import Signup from "./components/Signup";
 import { ThemeProvider } from "styled-components";
+import {
+    ThemeProvider as TPMaterial,
+    createMuiTheme,
+} from "@material-ui/core/styles";
 import * as themes from "./components/themes.js";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CubePage from "./components/CubeD";
@@ -24,66 +28,74 @@ const App = () => {
         setIsOpen(!isOpen);
     };
 
+    const themeMUI = createMuiTheme({
+        palette: {
+            type: theme == "lightT" ? "light" : "dark",
+        },
+    });
+
     useEffect(() => {
         reactLocalStorage.set("theme", theme);
     }, [theme]);
     return (
         <>
             <ThemeProvider theme={themes[theme]}>
-                <Router>
-                    <Sidebar
-                        isOpen={isOpen}
-                        toggle={toggle}
-                        theme={theme}
-                        setTheme={setTheme}
-                    />
-                    {/* <Navbar toggle={toggle} theme={theme} setTheme={setTheme} /> */}
-                    <Switch>
-                        <Route
-                            path="/"
-                            exact
-                            render={() => (
-                                <Home
-                                    toggle={toggle}
-                                    theme={theme}
-                                    setTheme={setTheme}
-                                />
-                            )}
+                <TPMaterial theme={themeMUI}>
+                    <Router>
+                        <Sidebar
+                            isOpen={isOpen}
+                            toggle={toggle}
+                            theme={theme}
+                            setTheme={setTheme}
                         />
-                        <Route
-                            path="/cube"
-                            exact
-                            render={() => (
-                                <CubePage
-                                    toggle={toggle}
-                                    theme={theme}
-                                    setTheme={setTheme}
-                                />
-                            )}
-                        />
-                        <Route
-                            path="/algstrainer"
-                            render={() => (
-                                <AlgsTrainer
-                                    toggle={toggle}
-                                    theme={theme}
-                                    setTheme={setTheme}
-                                />
-                            )}
-                        />
-                        <Route
-                            path="/signin"
-                            exact
-                            render={() => (
-                                <Signup
-                                    toggle={toggle}
-                                    theme={theme}
-                                    setTheme={setTheme}
-                                />
-                            )}
-                        />
-                    </Switch>
-                </Router>
+                        {/* <Navbar toggle={toggle} theme={theme} setTheme={setTheme} /> */}
+                        <Switch>
+                            <Route
+                                path="/"
+                                exact
+                                render={() => (
+                                    <Home
+                                        toggle={toggle}
+                                        theme={theme}
+                                        setTheme={setTheme}
+                                    />
+                                )}
+                            />
+                            <Route
+                                path="/cube"
+                                exact
+                                render={() => (
+                                    <CubePage
+                                        toggle={toggle}
+                                        theme={theme}
+                                        setTheme={setTheme}
+                                    />
+                                )}
+                            />
+                            <Route
+                                path="/algstrainer"
+                                render={() => (
+                                    <AlgsTrainer
+                                        toggle={toggle}
+                                        theme={theme}
+                                        setTheme={setTheme}
+                                    />
+                                )}
+                            />
+                            <Route
+                                path="/signin"
+                                exact
+                                render={() => (
+                                    <Signup
+                                        toggle={toggle}
+                                        theme={theme}
+                                        setTheme={setTheme}
+                                    />
+                                )}
+                            />
+                        </Switch>
+                    </Router>
+                </TPMaterial>
             </ThemeProvider>
         </>
     );
