@@ -24,6 +24,7 @@ import { ImPlay2, ImPause } from "react-icons/im";
 //import CubeD from "./cube.js";
 import VCube from "./VCube";
 import { FullCard } from "./FullCard";
+import Trial from "./trial1";
 
 function debounce(fn, ms) {
     let timer;
@@ -44,6 +45,7 @@ function CubePage(props) {
         width: window.innerWidth,
     });
     const [play, setplay] = useState(false);
+    const [ctrl, setCtrl] = useState([0, 0, 0, 0, 0]);
     const [mode, setMode] = useState("scraM"); //for fullscreen mode and Scra/Sol mode
 
     useEffect(() => {
@@ -90,6 +92,7 @@ function CubePage(props) {
 
     useEffect(() => {
         //Refresh component after resize
+
         const debouncedHandleResize = debounce(function handleResize() {
             setDimensions({
                 height: window.innerHeight,
@@ -121,10 +124,11 @@ function CubePage(props) {
                         Virtual Cube  {dimensions.width} x{" "}
                         {dimensions.height}
                     </h1> */}
-                    <VCube
-                        play={play}
+                    <Trial
+                        //play={play}
                         width={dimensions.width}
                         height={dimensions.height}
+                        theme={props.theme}
                     />
                     <ButtonArea mode={modes[mode]}>
                         <ThemeBtn>

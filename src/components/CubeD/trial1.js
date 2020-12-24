@@ -9,6 +9,7 @@ import ReactDOM from "react-dom";
 import createjs from "../../../node_modules/createjs-module/createjs";
 import { TrialStyle } from "./CubeElements";
 import gsap from "gsap";
+import * as themes from "../themes";
 
 // import Stats from '/jsm/libs/stats.module.js';
 import { animation_sequence } from "./cube_animation_sequence.js";
@@ -25,24 +26,9 @@ import { OrbitControls } from "../../../node_modules/three/examples/jsm/controls
 import * as THREE from "three";
 import { scramble_read } from "./cube_scramble_read_v3";
 
-function useWindowSize() {
-    const [size, setSize] = useState([0, 0]);
-    useLayoutEffect(() => {
-        function updateSize() {
-            setSize([window.innerWidth, window.innerHeight]);
-        }
-        window.addEventListener("resize", updateSize);
-        updateSize();
-        return () => window.removeEventListener("resize", updateSize);
-    }, []);
-    return size;
-}
-
-export const Trial = () => {
+export const Trial = (props) => {
     const mount = useRef(null);
     const [count, setCount] = useState(0);
-    const [width, height] = useWindowSize();
-
     useEffect(() => {
         console.log(count);
         setCount(count + 1);
@@ -100,7 +86,7 @@ export const Trial = () => {
             alpha: true,
             antialias: true,
         });
-        renderer.setClearColor(0x36454f);
+        renderer.setClearColor(themes[props.theme].primary);
         renderer.setSize(width, height, true);
         mount.current.appendChild(renderer.domElement);
         var anisotropy = renderer.capabilities.getMaxAnisotropy();
@@ -132,8 +118,8 @@ export const Trial = () => {
         // gap between the layers
         var padding = pad;
         // radius of the fillet used on corners of cube
-        var c = document.createElement("canvas")
-        var ctx = c.getContext("2d")
+        var c = document.createElement("canvas");
+        var ctx = c.getContext("2d");
         const tx1 = document.createElement("canvas").getContext("2d");
         tx1.font = "150pt poppins ";
         tx1.fillText("F", 100, 140);
@@ -220,7 +206,7 @@ export const Trial = () => {
                 current_move = scramble.slice(cube.length);
                 current_soln = soln.slice(cube_sol.length);
                 if (scramble.length > cube.length) {
-                     console.log(scramble)
+                    console.log(scramble);
                     moves = scramble_read(current_move, scramble, cube, 0);
                     console.log(moves);
 
@@ -235,16 +221,18 @@ export const Trial = () => {
                     fast_execute(scene, meshs, padding, moves6);
                 }
             }
-            if (  animation_flag == 0 )
-              { var myvar
-                camera.position.x = 300 
-                camera.position.y = 200
-                camera.position.z = 1000 
-                myvar = setTimeout(beg_cross(scene,meshs,ctx,c,padding,renderer) ,1500)
+            if (animation_flag == 0) {
+                var myvar;
+                camera.position.x = 300;
+                camera.position.y = 200;
+                camera.position.z = 1000;
+                myvar = setTimeout(
+                    beg_cross(scene, meshs, ctx, c, padding, renderer),
+                    1500
+                );
                 // const line2 = setTimeout(draw_text(scene,"Nobista", renderer) ,2500)
-                animation_flag = 1
-
-              }
+                animation_flag = 1;
+            }
             if (play == "true") {
                 face_plane_make(
                     face_plane,
@@ -291,20 +279,12 @@ export const Trial = () => {
         controls.current = { start, stop };
 
         return () => {
-            //stop();
+            stop();
             window.removeEventListener("resize", handleResize);
-            //mount.current.removeChild(renderer.domElement);
+            mount.current.removeChild(renderer.domElement);
             //scene.remove(cube);
         };
-    }, []);
-
-    // useEffect(() => {
-    //     if (isAnimating) {
-    //         controls.current.start();
-    //     } else {
-    //         controls.current.stop();
-    //     }
-    // }, [isAnimating]);
+    }, [props.theme, props.width, props.height]);
 
     return (
         <>
