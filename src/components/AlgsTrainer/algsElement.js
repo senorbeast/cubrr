@@ -14,7 +14,6 @@ export const CardContainer = styled.section`
     background-color: ${(props) => props.theme.secondary};
     color: ${(props) => props.theme.priopp};
     //height: calc(100vh - 6.8rem);
-    transition: all 0.3s ease-in-out;
     align-content: flex-start;
     min-height: calc(100vh - 6.8rem);
     @media screen and (max-width: 768px) {
@@ -32,8 +31,6 @@ export const SetCard = styled(LinkR)`
     border-radius: 1.75rem;
     padding: 1rem 2rem 1rem;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
-    transition: all 0.5s ease;
-
     &:hover {
         filter: contrast(100%);
     }
@@ -44,7 +41,6 @@ export const HeadCard = styled.div`
     background-color: ${(props) => props.theme.primary};
     border-radius: 1rem;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
-    transition: all 0.5s ease;
     width: 100%;
     height: 5rem;
     margin: 0.6rem;
@@ -71,7 +67,6 @@ export const AlgCardContainer = styled.div`
     border-radius: 1.75rem;
     padding: 1rem 2rem 1rem;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
-    transition: all 0.5s ease;
 
     &:hover {
         filter: contrast(100%);
@@ -104,7 +99,6 @@ export const EachAlgCard = styled.div`
     padding: 1rem 2rem 1rem;
     margin: 0.4rem;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
-    transition: all 0.5s ease;
 
     &:hover {
         filter: contrast(100%);
@@ -123,7 +117,6 @@ export const Algorithms = styled.div`
     padding: 1rem 2rem 1rem;
     margin: 0.4rem;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
-    transition: all 0.5s ease;
 
     &:hover {
         filter: contrast(100%);

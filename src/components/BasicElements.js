@@ -28,7 +28,6 @@ export const SignInBut = styled(Link)`
     outline: none;
     border: none;
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
     text-decoration: none;
 
     &:hover {
