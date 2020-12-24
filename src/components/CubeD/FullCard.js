@@ -92,9 +92,6 @@ export const FullCard=()=> {
     const handleReset = () => {
         setActiveStep(0);
     };
-    const helloThere = () => {
-        alert("Hi Ganya");
-    };
     return (
         <div>
             <h1>Hello there,</h1>
