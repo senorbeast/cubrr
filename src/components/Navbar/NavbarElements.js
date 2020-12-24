@@ -13,9 +13,7 @@ export const Nav = styled.nav`
     position: sticky;
     top: 0;
     z-index: 10;
-    transition: all 0.5s ease;
     @media screen and(max-width: 960px) {
-        transition: 0.8s all ease;
     }
 `;
 
@@ -39,7 +37,6 @@ export const NavLogo = styled(LinkR)`
     margin-left: 24px;
     font-weight: bold;
     text-decoration: none;
-    transition: all 0.5s ease;
 `;
 
 export const MobileIcon = styled.div`
@@ -54,7 +51,6 @@ export const MobileIcon = styled.div`
         font-size: 1.8rem;
         cursor: pointer;
         color: ${(props) => props.theme.priopp};
-        transition: all 0.5s ease;
     }
 `;
 
@@ -116,7 +112,6 @@ export const ThemeBtnN = styled.div`
     &:hover {
         color: ${(props) => props.theme.highlight};
         filter: brightness(1.2);
-        transition: 0.2s ease-in-out;
     }
 `;
 
@@ -137,6 +132,5 @@ export const LinkItemBtn = styled(LinkR)`
     &:hover {
         color: ${(props) => props.theme.highlight};
         filter: brightness(1.2);
-        transition: 0.2s ease-in-out;
     }
 `;

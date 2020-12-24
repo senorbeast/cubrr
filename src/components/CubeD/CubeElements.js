@@ -58,13 +58,13 @@ export const TrialStyle = styled.div`
 
 export const AlgsCard = styled.div`
     display: ${(props) => props.mode.alg};
-    background-color: ${(props) => props.theme.primary};
+    background-color: ${(props) => props.theme.mprim};
     border-radius: 1.75rem;
     padding: 1rem 2rem 1rem;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
     grid-row: span 14 / auto;
     grid-template-rows: repeat(9, 1fr);
-    transition: all 0.5s ease;
+    //transition: all 0.5s ease;
     @media screen and (max-width: 768px) {
         grid-column: span 3 / auto;
         grid-row: span 7 / auto;

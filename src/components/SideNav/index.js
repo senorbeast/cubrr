@@ -20,7 +20,7 @@ const SideNav = (props) => {
         }
     }
     const icon =
-        props.theme == "lightT" ? <FaMoon size={30} /> : <FaSun size={30} />;
+        props.theme === "lightT" ? <FaMoon size={30} /> : <FaSun size={30} />;
     return (
         <SideNavContainer>
             <SideNavMenu>
@@ -42,7 +42,7 @@ const SideNav = (props) => {
     );
     function algModeT() {
         console.log("Alg mode ", props.mode);
-        let amodeto = props.mode == "algM" ? "scraM" : "algM";
+        let amodeto = props.mode === "algM" ? "scraM" : "algM";
         props.setMode(amodeto);
     }
 };

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import logo from "./cubelogo.jpg";
+import React from "react";
+// import { Link } from "react-router-dom";
+// import logo from "./cubelogo.jpg";
 import { FaBars, FaSun, FaMoon } from "react-icons/fa";
 import { SiNintendogamecube } from "react-icons/si";
 import { HiChevronDown } from "react-icons/hi";
@@ -28,7 +28,7 @@ const Navbar = (props) => {
         }
     }
     const icon =
-        props.theme == "lightT" ? <FaMoon size={30} /> : <FaSun size={30} />;
+        props.theme === "lightT" ? <FaMoon size={30} /> : <FaSun size={30} />;
     return (
         <Nav>
             <NavbarContainer>
