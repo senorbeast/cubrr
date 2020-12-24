@@ -29,6 +29,8 @@ import { scramble_read } from "./cube_scramble_read_v3";
 export const Trial = (props) => {
     const mount = useRef(null);
     const [count, setCount] = useState(0);
+    let playBtn = props.play;
+
     useEffect(() => {
         console.log(count);
         setCount(count + 1);

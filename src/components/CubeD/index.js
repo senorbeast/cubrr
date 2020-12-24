@@ -45,7 +45,7 @@ function CubePage(props) {
         width: window.innerWidth,
     });
     const [play, setplay] = useState(false);
-    const [ctrl, setCtrl] = useState([0, 0, 0, 0, 0]);
+    //const [ctrl, setCtrl] = useState(false);
     const [mode, setMode] = useState("scraM"); //for fullscreen mode and Scra/Sol mode
 
     useEffect(() => {
@@ -129,6 +129,7 @@ function CubePage(props) {
                         width={dimensions.width}
                         height={dimensions.height}
                         theme={props.theme}
+                        play={play}
                     />
                     <ButtonArea mode={modes[mode]}>
                         <ThemeBtn>
