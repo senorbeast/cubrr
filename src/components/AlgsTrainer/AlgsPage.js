@@ -9,7 +9,7 @@ export const AlgsPage = (props) => {
     const { loading, data } = useQuery(FETCH_PLL_Query);
     return (
         <>
-            <AlgCardContainer>
+            {/* <AlgCardContainer> */}
                 <HeadCard>
                     <h1>Algs from Database</h1>
                 </HeadCard>
@@ -21,7 +21,7 @@ export const AlgsPage = (props) => {
                         <AlgCard key={PLL.id} PLL={PLL} />
                     ))
                 )}
-            </AlgCardContainer>
+            {/* </AlgCardContainer> */}
         </>
     );
 };

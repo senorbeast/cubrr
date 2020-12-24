@@ -18,7 +18,6 @@ function AlgsTrainer(props) {
                 setTheme={props.setTheme}
             />
             <Container maxWidth="lg">
-                <TypographySC component="div">
                     <CardContainer>
                         <Switch>
                             <Route exact path={`${url}`}>
@@ -29,7 +28,6 @@ function AlgsTrainer(props) {
                             </Route>
                         </Switch>
                     </CardContainer>
-                </TypographySC>
             </Container>
         </div>
     );
