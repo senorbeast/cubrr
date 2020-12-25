@@ -75,16 +75,24 @@ export const AlgCardContainer = styled.div`
 export const FlexRow = styled.div`
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 `;
 
 export const SubContainer = styled.div`
     display: flex;
-    flex-grow: 1;
+    flex-grow: 0.5;
+    flex-shrink: 0.5;
+    margin: -2%;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
 `;
 export const SubContainer2 = styled.div`
     display: flex;
     flex-direction: column;
     flex-grow: 3;
+    justify-content: flex-end;
+    align-items: flex-end;
 `;
 
 export const EachAlgCard = styled.div`
