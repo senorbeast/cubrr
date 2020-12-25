@@ -17,13 +17,18 @@ const AlgCard = ({ PLL: { nameAlg, id, recogn, alglist } }) => {
             <EachAlgCard>
                 <FlexRow>
                     <SubContainer>
-                        <img src={PLLImg} alt="PLL"></img>
+                        <img
+                            src={PLLImg}
+                            alt="PLL"
+                            width="280"
+                            height="280"
+                        ></img>
                     </SubContainer>
                     <SubContainer2>
                         <h1>{nameAlg}</h1>
-                        <h4>Recognition:{recogn}</h4>
+                        <h4>Recognition: {recogn}</h4>
                         {/* <p>{JSON.stringify(alglist)}</p> */}
-                        <div style={{ height: 250, width: "100%" }}>
+                        <div style={{ height: 230, width: "100%" }}>
                             <DataGrid
                                 hideFooter={true}
                                 autoHeight={true}
@@ -36,7 +41,7 @@ const AlgCard = ({ PLL: { nameAlg, id, recogn, alglist } }) => {
                                     },
                                     {
                                         field: "rating",
-                                        flex: 0.2,
+                                        flex: 0.25,
                                         headerName: "Ratings",
                                     },
                                 ]}
