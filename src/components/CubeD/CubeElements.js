@@ -29,7 +29,7 @@ export const CubeContainer = styled.div`
     grid-row: span 14 / auto;
     grid-column: span ${(props) => props.mode.cubecols} / auto;
     grid-template-rows: repeat(8, 1fr); //for the child tags
-    padding: 2rem 2rem 1rem;
+    padding: 2rem 2rem 1rem 2rem;
     color: ${(props) => props.theme.priopp};
     border-radius: 1.75rem;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
@@ -166,9 +166,10 @@ export const InTextArea2 = styled.textarea`
 `;
 
 export const ThemeBtn = styled.div`
-    display: block;
+    display: flex;
     align-items: center;
-    height: 2rem;
+    padding: none;
+    margin: none;
     cursor: pointer;
     &:hover {
         color: ${(props) => props.theme.highlight};
@@ -183,9 +184,8 @@ export const ThemeBtn = styled.div`
 export const ButtonArea = styled.div`
     display: grid;
     grid-template-columns: repeat(${(props) => props.mode.nobuts}, 1fr);
-    font-size: 5rem;
-    margin-top: 0.7rem;
-    margin-bottom: 1rem;
+    font-size: 4.2rem;
+    align-items: center;
     @media screen and (max-width: 768px) {
         font-size: 3rem;
     }
