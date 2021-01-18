@@ -17,7 +17,7 @@ import { beg_cross } from "./cube_beg_cross.js";
 import { cubelets_form } from "./cubelets.js";
 import { fast_execute } from "./cube_fast_execute.js";
 import { cube_color } from "./cubelet_colors.js";
-import { layer_group } from "./cubelet_group.js";
+
 import { animate_execute } from "./cube_animate_execute.js";
 import { draw_text } from "./cube_text.js";
 import { face_plane_make } from "./cube_face_plane.js";
@@ -25,6 +25,7 @@ import { OrbitControls } from "../../../node_modules/three/examples/jsm/controls
 // /import Stats from '/jsm/libs/stats.module.js';
 import * as THREE from "three";
 import { scramble_read } from "./cube_scramble_read_v3";
+import { animate_read } from "./cube_animate_read_3";
 
 export const Trial = (props) => {
     const mount = useRef(null);
@@ -38,7 +39,7 @@ export const Trial = (props) => {
         let width = mount.current.clientWidth;
         let height = mount.current.clientHeight;
         let frameId;
-
+        var mycube;
         var raycaster = new THREE.Raycaster(); //raycaster object
         var mouse = new THREE.Vector2(); //to get the location of mouse
         var scene = new THREE.Scene();
@@ -46,13 +47,14 @@ export const Trial = (props) => {
         var flag = 1;
         mouse.x = 100;
         mouse.y = 100;
+        var scramble_meshs = [];
         var meshs = [];
-
+        var cube_sol = [];
         var core = [];
         var ret = [];
         var face_plane = [];
         var animation_flag = 0;
-
+        var tick = 0 ;
         //   let mapDimensions = this.mount.getBoundingClientRect();
         //   let width = this.mount.clientWidth;
         //   let height = this.mount.clientHeight;
@@ -93,10 +95,10 @@ export const Trial = (props) => {
         mount.current.appendChild(renderer.domElement);
         var anisotropy = renderer.capabilities.getMaxAnisotropy();
         var controls = new OrbitControls(camera, renderer.domElement);
-        var mov1 = 0;
+       // var mov1 = 0;
         var moves = [];
         var moves6 = [];
-        var moves_sol = [];
+        //var moves_sol = [];
         var url_scra1 = "a";
         var url_soln1 = "a";
         var scramble = [];
@@ -105,7 +107,8 @@ export const Trial = (props) => {
         var current_move = [];
         var current_soln = [];
         var cube_sol = [];
-        var scramble_state = [];
+        var play_flag = 0 ;
+       // var scramble_state = [];
         var play = "false";
         const MathUtils = {
             DEG2RAD: function (deg) {
@@ -184,6 +187,25 @@ export const Trial = (props) => {
             camera.updateProjectionMatrix();
             renderScene();
         };
+        function cube_play()
+        {
+            
+            var cube_soln = animate_read(soln,soln,[],0);
+            
+            if (tick < cube_soln.length)
+            {
+            animate_execute(scene,meshs,cube_soln[tick],padding);
+            tick = tick+1;
+            }
+            if(tick == cube_soln.length)
+            {
+                tick = 0;
+                play_flag = 3;
+                clearInterval(mycube) ;
+            }
+            
+
+        }
 
         const animate = () => {
             requestAnimationFrame(animate);
@@ -207,35 +229,78 @@ export const Trial = (props) => {
                 soln = url_soln1.split("");
                 current_move = scramble.slice(cube.length);
                 current_soln = soln.slice(cube_sol.length);
+                
+                console.log(play);
                 if (scramble.length > cube.length) {
                     console.log(scramble);
                     moves = scramble_read(current_move, scramble, cube, 0);
                     console.log(moves);
 
                     fast_execute(scene, meshs, padding, moves);
+                    
+                   // console.log(scramble_meshs);
                     cube = scramble;
                 }
-
+                
                 if (soln.length > cube_sol.length) {
                     moves6 = scramble_read(current_soln, soln, cube_sol, 0);
                     console.log(moves6);
                     cube_sol = soln;
                     fast_execute(scene, meshs, padding, moves6);
+                    play_flag = 0;
                 }
             }
-            if (animation_flag == 0) {
-                var myvar;
-                camera.position.x = 300;
-                camera.position.y = 200;
-                camera.position.z = 1000;
-                myvar = setTimeout(
-                    beg_cross(scene, meshs, ctx, c, padding, renderer),
-                    1500
-                );
-                // const line2 = setTimeout(draw_text(scene,"Nobista", renderer) ,2500)
-                animation_flag = 1;
+            // if (animation_flag == 0) {
+            //     var myvar;
+            //     camera.position.x = 300;
+            //     camera.position.y = 200;
+            //     camera.position.z = 1000;
+            //     myvar = setTimeout(
+            //         cube_play(),
+            //         1500
+            //     );
+            //     // const line2 = setTimeout(draw_text(scene,"Nobista", renderer) ,2500)
+            //     animation_flag = 1;
+            // }
+            if (play == "true" && (play_flag == 0||play_flag == 2) )
+            {
+               
+                var inverse = scramble_read(soln,soln,[], 1);//FINDS THE INVERSE MOVES FOR THE SOLUTION
+               // this is when the user initially presses the play button so that solution moves gets inversed 
+               if (play_flag == 0)
+               {
+              
+                fast_execute(scene, meshs, padding, inverse);// this execcutes the inverse move
+                mycube = setInterval(cube_play, 600);
+                play_flag = 1;// done so that setinterval is not called recursively
+
+               }
+               // this is done to see if pause was pressed in between
+               else if (play_flag == 2)
+               {
+                mycube = setInterval(cube_play, 600);
+                play_flag = 1;// done so that setinterval is not called recursively
+               }
+                
+                
+                
             }
-            if (play == "true") {
+            
+            if (play == "false") 
+            {
+                if (play_flag == 1)
+                {
+                    play_flag = 2;// so that the moves dont get inversed again
+                    clearInterval(mycube) ;
+                }
+                if (play_flag == 3)
+                {
+                    play_flag = 0;
+                }
+               
+            }
+
+            if (playBtn == "true") {
                 face_plane_make(
                     face_plane,
                     "true",
@@ -247,7 +312,7 @@ export const Trial = (props) => {
                     tx6
                 );
             }
-            if (play == "false") {
+            if (playBtn == "false") {
                 face_plane_make(
                     face_plane,
                     "false",

@@ -148,43 +148,104 @@ if(url.length > cube.length)
             lay[flag] = "1_U_1"
             flag = flag + 1
         }
-        else if (scramble[i] == "R" && ( scramble[i+1] == "'" || scramble[i+1] == "2"))
-        {
-            lay[flag] = "-1_R_1"
-            flag = flag + 1
+        else if (scramble[i] == "R"  )
+        { 
+            if ( scramble[i+1] == "'")
+            {
+                lay[flag] = "-1_R_1"
+                flag = flag + 1
+
+            }      
+            else if (scramble[i+1] == "2")
+            {
+                lay[flag] = "-1_R_2"
+                flag = flag + 1
+
+            }  
+            
         }
-        else if (scramble[i] == "F" && ( scramble[i+1] == "'" || scramble[i+1] == "2"))
+        else if (scramble[i] == "F" )
         {
-            lay[flag] = "-1_F_1";
-            flag = flag + 1
+            if ( scramble[i+1] == "'")
+            {
+                lay[flag] = "-1_F_1"
+                flag = flag + 1
+
+            }      
+            else if (scramble[i+1] == "2")
+            {
+                lay[flag] = "-1_F_2"
+                flag = flag + 1
+
+            }  
         }
         
 
             
-        else if (scramble[i] == "B" && ( scramble[i+1] == "'" || scramble[i+1] == "2") )
+        else if (scramble[i] == "B" )
         {
-            lay[flag] = "1_B_1"
-            flag = flag + 1
+            if ( scramble[i+1] == "'")
+            {
+                lay[flag] = "1_B_1"
+                flag = flag + 1
+
+            }      
+            else if (scramble[i+1] == "2")
+            {
+                lay[flag] = "1_B_2"
+                flag = flag + 1
+
+            }  
         }
        
-        else if (scramble[i] == "D" && ( scramble[i+1] == "'" || scramble[i+1] == "2") )
+        else if (scramble[i] == "D"  )
         {
-            lay[flag] = "1_D_1"
-            flag = flag + 1
+            if ( scramble[i+1] == "'")
+            {
+                lay[flag] = "1_D_1"
+                flag = flag + 1
+
+            }      
+            else if (scramble[i+1] == "2")
+            {
+                lay[flag] = "1_D_2"
+                flag = flag + 1
+
+            }  
         }
         
-        else if (scramble[i] == "L" && ( scramble[i+1] == "'" || scramble[i+1] == "2") )
+        else if (scramble[i] == "L" )
         {
-            lay[flag] = "1_L_1"
-            flag = flag + 1
+            if ( scramble[i+1] == "'")
+            {
+                lay[flag] = "1_L_1"
+                flag = flag + 1
+
+            }      
+            else if (scramble[i+1] == "2")
+            {
+                lay[flag] = "1_L_2"
+                flag = flag + 1
+
+            }  
         }
         
-        else if (scramble[i] == "U" && ( scramble[i+1] == "'" || scramble[i+1] == "2") )
+        else if (scramble[i] == "U" )
         {
-            lay[flag] = "-1_U_1"
-            flag = flag + 1
+            if ( scramble[i+1] == "'")
+            {
+                lay[flag] = "-1_U_1"
+                flag = flag + 1
+
+            }      
+            else if (scramble[i+1] == "2")
+            {
+                lay[flag] = "-1_U_2"
+                flag = flag + 1
+
+            }  
         }
-       
+        
         }
         if ( i == scramble.length-1 )
         {
