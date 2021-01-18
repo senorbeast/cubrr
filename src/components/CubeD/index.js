@@ -10,6 +10,7 @@ import {
     InTextArea2,
     ThemeBtn,
     ButtonArea,
+    SliderSC,
 } from "./CubeElements";
 import * as modes from "./modes.js";
 import { FiCodesandbox } from "react-icons/fi";
@@ -25,6 +26,7 @@ import { ImPlay2, ImPause } from "react-icons/im";
 import VCube from "./VCube";
 import { FullCard } from "./FullCard";
 import Trial from "./trial1";
+import { BiCubeAlt } from "react-icons/bi";
 
 function debounce(fn, ms) {
     let timer;
@@ -36,6 +38,25 @@ function debounce(fn, ms) {
         }, ms);
     };
 }
+
+const marks = [
+    {
+        value: 0,
+        label: "Cross",
+    },
+    {
+        value: 6,
+        label: "F2L",
+    },
+    {
+        value: 30,
+        label: "OLL",
+    },
+    {
+        value: 45,
+        label: "PLL",
+    },
+];
 
 function CubePage(props) {
     const [newSol, setnewSol] = useState("");
@@ -130,6 +151,21 @@ function CubePage(props) {
                         height={dimensions.height}
                         theme={props.theme}
                         play={play}
+                    />
+                    <SliderSC
+                        mode={modes[mode]}
+                        //ThumbComponent={BiCubeAlt}
+                        //track={false}
+                        styles={{ height: "30px" }}
+                        defaultValue={0}
+                        getAriaValueText={(value) => {
+                            value;
+                        }}
+                        aria-labelledby="discrete-slider-custom"
+                        step={1}
+                        max={70}
+                        valueLabelDisplay="auto"
+                        marks={marks}
                     />
                     <ButtonArea mode={modes[mode]}>
                         <ThemeBtn>

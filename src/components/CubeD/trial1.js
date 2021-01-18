@@ -30,12 +30,15 @@ import { animate_read } from "./cube_animate_read_3";
 export const Trial = (props) => {
     const mount = useRef(null);
     const [count, setCount] = useState(0);
-    let playBtn = props.play;
+    const playBtn = useRef(props.play);
+    const [plays, setPlay] = useState(0);
+    playBtn.current = props.play;
+    console.log("Play", props.play);
+    console.log("rendered", count);
 
     useEffect(() => {
-        console.log(count);
-        setCount(count + 1);
-        console.log(count);
+        console.log("rendered in UseEffect", count);
+        console.log("Play in UseEFFect", props.play);
         let width = mount.current.clientWidth;
         let height = mount.current.clientHeight;
         let frameId;
@@ -348,7 +351,9 @@ export const Trial = (props) => {
         return () => {
             stop();
             window.removeEventListener("resize", handleResize);
-            mount.current.removeChild(renderer.domElement);
+            if (mount.current !== null) {
+                mount.current.removeChild(renderer.domElement);
+            }
             //scene.remove(cube);
         };
     }, [props.theme, props.width, props.height]);

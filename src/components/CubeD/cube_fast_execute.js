@@ -14,4 +14,4 @@ function fast_execute(scene,meshs,padding,moves)
                
             }
 }
-export{fast_execute}
+export { fast_execute };
