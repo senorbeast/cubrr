@@ -129,15 +129,50 @@ function beg_cross(scene, meshs, ctx, c, padding, renderer) {
         cross_time.add(tween3, "anime3");
     }
 
-    
-        
-    cross_time.play()
-    function animate_cross()
-    {
-        var sol = animate_read(["F","'","U","'","F","'","L","R","'","B","'","R","D","'","R","D"],["F","'","U","'","F","'","L","R","'","B","'","R","D","'","R","D"],[],0)
-        console.log(sol)
-        animate_execute(scene,meshs,sol,padding);
-     
+    cross_time.play();
+    function animate_cross() {
+        var sol = animate_read(
+            [
+                "F",
+                "'",
+                "U",
+                "'",
+                "F",
+                "'",
+                "L",
+                "R",
+                "'",
+                "B",
+                "'",
+                "R",
+                "D",
+                "'",
+                "R",
+                "D",
+            ],
+            [
+                "F",
+                "'",
+                "U",
+                "'",
+                "F",
+                "'",
+                "L",
+                "R",
+                "'",
+                "B",
+                "'",
+                "R",
+                "D",
+                "'",
+                "R",
+                "D",
+            ],
+            [],
+            0
+        );
+        console.log(sol);
+        animate_execute(scene, meshs, sol, padding);
 
         animate_execute(scene, meshs, sol, padding);
         //console.log(result);
