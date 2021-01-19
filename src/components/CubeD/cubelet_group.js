@@ -368,6 +368,81 @@ function layer_group(scene , meshs , layer , padding ,dir , number )
       my_return[1] = axis
       return my_return 
     }
+    if (layer == "x")
+    {
+        for (var qi = 0; qi < 27; qi++) 
+        {
+          meshs[qi].getWorldPosition ( v1 )
+          
+          
+         
+           
+          
+           //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
+           pivotx.attach(meshs[qi])
+         
+        
+         
+           
+       
+        }
+    
+        scene.add(pivotx)
+        axis = new THREE.Vector3(1,0,0)
+        my_return[0] = pivotx
+        my_return[1] = axis
+        return my_return 
+    }
+    if (layer == "y")
+    {
+        for (var qi = 0; qi < 27; qi++) 
+        {
+          meshs[qi].getWorldPosition ( v1 )
+          
+          
+         
+           
+          
+           //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
+           pivoty.attach(meshs[qi])
+         
+        
+         
+           
+       
+        }
+    
+        scene.add(pivoty)
+        axis = new THREE.Vector3(0,1,0)
+        my_return[0] = pivoty
+        my_return[1] = axis
+        return my_return 
+    }
+    if (layer == "z")
+    {
+        for (var qi = 0; qi < 27; qi++) 
+        {
+          meshs[qi].getWorldPosition ( v1 )
+          
+          
+         
+           
+          
+           //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
+           pivotz.attach(meshs[qi])
+         
+        
+         
+           
+       
+        }
+    
+        scene.add(pivotz)
+        axis = new THREE.Vector3(0,0,1)
+        my_return[0] = pivotz
+        my_return[1] = axis
+        return my_return 
+    }
 
 
     if (layer == "M")

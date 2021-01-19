@@ -148,33 +148,84 @@ if(url.length > cube.length)
             lay[flag] = "1_U_1"
             flag = flag + 1
         }
-        else if (scramble[i] == "R"  )
+        if (scramble[i] == "r" && ( scramble[i+1] != "'" && scramble[i+1] != "2"))
+        {
+            lay[flag] = "1_r_1"
+            flag = flag + 1
+        }
+        if (scramble[i] == "f" && ( scramble[i+1] != "'" && scramble[i+1] != "2"))
+        {
+            lay[flag] = "1_f_1";
+            flag = flag + 1
+        }
+        
+
+            
+        if (scramble[i] == "b" && ( scramble[i+1] != "'" && scramble[i+1] != "2") )
+        {
+            lay[flag] = "-1_b_1"
+            flag = flag + 1
+        }
+       
+        if (scramble[i] == "d" && ( scramble[i+1] != "'" && scramble[i+1] != "2") )
+        {
+            lay[flag] = "-1_d_1"
+            flag = flag + 1
+        }
+        
+        if (scramble[i] == "l" && ( scramble[i+1] != "'" && scramble[i+1] != "2") )
+        {
+            lay[flag] = "-1_l_1"
+            flag = flag + 1
+        }
+        
+        if (scramble[i] == "u" && ( scramble[i+1] != "'" && scramble[i+1] != "2") )
+        {
+            lay[flag] = "1_u_1"
+            flag = flag + 1
+        }
+        if (scramble[i] == "x" && ( scramble[i+1] != "'" && scramble[i+1] != "2"))
+        {
+            lay[flag] = "1_x_1"
+            flag = flag + 1
+        }
+        if (scramble[i] == "z" && ( scramble[i+1] != "'" && scramble[i+1] != "2"))
+        {
+            lay[flag] = "1_z_1";
+            flag = flag + 1
+        }
+        if (scramble[i] == "y" && ( scramble[i+1] != "'" && scramble[i+1] != "2"))
+        {
+            lay[flag] = "1_y_1";
+            flag = flag + 1
+        }
+        else if (scramble[i] == "R" || scramble[i] == "r" || scramble[i] == "x" )
         { 
             if ( scramble[i+1] == "'")
             {
-                lay[flag] = "-1_R_1"
+                lay[flag] = "-1_"+scramble[i] +"_1"
                 flag = flag + 1
 
             }      
             else if (scramble[i+1] == "2")
             {
-                lay[flag] = "-1_R_2"
+                lay[flag] = "-1_"+scramble[i]+"_2"
                 flag = flag + 1
 
             }  
             
         }
-        else if (scramble[i] == "F" )
+        else if (scramble[i] == "F" || scramble[i] == "f" || scramble[i] == "z" )
         {
             if ( scramble[i+1] == "'")
             {
-                lay[flag] = "-1_F_1"
+                lay[flag] = "-1_"+scramble[i] +"_1"
                 flag = flag + 1
 
             }      
             else if (scramble[i+1] == "2")
             {
-                lay[flag] = "-1_F_2"
+                lay[flag] = "-1_"+scramble[i]+"_2"
                 flag = flag + 1
 
             }  
@@ -182,107 +233,110 @@ if(url.length > cube.length)
         
 
             
-        else if (scramble[i] == "B" )
+        else if (scramble[i] == "B" || scramble[i] == "b" )
         {
             if ( scramble[i+1] == "'")
             {
-                lay[flag] = "1_B_1"
+                lay[flag] = "1_"+scramble[i]+"_1"
                 flag = flag + 1
 
             }      
             else if (scramble[i+1] == "2")
             {
-                lay[flag] = "1_B_2"
+                lay[flag] = "1_"+scramble[i]+"_2"
                 flag = flag + 1
 
             }  
         }
        
-        else if (scramble[i] == "D"  )
+        else if (scramble[i] == "D"  || scramble[i] == "d" )
         {
             if ( scramble[i+1] == "'")
             {
-                lay[flag] = "1_D_1"
+                lay[flag] = "1_"+scramble[i]+"_1"
                 flag = flag + 1
 
             }      
             else if (scramble[i+1] == "2")
             {
-                lay[flag] = "1_D_2"
+                lay[flag] = "1_"+scramble[i]+"_2"
                 flag = flag + 1
 
-            }  
+            }   
         }
         
-        else if (scramble[i] == "L" )
+        else if (scramble[i] == "L"  || scramble[i] == "l")
         {
             if ( scramble[i+1] == "'")
             {
-                lay[flag] = "1_L_1"
+                lay[flag] = "1_"+scramble[i]+"_1"
                 flag = flag + 1
 
             }      
             else if (scramble[i+1] == "2")
             {
-                lay[flag] = "1_L_2"
+                lay[flag] = "1_"+scramble[i]+"_2"
                 flag = flag + 1
 
-            }  
+            }   
         }
         
-        else if (scramble[i] == "U" )
+        else if (scramble[i] == "U" || scramble[i] == "u" || scramble[i] == "y" )
         {
             if ( scramble[i+1] == "'")
             {
-                lay[flag] = "-1_U_1"
+                lay[flag] = "-1_"+scramble[i] +"_1"
                 flag = flag + 1
 
             }      
             else if (scramble[i+1] == "2")
             {
-                lay[flag] = "-1_U_2"
+                lay[flag] = "-1_"+scramble[i]+"_2"
                 flag = flag + 1
 
-            }  
+            }   
         }
+        
         
         }
         if ( i == scramble.length-1 )
         {
-            if (scramble[i] == "R")
+            if (scramble[i] == "R" || scramble[i] =="r" || scramble[i] == "x")
         {
-            lay[flag] = "1_R_1"
+            lay[flag] = "1_"+scramble[i]+"_1"
             flag = flag + 1
         }
-        if (scramble[i] == "F")
+        if (scramble[i] == "F" ||scramble[i] == "f" || scramble[i] == "z")
         {
-            lay[flag] = "1_F_1";
+            lay[flag] = "1_"+scramble[i]+"_1"
             flag = flag + 1
         }
         
 
             
-        if (scramble[i] == "B")
+        if (scramble[i] == "B" ||scramble[i] == "b")
         {
-            lay[flag] = "-1_B_1"
+            
+            lay[flag] = "-1_"+scramble[i]+"_1"
             flag = flag + 1
         }
        
-        if (scramble[i] == "D")
+        if (scramble[i] == "D"|| scramble[i]=="d")
         {
-            lay[flag] = "-1_D_1"
+          
+            lay[flag] = "-1_"+scramble[i]+"_1"
             flag = flag + 1
         }
         
-        if (scramble[i] == "L")
+        if (scramble[i] == "L"||scramble[i] == "l")
         {
-            lay[flag] = "-1_L_1"
+            lay[flag] = "-1_"+scramble[i]+"_1"
             flag = flag + 1
         }
         
-        if (scramble[i] == "U")
+        if (scramble[i] == "U"||scramble[i] == "f" || scramble[i] == "z")
         {
-            lay[flag] = "1_U_1"
+            lay[flag] = "1_"+scramble[i]+"_1"
             flag = flag + 1
         }
         

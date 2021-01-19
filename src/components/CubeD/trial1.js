@@ -195,7 +195,7 @@ export const Trial = (props) => {
         {
             
             var cube_soln = animate_read(soln,soln,[],0);
-            
+            console.log(cube_soln)
             if (tick < cube_soln.length)
             {
             animate_execute(scene,meshs,cube_soln[tick],padding);
@@ -235,7 +235,7 @@ export const Trial = (props) => {
                 current_move = scramble.slice(cube.length);
                 current_soln = soln.slice(cube_sol.length);
                 
-                console.log(play);
+                console.log(soln);
                 if (scramble.length > cube.length) 
                 
                 {
@@ -270,10 +270,7 @@ export const Trial = (props) => {
             //     // const line2 = setTimeout(draw_text(scene,"Nobista", renderer) ,2500)
             //     animation_flag = 1;
             // }
-            if (slider_value )
-            {
-                
-            }
+            
             if (play == "true" && (play_flag == 0||play_flag == 2) )
             {
                
