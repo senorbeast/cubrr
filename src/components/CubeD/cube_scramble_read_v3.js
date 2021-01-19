@@ -22,284 +22,125 @@ if ( but == 1)
         if (url[i] == "'")
         { 
             console.log("", url[i+1] );
-            if (url[i+1] == "R" )
+            if (url[i+1] == "R" ||url[i+1] == "r" || url[i+1] == "x"  )
             {
-                lay[ar] = "1_R_1"
+                lay[ar] = "1_"+url[i+1]+"_1"
                 flag = flag + 1;
                 ar = ar + 1 ;
             }
-            else if (url[i+1] == "F")
+            else if (url[i+1] == "F"||url[i+1] == "f" || url[i+1] == "z")
             {
-                lay[ar] = "1_F_1";
+                lay[ar] = "1_"+url[i+1]+"_1"
                 flag = flag + 1;
                 ar = ar + 1 ;
             }
-            else if (url[i+1] == "B")
+            else if (url[i+1] == "B"||url[i+1] == "b")
             {
-                lay[ar] = "-1_B_1";
+                lay[ar] = "-1_"+url[i+1]+"_1";
                 flag = flag + 1;
                 ar = ar + 1 ;
             }
-            else if (url[i+1] == "U")
+            else if (url[i+1] == "U"||url[i+1] == "u" || url[i+1] == "y")
             {
-                lay[ar] = "1_U_1";
+                lay[ar] = "1_"+url[i+1]+"_1"
                 flag = flag + 1;
                 ar = ar + 1 ;
             }
-            else if (url[i+1] == "L")
+            else if (url[i+1] == "L"||url[i+1] == "l")
             {
-                lay[ar] = "-1_L_1";
+                lay[ar] = "-1_"+url[i+1]+"_1";
                 flag = flag + 1;
                 ar = ar + 1 ;
             }
-            else if (url[i+1]== "D")
+            else if (url[i+1]== "D"||url[i+1] == "d")
             {
-                lay[ar] = "-1_D_1";
+                lay[ar] = "-1_"+url[i+1]+"_1";
                 flag = flag + 1;
                 ar = ar + 1 ;
             }
-            if (url[i+1] == "r" )
-            {
-                lay[ar] = "1_r_1"
-                flag = flag + 1;
-                ar = ar + 1 ;
-            }
-            else if (url[i+1] == "f")
-            {
-                lay[ar] = "1_f_1";
-                flag = flag + 1;
-                ar = ar + 1 ;
-            }
-            else if (url[i+1] == "b")
-            {
-                lay[ar] = "-1_b_1";
-                flag = flag + 1;
-                ar = ar + 1 ;
-            }
-            else if (url[i+1] == "u")
-            {
-                lay[ar] = "1_u_1";
-                flag = flag + 1;
-                ar = ar + 1 ;
-            }
-            else if (url[i+1] == "l")
-            {
-                lay[ar] = "-1_l_1";
-                flag = flag + 1;
-                ar = ar + 1 ;
-            }
-            else if (url[i+1]== "d")
-            {
-                lay[ar] = "-1_d_1";
-                flag = flag + 1;
-                ar = ar + 1 ;
-            }
-            if (url[i+1] == "x" )
-            {
-                lay[ar] = "1_x_1"
-                flag = flag + 1;
-                ar = ar + 1 ;
-            }
-            else if (url[i+1] == "y")
-            {
-                lay[ar] = "1_y_1";
-                flag = flag + 1;
-                ar = ar + 1 ;
-            }
-            else if (url[i+1] == "z")
-            {
-                lay[ar] = "1_z_1";
-                flag = flag + 1;
-                ar = ar + 1 ;
-            }
+            
             
         }
         else if (url[i] == "2")
         { 
             console.log("2",url[flag+1]);
-            if (url[i+1] == "R" )
+            if (url[i+1] == "R" || url[i+1] == "r" || url[i+1] == "x" )
             {
-                lay[ar] = "-1_R_2"
+                lay[ar] = "-1_"+url[i+1]+"_2"
                 flag = flag + 1;
                 ar = ar + 1 ;
             }
-            else if (url[i+1] == "F")
+            else if (url[i+1] == "F"|| url[i+1] == "f" || url[i+1] == "z")
             {
-                lay[ar] = "-1_F_2";
+                lay[ar] = "-1_"+url[i+1]+"_2"
                 flag = flag + 1;
                 ar = ar + 1 ;
             }
-            else if (url[i+1] == "B")
+            else if (url[i+1] == "B"|| url[i+1] == "b" )
             {
-                lay[ar] = "1_B_2";
+                lay[ar] = "1_"+url[i+1]+"_2"
                 flag = flag + 1;
                 ar = ar + 1 ;
             }
-            else if (url[i+1] == "U")
+            else if (url[i+1] == "U"|| url[i+1] == "u" || url[i+1] == "y")
             {
-                lay[ar] = "-1_U_2";
+                lay[ar] = "-1_"+url[i+1]+"_2"
                 flag = flag + 1;
                 ar = ar + 1; 
             }
-            else if (url[i+1] == "L")
+            else if (url[i+1] == "L"|| url[i+1] == "l" )
             {
-                lay[ar] = "1_L_2";
+                lay[ar] = "1_"+url[i+1]+"_2"
                 flag = flag + 1;
                 ar = ar + 1; 
              }
-            else if (url[i+1]== "D")
+            else if (url[i+1]== "D"|| url[i+1] == "d" )
             {
-                lay[ar] = "1_D_2";
+                lay[ar] = "1_"+url[i+1]+"_2"
                 flag = flag + 1;
                 ar = ar + 1; 
             }
-            if (url[i+1] == "r" )
-            {
-                lay[ar] = "-1_r_1"
-                flag = flag + 1;
-                ar = ar + 1 ;
-            }
-            else if (url[i+1] == "f")
-            {
-                lay[ar] = "-1_f_1";
-                flag = flag + 1;
-                ar = ar + 1 ;
-            }
-            else if (url[i+1] == "b")
-            {
-                lay[ar] = "1_b_1";
-                flag = flag + 1;
-                ar = ar + 1 ;
-            }
-            else if (url[i+1] == "u")
-            {
-                lay[ar] = "-1_u_1";
-                flag = flag + 1;
-                ar = ar + 1 ;
-            }
-            else if (url[i+1] == "l")
-            {
-                lay[ar] = "1_l_1";
-                flag = flag + 1;
-                ar = ar + 1 ;
-            }
-            else if (url[i+1]== "d")
-            {
-                lay[ar] = "1_d_1";
-                flag = flag + 1;
-                ar = ar + 1 ;
-            }
-            if (url[i+1] == "x" )
-            {
-                lay[ar] = "-1_x_1"
-                flag = flag + 1;
-                ar = ar + 1 ;
-            }
-            else if (url[i+1] == "y")
-            {
-                lay[ar] = "-1_y_1";
-                flag = flag + 1;
-                ar = ar + 1 ;
-            }
-            else if (url[i+1] == "z")
-            {
-                lay[ar] = "-1_z_1";
-                flag = flag + 1;
-                ar = ar + 1 ;
-            }
+            
             
             
         }
-        if (url[i] == "R" && url[i-1] != "'" && url[i-1] != "2")
+        if ((url[i] == "R" ||url[i] == "r" || url[i] == "x" )&& url[i-1] != "'" && url[i-1] != "2")
             {
-                lay[ar] = "-1_R_1"
+                lay[ar] = "-1_"+url[i]+"_1"
                 flag = flag + 1;
                 ar = ar + 1           
             }
-            else if (url[i] == "F" && url[i-1] != "'" && url[i-1] != "2")
+            else if ((url[i] == "F"||url[i] == "f" || url[i] == "z") && url[i-1] != "'" && url[i-1] != "2")
             {
-                lay[ar] = "-1_F_1";
+                lay[ar] = "-1_"+url[i]+"_1";
                 flag = flag + 1;
                 ar = ar + 1 
             }
-            else if (url[i] == "B" && url[i-1] != "'" && url[i-1] != "2")
+            else if ((url[i] == "B" ||url[i] == "b")&& url[i-1] != "'" && url[i-1] != "2")
             {
-                lay[ar] = "1_B_1";
+                lay[ar] = "1_"+url[i]+"_1";
                 flag = flag + 1;
                 ar = ar + 1 ;
             }
-            else if (url[i] == "U" && url[i-1] != "'" && url[i-1] != "2")
+            else if ((url[i] == "U"||url[i] == "u"||url[i] == "y") && url[i-1] != "'" && url[i-1] != "2")
             {
-                lay[ar] = "-1_U_1";
+                lay[ar] = "-1_"+url[i]+"_1";
                 flag = flag + 1;
                 ar = ar + 1 
             }
-            else if (url[i] == "L" && url[i-1] != "'" && url[i-1] != "2")
+            else if ((url[i] == "L" ||url[i] == "l")&& url[i-1] != "'" && url[i-1] != "2")
             {
-                lay[ar] = "1_L_1";
+                lay[ar] = "1_"+url[i]+"_1";
                 flag = flag + 1;
                 ar = ar + 1 
             }
-            else if (url[i]== "D" && url[i-1] != "'" && url[i-1] != "2")
+            else if ((url[i]== "D"||url[i] == "d") && url[i-1] != "'" && url[i-1] != "2")
             {
-                lay[ar] = "1_D_1";
+                lay[ar] = "1_"+url[i]+"_1";
                 flag = flag + 1;
                 ar = ar + 1 
             }   
-           else if (url[i] == "r" && url[i-1] != "'" && url[i-1] != "2")
-            {
-                lay[ar] = "-1_r_1"
-                flag = flag + 1;
-                ar = ar + 1           
-            }
-            else if (url[i] == "f" && url[i-1] != "'" && url[i-1] != "2")
-            {
-                lay[ar] = "-1_f_1";
-                flag = flag + 1;
-                ar = ar + 1 
-            }
-            else if (url[i] == "b" && url[i-1] != "'" && url[i-1] != "2")
-            {
-                lay[ar] = "1_b_1";
-                flag = flag + 1;
-                ar = ar + 1 ;
-            }
-            else if (url[i] == "u" && url[i-1] != "'" && url[i-1] != "2")
-            {
-                lay[ar] = "-1_u_1";
-                flag = flag + 1;
-                ar = ar + 1 
-            }
-            else if (url[i] == "l" && url[i-1] != "'" && url[i-1] != "2")
-            {
-                lay[ar] = "1_l_1";
-                flag = flag + 1;
-                ar = ar + 1 
-            }
-            else if (url[i]== "d" && url[i-1] != "'" && url[i-1] != "2")
-            {
-                lay[ar] = "1_d_1";
-                flag = flag + 1;
-                ar = ar + 1 
-            }
-            else if (url[i] == "x" && url[i-1] != "'" && url[i-1] != "2")
-            {
-                lay[ar] = "-1_x_1"
-                flag = flag + 1;
-                ar = ar + 1           
-            }
-            else if (url[i] == "y" && url[i-1] != "'" && url[i-1] != "2")
-            {
-                lay[ar] = "-1_y_1";
-                flag = flag + 1;
-                ar = ar + 1 
-            }
-            else if (url[i] == "z" && url[i-1] != "'" && url[i-1] != "2")
-            {
-                lay[ar] = "-1_z_1";
-                flag = flag + 1;
-                ar = ar + 1 
-            }
+         
        
     
 }

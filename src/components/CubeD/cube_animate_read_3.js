@@ -46,7 +46,7 @@ if(url.length > cube.length)
             flag = flag + 1
         }
         
-        if ((scramble[i] == "U"|| scramble[i]=="l"|| scramble[i]=="z") && ( scramble[i+1] != "'" && scramble[i+1] != "2") )
+        if ((scramble[i] == "U"|| scramble[i]=="u"|| scramble[i]=="z") && ( scramble[i+1] != "'" && scramble[i+1] != "2") )
         {
             lay[flag] = "1_"+scramble[i]+"_1"
             flag = flag + 1
