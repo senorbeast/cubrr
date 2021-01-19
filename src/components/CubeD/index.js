@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import SideNav from "../SideNav";
 import {
     CardContainer,
@@ -26,6 +26,7 @@ import { ImPlay2, ImPause } from "react-icons/im";
 import VCube from "./VCube";
 import { FullCard } from "./FullCard";
 import Trial from "./trial1";
+import { Typography } from "@material-ui/core";
 import { BiCubeAlt } from "react-icons/bi";
 
 function debounce(fn, ms) {
@@ -113,7 +114,6 @@ function CubePage(props) {
 
     useEffect(() => {
         //Refresh component after resize
-
         const debouncedHandleResize = debounce(function handleResize() {
             setDimensions({
                 height: window.innerHeight,
@@ -193,7 +193,9 @@ function CubePage(props) {
                     <FullCard />
                 </AlgsCard>
                 <ScrambleI mode={modes[mode]}>
-                    <h1>Scramble </h1>
+                    <Typography variant="h4" component="h4">
+                        Scramble
+                    </Typography>
                     <InTextArea1
                         type="Text"
                         onKeyUp={handleChangeScra}
@@ -202,7 +204,9 @@ function CubePage(props) {
                     />
                 </ScrambleI>
                 <SolutionI mode={modes[mode]}>
-                    <h1>Solutions </h1>
+                    <Typography variant="h4" component="h4">
+                        Solution
+                    </Typography>
                     <InTextArea2
                         type="Text"
                         onKeyUp={handleChangeSol}

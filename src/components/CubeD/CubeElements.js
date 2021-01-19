@@ -28,8 +28,8 @@ export const CubeContainer = styled.div`
     background-color: ${(props) => props.theme.primary};
     grid-row: span 14 / auto;
     grid-column: span ${(props) => props.mode.cubecols} / auto;
-    grid-template-rows: repeat(8, 1fr); //for the child tags
-    padding: 2rem 2rem 1rem 2rem;
+    grid-template-rows: repeat(24, 1fr); //for the child tags
+    padding: 2rem 2rem 1.8rem 2rem;
     color: ${(props) => props.theme.priopp};
     border-radius: 1.75rem;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
@@ -48,7 +48,7 @@ export const CubeContainer = styled.div`
 
 export const TrialStyle = styled.div`
     display: grid;
-    grid-row: span 7 / auto;
+    grid-row: span 20 / auto;
     border: none;
     margin: none;
     box-shadow: none;
@@ -79,10 +79,10 @@ export const ScrambleI = styled.div`
     display: ${(props) => props.mode.none};
     background-color: ${(props) => props.theme.prialt};
     border-radius: 1.75rem;
-    padding: 1rem 2rem 1rem;
+    padding: 1.8rem;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
     grid-row: span 6 / auto;
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-rows: repeat(8, 1fr);
     transition: all 0.5s ease;
     @media screen and (max-width: 768px) {
         grid-column: span 3 / auto;
@@ -99,9 +99,9 @@ export const SolutionI = styled.div`
     background-color: ${(props) => props.theme.secalt};
     border-radius: 1.75rem;
     grid-row: span 8 / auto;
-    padding: 1rem 2rem 1rem;
+    padding: 1.8rem;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-rows: repeat(10, 1fr);
     transition: all 0.5s ease;
     @media screen and (max-width: 768px) {
         grid-column: span 3 / auto;
@@ -119,9 +119,9 @@ export const InTextArea1 = styled.textarea`
     background-color: ${(props) => props.theme.prialt};
     color: ${(props) => props.theme.priopp};
     //background: papayawhip;
-    border-radius: 1.2rem;
-    padding: 1rem 1rem 1rem;
-    grid-row: span 2 / auto;
+    padding: 0.9rem 0rem;
+    padding: none;
+    grid-row: span 6 / auto;
     transition: all 0.5s ease;
     //box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
     resize: none;
@@ -143,11 +143,12 @@ export const InTextArea2 = styled.textarea`
     display: grid;
     height: 100%;
     font-size: 2.3rem;
+    padding: 0.9rem 0rem;
     background: ${(props) => props.theme.secalt};
     color: ${(props) => props.theme.priopp};
-    border-radius: 1.2rem;
-    padding: 1rem 1rem 1rem;
-    grid-row: span 3 / auto;
+    //border-radius: 1.2rem;
+    padding: none;
+    grid-row: span 8 / auto;
     transition: all 0.5s ease;
     //box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
     resize: none;
@@ -183,8 +184,9 @@ export const ThemeBtn = styled.div`
 
 export const ButtonArea = styled.div`
     display: grid;
+    grid-row: span 3 / auto;
     grid-template-columns: repeat(${(props) => props.mode.nobuts}, 1fr);
-    font-size: 4.2rem;
+    font-size: 4rem;
     align-items: center;
     @media screen and (max-width: 768px) {
         font-size: 3rem;
