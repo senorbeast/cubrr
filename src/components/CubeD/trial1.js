@@ -57,7 +57,8 @@ export const Trial = (props) => {
         var ret = [];
         var face_plane = [];
         var animation_flag = 0;
-        var tick = 0 ;
+        var tick = 0 ;//used in time line to keep track on which move to be made 
+        var slider_value = 0 ;
         //   let mapDimensions = this.mount.getBoundingClientRect();
         //   let width = this.mount.clientWidth;
         //   let height = this.mount.clientHeight;
@@ -218,7 +219,8 @@ export const Trial = (props) => {
 
             var url_split = currentURL.split("?");
 
-            if (url_split.length > 1) {
+            if (url_split.length > 1) 
+            {
                 var scramble_arr = url_split[1].split("=");
                 var soln_arr = url_split[2].split("=");
                 var play_button = url_split[3].split("=");
@@ -234,7 +236,9 @@ export const Trial = (props) => {
                 current_soln = soln.slice(cube_sol.length);
                 
                 console.log(play);
-                if (scramble.length > cube.length) {
+                if (scramble.length > cube.length) 
+                
+                {
                     console.log(scramble);
                     moves = scramble_read(current_move, scramble, cube, 0);
                     console.log(moves);
@@ -245,7 +249,8 @@ export const Trial = (props) => {
                     cube = scramble;
                 }
                 
-                if (soln.length > cube_sol.length) {
+                if (soln.length > cube_sol.length) 
+                {
                     moves6 = scramble_read(current_soln, soln, cube_sol, 0);
                     console.log(moves6);
                     cube_sol = soln;
@@ -265,10 +270,14 @@ export const Trial = (props) => {
             //     // const line2 = setTimeout(draw_text(scene,"Nobista", renderer) ,2500)
             //     animation_flag = 1;
             // }
+            if (slider_value )
+            {
+                
+            }
             if (play == "true" && (play_flag == 0||play_flag == 2) )
             {
                
-                var inverse = scramble_read(soln,soln,[], 1);//FINDS THE INVERSE MOVES FOR THE SOLUTION
+               var inverse = scramble_read(soln,soln,[], 1);//FINDS THE INVERSE MOVES FOR THE SOLUTION
                // this is when the user initially presses the play button so that solution moves gets inversed 
                if (play_flag == 0)
                {

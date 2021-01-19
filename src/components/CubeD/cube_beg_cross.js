@@ -139,7 +139,7 @@ function beg_cross(scene, meshs, ctx, c, padding, renderer) {
         animate_execute(scene,meshs,sol,padding);
      
 
-        let result = await animate_execute(scene, meshs, sol, padding);
+        animate_execute(scene, meshs, sol, padding);
         //console.log(result);
     }
 }

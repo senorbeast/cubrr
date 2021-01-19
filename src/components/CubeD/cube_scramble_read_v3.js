@@ -7,6 +7,7 @@ function scramble_read(scramble,url,cube,but)
     var ar = 0;
     var lay = []
    console.log(but);
+   /***********USED FOR GENERATING ARRAY FOR INVERSING MOVES *************/
 if ( but == 1)
 {
 
@@ -143,6 +144,7 @@ if ( but == 1)
     
 }
 }
+ /***********USED FOR GENERATING ARRAY FOR LEGAL MOVES *************/
 if (but == 0)
 {
 if(url.length > cube.length)
@@ -154,17 +156,31 @@ if(url.length > cube.length)
             lay[flag] = "1_R_1"
             flag = flag + 1
         }
+        if (scramble[i] == "r")
+        {
+            lay[flag] = "1_r_1"
+            flag = flag + 1
+        }
         if (scramble[i] == "F")
         {
             lay[flag] = "1_F_1";
             flag = flag + 1
         }
-        
+        if (scramble[i] == "f")
+        {
+            lay[flag] = "1_f_1"
+            flag = flag + 1
+        }        
 
             
         if (scramble[i] == "B")
         {
             lay[flag] = "-1_B_1"
+            flag = flag + 1
+        }
+        if (scramble[i] == "b")
+        {
+            lay[flag] = "-1_b_1"
             flag = flag + 1
         }
        
@@ -173,10 +189,20 @@ if(url.length > cube.length)
             lay[flag] = "-1_D_1"
             flag = flag + 1
         }
+        if (scramble[i] == "d")
+        {
+            lay[flag] = "-1_d_1"
+            flag = flag + 1
+        }
         
         if (scramble[i] == "L")
         {
             lay[flag] = "-1_L_1"
+            flag = flag + 1
+        }
+        if (scramble[i] == "l")
+        {
+            lay[flag] = "-1_l_1"
             flag = flag + 1
         }
         
@@ -185,18 +211,22 @@ if(url.length > cube.length)
             lay[flag] = "1_U_1"
             flag = flag + 1
         }
-
+        if (scramble[i] == "u")
+        {
+            lay[flag] = "1_u_1"
+            flag = flag + 1
+        }
            
         
         if (scramble[i] == "'")
         {
-            if ( scramble[i-1] == "L" || scramble[i-1] == "D" || scramble[i-1] == "B" )
+            if ( scramble[i-1] == "L" || scramble[i-1] == "D" || scramble[i-1] == "B" || scramble[i-1] == "l" || scramble[i-1] == "d" || scramble[i-1] == "b" )
             {
                 lay[flag] = "-1_" + scramble[i-1] + "_1"
                 lay[flag+1] = "-1_" + scramble[i-1] + "_1"
                 flag = flag + 2
             }
-            else if (scramble[i-1] == "F" || scramble[i-1] == "U" || scramble [i-1] == "R")
+            else if (scramble[i-1] == "F" || scramble[i-1] == "U" || scramble [i-1] == "R" ||scramble[i-1] == "f" || scramble[i-1] == "u" || scramble [i-1] == "r")
             {
                 lay[flag] = "1_" + scramble[i-1] + "_1"
                 lay[flag+1] = "1_" + scramble[i-1] + "_1"
@@ -205,12 +235,12 @@ if(url.length > cube.length)
         }
         if (scramble[i] == "2")
         {
-            if ( scramble[i-1] == "L" || scramble[i-1] == "D" || scramble[i-1] == "B" )
+            if ( scramble[i-1] == "L" || scramble[i-1] == "D" || scramble[i-1] == "B" || scramble[i-1] == "l" || scramble[i-1] == "d" || scramble[i-1] == "b" )
             {
                 lay[flag] = "-1_" + scramble[i-1] + "_1"
                 flag = flag + 1
             }
-            else if (scramble[i-1] == "F" || scramble[i-1] == "U" || scramble [i-1] == "R")
+            else if (scramble[i-1] == "F" || scramble[i-1] == "U" || scramble [i-1] == "R" || scramble[i-1] == "f"|| scramble[i-1] == "u" || scramble [i-1] == "r")
             {
                 lay[flag] = "1_" + scramble[i-1] + "_1"
                 flag = flag + 1                
@@ -221,13 +251,13 @@ if(url.length > cube.length)
         if (scramble[0] == "'")
         {
             console.log("imp",url[cube.length-1])
-            if ( url[cube.length-1] == "L" || url[cube.length-1] == "D" || url[cube.length-1] == "B" )
+            if ( url[cube.length-1] == "L" || url[cube.length-1] == "D" || url[cube.length-1] == "B" || url[cube.length-1] == "l" || url[cube.length-1] == "d" || url[cube.length-1] == "b" )
             {
                 lay[flag] = "-1_" + url[cube.length-1] + "_1"
                 lay[flag+1] = "-1_" + url[cube.length-1] + "_1"
                 flag = flag + 2
             }
-            else if (url[cube.length-1] == "F" || url[cube.length-1] == "U" || url [cube.length-1] == "R")
+            else if (url[cube.length-1] == "F" || url[cube.length-1] == "U" || url [cube.length-1] == "R" || url[cube.length-1] == "f" || url[cube.length-1] == "u" || url [cube.length-1] == "r")
             {
                 lay[flag] = "1_" + url[cube.length-1] + "_1"
                 lay[flag+1] = "1_" + url[cube.length-1] + "_1"
@@ -236,12 +266,12 @@ if(url.length > cube.length)
         }
         if (scramble[0] == "2")
         {
-            if ( url[cube.length-1] == "L" || url[cube.length-1] == "D" || url[cube.length-1] == "B" )
+            if ( url[cube.length-1] == "L" || url[cube.length-1] == "D" || url[cube.length-1] == "B" || url[cube.length-1] == "l" || url[cube.length-1] == "d" || url[cube.length-1] == "b" )
             {
                 lay[flag] = "-1_" + url[cube.length-1] + "_1"
                 flag = flag + 1
             }
-            else if (url[cube.length-1] == "F" || url[cube.length-1] == "U" || url[cube.length-1] == "R")
+            else if (url[cube.length-1] == "F" || url[cube.length-1] == "U" || url[cube.length-1] == "R" || url[cube.length-1] == "f" || url[cube.length-1] == "u" || url[cube.length-1] == "r")
             {
                 lay[flag] = "1_" + url[cube.length-1] + "_1"
                 flag = flag + 1                

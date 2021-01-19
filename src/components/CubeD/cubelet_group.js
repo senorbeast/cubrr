@@ -4,15 +4,24 @@ function layer_group(scene , meshs , layer , padding ,dir , number )
     var my_return = []
     var v1 = new THREE.Vector3();
     var axis = new THREE.Vector3();
-    var pivot = new THREE.Object3D();/* --USED TO GROUP CUBIES PRESENT IN D LAYER-- */
-    var pivot1 = new THREE.Object3D();/* --USED TO GROUP CUBIES PRESENT IN U LAYER-- */
-    var pivot2 = new THREE.Object3D();/* --USED TO GROUP CUBIES PRESENT IN F LAYER-- */
-    var pivot3 = new THREE.Object3D();/* --USED TO GROUP CUBIES PRESENT IN B LAYER-- */
-    var pivot4 = new THREE.Object3D();/* --USED TO GROUP CUBIES PRESENT IN R LAYER-- */
-    var pivot5 = new THREE.Object3D();/* --USED TO GROUP CUBIES PRESENT IN L LAYER-- */
-    var pivotm = new THREE.Object3D();/* --USED TO GROUP CUBIES PRESENT IN MIDDLE LAYER -- */
-    var pivots = new THREE.Object3D();/* --USED TO GROUP CUBIES PRESENT IN STANDING LAYER -- */
-    var pivote = new THREE.Object3D();/* --USED TO GROUP CUBIES PRESENT IN EQUATORIAL LAYER -- */
+    var pivotD = new THREE.Object3D();/* --USED TO GROUP CUBIES PRESENT IN D LAYER-- */
+    var pivotd = new THREE.Object3D();
+    var pivotU = new THREE.Object3D();/* --USED TO GROUP CUBIES PRESENT IN U LAYER-- */
+    var pivotu = new THREE.Object3D();
+    var pivotF = new THREE.Object3D();/* --USED TO GROUP CUBIES PRESENT IN F LAYER-- */
+    var pivotf = new THREE.Object3D();
+    var pivotB = new THREE.Object3D();/* --USED TO GROUP CUBIES PRESENT IN B LAYER-- */
+    var pivotb = new THREE.Object3D();
+    var pivotR = new THREE.Object3D();/* --USED TO GROUP CUBIES PRESENT IN R LAYER-- */
+    var pivotr = new THREE.Object3D();
+    var pivotL = new THREE.Object3D();/* --USED TO GROUP CUBIES PRESENT IN L LAYER-- */
+    var pivotl = new THREE.Object3D();
+    var pivotM = new THREE.Object3D();/* --USED TO GROUP CUBIES PRESENT IN MIDDLE LAYER -- */
+    var pivotS = new THREE.Object3D();/* --USED TO GROUP CUBIES PRESENT IN STANDING LAYER -- */
+    var pivotE = new THREE.Object3D();/* --USED TO GROUP CUBIES PRESENT IN EQUATORIAL LAYER -- */
+    var pivotx = new THREE.Object3D();
+    var pivoty = new THREE.Object3D();
+    var pivotz = new THREE.Object3D();
     if (dir == 1)
         {
           my_return[2] = -Math.PI/2
@@ -41,7 +50,7 @@ function layer_group(scene , meshs , layer , padding ,dir , number )
              
            
            //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-             pivot.attach(meshs[qi])
+             pivotD.attach(meshs[qi])
                             
         
            }
@@ -49,9 +58,9 @@ function layer_group(scene , meshs , layer , padding ,dir , number )
        
         }
         
-        scene.add(pivot)
+        scene.add(pivotD)
         axis = new THREE.Vector3(0,1,0)
-        my_return[0] = pivot 
+        my_return[0] = pivotD
         my_return[1] = axis
        return my_return 
     }
@@ -70,7 +79,7 @@ function layer_group(scene , meshs , layer , padding ,dir , number )
            
           
            //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-           pivot1.attach(meshs[qi])
+           pivotU.attach(meshs[qi])
          
         
          }
@@ -78,9 +87,9 @@ function layer_group(scene , meshs , layer , padding ,dir , number )
        
         }
     
-        scene.add(pivot1)
+        scene.add(pivotU)
         axis = new THREE.Vector3(0,1,0)
-        my_return[0] = pivot1 
+        my_return[0] = pivotU
         my_return[1] = axis
         return my_return 
     }
@@ -97,7 +106,7 @@ function layer_group(scene , meshs , layer , padding ,dir , number )
         {
     
           //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-          pivot2.attach(meshs[qi])
+          pivotF.attach(meshs[qi])
   
     
         }
@@ -105,9 +114,9 @@ function layer_group(scene , meshs , layer , padding ,dir , number )
     
       }
      
-      scene.add(pivot2)
+      scene.add(pivotF)
       axis = new THREE.Vector3(0,0,1)
-      my_return[0] = pivot2 
+      my_return[0] = pivotF
       my_return[1] = axis
       return my_return 
     }
@@ -125,7 +134,7 @@ function layer_group(scene , meshs , layer , padding ,dir , number )
     
           
           //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-          pivot3.attach(meshs[qi])
+          pivotB.attach(meshs[qi])
     
     
         }
@@ -133,9 +142,9 @@ function layer_group(scene , meshs , layer , padding ,dir , number )
     
       }
   
-      scene.add(pivot3)
+      scene.add(pivotB)
       axis = new THREE.Vector3(0,0,1)
-      my_return[0] = pivot3
+      my_return[0] = pivotB
       my_return[1] = axis
       return my_return 
     }
@@ -154,7 +163,7 @@ function layer_group(scene , meshs , layer , padding ,dir , number )
          
       
          //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-         pivot4.attach(meshs[qi])
+         pivotR.attach(meshs[qi])
      
          
       
@@ -163,9 +172,9 @@ function layer_group(scene , meshs , layer , padding ,dir , number )
      
       }
 
-      scene.add(pivot4)
+      scene.add(pivotR)
       axis = new THREE.Vector3(1,0,0)
-      my_return[0] = pivot4
+      my_return[0] = pivotR
       my_return[1] = axis
       return my_return 
     }
@@ -184,7 +193,7 @@ function layer_group(scene , meshs , layer , padding ,dir , number )
          
          
          //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-         pivot5.attach(meshs[qi])
+         pivotL.attach(meshs[qi])
         
               
       
@@ -192,12 +201,174 @@ function layer_group(scene , meshs , layer , padding ,dir , number )
          
      
       }
-      scene.add(pivot5)
+      scene.add(pivotL)
       axis = new THREE.Vector3(1,0,0)
-      my_return[0] = pivot5
+      my_return[0] = pivotL
       my_return[1] = axis
       return my_return 
     }
+    if (layer == "r")
+    {
+      for (var qi = 0; qi < 27; qi++) 
+      {
+        meshs[qi].getWorldPosition ( v1 )
+       
+        
+        
+       if (Math.round(v1.x) != -(50 + padding))
+       {
+         
+      
+         //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
+         pivotr.attach(meshs[qi])
+     
+         
+      
+       }
+         
+     
+      }
+
+      scene.add(pivotr)
+      axis = new THREE.Vector3(1,0,0)
+      my_return[0] = pivotr
+      my_return[1] = axis
+      return my_return 
+    }
+    if (layer == "l")
+    {
+      for (var qi = 0; qi < 27; qi++) 
+      {
+        meshs[qi].getWorldPosition ( v1 )
+       
+        
+        
+       if (Math.round(v1.x) != (50 + padding))
+       {
+         
+      
+         //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
+         pivotl.attach(meshs[qi])
+     
+         
+      
+       }
+         
+     
+      }
+
+      scene.add(pivotl)
+      axis = new THREE.Vector3(1,0,0)
+      my_return[0] = pivotl
+      my_return[1] = axis
+      return my_return 
+    }
+    if (layer == "u")
+    {
+        for (var qi = 0; qi < 27; qi++) 
+        {
+          meshs[qi].getWorldPosition ( v1 )
+          
+          
+          
+           if (Math.round(v1.y) != -(50 + padding))
+           {
+             
+           
+           //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
+             pivotu.attach(meshs[qi])
+                            
+        
+           }
+             
+       
+        }
+        
+        scene.add(pivotu)
+        axis = new THREE.Vector3(0,1,0)
+        my_return[0] = pivotu
+        my_return[1] = axis
+       return my_return 
+    }
+    if (layer == "d")
+    {
+        for (var qi = 0; qi < 27; qi++) 
+        {
+          meshs[qi].getWorldPosition ( v1 )
+          
+          
+          
+         if (Math.round(v1.y) != (50 + padding))
+         {
+           
+          
+           //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
+           pivotd.attach(meshs[qi])
+         
+        
+         }
+           
+       
+        }
+    
+        scene.add(pivotd)
+        axis = new THREE.Vector3(0,1,0)
+        my_return[0] = pivotd
+        my_return[1] = axis
+        return my_return 
+    }
+    if (layer == "b")
+    {
+      for (var qi = 0; qi < 27; qi++) 
+      {
+        meshs[qi].getWorldPosition(v1)
+      
+    
+        if (Math.round(v1.z)!= (50 + padding)) 
+        {
+    
+          //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
+          pivotb.attach(meshs[qi])
+  
+    
+        }
+    
+    
+      }
+     
+      scene.add(pivotb)
+      axis = new THREE.Vector3(0,0,1)
+      my_return[0] = pivotb
+      my_return[1] = axis
+      return my_return 
+    }
+    if (layer == "f")
+    {
+      for (var qi = 0; qi < 27; qi++) 
+      {
+        meshs[qi].getWorldPosition(v1)
+        
+    
+        if (Math.round(v1.z )  != -(50 + padding))
+       {
+    
+          
+          //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
+          pivotf.attach(meshs[qi])
+    
+    
+        }
+    
+    
+      }
+  
+      scene.add(pivotf)
+      axis = new THREE.Vector3(0,0,1)
+      my_return[0] = pivotf
+      my_return[1] = axis
+      return my_return 
+    }
+
 
     if (layer == "M")
     {
@@ -212,7 +383,7 @@ function layer_group(scene , meshs , layer , padding ,dir , number )
          
         
          //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-         pivotm.attach(meshs[qi])
+         pivotM.attach(meshs[qi])
    
               
       
@@ -220,9 +391,9 @@ function layer_group(scene , meshs , layer , padding ,dir , number )
          
      
       }
-      scene.add(pivotm)
+      scene.add(pivotM)
       axis = (0,1,0)
-      my_return[0] = pivotm 
+      my_return[0] = pivotM 
       my_return[1] = axis
       return my_return 
     }
@@ -240,7 +411,7 @@ function layer_group(scene , meshs , layer , padding ,dir , number )
          
        
          //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-         pivots.attach(meshs[qi])
+         pivotS.attach(meshs[qi])
   
               
       
@@ -248,9 +419,9 @@ function layer_group(scene , meshs , layer , padding ,dir , number )
          
      
       }
-      scene.add(pivots)
+      scene.add(pivotS)
       axis = (0,1,0)
-      my_return[0] = pivots
+      my_return[0] = pivotS
       my_return[1] = axis
       return my_return 
     }
@@ -268,19 +439,20 @@ function layer_group(scene , meshs , layer , padding ,dir , number )
          
         
          //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-         pivote.attach(meshs[qi])
+         pivotE.attach(meshs[qi])
     
       
        }
          
      
       }
-      scene.add(pivote)
+      scene.add(pivotE)
       axis = (0,1,0)
-      my_return[0] = pivote
+      my_return[0] = pivotE
       my_return[1] = axis
       return my_return 
     }
+    
     
   
 }
