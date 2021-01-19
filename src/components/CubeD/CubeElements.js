@@ -17,6 +17,8 @@ export const CardContainer = styled.section`
 
     @media screen and (max-width: 768px) {
         height: 160vh;
+        padding: 0.2rem;
+        gap: 0.2rem;
     }
     //justify-content: space-evenly;
     //grid-template-columns:repeat(2
@@ -39,6 +41,8 @@ export const CubeContainer = styled.div`
         grid-row: span 7 / auto;
         grid-column: span 3 / auto;
         margin-left: 0rem;
+        padding: 1rem;
+        border-radius: 1rem;
     }
 
     &:hover {
@@ -68,6 +72,8 @@ export const AlgsCard = styled.div`
     @media screen and (max-width: 768px) {
         grid-column: span 3 / auto;
         grid-row: span 7 / auto;
+        padding: 1rem;
+        border-radius: 1rem;
     }
 
     &:hover {
@@ -87,6 +93,8 @@ export const ScrambleI = styled.div`
     @media screen and (max-width: 768px) {
         grid-column: span 3 / auto;
         grid-row: span 3 / auto;
+        padding: 1rem;
+        border-radius: 1rem;
     }
 
     &:hover {
@@ -106,6 +114,8 @@ export const SolutionI = styled.div`
     @media screen and (max-width: 768px) {
         grid-column: span 3 / auto;
         grid-row: span 4 / auto;
+        padding: 1rem;
+        border-radius: 1rem;
     }
     &:hover {
         filter: contrast(100%);
@@ -129,7 +139,7 @@ export const InTextArea1 = styled.textarea`
     border: none;
     @media screen and (max-width: 768px) {
         grid-column: span 3 / auto;
-        grid-row: span 2 / auto;
+        grid-row: span 6 / auto;
     }
     &:hover {
         filter: contrast(100%);
@@ -156,7 +166,7 @@ export const InTextArea2 = styled.textarea`
     border: none;
     @media screen and (max-width: 768px) {
         grid-column: span 3 / auto;
-        grid-row: span 3 / auto;
+        grid-row: span 8 / auto;
     }
     &:hover {
         filter: contrast(100%);
