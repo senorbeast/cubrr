@@ -22,124 +22,64 @@ if ( but == 1)
         if (url[i] == "'")
         { 
             console.log("", url[i+1] );
-            if (url[i+1] == "R" ||url[i+1] == "r" || url[i+1] == "x"  )
+            if (url[i+1] == "R" ||url[i+1] == "r" || url[i+1] == "x" ||url[i+1] == "F"||url[i+1] == "f" || url[i+1] == "z" ||url[i+1] == "U"||url[i+1] == "u" || url[i+1] == "y")
             {
                 lay[ar] = "1_"+url[i+1]+"_1"
                 flag = flag + 1;
                 ar = ar + 1 ;
             }
-            else if (url[i+1] == "F"||url[i+1] == "f" || url[i+1] == "z")
-            {
-                lay[ar] = "1_"+url[i+1]+"_1"
-                flag = flag + 1;
-                ar = ar + 1 ;
-            }
-            else if (url[i+1] == "B"||url[i+1] == "b")
+          
+            else if (url[i+1] == "B"||url[i+1] == "b"||url[i+1] == "L"||url[i+1] == "l"||url[i+1]== "D"||url[i+1] == "d")
             {
                 lay[ar] = "-1_"+url[i+1]+"_1";
                 flag = flag + 1;
                 ar = ar + 1 ;
             }
-            else if (url[i+1] == "U"||url[i+1] == "u" || url[i+1] == "y")
-            {
-                lay[ar] = "1_"+url[i+1]+"_1"
-                flag = flag + 1;
-                ar = ar + 1 ;
-            }
-            else if (url[i+1] == "L"||url[i+1] == "l")
-            {
-                lay[ar] = "-1_"+url[i+1]+"_1";
-                flag = flag + 1;
-                ar = ar + 1 ;
-            }
-            else if (url[i+1]== "D"||url[i+1] == "d")
-            {
-                lay[ar] = "-1_"+url[i+1]+"_1";
-                flag = flag + 1;
-                ar = ar + 1 ;
-            }
+            
+           
+            
             
             
         }
         else if (url[i] == "2")
         { 
             console.log("2",url[flag+1]);
-            if (url[i+1] == "R" || url[i+1] == "r" || url[i+1] == "x" )
+            if (url[i+1] == "R" || url[i+1] == "r" || url[i+1] == "x" ||url[i+1] == "F"|| url[i+1] == "f" || url[i+1] == "z"||url[i+1] == "U"|| url[i+1] == "u" || url[i+1] == "y")
             {
                 lay[ar] = "-1_"+url[i+1]+"_2"
                 flag = flag + 1;
                 ar = ar + 1 ;
             }
-            else if (url[i+1] == "F"|| url[i+1] == "f" || url[i+1] == "z")
-            {
-                lay[ar] = "-1_"+url[i+1]+"_2"
-                flag = flag + 1;
-                ar = ar + 1 ;
-            }
-            else if (url[i+1] == "B"|| url[i+1] == "b" )
+            
+            else if (url[i+1] == "B"|| url[i+1] == "b" ||url[i+1] == "L"|| url[i+1] == "l"||url[i+1]== "D"|| url[i+1] == "d")
             {
                 lay[ar] = "1_"+url[i+1]+"_2"
                 flag = flag + 1;
                 ar = ar + 1 ;
             }
-            else if (url[i+1] == "U"|| url[i+1] == "u" || url[i+1] == "y")
-            {
-                lay[ar] = "-1_"+url[i+1]+"_2"
-                flag = flag + 1;
-                ar = ar + 1; 
-            }
-            else if (url[i+1] == "L"|| url[i+1] == "l" )
-            {
-                lay[ar] = "1_"+url[i+1]+"_2"
-                flag = flag + 1;
-                ar = ar + 1; 
-             }
-            else if (url[i+1]== "D"|| url[i+1] == "d" )
-            {
-                lay[ar] = "1_"+url[i+1]+"_2"
-                flag = flag + 1;
-                ar = ar + 1; 
-            }
+           
+            
+            
             
             
             
         }
-        if ((url[i] == "R" ||url[i] == "r" || url[i] == "x" )&& url[i-1] != "'" && url[i-1] != "2")
+        if ((url[i] == "R" ||url[i] == "r" || url[i] == "x" ||url[i] == "F"||url[i] == "f" || url[i] == "z"||url[i] == "U"||url[i] == "u"||url[i] == "y")&& url[i-1] != "'" && url[i-1] != "2")
             {
                 lay[ar] = "-1_"+url[i]+"_1"
                 flag = flag + 1;
                 ar = ar + 1           
             }
-            else if ((url[i] == "F"||url[i] == "f" || url[i] == "z") && url[i-1] != "'" && url[i-1] != "2")
-            {
-                lay[ar] = "-1_"+url[i]+"_1";
-                flag = flag + 1;
-                ar = ar + 1 
-            }
-            else if ((url[i] == "B" ||url[i] == "b")&& url[i-1] != "'" && url[i-1] != "2")
+            
+            else if ((url[i] == "B" ||url[i] == "b"||url[i] == "L" ||url[i] == "l"||url[i]== "D"||url[i] == "d")&& url[i-1] != "'" && url[i-1] != "2")
             {
                 lay[ar] = "1_"+url[i]+"_1";
                 flag = flag + 1;
                 ar = ar + 1 ;
             }
-            else if ((url[i] == "U"||url[i] == "u"||url[i] == "y") && url[i-1] != "'" && url[i-1] != "2")
-            {
-                lay[ar] = "-1_"+url[i]+"_1";
-                flag = flag + 1;
-                ar = ar + 1 
-            }
-            else if ((url[i] == "L" ||url[i] == "l")&& url[i-1] != "'" && url[i-1] != "2")
-            {
-                lay[ar] = "1_"+url[i]+"_1";
-                flag = flag + 1;
-                ar = ar + 1 
-            }
-            else if ((url[i]== "D"||url[i] == "d") && url[i-1] != "'" && url[i-1] != "2")
-            {
-                lay[ar] = "1_"+url[i]+"_1";
-                flag = flag + 1;
-                ar = ar + 1 
-            }   
+            
+            
+              
          
        
     
@@ -152,86 +92,22 @@ if(url.length > cube.length)
 { 
     for (var i = 0 ; i < scramble.length ; i++ )
     {
-        if (scramble[i] == "R")
+        if (scramble[i] == "R"||scramble[i] == "r"||scramble[i] == "F"||scramble[i] == "f"||scramble[i] == "U"||scramble[i] == "u"||scramble[i] == "x"||scramble[i] == "y"||scramble[i] == "z")
         {
-            lay[flag] = "1_R_1"
+            lay[flag] = "1_"+scramble[i]+"_1"
             flag = flag + 1
         }
-        if (scramble[i] == "r")
-        {
-            lay[flag] = "1_r_1"
-            flag = flag + 1
-        }
-        if (scramble[i] == "F")
-        {
-            lay[flag] = "1_F_1";
-            flag = flag + 1
-        }
-        if (scramble[i] == "f")
-        {
-            lay[flag] = "1_f_1"
-            flag = flag + 1
-        }        
+            
 
             
-        if (scramble[i] == "B")
+        if (scramble[i] == "B"||scramble[i] == "b"||scramble[i] == "L"||scramble[i] == "l"||scramble[i] == "D"||scramble[i] == "d")
         {
-            lay[flag] = "-1_B_1"
+            lay[flag] = "-1_"+scramble[i]+"_1"
             flag = flag + 1
         }
-        if (scramble[i] == "b")
-        {
-            lay[flag] = "-1_b_1"
-            flag = flag + 1
-        }
+        
        
-        if (scramble[i] == "D")
-        {
-            lay[flag] = "-1_D_1"
-            flag = flag + 1
-        }
-        if (scramble[i] == "d")
-        {
-            lay[flag] = "-1_d_1"
-            flag = flag + 1
-        }
-        
-        if (scramble[i] == "L")
-        {
-            lay[flag] = "-1_L_1"
-            flag = flag + 1
-        }
-        if (scramble[i] == "l")
-        {
-            lay[flag] = "-1_l_1"
-            flag = flag + 1
-        }
-        
-        if (scramble[i] == "U")
-        {
-            lay[flag] = "1_U_1"
-            flag = flag + 1
-        }
-        if (scramble[i] == "u")
-        {
-            lay[flag] = "1_u_1"
-            flag = flag + 1
-        }
-        if (scramble[i] == "x")
-        {
-            lay[flag] = "1_x_1"
-            flag = flag + 1
-        }
-        if (scramble[i] == "y")
-        {
-            lay[flag] = "1_y_1"
-            flag = flag + 1
-        }
-        if (scramble[i] == "z")
-        {
-            lay[flag] = "1_z_1"
-            flag = flag + 1
-        }
+      
            
         
         if (scramble[i] == "'")

@@ -198,7 +198,7 @@ export const Trial = (props) => {
             console.log(cube_soln)
             if (tick < cube_soln.length)
             {
-            animate_execute(scene,meshs,cube_soln[tick],padding);
+            animate_execute(scene,meshs,cube_soln[tick],padding,400);
             tick = tick+1;
             }
             if(tick == cube_soln.length)
@@ -263,11 +263,8 @@ export const Trial = (props) => {
             //     camera.position.x = 300;
             //     camera.position.y = 200;
             //     camera.position.z = 1000;
-            //     myvar = setTimeout(
-            //         cube_play(),
-            //         1500
-            //     );
-            //     // const line2 = setTimeout(draw_text(scene,"Nobista", renderer) ,2500)
+                
+            //     const line2 = animation_sequence(scene,meshs,core,camera)
             //     animation_flag = 1;
             // }
             
