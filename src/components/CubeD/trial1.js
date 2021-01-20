@@ -235,13 +235,13 @@ export const Trial = (props) => {
                 current_move = scramble.slice(cube.length);
                 current_soln = soln.slice(cube_sol.length);
                 
-                console.log(soln);
+               
                 if (scramble.length > cube.length) 
                 
                 {
                     console.log(scramble);
                     moves = scramble_read(current_move, scramble, cube, 0);
-                    console.log(moves);
+                   
 
                     fast_execute(scene, meshs, padding, moves);
                     

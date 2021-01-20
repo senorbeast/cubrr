@@ -467,7 +467,7 @@ function layer_group(scene , meshs , layer , padding ,dir , number )
      
       }
       scene.add(pivotM)
-      axis = (0,1,0)
+      axis =  new THREE.Vector3(1,0,0)
       my_return[0] = pivotM 
       my_return[1] = axis
       return my_return 
@@ -495,7 +495,7 @@ function layer_group(scene , meshs , layer , padding ,dir , number )
      
       }
       scene.add(pivotS)
-      axis = (0,1,0)
+      axis =  new THREE.Vector3(0,0,1)
       my_return[0] = pivotS
       my_return[1] = axis
       return my_return 
@@ -522,7 +522,7 @@ function layer_group(scene , meshs , layer , padding ,dir , number )
      
       }
       scene.add(pivotE)
-      axis = (0,1,0)
+      axis =  new THREE.Vector3(0,1,0)
       my_return[0] = pivotE
       my_return[1] = axis
       return my_return 

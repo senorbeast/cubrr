@@ -15,7 +15,7 @@ if(url.length > cube.length)
         {
 
         
-        if ((scramble[i] == "R" || scramble[i]=="r"||scramble[i]=="x"||scramble[i] == "F"  || scramble[i]=="f"||scramble[i]=="y" ||scramble[i] == "U"|| scramble[i]=="u"|| scramble[i]=="z") && ( scramble[i+1] != "'" && scramble[i+1] != "2"))
+        if ((scramble[i] == "R" || scramble[i]=="r"||scramble[i]=="x"||scramble[i] == "F"  || scramble[i]=="f"||scramble[i]=="y" ||scramble[i] == "U"|| scramble[i]=="u"|| scramble[i]=="z"||scramble[i] == "S") && ( scramble[i+1] != "'" && scramble[i+1] != "2"))
         {
             lay[flag] = "1_"+scramble[i]+"_1"
             flag = flag + 1
@@ -24,7 +24,7 @@ if(url.length > cube.length)
         
 
             
-        if ((scramble[i] == "B" || scramble[i] =="b"||scramble[i] == "L" || scramble[i]=="l"||scramble[i] == "D"|| scramble[i] =="d") && ( scramble[i+1] != "'" && scramble[i+1] != "2") )
+        if ((scramble[i] == "B" || scramble[i] =="b"||scramble[i] == "L" || scramble[i]=="l"||scramble[i] == "D"|| scramble[i] =="d"||scramble[i] == "M"||scramble[i] == "E") && ( scramble[i+1] != "'" && scramble[i+1] != "2") )
         {
             lay[flag] = "-1_"+scramble[i]+"_1"
             flag = flag + 1
@@ -34,7 +34,7 @@ if(url.length > cube.length)
         
         
         
-        else if (scramble[i] == "R" || scramble[i] == "r" || scramble[i] == "x" ||scramble[i] == "F" || scramble[i] == "f" || scramble[i] == "z" ||scramble[i] == "U" || scramble[i] == "u" || scramble[i] == "y"  )
+        else if (scramble[i] == "R" || scramble[i] == "r" || scramble[i] == "x" ||scramble[i] == "F" || scramble[i] == "f" || scramble[i] == "z" ||scramble[i] == "U" || scramble[i] == "u" || scramble[i] == "y"  ||scramble[i] == "S")
         { 
             if ( scramble[i+1] == "'")
             {
@@ -54,7 +54,7 @@ if(url.length > cube.length)
         
 
             
-        else if (scramble[i] == "B" || scramble[i] == "b" |scramble[i] == "D"  || scramble[i] == "d"||scramble[i] == "L"  || scramble[i] == "l")
+        else if (scramble[i] == "B" || scramble[i] == "b" |scramble[i] == "D"  || scramble[i] == "d"||scramble[i] == "L"  || scramble[i] == "l"||scramble[i] == "M"||scramble[i] == "E")
         {
             if ( scramble[i+1] == "'")
             {
@@ -80,7 +80,7 @@ if(url.length > cube.length)
         }
         if ( i == scramble.length-1 )
         {
-            if (scramble[i] == "R" || scramble[i] =="r" || scramble[i] == "x"||scramble[i] == "F" ||scramble[i] == "f" || scramble[i] == "z"||scramble[i] == "U"||scramble[i] == "u" || scramble[i] == "z")
+            if (scramble[i] == "R" || scramble[i] =="r" || scramble[i] == "x"||scramble[i] == "F" ||scramble[i] == "f" || scramble[i] == "z"||scramble[i] == "U"||scramble[i] == "u" || scramble[i] == "z"||scramble[i] == "S")
         {
             lay[flag] = "1_"+scramble[i]+"_1"
             flag = flag + 1
@@ -89,7 +89,7 @@ if(url.length > cube.length)
         
 
             
-        if (scramble[i] == "B" ||scramble[i] == "b"||scramble[i] == "L"||scramble[i] == "l"||scramble[i] == "D"|| scramble[i]=="d")
+        if (scramble[i] == "B" ||scramble[i] == "b"||scramble[i] == "L"||scramble[i] == "l"||scramble[i] == "D"|| scramble[i]=="d"||scramble[i] == "M"||scramble[i] == "E")
         {
             
             lay[flag] = "-1_"+scramble[i]+"_1"
