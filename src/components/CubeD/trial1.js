@@ -194,14 +194,14 @@ export const Trial = (props) => {
         function cube_play()
         {
             
-            var cube_soln = animate_read(soln,soln,[],0);
-            console.log(cube_soln)
-            if (tick < cube_soln.length)
+            var cube_soln_animate = animate_read(soln,soln,[],0);
+            console.log(cube_soln_animate)
+            if (tick < cube_soln_animate.length)
             {
-            animate_execute(scene,meshs,cube_soln[tick],padding,400);
+            animate_execute(scene,meshs,cube_soln_animate[tick],padding,400);
             tick = tick+1;
             }
-            if(tick == cube_soln.length)
+            if(tick == cube_soln_animate.length)
             {
                 tick = 0;
                 play_flag = 3;
@@ -256,6 +256,16 @@ export const Trial = (props) => {
                     cube_sol = soln;
                     fast_execute(scene, meshs, padding, moves6);
                     play_flag = 0;
+                }
+                if (soln.length < cube_sol.length)
+                {
+                    
+                    var inv = scramble_read(cube_sol,cube_sol,[],1);
+                    fast_execute(scene,meshs,padding,inv);
+                    var so = scramble_read(soln,soln,[],0)
+                    fast_execute(scene,meshs,padding,so);
+                    cube_sol = soln;
+
                 }
             }
             // if (animation_flag == 0) {
