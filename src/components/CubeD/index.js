@@ -26,9 +26,10 @@ import { ImPlay2, ImPause } from "react-icons/im";
 import VCube from "./VCube";
 import { FullCard } from "./FullCard";
 import Trial from "./trial1";
-import { Typography } from "@material-ui/core";
+import { FormGroup, Typography } from "@material-ui/core";
 import { BiCubeAlt } from "react-icons/bi";
-
+import {parser}from "./parser";
+import {expand, parse, algToString} from "alg"
 function debounce(fn, ms) {
     let timer;
     return (_) => {
@@ -72,6 +73,9 @@ function CubePage(props) {
 
     useEffect(() => {
         if (newScra != undefined) {
+             
+             newScra = parser(newScra);
+             
             window.history.pushState(
                 "object or string",
                 "",
