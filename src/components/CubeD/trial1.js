@@ -114,15 +114,7 @@ export const Trial = (props) => {
         var play_flag = 0 ;
        // var scramble_state = [];
         var play = "false";
-        const MathUtils = {
-            DEG2RAD: function (deg) {
-                return (Math.PI / 180) * deg;
-            },
-
-            lerp: function (x, y, t) {
-                return (1 - t) * x + t * y;
-            },
-        };
+        
         var pad = 5;
         // gap between the layers
         var padding = pad;
@@ -234,8 +226,10 @@ export const Trial = (props) => {
                 soln = url_soln1.split("");
                 current_move = scramble.slice(cube.length);
                 current_soln = soln.slice(cube_sol.length);
+                /********TODO**********/
+                //When solution is edited in between//
+                //When moves are copy pasted in solution//
                 
-               
                 if (scramble.length > cube.length) 
                 
                 {
@@ -251,11 +245,26 @@ export const Trial = (props) => {
                 
                 if (soln.length > cube_sol.length) 
                 {
-                    moves6 = scramble_read(current_soln, soln, cube_sol, 0);
-                    console.log(moves6);
-                    cube_sol = soln;
-                    fast_execute(scene, meshs, padding, moves6);
-                    play_flag = 0;
+                    var sol_check = soln.slice(0,cube_sol.length-1);
+                    if (sol_check == cube_sol)
+                    {
+                        moves6 = scramble_read(current_soln, soln, cube_sol, 0);
+                        console.log(moves6);
+                        cube_sol = soln;
+                        fast_execute(scene, meshs, padding, moves6);
+                        play_flag = 0;
+
+                    }   
+                    else 
+                    {
+                        var inv = scramble_read(cube_sol,cube_sol,[],1);
+                        fast_execute(scene,meshs,padding,inv);
+                        var so = scramble_read(soln,soln,[],0)
+                        fast_execute(scene,meshs,padding,so);
+                        cube_sol = soln;
+
+                    }                  
+                    
                 }
                 if (soln.length < cube_sol.length)
                 {
@@ -267,6 +276,23 @@ export const Trial = (props) => {
                     cube_sol = soln;
 
                 }
+                if (soln.length == cube_sol.length)
+                {
+                    if (soln!=cube_sol)
+                    {
+                        console.log("laudde lag gaye");
+                        var inv = scramble_read(cube_sol,cube_sol,[],1);
+                        fast_execute(scene,meshs,padding,inv);
+                        var so = scramble_read(soln,soln,[],0)
+                        fast_execute(scene,meshs,padding,so);
+                        cube_sol = soln;
+
+                    }
+
+                    
+
+                }
+                
             }
             // if (animation_flag == 0) {
             //     var myvar;
