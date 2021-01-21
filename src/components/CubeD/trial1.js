@@ -246,7 +246,7 @@ export const Trial = (props) => {
                 if (soln.length > cube_sol.length) 
                 {
                     var sol_check = soln.slice(0,cube_sol.length-1);
-                    if (sol_check == cube_sol)
+                    if (JSON.stringify(sol_check) === JSON.stringify(cube_sol))
                     {
                         moves6 = scramble_read(current_soln, soln, cube_sol, 0);
                         console.log(moves6);
@@ -278,9 +278,11 @@ export const Trial = (props) => {
                 }
                 if (soln.length == cube_sol.length)
                 {
-                    if (soln!=cube_sol)
+                    console.log(JSON.stringify(soln) === JSON.stringify(cube_sol))
+                    if (JSON.stringify(soln) !== JSON.stringify(cube_sol))
                     {
-                        console.log("laudde lag gaye");
+                        console.log("laudde lag gaye",soln);
+                        console.log(cube_sol)
                         var inv = scramble_read(cube_sol,cube_sol,[],1);
                         fast_execute(scene,meshs,padding,inv);
                         var so = scramble_read(soln,soln,[],0)

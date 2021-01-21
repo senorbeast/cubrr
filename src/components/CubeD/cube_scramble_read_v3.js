@@ -6,13 +6,13 @@ function scramble_read(scramble,url,cube,but)
     var flag = 0;  
     var ar = 0;
     var lay = []
-   console.log(but);
+ 
    /***********USED FOR GENERATING ARRAY FOR INVERSING MOVES *************/
 if ( but == 1)
 {
 
     url = url.reverse();
-    console.log(url);
+
     for (var i = 0 ; i < url.length ; i++ )
     
     {
@@ -21,7 +21,7 @@ if ( but == 1)
         
         if (url[i] == "'")
         { 
-            console.log("", url[i+1] );
+            
             if (url[i+1] == "R" ||url[i+1] == "r" || url[i+1] == "x" ||url[i+1] == "F"||url[i+1] == "f" || url[i+1] == "z" ||url[i+1] == "U"||url[i+1] == "u" || url[i+1] == "y"||url[i+1] == "S")
             {
                 lay[ar] = "1_"+url[i+1]+"_1"
@@ -43,7 +43,7 @@ if ( but == 1)
         }
         else if (url[i] == "2")
         { 
-            console.log("2",url[flag+1]);
+
             if (url[i+1] == "R" || url[i+1] == "r" || url[i+1] == "x" ||url[i+1] == "F"|| url[i+1] == "f" || url[i+1] == "z"||url[i+1] == "U"|| url[i+1] == "u" || url[i+1] == "y"||url[i+1] == "S")
             {
                 lay[ar] = "-1_"+url[i+1]+"_2"

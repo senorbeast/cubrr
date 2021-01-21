@@ -9,7 +9,7 @@ function fast_execute(scene,meshs,padding,moves)
               var moves3 = moves2.split("_")
               
               var moves1 = layer_group(scene,meshs,moves3[1],padding,Number(moves3[0]),moves3[2])
-              console.log(moves1)
+             
               moves1[0].rotateOnWorldAxis(moves1[1],moves1[2])
                
             }
