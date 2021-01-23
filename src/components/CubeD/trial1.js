@@ -114,7 +114,7 @@ export const Trial = (props) => {
         var play_flag = 0 ;
        // var scramble_state = [];
         var play = "false";
-        
+        var sc_be_so = 0;
         var pad = 5;
         // gap between the layers
         var padding = pad;
@@ -233,16 +233,85 @@ export const Trial = (props) => {
                 if (scramble.length > cube.length) 
                 
                 {
+                    
                     console.log(scramble);
-                    moves = scramble_read(current_move, scramble, cube, 0);
+                    var scramble_check = scramble.slice(0,cube.length-1);
+                    if (JSON.stringify(scramble_check) === JSON.stringify(cube))
+                    
+                    {
+                        moves = scramble_read(current_move, scramble, cube, 0);
                    
 
-                    fast_execute(scene, meshs, padding, moves);
+                        fast_execute(scene, meshs, padding, moves);
                     
-                   // console.log(scramble_meshs);
-                    cube = scramble;
+                        // console.log(scramble_meshs);
+                        cube = scramble;
+                        
+                    }
+                    else 
+                    {
+                        var inv = scramble_read(cube.concat(cube_sol),cube.concat(cube_sol),[],1);
+                        fast_execute(scene,meshs,padding,inv);
+                        var so = scramble_read(scramble.concat(cube_sol),scramble.concat(cube_sol),[],0)
+                        fast_execute(scene,meshs,padding,so);
+                        cube = scramble;
+
+                    } 
+                    
                 }
-                
+                if (scramble.length < cube.length)
+                {
+                    
+                    var inv = scramble_read(cube.concat(cube_sol),cube.concat(cube_sol),[],1);
+                    fast_execute(scene,meshs,padding,inv);
+                    var so = scramble_read(scramble.concat(cube_sol),scramble.concat(cube_sol),[],0)
+                    fast_execute(scene,meshs,padding,so);
+                    cube = scramble;
+
+                }
+                if (scramble.length == cube.length)
+                {
+                    
+                    if (JSON.stringify(scramble) !== JSON.stringify(cube))
+                    {
+                        // console.log("laudde lag gaye",soln);
+                        // console.log(cube_sol)
+                        var inv = scramble_read(cube.concat(cube_sol),cube.concat(cube_sol),[],1);
+                        fast_execute(scene,meshs,padding,inv);
+                        var so = scramble_read(scramble.concat(cube_sol),scramble.concat(cube_sol),[],0)
+                        fast_execute(scene,meshs,padding,so);
+                        cube == scramble;
+
+                    }
+
+                }
+                if (scramble.length == 0)
+                {
+                    if (soln.length >0 && sc_be_so == 0)
+                    {
+                        console.log("IAM");
+                        var inv = scramble_read(cube_sol,cube_sol,[],1);
+                        fast_execute(scene,meshs,padding,inv);
+                        sc_be_so = 1;
+                    }
+
+                    
+                    
+                }
+
+                if (scramble.length >0)
+                {
+                    console.log(scramble.length);
+                    if (sc_be_so == 1)
+                    {
+                        var so = scramble_read(soln,soln,[],0)
+                        fast_execute(scene,meshs,padding,so);
+                        cube_sol = soln;
+
+                        play_flag = 0;
+
+                    }
+                    sc_be_so = 0;
                 if (soln.length > cube_sol.length) 
                 {
                     var sol_check = soln.slice(0,cube_sol.length-1);
@@ -294,6 +363,7 @@ export const Trial = (props) => {
                     
 
                 }
+            }
                 
             }
             // if (animation_flag == 0) {
