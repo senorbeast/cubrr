@@ -88,7 +88,8 @@ if ( but == 1)
  /***********USED FOR GENERATING ARRAY FOR LEGAL MOVES *************/
 if (but == 0)
 {
-if(url1.length > cube.length)
+    url = url1;
+if(url.length > cube.length)
 { 
     for (var i = 0 ; i < scramble.length ; i++ )
     {
