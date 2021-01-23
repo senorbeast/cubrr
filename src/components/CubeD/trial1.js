@@ -112,6 +112,7 @@ export const Trial = (props) => {
         var current_soln = [];
         var cube_sol = [];
         var play_flag = 0;
+        var focus = 0;
         // var scramble_state = [];
         var play = "false";
         var sc_be_so = 0;
@@ -202,7 +203,18 @@ export const Trial = (props) => {
                 clearInterval(mycube);
             }
         }
+        window.addEventListener("visibilitychange", event => {
+            if (document.visibilityState != "visible") {
+                focus = 1;
+             clearInterval(mycube);
+            } 
+            else if (document.visibilityState == "visible" && focus == 1)
+            {
+                setInterval(mycube,600);
+                focus = 2;
 
+            }
+          })
         const animate = () => {
             requestAnimationFrame(animate);
             controls.update();
@@ -210,6 +222,7 @@ export const Trial = (props) => {
             var currentURL = window.location.href;
 
             var url_split = currentURL.split("?");
+            
 
             if (url_split.length > 1) {
                 var scramble_arr = url_split[1].split("=");
