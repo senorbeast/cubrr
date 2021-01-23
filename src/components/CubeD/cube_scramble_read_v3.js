@@ -1,18 +1,18 @@
 //  var scramble = ["R","'","F","'","B","L","U"]
 
   
-function scramble_read(scramble,url,cube,but)
+function scramble_read(scramble,url1,cube,but)
 {
     var flag = 0;  
     var ar = 0;
     var lay = []
- 
+    var url = []
    /***********USED FOR GENERATING ARRAY FOR INVERSING MOVES *************/
 if ( but == 1)
 {
 
-    url = url.reverse();
-
+    url = url1.reverse();
+    console.log(url)
     for (var i = 0 ; i < url.length ; i++ )
     
     {
@@ -88,7 +88,7 @@ if ( but == 1)
  /***********USED FOR GENERATING ARRAY FOR LEGAL MOVES *************/
 if (but == 0)
 {
-if(url.length > cube.length)
+if(url1.length > cube.length)
 { 
     for (var i = 0 ; i < scramble.length ; i++ )
     {
@@ -174,7 +174,9 @@ if(url.length > cube.length)
     }
 }
 }
+ 
     return lay
+
 }
 
 export {scramble_read};

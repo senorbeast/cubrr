@@ -75,8 +75,8 @@ export const Trial = (props) => {
             NEAR,
             FAR
         );
-        camera.position.z = 600;
-        camera.position.x = 600;
+        camera.position.z = 275;
+        camera.position.x = 275;
         camera.position.y = 300;
         camera.tanFOV = Math.tan(((Math.PI / 180) * camera.fov) / 2); //  For maintaining scale on windowResize.
         camera.oneToOne = function () {
@@ -234,8 +234,10 @@ export const Trial = (props) => {
                 
                 {
                     
-                    console.log(scramble);
+                   
                     var scramble_check = scramble.slice(0,cube.length-1);
+                    console.log("cube",cube);
+                    console.log("scramble",scramble);
                     if (JSON.stringify(scramble_check) === JSON.stringify(cube))
                     
                     {
@@ -250,11 +252,13 @@ export const Trial = (props) => {
                     }
                     else 
                     {
-                        var inv = scramble_read(cube.concat(cube_sol),cube.concat(cube_sol),[],1);
+                        console.log("cubesol",cube_sol)
+                        var inv = scramble_read(cube.concat(soln),cube.concat(soln),[],1);
                         fast_execute(scene,meshs,padding,inv);
-                        var so = scramble_read(scramble.concat(cube_sol),scramble.concat(cube_sol),[],0)
+                        var so = scramble_read(scramble.concat(soln),scramble.concat(soln),[],0)
                         fast_execute(scene,meshs,padding,so);
                         cube = scramble;
+                        
 
                     } 
                     
@@ -262,9 +266,9 @@ export const Trial = (props) => {
                 if (scramble.length < cube.length)
                 {
                     
-                    var inv = scramble_read(cube.concat(cube_sol),cube.concat(cube_sol),[],1);
+                    var inv = scramble_read(cube.concat(soln),cube.concat(soln),[],1);
                     fast_execute(scene,meshs,padding,inv);
-                    var so = scramble_read(scramble.concat(cube_sol),scramble.concat(cube_sol),[],0)
+                    var so = scramble_read(scramble.concat(soln),scramble.concat(soln),[],0)
                     fast_execute(scene,meshs,padding,so);
                     cube = scramble;
 
@@ -276,11 +280,11 @@ export const Trial = (props) => {
                     {
                         // console.log("laudde lag gaye",soln);
                         // console.log(cube_sol)
-                        var inv = scramble_read(cube.concat(cube_sol),cube.concat(cube_sol),[],1);
+                        var inv = scramble_read(cube.concat(soln),cube.concat(soln),[],1);
                         fast_execute(scene,meshs,padding,inv);
-                        var so = scramble_read(scramble.concat(cube_sol),scramble.concat(cube_sol),[],0)
+                        var so = scramble_read(scramble.concat(soln),scramble.concat(soln),[],0)
                         fast_execute(scene,meshs,padding,so);
-                        cube == scramble;
+                        cube = scramble;
 
                     }
 
@@ -289,11 +293,13 @@ export const Trial = (props) => {
                 {
                     if (soln.length >0 && sc_be_so == 0)
                     {
-                        console.log("IAM");
+
+                        console.log(cube_sol);
                         var inv = scramble_read(cube_sol,cube_sol,[],1);
                         fast_execute(scene,meshs,padding,inv);
                         sc_be_so = 1;
                     }
+                    cube = scramble;
 
                     
                     
