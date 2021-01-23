@@ -12,7 +12,7 @@ if ( but == 1)
 {
 
     url = url1.reverse();
-    console.log(url)
+   
     for (var i = 0 ; i < url.length ; i++ )
     
     {
