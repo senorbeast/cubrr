@@ -28,8 +28,8 @@ import { FullCard } from "./FullCard";
 import Trial from "./trial1";
 import { FormGroup, Typography } from "@material-ui/core";
 import { BiCubeAlt } from "react-icons/bi";
-import {parser}from "./parser";
-import {expand, parse, algToString} from "alg"
+import { parser } from "./parser";
+import { expand, parse, algToString } from "alg";
 function debounce(fn, ms) {
     let timer;
     return (_) => {
@@ -73,9 +73,9 @@ function CubePage(props) {
 
     useEffect(() => {
         if (newScra != undefined) {
-             
-             newScra = parser(newScra);
-             
+            console.log(newScra);
+            //var newScra1 = parser(newScra);
+            console.log("Parsed", newScra);
             window.history.pushState(
                 "object or string",
                 "",
