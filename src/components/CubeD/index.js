@@ -28,9 +28,11 @@ import { FullCard } from "./FullCard";
 import Trial from "./trial1";
 import { FormGroup, Typography } from "@material-ui/core";
 import { BiCubeAlt } from "react-icons/bi";
-import { parser } from "./parser";
 import { expand, parse, algToString } from "alg";
-var scramble = "";
+import getComments from "./Parser/getComments";
+import getAlgs from "./Parser/getAlgs";
+import validateAlgs from "./Parser/validateAlg";
+
 function debounce(fn, ms) {
     let timer;
     return (_) => {
@@ -77,11 +79,12 @@ function CubePage(props) {
         if (newScra != undefined) {
             //TODO: run this only 1 onces and combine newScra and newScol in one state
             //*Check how many times this is running
-            //console.log(newScra);
-            //var newScra1 = parser(newScra);
-            //console.log("Parsed", newScra);
             //!Aditya extremely usefull and not IRRITATING
-            // url.searchParams.set("scramble", "newScra");
+            var cmts = getAlgs(newSol);
+            console.log("Comments", getComments(newSol));
+            console.log("Algs", validateAlgs(cmts).legalAlg);
+            console.log("Valid", !validateAlgs(cmts).IvldTest);
+            console.log("Move Count", validateAlgs(cmts).movesNum);
             window.history.pushState(
                 "object or string",
                 "",
@@ -110,7 +113,7 @@ function CubePage(props) {
             let scra = scramble[0].replace(/%20/g, " "); // (/  /g) to replace globally here it means to replace all values
             let scra2 = scra.replace(/%27/g, "'");
             let scra3 = scra2.replace(/\./g, ".\n");
-            setnewScra(scra3);
+            setnewScra(scra2);
             console.log("Getting Scramble");
         }
         //Same for solution
@@ -237,13 +240,14 @@ function CubePage(props) {
     );
     //
     function handleChangeScra(event) {
-        setnewScra(event.target.value.replace(/(.^|\n)([^+]|$)/g, "$1.$2"));
+        setnewScra(event.target.value);
     }
     //replace(/(.^|\r\n|\n)([^*]|$)/g, "$1*$2")) (Removes the nextlines after reload idk how)
     //TODO: Understand the diffin \r\n and \n .
 
     function handleChangeSol(event) {
-        setnewSol(event.target.value.replace(/(.^|\n)([^+]|$)/g, "$1.$2"));
+        var dots = event.target.value.replace(/\./g, ""); //Fixed-User Can type dots in Solution box
+        setnewSol(dots.replace(/(.^|\n)([^.]|$)/g, "$1.$2"));
     }
     function togglePlay() {
         setplay(!play);
