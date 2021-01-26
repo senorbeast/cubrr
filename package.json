@@ -14,6 +14,7 @@
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
     "apollo-link-http": "^1.5.17",
+    "canvas-multiline-text": "^1.0.3",
     "canvas-txt": "^3.0.0",
     "createjs-module": "^0.8.3",
     "graphql": "^15.4.0",

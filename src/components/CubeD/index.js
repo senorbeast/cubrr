@@ -25,7 +25,7 @@ import { ImPlay2, ImPause } from "react-icons/im";
 //import CubeD from "./cube.js";
 import VCube from "./VCube";
 import { FullCard } from "./FullCard";
-import Trial from "./trial1";
+import Trial from "./trial2";
 import { FormGroup, Typography } from "@material-ui/core";
 import { BiCubeAlt } from "react-icons/bi";
 import { parser } from "./parser";

@@ -26,30 +26,29 @@ import { OrbitControls } from "../../../node_modules/three/examples/jsm/controls
 import * as THREE from "three";
 import { scramble_read } from "./cube_scramble_read_v3";
 import { animate_read } from "./cube_animate_read_3";
-
+import  CUBE from "./CUBE.js";
 export const Trial = (props) => {
     const mount = useRef(null);
     const [count, setCount] = useState(0);
     const playBtn = useRef(props.play);
     const [plays, setPlay] = useState(0);
     playBtn.current = props.play;
-    console.log("Play", props.play);
-    console.log("rendered", count);
+    // console.log("Play", props.play);
+    // console.log("rendered", count);
 
     useEffect(() => {
-        console.log("rendered in UseEffect", count);
-        console.log("Play in UseEFFect", props.play);
+        // console.log("rendered in UseEffect", count);
+        // console.log("Play in UseEFFect", props.play);
         let width = mount.current.clientWidth;
         let height = mount.current.clientHeight;
         let frameId;
         var mycube;
-        var raycaster = new THREE.Raycaster(); //raycaster object
-        var mouse = new THREE.Vector2(); //to get the location of mouse
-        var scene = new THREE.Scene();
+       
+       
+        // var scene = new THREE.Scene();
         /* variables to create color */
         var flag = 1;
-        mouse.x = 100;
-        mouse.y = 100;
+        var scene = new THREE.Scene();
         var scramble_meshs = [];
         var meshs = [];
         var cube_sol = [];
@@ -57,7 +56,8 @@ export const Trial = (props) => {
         var ret = [];
         var face_plane = [];
         var animation_flag = 0;
-        var tick = 0 ;
+        var tick = 0; //used in time line to keep track on which move to be made
+        var slider_value = 0;
         //   let mapDimensions = this.mount.getBoundingClientRect();
         //   let width = this.mount.clientWidth;
         //   let height = this.mount.clientHeight;
@@ -74,18 +74,19 @@ export const Trial = (props) => {
             NEAR,
             FAR
         );
-        camera.position.z = 600;
-        camera.position.x = 600;
-        camera.position.y = 300;
-        camera.tanFOV = Math.tan(((Math.PI / 180) * camera.fov) / 2); //  For maintaining scale on windowResize.
-        camera.oneToOne = function () {
-            //  Return the Z position at which to place an object for exactly 100% scale.
-            //  https://github.com/mrdoob/three.js/blob/dev/examples/js/renderers/CSS3DRenderer.js#L142
+       
+        // camera.position.z = 275;
+        // camera.position.x = 275;
+        // camera.position.y = 300;
+        // camera.tanFOV = Math.tan(((Math.PI / 180) * camera.fov) / 2); //  For maintaining scale on windowResize.
+        // camera.oneToOne = function () {
+        //     //  Return the Z position at which to place an object for exactly 100% scale.
+        //     //  https://github.com/mrdoob/three.js/blob/dev/examples/js/renderers/CSS3DRenderer.js#L142
 
-            return (-0.5 / Math.tan((camera.fov * Math.PI) / 360)) * HEIGHT;
-        };
-        camera.lookAt(scene.position);
-        scene.add(camera);
+        //     return (-0.5 / Math.tan((camera.fov * Math.PI) / 360)) * HEIGHT;
+        // };
+        // camera.lookAt(scene.position);
+        // scene.add(camera);
         /* adding webgl renderer */
 
         //   console.log("Width", width, "height", height, mapDimensions);
@@ -96,9 +97,9 @@ export const Trial = (props) => {
         renderer.setClearColor(themes[props.theme].primary);
         renderer.setSize(width, height, true);
         mount.current.appendChild(renderer.domElement);
-        var anisotropy = renderer.capabilities.getMaxAnisotropy();
+        //var anisotropy = renderer.capabilities.getMaxAnisotropy();
         var controls = new OrbitControls(camera, renderer.domElement);
-       // var mov1 = 0;
+        // var mov1 = 0;
         var moves = [];
         var moves6 = [];
         //var moves_sol = [];
@@ -110,78 +111,75 @@ export const Trial = (props) => {
         var current_move = [];
         var current_soln = [];
         var cube_sol = [];
-        var play_flag = 0 ;
-       // var scramble_state = [];
+        var play_flag = 0;
+        var focus = 0;
+        // var scramble_state = [];
         var play = "false";
-        const MathUtils = {
-            DEG2RAD: function (deg) {
-                return (Math.PI / 180) * deg;
-            },
-
-            lerp: function (x, y, t) {
-                return (1 - t) * x + t * y;
-            },
-        };
+        var sc_be_so = 0;
         var pad = 5;
         // gap between the layers
         var padding = pad;
         // radius of the fillet used on corners of cube
         var c = document.createElement("canvas");
         var ctx = c.getContext("2d");
-        const tx1 = document.createElement("canvas").getContext("2d");
-        tx1.font = "150pt poppins ";
-        tx1.fillText("F", 100, 140);
-        const tx2 = document.createElement("canvas").getContext("2d");
-        tx2.font = "150pt roboto";
-        tx2.fillText("B", 100, 140);
-        const tx3 = document.createElement("canvas").getContext("2d");
-        tx3.font = "150pt roboto";
-        tx3.fillText("R", 100, 140);
-        const tx4 = document.createElement("canvas").getContext("2d");
-        tx4.font = "150pt roboto";
-        tx4.fillText("L", 100, 140);
-        const tx5 = document.createElement("canvas").getContext("2d");
-        tx5.font = "150pt roboto";
-        tx5.fillText("U", 100, 140);
-        const tx6 = document.createElement("canvas").getContext("2d");
-        tx6.font = "150pt roboto";
-        tx6.fillText("D", 100, 140);
+        // const tx1 = document.createElement("canvas").getContext("2d");
+        // tx1.font = "150pt poppins ";
+        // tx1.fillText("F", 100, 140);
+        // const tx2 = document.createElement("canvas").getContext("2d");
+        // tx2.font = "150pt roboto";
+        // tx2.fillText("B", 100, 140);
+        // const tx3 = document.createElement("canvas").getContext("2d");
+        // tx3.font = "150pt roboto";
+        // tx3.fillText("R", 100, 140);
+        // const tx4 = document.createElement("canvas").getContext("2d");
+        // tx4.font = "150pt roboto";
+        // tx4.fillText("L", 100, 140);
+        // const tx5 = document.createElement("canvas").getContext("2d");
+        // tx5.font = "150pt roboto";
+        // tx5.fillText("U", 100, 140);
+        // const tx6 = document.createElement("canvas").getContext("2d");
+        // tx6.font = "150pt roboto";
+        // tx6.fillText("D", 100, 140);
 
-        // const texture = new THREE.TextureLoader().load("rubiksLogoClassic.png" );
+        // // const texture = new THREE.TextureLoader().load("rubiksLogoClassic.png" );
 
-        let texture1 = new THREE.CanvasTexture(tx1.canvas);
-        let texture2 = new THREE.CanvasTexture(tx2.canvas);
-        let texture3 = new THREE.CanvasTexture(tx3.canvas);
-        let texture4 = new THREE.CanvasTexture(tx4.canvas);
-        let texture5 = new THREE.CanvasTexture(tx5.canvas);
-        let texture6 = new THREE.CanvasTexture(tx6.canvas);
+        // let texture1 = new THREE.CanvasTexture(tx1.canvas);
+        // let texture2 = new THREE.CanvasTexture(tx2.canvas);
+        // let texture3 = new THREE.CanvasTexture(tx3.canvas);
+        // let texture4 = new THREE.CanvasTexture(tx4.canvas);
+        // let texture5 = new THREE.CanvasTexture(tx5.canvas);
+        // let texture6 = new THREE.CanvasTexture(tx6.canvas);
 
-        texture1.anisotropy = renderer.capabilities.getMaxAnisotropy();
-        texture2.anisotropy = renderer.capabilities.getMaxAnisotropy();
-        texture3.anisotropy = renderer.capabilities.getMaxAnisotropy();
-        texture4.anisotropy = renderer.capabilities.getMaxAnisotropy();
-        texture5.anisotropy = renderer.capabilities.getMaxAnisotropy();
-        texture6.anisotropy = renderer.capabilities.getMaxAnisotropy();
-        //loader used for texture
-        ret = cubelets_form(
-            scene,
-            3,
-            padding,
-            texture1,
-            texture2,
-            texture3,
-            texture4,
-            texture5,
-            texture6
-        );
-        meshs = ret[0];
-        core = ret[1];
-        face_plane = ret[2];
-        cube_color(meshs);
+        // texture1.anisotropy = renderer.capabilities.getMaxAnisotropy();
+        // texture2.anisotropy = renderer.capabilities.getMaxAnisotropy();
+        // texture3.anisotropy = renderer.capabilities.getMaxAnisotropy();
+        // texture4.anisotropy = renderer.capabilities.getMaxAnisotropy();
+        // texture5.anisotropy = renderer.capabilities.getMaxAnisotropy();
+        // texture6.anisotropy = renderer.capabilities.getMaxAnisotropy();
+        // //loader used for texture
+        // ret = cubelets_form(
+        //     scene,
+        //     3,
+        //     padding,
+        //     texture1,
+        //     texture2,
+        //     texture3,
+        //     texture4,
+        //     texture5,
+        //     texture6
+        // );
+        // meshs = ret[0];
+        // core = ret[1];
+        // face_plane = ret[2];
+        // cube_color(meshs);
+        var cube1 = new CUBE(3,camera , renderer,scene);
+        cube1.add();
+        cube1.color();
+
         const renderScene = () => {
             renderer.render(scene, camera);
         };
-
+        renderScene();
         const handleResize = () => {
             width = mount.current.clientWidth;
             height = mount.current.clientHeight;
@@ -190,26 +188,39 @@ export const Trial = (props) => {
             camera.updateProjectionMatrix();
             renderScene();
         };
-        function cube_play()
-        {
-            
-            var cube_soln = animate_read(soln,soln,[],0);
-            
-            if (tick < cube_soln.length)
-            {
-            animate_execute(scene,meshs,cube_soln[tick],padding);
-            tick = tick+1;
+        function cube_play() {
+            var cube_soln_animate = animate_read(soln, soln, [], 0);
+         
+            if (tick < cube_soln_animate.length) {
+                cube1.animateMove(cube_soln,400)
+                // animate_execute(
+                //     scene,
+                //     meshs,
+                //     cube_soln_animate[tick],
+                //     padding,
+                //     400,
+                //     0
+                // );
+                tick = tick + 1;
             }
-            if(tick == cube_soln.length)
-            {
+            if (tick == cube_soln_animate.length) {
                 tick = 0;
                 play_flag = 3;
-                clearInterval(mycube) ;
+                clearInterval(mycube);
             }
-            
-
         }
+        window.addEventListener("visibilitychange", event => {
+            if (document.visibilityState != "visible") {
+                focus = 1;
+             clearInterval(mycube);
+            } 
+            else if (document.visibilityState == "visible" && focus == 1)
+            {
+                setInterval(mycube,600);
+                focus = 2;
 
+            }
+          })
         const animate = () => {
             requestAnimationFrame(animate);
             controls.update();
@@ -217,6 +228,7 @@ export const Trial = (props) => {
             var currentURL = window.location.href;
 
             var url_split = currentURL.split("?");
+            
 
             if (url_split.length > 1) {
                 var scramble_arr = url_split[1].split("=");
@@ -228,29 +240,178 @@ export const Trial = (props) => {
                 var url_soln = soln_arr[1].replace(/%20/g, "");
                 url_scra1 = url_scramble.replace(/%27/g, "'");
                 url_soln1 = url_soln.replace(/%27/g, "'");
-                scramble = url_scra1.split("");
-                soln = url_soln1.split("");
-                current_move = scramble.slice(cube.length);
-                current_soln = soln.slice(cube_sol.length);
+                scramble = url_scra1.split("");//the actual scramble input from user
+                soln = url_soln1.split("");//the actual solution input from user 
+                current_move = scramble.slice(cube.length);//the current scramble move to be executed
+                current_soln = soln.slice(cube_sol.length);//the current solution move to be executed
                 
-                console.log(play);
-                if (scramble.length > cube.length) {
-                    console.log(scramble);
-                    moves = scramble_read(current_move, scramble, cube, 0);
-                    console.log(moves);
-
-                    fast_execute(scene, meshs, padding, moves);
+                /********THE BELOW PART IS TO HANDLE VARIOUS USER INPUTS*********/
+                //i.e :- For example if user deletes scramble and only solution is present
+            
+                /***********BELOW CODE IS EXECUTED ONLY IF USER ENTERS SOMETHING NEW IN SCRAMBLE FIELD***********/
+                if (scramble.length > cube.length) 
+                //HERE CUBE IS THE CURRENT STATE OF THE CUBE AND SCRAMBLE IS THE DESIRED STATE 
+                { 
                     
-                   // console.log(scramble_meshs);
+                   
+                    /*******************this is done to see if user has not added any extra move in between the scramble*************************/
+                    var scramble_check = scramble.slice(0,cube.length);
+                    console.log(scramble_check)
+                    /*********BELOW PART WILL BE DONE IF THE PREVIOUS STATE OF CUBE HAD NO MOVES IN IT i.e : no moves were done on the cube previously**********/
+                    if (cube.length==0)
+                    {
+                        console.log("!")
+                        // moves = scramble_read(current_move, scramble, cube, 0);
+                   
+
+                        // fast_execute(scene, meshs, padding, moves);
+                        cube1.liveMove(current_move, scramble, cube, 0)
+                        // console.log(scramble_meshs);
+                        cube = scramble;
+
+                    }
+        //             /**************BELOW PART WILL BE DONE IF ANY EXTRA MOVE IS ADDED IN BETWEEN THE SCRAMBLE********************/
+                
+                   else  if (JSON.stringify(scramble_check) === JSON.stringify(cube))
+                    
+                    {
+                        console.log("111")
+                        cube1.liveMove(current_move, scramble, cube, 0)
+                        // moves = scramble_read(current_move, scramble, cube, 0);
+
+                        // fast_execute(scene, meshs, padding, moves);
+
+                        // console.log(scramble_meshs);
+                        cube = scramble;
+                        
+                    }
+                    /****************BELOW PART WILL BE DONE IF A NEW MOVE IS ADDED AT THE END OF THE SCRAMBLE********************/
+                    else 
+                    {
+                        console.log("23232")
+                        cube1.fastMove(cube.concat(cube_sol),1);
+                        cube1.fastMove(scramble.concat(cube_sol),0)
+                        // var inv = scramble_read(cube.concat(cube_sol),cube.concat(cube_sol),[],1);
+                        // fast_execute(scene,meshs,padding,inv);
+                        // var so = scramble_read(scramble.concat(cube_sol),scramble.concat(cube_sol),[],0)
+                        // fast_execute(scene,meshs,padding,so);
+                        cube = scramble;
+                        
+
+                    } 
+                    
+                }
+
+        //         /*********************BELOW PART WILL BE EXECUTED IF MOVE/MOVES ARE DELETED FROM SCRAMBLE****************************/
+                if (scramble.length < cube.length) {
+                    cube1.fastMove(cube.concat(cube_sol),1);
+                    cube1.fastMove(scramble.concat(cube_sol),0)
+                    // var inv = scramble_read(
+                    //     cube.concat(cube_sol),
+                    //     cube.concat(cube_sol),
+                    //     [],1);
+                    // fast_execute(scene, meshs, padding, inv);
+                    // var so = scramble_read(
+                    //     scramble.concat(cube_sol),
+                    //     scramble.concat(cube_sol),
+                    //     [],0);
+                    // fast_execute(scene, meshs, padding, so);
                     cube = scramble;
                 }
-                
-                if (soln.length > cube_sol.length) {
-                    moves6 = scramble_read(current_soln, soln, cube_sol, 0);
-                    console.log(moves6);
-                    cube_sol = soln;
-                    fast_execute(scene, meshs, padding, moves6);
-                    play_flag = 0;
+                /****************BELOW PART WILL BE DONE IF USER COPY PASTES A NEW SCRAMBLE WITH EXACT SAME NO.OF MOVES*******************/
+                if (scramble.length == cube.length) {
+                    if (JSON.stringify(scramble) !== JSON.stringify(cube)) {
+                        // console.log("laudde lag gaye",soln);
+                        // console.log(cube_sol)
+                        cube1.fastMove(cube.concat(cube_sol),1);
+                        cube1.fastMove(scramble.concat(cube_sol),0)
+                        cube = scramble;                        
+
+                    }
+                }
+        //         /******************BELOW PART WILL BE EXECUTED ONLY WHEN THEIR IS NOTHING ENETERED IN SCRAMBLE FIELD AND THEIR ARE MOVES ENTERED IN SOLUTION FIELD*********************/
+                if (scramble.length == 0)
+                {
+                    if (soln.length >0 && sc_be_so == 0)
+                    {
+
+                        cube1.fastMove(cube_sol,1);
+                        // var inv = scramble_read(cube_sol,cube_sol,[],1);
+                        // fast_execute(scene,meshs,padding,inv);
+                        
+                        sc_be_so = 1;
+                    }
+                    cube = scramble;
+
+                    
+                    
+                }
+        //         /*******************THIS CODE ENSURES SOLUTION IS EXECUTED ONLY IF SCRAMBLE IS PRESENT***********************/
+                if (scramble.length > 0) {
+                    
+                    if (sc_be_so == 1) {
+
+                        cube1.fastMove(cube_sol,1);
+                        
+                        // var so = scramble_read(soln, soln, [], 0);
+                        // fast_execute(scene, meshs, padding, so);
+                        cube_sol = soln;
+
+                        play_flag = 0;
+                    }
+                    sc_be_so = 0;
+                    if (soln.length > cube_sol.length)
+                     {
+                        var sol_check = soln.slice(0, cube_sol.length - 1);
+                        if (JSON.stringify(sol_check) === JSON.stringify(cube_sol)) 
+                        {
+                            cube1.liveMove(current_soln, soln, cube_sol, 0)
+                            // moves6 = scramble_read(
+                            //     current_soln,
+                            //     soln,
+                            //     cube_sol,
+                            //     0
+                            // );
+                            
+                            cube_sol = soln;
+                            // fast_execute(scene, meshs, padding, moves6);
+                            play_flag = 0;
+                        } 
+                        else 
+                        {
+
+                            cube1.fastMove(cube_sol,1);
+                            cube1.fastMove(soln,0)
+
+                            //  var inv = scramble_read(cube_sol, cube_sol, [], 1);
+                            //  fast_execute(scene, meshs, padding, inv);
+                            //  var so = scramble_read(soln, soln, [], 0);
+                            //  fast_execute(scene, meshs, padding, so);
+                             cube_sol = soln;
+                         }
+                   }
+                    if (soln.length < cube_sol.length) {
+                        cube1.fastMove(cube_sol,1);
+                        cube1.fastMove(soln,0)
+
+                        // var inv = scramble_read(cube_sol, cube_sol, [], 1);
+                        // fast_execute(scene, meshs, padding, inv);
+                        // var so = scramble_read(soln, soln, [], 0);
+                        // fast_execute(scene, meshs, padding, so);
+                        cube_sol = soln;
+                    }
+                    if (soln.length == cube_sol.length) {
+                       
+                        if (JSON.stringify(soln) !== JSON.stringify(cube_sol)) {
+                            cube1.fastMove(cube_sol,1);
+                            cube1.fastMove(soln,0)
+                            // var inv = scramble_read(cube_sol, cube_sol, [], 1);
+                            // fast_execute(scene, meshs, padding, inv);
+                            // var so = scramble_read(soln, soln, [], 0);
+                            // fast_execute(scene, meshs, padding, so);
+                            cube_sol = soln;
+                        }
+                    }
                 }
             }
             // if (animation_flag == 0) {
@@ -258,49 +419,35 @@ export const Trial = (props) => {
             //     camera.position.x = 300;
             //     camera.position.y = 200;
             //     camera.position.z = 1000;
-            //     myvar = setTimeout(
-            //         cube_play(),
-            //         1500
-            //     );
-            //     // const line2 = setTimeout(draw_text(scene,"Nobista", renderer) ,2500)
+
+            //     const line2 = beg_cross(scene,meshs,ctx ,c,padding,renderer)
             //     animation_flag = 1;
             // }
-            if (play == "true" && (play_flag == 0||play_flag == 2) )
-            {
-               
-                var inverse = scramble_read(soln,soln,[], 1);//FINDS THE INVERSE MOVES FOR THE SOLUTION
-               // this is when the user initially presses the play button so that solution moves gets inversed 
-               if (play_flag == 0)
-               {
-              
-                fast_execute(scene, meshs, padding, inverse);// this execcutes the inverse move
-                mycube = setInterval(cube_play, 600);
-                play_flag = 1;// done so that setinterval is not called recursively
 
-               }
-               // this is done to see if pause was pressed in between
-               else if (play_flag == 2)
-               {
-                mycube = setInterval(cube_play, 600);
-                play_flag = 1;// done so that setinterval is not called recursively
-               }
-                
-                
-                
-            }
-            
-            if (play == "false") 
-            {
-                if (play_flag == 1)
-                {
-                    play_flag = 2;// so that the moves dont get inversed again
-                    clearInterval(mycube) ;
+            if (play == "true" && (play_flag == 0 || play_flag == 2)) {
+                // var inverse = scramble_read(soln, soln, [], 1); //FINDS THE INVERSE MOVES FOR THE SOLUTION
+                // this is when the user initially presses the play button so that solution moves gets inversed
+                if (play_flag == 0) {
+                    cube1.fastMove(soln,0)
+                    // fast_execute(scene, meshs, padding, inverse); // this execcutes the inverse move
+                    mycube = setInterval(cube_play, 600);
+                    play_flag = 1; // done so that setinterval is not called recursively
                 }
-                if (play_flag == 3)
-                {
+                // this is done to see if pause was pressed in between
+                else if (play_flag == 2) {
+                    mycube = setInterval(cube_play, 600);
+                    play_flag = 1; // done so that setinterval is not called recursively
+                }
+            }
+
+            if (play == "false") {
+                if (play_flag == 1) {
+                    play_flag = 2; // so that the moves dont get inversed again
+                    clearInterval(mycube);
+                }
+                if (play_flag == 3) {
                     play_flag = 0;
                 }
-               
             }
 
             if (playBtn == "true") {
@@ -343,7 +490,7 @@ export const Trial = (props) => {
         };
 
         mount.current.appendChild(renderer.domElement);
-        //window.addEventListener("resize", handleResize);
+        window.addEventListener("resize", handleResize);
         start();
 
         controls.current = { start, stop };

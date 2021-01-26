@@ -96,7 +96,7 @@ function beg_cross(scene, meshs, ctx, c, padding, renderer) {
     }
     scene.add(cube);
     scene.add(cross);
-
+    //draw_text(scene, "Lets Start", renderer, ctx, c, 1);
     var cross_time = gsap.timeline({ duration: 2, onComplete: animate_cross });
     var tween1 = gsap.to(cube.rotation, {
         x: Math.PI,
@@ -172,10 +172,10 @@ function beg_cross(scene, meshs, ctx, c, padding, renderer) {
             0
         );
         console.log(sol);
-        animate_execute(scene, meshs, sol, padding);
+        animate_execute(scene, meshs, sol, padding,400,1);
 
-        animate_execute(scene, meshs, sol, padding);
-        //console.log(result);
+        
+    
     }
 }
 export { beg_cross };

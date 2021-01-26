@@ -14,32 +14,32 @@ function cubelets_form(scene, size, padding, tx1, tx2, tx3, tx4, tx5, tx6) {
             space = (50 + padding) * j;
             for (var k = 0; k < 3; k++) {
                 //mesh created for every cube
-                if (i == 2 && j == 1 && k == 1) {
-                    const materials =
-                        [
+                // if (i == 2 && j == 1 && k == 1) {
+                //     const materials =
+                //         [
 
-                            new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: false, vertexColors: THREE.FaceColors, transaprent: true, opacity: 1 }),
-                            new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: false, vertexColors: THREE.FaceColors, transaprent: true, opacity: 1 }),
-                            new THREE.MeshBasicMaterial({ transparent1: true, opacity: 1 }),
-                            new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: false, vertexColors: THREE.FaceColors, transaprent: true, opacity: 1 }),
-                            new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: false, vertexColors: THREE.FaceColors, transaprent: true, opacity: 1 }),
+                //             new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: false, vertexColors: THREE.FaceColors, transaprent: true, opacity: 1 }),
+                //             new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: false, vertexColors: THREE.FaceColors, transaprent: true, opacity: 1 }),
+                //             new THREE.MeshBasicMaterial({ transparent1: true, opacity: 1 }),
+                //             new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: false, vertexColors: THREE.FaceColors, transaprent: true, opacity: 1 }),
+                //             new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: false, vertexColors: THREE.FaceColors, transaprent: true, opacity: 1 }),
 
-                            new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: false, vertexColors: THREE.FaceColors, transaprent: true, opacity: 1 }),
+                //             new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: false, vertexColors: THREE.FaceColors, transaprent: true, opacity: 1 }),
 
-                        ];
+                //         ];
 
-                    var cube2 = new THREE.Mesh(new THREE.BoxGeometry(50, 50, 50), materials);
+                //     var cube2 = new THREE.Mesh(new THREE.BoxGeometry(50, 50, 50), materials);
 
-                }
-                else if (i == 1 && j == 1 && k == 1) {
-                    var cube2 = new THREE.Mesh(new THREE.BoxGeometry(50, 50, 50), new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: false, skinning: true, vertexColors: THREE.FaceColors, transparent: true, opacity: 0, side: THREE.DoubleSide }));
+                // }
+                // else if (i == 1 && j == 1 && k == 1) {
+                //     var cube2 = new THREE.Mesh(new THREE.BoxGeometry(50, 50, 50), new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: false, skinning: true, vertexColors: THREE.FaceColors, transparent: true, opacity: 0, side: THREE.DoubleSide }));
 
-                }
+                // }
 
-                else {
+                
                     var cube2 = new THREE.Mesh(new THREE.BoxGeometry(50, 50, 50), new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: false, skinning: true, vertexColors: THREE.FaceColors, transparent: true, opacity: 1, side: THREE.DoubleSide }));
 
-                }
+            
 
 
                 scene.add(cube2);
