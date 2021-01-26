@@ -106,7 +106,7 @@ export default class CUBE {
                     this.meshs,
                     move,
                     5,
-                    400,
+                    time,
                     0
                 );
   }

@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
 import SideNav from "../SideNav";
+import { useState, useEffect, useRef } from "react";
 import {
     CardContainer,
     CubeContainer,
@@ -28,8 +28,11 @@ import { FullCard } from "./FullCard";
 import Trial from "./trial2";
 import { FormGroup, Typography } from "@material-ui/core";
 import { BiCubeAlt } from "react-icons/bi";
-import { parser } from "./parser";
 import { expand, parse, algToString } from "alg";
+import getComments from "./Parser/getComments";
+import getAlgs from "./Parser/getAlgs";
+import validateAlgs from "./Parser/validateAlg";
+
 function debounce(fn, ms) {
     let timer;
     return (_) => {
@@ -62,20 +65,26 @@ const marks = [
 
 function CubePage(props) {
     const [newSol, setnewSol] = useState("");
-    let [newScra, setnewScra] = useState(); //using to store the scramble and push it to URL and also to store the initial URl and show in Scramble
+    const [newScra, setnewScra] = useState(); //using to store the scramble and push it to URL and also to store the initial URl and show in Scramble
     const [dimensions, setDimensions] = useState({
         height: window.innerHeight,
         width: window.innerWidth,
     });
     const [play, setplay] = useState(false);
+    const txtarea1 = useRef("txtarea1");
     //const [ctrl, setCtrl] = useState(false);
     const [mode, setMode] = useState("scraM"); //for fullscreen mode and Scra/Sol mode
-
+    //var url = new URL("http://localhost:3000/cube");
     useEffect(() => {
         if (newScra != undefined) {
-            console.log(newScra);
-            //var newScra1 = parser(newScra);
-            console.log("Parsed", newScra);
+            //TODO: run this only 1 onces and combine newScra and newScol in one state
+            //*Check how many times this is running
+            //!Aditya extremely usefull and not IRRITATING
+            var cmts = getAlgs(newSol);
+            console.log("Comments", getComments(newSol));
+            console.log("Algs", validateAlgs(cmts).legalAlg);
+            console.log("Valid", !validateAlgs(cmts).IvldTest);
+            console.log("Move Count", validateAlgs(cmts).movesNum);
             window.history.pushState(
                 "object or string",
                 "",
@@ -87,12 +96,14 @@ function CubePage(props) {
                     play +
                     "?"
             );
+            console.log("Updating URL");
         }
     }, [newScra, newSol, play]);
 
     useEffect(() => {
         //TODO: This can be made efficient by storing the previous values of scramble and solution and running this only when there is a change in scramble and solution
         /*Runs only once now */ /*Used to copy the scramble in URL to Scramble Text Area*/
+
         let urlstr = window.location.href;
         let splitedurl = urlstr.split("=");
         if (splitedurl[1] != undefined) {
@@ -101,20 +112,22 @@ function CubePage(props) {
             let scramble = aftereq.split("?");
             let scra = scramble[0].replace(/%20/g, " "); // (/  /g) to replace globally here it means to replace all values
             let scra2 = scra.replace(/%27/g, "'");
-
+            let scra3 = scra2.replace(/\./g, ".\n");
             setnewScra(scra2);
+            console.log("Getting Scramble");
         }
         //Same for solution
         if (splitedurl[2] != undefined) {
             //Runs only if there is some scramble in the URL (so no replace error)
-            let aftereq = splitedurl[2];
-            let scramble = aftereq.split("?");
-            let scra = scramble[0].replace(/%20/g, " "); // (/  /g) to replace globally here it means to replace all values
-            let scra2 = scra.replace(/%27/g, "'");
-
-            setnewSol(scra2);
+            let aftereq2 = splitedurl[2];
+            let solution = aftereq2.split("?");
+            let sol = solution[0].replace(/%20/g, " "); // (/  /g) to replace globally here it means to replace all values
+            let sol2 = sol.replace(/%27/g, "'");
+            let sol3 = sol2.replace(/\./g, ".\n");
+            setnewSol(sol3);
+            console.log("Getting Solution");
         }
-    }, [window.location.href]);
+    }, []);
 
     useEffect(() => {
         //Refresh component after resize
@@ -201,6 +214,7 @@ function CubePage(props) {
                         Scramble
                     </Typography>
                     <InTextArea1
+                        autoFocus={true}
                         type="Text"
                         onKeyUp={handleChangeScra}
                         placeholder="Enter the Scramble Here :)"
@@ -212,34 +226,28 @@ function CubePage(props) {
                         Solution
                     </Typography>
                     <InTextArea2
+                        id="txt2"
                         type="Text"
+                        ref={txtarea1}
                         onKeyUp={handleChangeSol}
                         placeholder="Enter the Solution Here :)"
                         defaultValue={newSol}
+                        multiline={true}
                     />
                 </SolutionI>
             </CardContainer>
         </>
     );
-
-    function handleChangeScra(event) {
-        var key = event.keyCode || event.charCode;
-        if (key == 8 || key == 46) {
-            setnewScra(event.target.value);
-            //Code to run after backspace or del in scramble
-        } else {
-            setnewScra(event.target.value);
-            console.log("Scramble:", newScra);
-        }
-    }
+    //
     function handleChangeScra(event) {
         setnewScra(event.target.value);
-        console.log("Scramble:", newScra);
     }
+    //replace(/(.^|\r\n|\n)([^*]|$)/g, "$1*$2")) (Removes the nextlines after reload idk how)
+    //TODO: Understand the diffin \r\n and \n .
 
     function handleChangeSol(event) {
-        setnewSol(event.target.value);
-        console.log("Solution:", newSol);
+        var dots = event.target.value.replace(/\./g, ""); //Fixed-User Can type dots in Solution box
+        setnewSol(dots.replace(/(.^|\n)([^.]|$)/g, "$1.$2"));
     }
     function togglePlay() {
         setplay(!play);

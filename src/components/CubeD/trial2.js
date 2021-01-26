@@ -192,7 +192,7 @@ export const Trial = (props) => {
             var cube_soln_animate = animate_read(soln, soln, [], 0);
          
             if (tick < cube_soln_animate.length) {
-                cube1.animateMove(cube_soln,400)
+                cube1.animateMove(cube_soln_animate[tick],400)
                 // animate_execute(
                 //     scene,
                 //     meshs,
@@ -428,7 +428,7 @@ export const Trial = (props) => {
                 // var inverse = scramble_read(soln, soln, [], 1); //FINDS THE INVERSE MOVES FOR THE SOLUTION
                 // this is when the user initially presses the play button so that solution moves gets inversed
                 if (play_flag == 0) {
-                    cube1.fastMove(soln,0)
+                    cube1.fastMove(soln,1)
                     // fast_execute(scene, meshs, padding, inverse); // this execcutes the inverse move
                     mycube = setInterval(cube_play, 600);
                     play_flag = 1; // done so that setinterval is not called recursively

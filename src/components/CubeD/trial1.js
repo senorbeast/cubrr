@@ -77,7 +77,7 @@ export const Trial = (props) => {
         );
         camera.position.z = 275;
         camera.position.x = 275;
-        camera.position.y = 300;
+        camera.position.y = 135;
         camera.tanFOV = Math.tan(((Math.PI / 180) * camera.fov) / 2); //  For maintaining scale on windowResize.
         camera.oneToOne = function () {
             //  Return the Z position at which to place an object for exactly 100% scale.
@@ -204,18 +204,15 @@ export const Trial = (props) => {
                 clearInterval(mycube);
             }
         }
-        window.addEventListener("visibilitychange", event => {
+        window.addEventListener("visibilitychange", (event) => {
             if (document.visibilityState != "visible") {
                 focus = 1;
-             clearInterval(mycube);
-            } 
-            else if (document.visibilityState == "visible" && focus == 1)
-            {
-                setInterval(mycube,600);
+                clearInterval(mycube);
+            } else if (document.visibilityState == "visible" && focus == 1) {
+                setInterval(mycube, 600);
                 focus = 2;
-
             }
-          })
+        });
         const animate = () => {
             requestAnimationFrame(animate);
             controls.update();
@@ -223,7 +220,6 @@ export const Trial = (props) => {
             var currentURL = window.location.href;
 
             var url_split = currentURL.split("?");
-            
 
             if (url_split.length > 1) {
                 var scramble_arr = url_split[1].split("=");
@@ -235,30 +231,25 @@ export const Trial = (props) => {
                 var url_soln = soln_arr[1].replace(/%20/g, "");
                 url_scra1 = url_scramble.replace(/%27/g, "'");
                 url_soln1 = url_soln.replace(/%27/g, "'");
-                scramble = url_scra1.split("");//the actual scramble input from user
-                soln = url_soln1.split("");//the actual solution input from user 
-                current_move = scramble.slice(cube.length);//the current scramble move to be executed
-                current_soln = soln.slice(cube_sol.length);//the current solution move to be executed
-                
+                scramble = url_scra1.split(""); //the actual scramble input from user
+                soln = url_soln1.split(""); //the actual solution input from user
+                current_move = scramble.slice(cube.length); //the current scramble move to be executed
+                current_soln = soln.slice(cube_sol.length); //the current solution move to be executed
+
                 /********THE BELOW PART IS TO HANDLE VARIOUS USER INPUTS*********/
                 //i.e :- For example if user deletes scramble and only solution is present
-            
+
                 /***********BELOW CODE IS EXECUTED ONLY IF USER ENTERS SOMETHING NEW IN SCRAMBLE FIELD***********/
-                if (scramble.length > cube.length) 
-                //HERE CUBE IS THE CURRENT STATE OF THE CUBE AND SCRAMBLE IS THE DESIRED STATE 
-                {
-                    
-                   
+                if (scramble.length > cube.length) {
+                    //HERE CUBE IS THE CURRENT STATE OF THE CUBE AND SCRAMBLE IS THE DESIRED STATE
                     /*******************this is done to see if user has not added any extra move in between the scramble*************************/
                     var scramble_check = scramble.slice(0,cube.length);
                     /*********BELOW PART WILL BE DONE IF THE PREVIOUS STATE OF CUBE HAD NO MOVES IN IT i.e : no moves were done on the cube previously**********/
-                    if (cube.length==0)
-                    {
+                    if (cube.length == 0) {
                         moves = scramble_read(current_move, scramble, cube, 0);
-                   
 
                         fast_execute(scene, meshs, padding, moves);
-                    
+
                         // console.log(scramble_meshs);
                         cube = scramble;
 
@@ -286,10 +277,7 @@ export const Trial = (props) => {
                         var so = scramble_read(scramble.concat(cube_sol),scramble.concat(cube_sol),[],0)
                         fast_execute(scene,meshs,padding,so);
                         cube = scramble;
-                        
-
-                    } 
-                    
+                    }
                 }
 
                 /*********************BELOW PART WILL BE EXECUTED IF MOVE/MOVES ARE DELETED FROM SCRAMBLE****************************/
@@ -297,12 +285,16 @@ export const Trial = (props) => {
                     var inv = scramble_read(
                         cube.concat(cube_sol),
                         cube.concat(cube_sol),
-                        [],1);
+                        [],
+                        1
+                    );
                     fast_execute(scene, meshs, padding, inv);
                     var so = scramble_read(
                         scramble.concat(cube_sol),
                         scramble.concat(cube_sol),
-                        [],0);
+                        [],
+                        0
+                    );
                     fast_execute(scene, meshs, padding, so);
                     cube = scramble;
                 }
@@ -311,34 +303,35 @@ export const Trial = (props) => {
                     if (JSON.stringify(scramble) !== JSON.stringify(cube)) {
                         // console.log("laudde lag gaye",soln);
                         // console.log(cube_sol)
-                        var inv = scramble_read(cube.concat(cube_sol),cube.concat(cube_sol),[],1);
-                        fast_execute(scene,meshs,padding,inv);
-                        var so = scramble_read(scramble.concat(cube_sol),scramble.concat(cube_sol),[],0)
-                        fast_execute(scene,meshs,padding,so);
+                        var inv = scramble_read(
+                            cube.concat(cube_sol),
+                            cube.concat(cube_sol),
+                            [],
+                            1
+                        );
+                        fast_execute(scene, meshs, padding, inv);
+                        var so = scramble_read(
+                            scramble.concat(cube_sol),
+                            scramble.concat(cube_sol),
+                            [],
+                            0
+                        );
+                        fast_execute(scene, meshs, padding, so);
                         cube = scramble;
-
                     }
                 }
                 /******************BELOW PART WILL BE EXECUTED ONLY WHEN THEIR IS NOTHING ENETERED IN SCRAMBLE FIELD AND THEIR ARE MOVES ENTERED IN SOLUTION FIELD*********************/
-                if (scramble.length == 0)
-                {
-                    if (soln.length >0 && sc_be_so == 0)
-                    {
+                if (scramble.length == 0) {
+                    if (soln.length > 0 && sc_be_so == 0) {
+                        var inv = scramble_read(cube_sol, cube_sol, [], 1);
+                        fast_execute(scene, meshs, padding, inv);
 
-                       
-                        var inv = scramble_read(cube_sol,cube_sol,[],1);
-                        fast_execute(scene,meshs,padding,inv);
-                        
                         sc_be_so = 1;
                     }
                     cube = scramble;
-
-                    
-                    
                 }
                 /*******************THIS CODE ENSURES SOLUTION IS EXECUTED ONLY IF SCRAMBLE IS PRESENT***********************/
                 if (scramble.length > 0) {
-                    
                     if (sc_be_so == 1) {
                         var so = scramble_read(soln, soln, [], 0);
                         fast_execute(scene, meshs, padding, so);
@@ -359,7 +352,7 @@ export const Trial = (props) => {
                                 cube_sol,
                                 0
                             );
-                            
+
                             cube_sol = soln;
                             fast_execute(scene, meshs, padding, moves6);
                             play_flag = 0;
@@ -379,9 +372,7 @@ export const Trial = (props) => {
                         cube_sol = soln;
                     }
                     if (soln.length == cube_sol.length) {
-                       
                         if (JSON.stringify(soln) !== JSON.stringify(cube_sol)) {
-                          
                             var inv = scramble_read(cube_sol, cube_sol, [], 1);
                             fast_execute(scene, meshs, padding, inv);
                             var so = scramble_read(soln, soln, [], 0);
