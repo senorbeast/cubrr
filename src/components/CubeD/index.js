@@ -45,24 +45,26 @@ function debounce(fn, ms) {
     };
 }
 
-const marks = [
-    {
-        value: 0,
-        label: "Cross",
-    },
-    {
-        value: 6,
-        label: "F2L",
-    },
-    {
-        value: 30,
-        label: "OLL",
-    },
-    {
-        value: 45,
-        label: "PLL",
-    },
-];
+// const marks = [
+//     {
+//         value: 0,
+//         label: "Cross",
+//     },
+//     {
+//         value: 6,
+//         label: "F2L",
+//     },
+//     {
+//         value: 30,
+//         label: "OLL",
+//     },
+//     {
+//         value: 45,
+//         label: "PLL",
+//     },
+// ];
+
+const marks = [{}];
 
 function CubePage(props) {
     const [newSol, setnewSol] = useState("");
@@ -75,18 +77,29 @@ function CubePage(props) {
     const txtarea1 = useRef("txtarea1");
     //const [ctrl, setCtrl] = useState(false);
     const [mode, setMode] = useState("scraM"); //for fullscreen mode and Scra/Sol mode
+    const [Cmarks, setCmarks] = useState([{}]);
+    const [solMoves, setsolMoves] = useState();
     //var url = new URL("http://localhost:3000/cube");
     useEffect(() => {
         if (newScra != undefined) {
             //TODO: run this only 1 onces and combine newScra and newScol in one state
             //*Check how many times this is running
             //!Aditya extremely usefull and not IRRITATING
-            //var alrg = getAlgs(newSol);
-            console.log("Comments", getComments(newSol));
-            console.log("Section Length", getAlgCmtNum(newSol));
-            //console.log("Algs", validateAlgs(cmts).legalAlg);
+
+            var cmtLabel = getComments(newSol);
+            var cmtValue = getAlgCmtNum(newSol);
+            console.log("Comments", cmtLabel);
+            console.log("Section Length", cmtValue);
+            var alrg = getAlgs(newSol);
+            setsolMoves(validateAlgs(alrg).movesNum);
+            var MarksC = cmtValue.map(function (Cvalue, index) {
+                return { value: Cvalue, label: cmtLabel[index] };
+            });
+            setCmarks(MarksC);
+            console.log("Marks", MarksC);
+            console.log("Algs", validateAlgs(alrg).legalAlg);
             //console.log("Valid", !validateAlgs(cmts).IvldTest);
-            //console.log("Move Count", validateAlgs(cmts).movesNum);
+            console.log("Move Count", validateAlgs(alrg).movesNum);
             window.history.pushState(
                 "object or string",
                 "",
@@ -182,9 +195,9 @@ function CubePage(props) {
                         }}
                         aria-labelledby="discrete-slider-custom"
                         step={1}
-                        max={70}
+                        max={solMoves}
                         valueLabelDisplay="auto"
-                        marks={marks}
+                        marks={Cmarks}
                     />
                     <ButtonArea mode={modes[mode]}>
                         <ThemeBtn>
@@ -250,6 +263,8 @@ function CubePage(props) {
     function handleChangeSol(event) {
         var dots = event.target.value.replace(/\./g, ""); //Fixed-User Can type dots in Solution box
         setnewSol(dots.replace(/(.^|\n)([^.]|$)/g, "$1.$2"));
+        // var alrg = getAlgs(newSol);
+        // setsolMoves(() => validateAlgs(alrg).movesNum);
     }
     function togglePlay() {
         setplay(!play);

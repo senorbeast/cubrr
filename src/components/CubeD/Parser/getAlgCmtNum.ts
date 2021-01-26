@@ -7,7 +7,7 @@ const getAlgCmtNum = (solution: string) => {
     var withCmt = validateAlg(rpcmts)?.legalAlg;
     //console.log("Alg with Cmt ", withCmt);
     var middlestep = gotCmtNum(withCmt);
-    console.log("Alg 1/2 processed", middlestep);
+    //console.log("Alg 1/2 processed", middlestep);
     return adjCmtNum(middlestep);
 };
 export default getAlgCmtNum;
@@ -27,15 +27,13 @@ const gotCmtNum = (Arr: any) => {
 // TODO:Adjust gotCmtNum() Array to compenstate for length of "%v%" and length of prev section
 
 const adjCmtNum = (numArr: Array<number>) => {
-    var sum: number;
+    //var sum: number;
     var adjArr: Array<number> = [];
     for (var i = 0; i < numArr.length; i++) {
-        //Position of %v% gives size of array befor it
         if (i == 0) {
-            adjArr.push(numArr[i]);
+            adjArr.push(0);
         } else if (i > 0) {
-            sum = +numArr[i - 1];
-            adjArr.push(numArr[i] - sum - i);
+            adjArr.push(numArr[i - 1] - i + 1);
         }
     }
     return adjArr;
