@@ -263,70 +263,66 @@ export const Trial = (props) => {
                         console.log("!")
                         // moves = scramble_read(current_move, scramble, cube, 0);
                    
+                        console.log("23232")
+                        console.log(scramble.concat(soln))
 
-                        // fast_execute(scene, meshs, padding, moves);
                         cube1.liveMove(current_move, scramble, cube, 0)
                         // console.log(scramble_meshs);
-                        cube = scramble;
+                      
 
                     }
-        //             /**************BELOW PART WILL BE DONE IF ANY EXTRA MOVE IS ADDED IN BETWEEN THE SCRAMBLE********************/
+                     /**************BELOW PART WILL BE DONE IF ANY EXTRA MOVE IS ADDED IN BETWEEN THE SCRAMBLE********************/
                 
-                   else  if (JSON.stringify(scramble_check) === JSON.stringify(cube))
+                   else  if (JSON.stringify(scramble_check) === JSON.stringify(cube) && cube.length != 0)
                     
                     {
                         console.log("111")
                         cube1.liveMove(current_move, scramble, cube, 0)
-                        // moves = scramble_read(current_move, scramble, cube, 0);
-
-                        // fast_execute(scene, meshs, padding, moves);
-
-                        // console.log(scramble_meshs);
-                        cube = scramble;
+                       
+                       
                         
                     }
                     /****************BELOW PART WILL BE DONE IF A NEW MOVE IS ADDED AT THE END OF THE SCRAMBLE********************/
-                    else 
+                    else if (JSON.stringify(scramble_check) !== JSON.stringify(cube) && cube.length != 0)
                     {
                         console.log("23232")
                         cube1.fastMove(cube.concat(cube_sol),1);
                         cube1.fastMove(scramble.concat(cube_sol),0)
-                        // var inv = scramble_read(cube.concat(cube_sol),cube.concat(cube_sol),[],1);
-                        // fast_execute(scene,meshs,padding,inv);
-                        // var so = scramble_read(scramble.concat(cube_sol),scramble.concat(cube_sol),[],0)
-                        // fast_execute(scene,meshs,padding,so);
-                        cube = scramble;
+                       
+                        
                         
 
                     } 
+                    if (( JSON.stringify(soln) === JSON.stringify(cube_sol)) && soln.length !=0 && cube.length!=0)
+                    {
+                        console.log("9")
+                        cube1.fastMove(cube.concat(cube_sol),1);
+                        cube1.fastMove(scramble.concat(cube_sol),0)
+                     
+                        cube = scramble;
+    
+                    }
+                    cube = scramble;
                     
                 }
+                
 
-        //         /*********************BELOW PART WILL BE EXECUTED IF MOVE/MOVES ARE DELETED FROM SCRAMBLE****************************/
-                if (scramble.length < cube.length) {
+                /*********************BELOW PART WILL BE EXECUTED IF MOVE/MOVES ARE DELETED FROM SCRAMBLE****************************/
+                if (scramble.length < cube.length && scramble.length != 0) {
+                    console.log("1");
                     cube1.fastMove(cube.concat(cube_sol),1);
                     cube1.fastMove(scramble.concat(cube_sol),0)
-                    // var inv = scramble_read(
-                    //     cube.concat(cube_sol),
-                    //     cube.concat(cube_sol),
-                    //     [],1);
-                    // fast_execute(scene, meshs, padding, inv);
-                    // var so = scramble_read(
-                    //     scramble.concat(cube_sol),
-                    //     scramble.concat(cube_sol),
-                    //     [],0);
-                    // fast_execute(scene, meshs, padding, so);
+                 
                     cube = scramble;
                 }
                 /****************BELOW PART WILL BE DONE IF USER COPY PASTES A NEW SCRAMBLE WITH EXACT SAME NO.OF MOVES*******************/
                 if (scramble.length == cube.length) {
                     if (JSON.stringify(scramble) !== JSON.stringify(cube)) {
-                        // console.log("laudde lag gaye",soln);
-                        // console.log(cube_sol)
+              
                         cube1.fastMove(cube.concat(cube_sol),1);
                         cube1.fastMove(scramble.concat(cube_sol),0)
                         cube = scramble;                        
-
+                         console.log("2");
                     }
                 }
         //         /******************BELOW PART WILL BE EXECUTED ONLY WHEN THEIR IS NOTHING ENETERED IN SCRAMBLE FIELD AND THEIR ARE MOVES ENTERED IN SOLUTION FIELD*********************/
@@ -335,11 +331,11 @@ export const Trial = (props) => {
                     if (soln.length >0 && sc_be_so == 0)
                     {
 
-                        cube1.fastMove(cube_sol,1);
-                        // var inv = scramble_read(cube_sol,cube_sol,[],1);
-                        // fast_execute(scene,meshs,padding,inv);
+                        cube1.fastMove(cube.concat(cube_sol),1);
+                 
                         
                         sc_be_so = 1;
+                        console.log("sol",cube_sol)
                     }
                     cube = scramble;
 
@@ -348,13 +344,13 @@ export const Trial = (props) => {
                 }
         //         /*******************THIS CODE ENSURES SOLUTION IS EXECUTED ONLY IF SCRAMBLE IS PRESENT***********************/
                 if (scramble.length > 0) {
-                    
+                    console.log("23");
                     if (sc_be_so == 1) {
+                      
 
-                        cube1.fastMove(cube_sol,1);
+                        cube1.fastMove(cube_sol,0);
                         
-                        // var so = scramble_read(soln, soln, [], 0);
-                        // fast_execute(scene, meshs, padding, so);
+                    
                         cube_sol = soln;
 
                         play_flag = 0;
@@ -362,20 +358,16 @@ export const Trial = (props) => {
                     sc_be_so = 0;
                     if (soln.length > cube_sol.length)
                      {
-                        var sol_check = soln.slice(0, cube_sol.length - 1);
+                        var sol_check = soln.slice(0, cube_sol.length );
                         if (JSON.stringify(sol_check) === JSON.stringify(cube_sol)) 
                         {
                             cube1.liveMove(current_soln, soln, cube_sol, 0)
-                            // moves6 = scramble_read(
-                            //     current_soln,
-                            //     soln,
-                            //     cube_sol,
-                            //     0
-                            // );
+     
                             
                             cube_sol = soln;
-                            // fast_execute(scene, meshs, padding, moves6);
+                           
                             play_flag = 0;
+                            console.log("soln",cube_sol)
                         } 
                         else 
                         {
@@ -383,10 +375,7 @@ export const Trial = (props) => {
                             cube1.fastMove(cube_sol,1);
                             cube1.fastMove(soln,0)
 
-                            //  var inv = scramble_read(cube_sol, cube_sol, [], 1);
-                            //  fast_execute(scene, meshs, padding, inv);
-                            //  var so = scramble_read(soln, soln, [], 0);
-                            //  fast_execute(scene, meshs, padding, so);
+                        
                              cube_sol = soln;
                          }
                    }
@@ -394,10 +383,7 @@ export const Trial = (props) => {
                         cube1.fastMove(cube_sol,1);
                         cube1.fastMove(soln,0)
 
-                        // var inv = scramble_read(cube_sol, cube_sol, [], 1);
-                        // fast_execute(scene, meshs, padding, inv);
-                        // var so = scramble_read(soln, soln, [], 0);
-                        // fast_execute(scene, meshs, padding, so);
+                 
                         cube_sol = soln;
                     }
                     if (soln.length == cube_sol.length) {
@@ -405,10 +391,8 @@ export const Trial = (props) => {
                         if (JSON.stringify(soln) !== JSON.stringify(cube_sol)) {
                             cube1.fastMove(cube_sol,1);
                             cube1.fastMove(soln,0)
-                            // var inv = scramble_read(cube_sol, cube_sol, [], 1);
-                            // fast_execute(scene, meshs, padding, inv);
-                            // var so = scramble_read(soln, soln, [], 0);
-                            // fast_execute(scene, meshs, padding, so);
+                            console.log("IAM")
+                           
                             cube_sol = soln;
                         }
                     }
