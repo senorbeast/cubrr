@@ -32,6 +32,7 @@ import { expand, parse, algToString } from "alg";
 import getComments from "./Parser/getComments";
 import getAlgs from "./Parser/getAlgs";
 import validateAlgs from "./Parser/validateAlg";
+import getAlgCmtNum from "./Parser/getAlgCmtNum";
 
 function debounce(fn, ms) {
     let timer;
@@ -80,11 +81,12 @@ function CubePage(props) {
             //TODO: run this only 1 onces and combine newScra and newScol in one state
             //*Check how many times this is running
             //!Aditya extremely usefull and not IRRITATING
-            var cmts = getAlgs(newSol);
+            //var alrg = getAlgs(newSol);
             console.log("Comments", getComments(newSol));
-            console.log("Algs", validateAlgs(cmts).legalAlg);
-            console.log("Valid", !validateAlgs(cmts).IvldTest);
-            console.log("Move Count", validateAlgs(cmts).movesNum);
+            console.log("Section Length", getAlgCmtNum(newSol));
+            //console.log("Algs", validateAlgs(cmts).legalAlg);
+            //console.log("Valid", !validateAlgs(cmts).IvldTest);
+            //console.log("Move Count", validateAlgs(cmts).movesNum);
             window.history.pushState(
                 "object or string",
                 "",
