@@ -193,7 +193,8 @@ export const Trial = (props) => {
                     meshs,
                     cube_soln_animate[tick],
                     padding,
-                    400
+                    400,
+                    0
                 );
                 tick = tick + 1;
             }
@@ -242,7 +243,7 @@ export const Trial = (props) => {
                 if (scramble.length > cube.length) {
                     //HERE CUBE IS THE CURRENT STATE OF THE CUBE AND SCRAMBLE IS THE DESIRED STATE
                     /*******************this is done to see if user has not added any extra move in between the scramble*************************/
-                    var scramble_check = scramble.slice(0, cube.length - 1);
+                    var scramble_check = scramble.slice(0,cube.length);
                     /*********BELOW PART WILL BE DONE IF THE PREVIOUS STATE OF CUBE HAD NO MOVES IN IT i.e : no moves were done on the cube previously**********/
                     if (cube.length == 0) {
                         moves = scramble_read(current_move, scramble, cube, 0);
@@ -251,32 +252,30 @@ export const Trial = (props) => {
 
                         // console.log(scramble_meshs);
                         cube = scramble;
-                    } else if (
-                        /**************BELOW PART WILL BE DONE IF ANY EXTRA MOVE IS ADDED IN BETWEEN THE SCRAMBLE********************/
-                        JSON.stringify(scramble_check) === JSON.stringify(cube)
-                    ) {
+
+                    }
+                    /**************BELOW PART WILL BE DONE IF ANY EXTRA MOVE IS ADDED IN BETWEEN THE SCRAMBLE********************/
+                   else  if (JSON.stringify(scramble_check) === JSON.stringify(cube))
+                    
+                    {
+                        console.log("!!!")
                         moves = scramble_read(current_move, scramble, cube, 0);
 
                         fast_execute(scene, meshs, padding, moves);
 
                         // console.log(scramble_meshs);
                         cube = scramble;
-                    } else {
-                        /****************BELOW PART WILL BE DONE IF A NEW MOVE IS ADDED AT THE END OF THE SCRAMBLE********************/
-                        var inv = scramble_read(
-                            cube.concat(cube_sol),
-                            cube.concat(cube_sol),
-                            [],
-                            1
-                        );
-                        fast_execute(scene, meshs, padding, inv);
-                        var so = scramble_read(
-                            scramble.concat(cube_sol),
-                            scramble.concat(cube_sol),
-                            [],
-                            0
-                        );
-                        fast_execute(scene, meshs, padding, so);
+                        
+                    }
+                    /****************BELOW PART WILL BE DONE IF A NEW MOVE IS ADDED AT THE END OF THE SCRAMBLE********************/
+                    else 
+                    {
+                        console.log("111")
+                       
+                        var inv = scramble_read(cube.concat(cube_sol),cube.concat(cube_sol),[],1);
+                        fast_execute(scene,meshs,padding,inv);
+                        var so = scramble_read(scramble.concat(cube_sol),scramble.concat(cube_sol),[],0)
+                        fast_execute(scene,meshs,padding,so);
                         cube = scramble;
                     }
                 }
@@ -389,7 +388,7 @@ export const Trial = (props) => {
             //     camera.position.y = 200;
             //     camera.position.z = 1000;
 
-            //     const line2 = animation_sequence(scene,meshs,core,camera)
+            //     const line2 = beg_cross(scene,meshs,ctx ,c,padding,renderer)
             //     animation_flag = 1;
             // }
 
