@@ -23,12 +23,9 @@ import {
 } from "react-icons/cg";
 import { ImPlay2, ImPause } from "react-icons/im";
 //import CubeD from "./cube.js";
-import VCube from "./VCube";
 import { FullCard } from "./FullCard";
 import Trial from "./trial2";
-import { FormGroup, Typography } from "@material-ui/core";
-import { BiCubeAlt } from "react-icons/bi";
-import { expand, parse, algToString } from "alg";
+import { Typography } from "@material-ui/core";
 import getComments from "./Parser/getComments";
 import getAlgs from "./Parser/getAlgs";
 import validateAlgs from "./Parser/validateAlg";
@@ -74,7 +71,6 @@ function CubePage(props) {
         width: window.innerWidth,
     });
     const [play, setplay] = useState(false);
-    const txtarea1 = useRef("txtarea1");
     //const [ctrl, setCtrl] = useState(false);
     const [mode, setMode] = useState("scraM"); //for fullscreen mode and Scra/Sol mode
     const [Cmarks, setCmarks] = useState([{}]);
@@ -85,21 +81,21 @@ function CubePage(props) {
             //TODO: run this only 1 onces and combine newScra and newScol in one state
             //*Check how many times this is running
             //!Aditya extremely usefull and not IRRITATING
-
+            //TODO: try solMoves and Cmarks without useState
             var cmtLabel = getComments(newSol);
             var cmtValue = getAlgCmtNum(newSol);
-            console.log("Comments", cmtLabel);
-            console.log("Section Length", cmtValue);
+            //console.log("Comments", cmtLabel);
+            //console.log("Section Length", cmtValue);
             var alrg = getAlgs(newSol);
             setsolMoves(validateAlgs(alrg).movesNum);
             var MarksC = cmtValue.map(function (Cvalue, index) {
                 return { value: Cvalue, label: cmtLabel[index] };
             });
             setCmarks(MarksC);
-            console.log("Marks", MarksC);
-            console.log("Algs", validateAlgs(alrg).legalAlg);
+            //console.log("Marks", MarksC);
+            //console.log("Algs", validateAlgs(alrg).legalAlg);
             //console.log("Valid", !validateAlgs(cmts).IvldTest);
-            console.log("Move Count", validateAlgs(alrg).movesNum);
+            //console.log("Move Count", validateAlgs(alrg).movesNum);
             window.history.pushState(
                 "object or string",
                 "",
@@ -111,7 +107,7 @@ function CubePage(props) {
                     play +
                     "?"
             );
-            console.log("Updating URL");
+            //console.log("Updating URL");
         }
     }, [newScra, newSol, play]);
 
@@ -129,7 +125,7 @@ function CubePage(props) {
             let scra2 = scra.replace(/%27/g, "'");
             let scra3 = scra2.replace(/\./g, ".\n");
             setnewScra(scra2);
-            console.log("Getting Scramble");
+            //console.log("Getting Scramble");
         }
         //Same for solution
         if (splitedurl[2] != undefined) {
@@ -140,7 +136,7 @@ function CubePage(props) {
             let sol2 = sol.replace(/%27/g, "'");
             let sol3 = sol2.replace(/\./g, ".\n");
             setnewSol(sol3);
-            console.log("Getting Solution");
+            //console.log("Getting Solution");
         }
     }, []);
 
@@ -191,7 +187,7 @@ function CubePage(props) {
                         styles={{ height: "30px" }}
                         defaultValue={0}
                         getAriaValueText={(value) => {
-                            value;
+                            console.log(value);
                         }}
                         aria-labelledby="discrete-slider-custom"
                         step={1}
@@ -241,9 +237,7 @@ function CubePage(props) {
                         Solution
                     </Typography>
                     <InTextArea2
-                        id="txt2"
                         type="Text"
-                        ref={txtarea1}
                         onKeyUp={handleChangeSol}
                         placeholder="Enter the Solution Here :)"
                         defaultValue={newSol}
