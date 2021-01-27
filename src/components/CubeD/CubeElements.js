@@ -230,6 +230,7 @@ const PrettoSlider = withStyles((theme) => ({
         },
     },
     active: {},
+    focusVisible: {},
     valueLabel: {
         left: "calc(-50% + 12px)",
         bottom: "50px",
@@ -254,12 +255,20 @@ const PrettoSlider = withStyles((theme) => ({
     },
     markActive: {
         opacity: 1,
-        backgroundColor: "currentColor",
+        backgroundColor: "#3880ff",
     },
+    markLabel: {
+        " & :nth-child(odd)": {
+            color: "red",
+            opacity: 0.2,
+        },
+    },
+    markLabelActive: {},
 }))(Slider);
 
-export const SliderSC = styled(PrettoSlider)`
-    && {
-        display: ${(props) => props.mode.none};
-    }
-`;
+export { PrettoSlider };
+// export const SliderSC = styled(PrettoSlider)`
+//     && {
+//         display: ${(props) => props.mode.none};
+//     }
+// `;

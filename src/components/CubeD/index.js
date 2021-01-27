@@ -10,7 +10,7 @@ import {
     InTextArea2,
     ThemeBtn,
     ButtonArea,
-    SliderSC,
+    PrettoSlider,
 } from "./CubeElements";
 import * as modes from "./modes.js";
 import { FiCodesandbox } from "react-icons/fi";
@@ -42,27 +42,6 @@ function debounce(fn, ms) {
     };
 }
 
-// const marks = [
-//     {
-//         value: 0,
-//         label: "Cross",
-//     },
-//     {
-//         value: 6,
-//         label: "F2L",
-//     },
-//     {
-//         value: 30,
-//         label: "OLL",
-//     },
-//     {
-//         value: 45,
-//         label: "PLL",
-//     },
-// ];
-
-const marks = [{}];
-
 function CubePage(props) {
     const [newSol, setnewSol] = useState("");
     const [newScra, setnewScra] = useState(); //using to store the scramble and push it to URL and also to store the initial URl and show in Scramble
@@ -73,7 +52,13 @@ function CubePage(props) {
     const [play, setplay] = useState(false);
     //const [ctrl, setCtrl] = useState(false);
     const [mode, setMode] = useState("scraM"); //for fullscreen mode and Scra/Sol mode
-    const [Cmarks, setCmarks] = useState([{}]);
+    const [Cmarks, setCmarks] = useState([
+        //To Fix Warning:Each child in a list should have a unique "key" prop
+        {
+            value: 0,
+            label: "Cmts..",
+        },
+    ]);
     const [solMoves, setsolMoves] = useState();
     //var url = new URL("http://localhost:3000/cube");
     useEffect(() => {
@@ -91,6 +76,7 @@ function CubePage(props) {
             var MarksC = cmtValue.map(function (Cvalue, index) {
                 return { value: Cvalue, label: cmtLabel[index] };
             });
+
             setCmarks(MarksC);
             //console.log("Marks", MarksC);
             //console.log("Algs", validateAlgs(alrg).legalAlg);
@@ -180,16 +166,16 @@ function CubePage(props) {
                         theme={props.theme}
                         play={play}
                     />
-                    <SliderSC
+                    <PrettoSlider
                         mode={modes[mode]}
                         //ThumbComponent={BiCubeAlt}
                         //track={false}
                         styles={{ height: "30px" }}
                         defaultValue={0}
                         getAriaValueText={(value) => {
-                            console.log(value);
+                            //console.log(value); //* Getting Values of the the marker
                         }}
-                        aria-labelledby="discrete-slider-custom"
+                        //aria-labelledby="discrete-slider-custom"
                         step={1}
                         max={solMoves}
                         valueLabelDisplay="auto"
