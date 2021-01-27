@@ -224,7 +224,7 @@ function CubePage(props) {
                     </Typography>
                     <InTextArea2
                         type="Text"
-                        onKeyUp={handleChangeSol}
+                        onChange={handleChangeSol}
                         placeholder="Enter the Solution Here :)"
                         defaultValue={newSol}
                         multiline={true}

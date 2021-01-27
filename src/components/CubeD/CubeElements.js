@@ -2,7 +2,7 @@ import styled from "styled-components";
 //import { Link as LinkR } from "react-router-dom";
 //import { Link as LinkS } from "react-scroll";
 
-export const CardContainer = styled.section`
+export const CardContainer = styled.div`
     display: grid;
     padding: 0.9rem 0.9rem 0.9rem 0.9rem;
     //position: absolute;
@@ -16,6 +16,7 @@ export const CardContainer = styled.section`
     transition: all 0.3s ease-in-out;
 
     @media screen and (max-width: 768px) {
+        grid-template-rows: repeat(15, 1fr);
         height: 160vh;
         padding: 0.2rem;
         gap: 0.2rem;
@@ -40,6 +41,7 @@ export const CubeContainer = styled.div`
     @media screen and (max-width: 768px) {
         grid-row: span 7 / auto;
         grid-column: span 3 / auto;
+        margin-top: 0rem;
         margin-left: 0rem;
         padding: 1rem;
         border-radius: 1rem;
