@@ -67,7 +67,7 @@ function CubePage(props) {
     const [play, setplay] = useState(false);
     //const [ctrl, setCtrl] = useState(false);
     const [mode, setMode] = useState("scraM"); //for fullscreen mode and Scra/Sol mode
-    const [Cmarks, setCmarks] = useState([
+    const Cmarks = useRef([
         //To Fix Warning:Each child in a list should have a unique "key" prop
         {
             value: 0,
@@ -92,7 +92,7 @@ function CubePage(props) {
                 return { value: Cvalue, label: cmtLabel[index] };
             });
 
-            setCmarks(MarksC);
+            Cmarks.current = MarksC;
             //console.log("Marks", MarksC);
             //console.log("Algs", validateAlgs(alrg).legalAlg);
             //console.log("Valid", !validateAlgs(cmts).IvldTest);
@@ -195,7 +195,7 @@ function CubePage(props) {
                         step={1}
                         max={solMoves}
                         valueLabelDisplay="auto"
-                        marks={Cmarks}
+                        marks={Cmarks.current}
                     />
                     <ButtonArea mode={modes[mode]}>
                         <ThemeBtn>
