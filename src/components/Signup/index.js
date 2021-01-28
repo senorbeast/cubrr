@@ -19,19 +19,23 @@ const Signup = (props) => {
     const classes = useStyles();
     return (
         <>
-        <Navbar
+            <Navbar
                 toggle={props.toggle}
                 theme={props.theme}
                 setTheme={props.setTheme}
             />
-        <div className={classes.root}>
-            <Paper elevation={3} style={{width :"100%", height :"100%"}} square={true}>
-            <LoginHooks />
-            <LogoutHooks />
+            <div className={classes.root}>
+                <Paper
+                    elevation={3}
+                    style={{ width: "100%", height: "100%" }}
+                    square={true}
+                >
+                    <LoginHooks />
+                    <LogoutHooks />
 
-                <RegisterMui />
-            </Paper>
-        </div>
+                    <RegisterMui />
+                </Paper>
+            </div>
         </>
     );
 };
