@@ -24,12 +24,13 @@ import {
 import { ImPlay2, ImPause } from "react-icons/im";
 //import CubeD from "./cube.js";
 import { FullCard } from "./FullCard";
-import Trial from "./trial2";
+import Trial from "./trial1";
 import { Typography } from "@material-ui/core";
 import getComments from "./Parser/getComments";
 import getAlgs from "./Parser/getAlgs";
 import validateAlgs from "./Parser/validateAlg";
 import getAlgCmtNum from "./Parser/getAlgCmtNum";
+import Tooltip from "@material-ui/core/Tooltip";
 
 function debounce(fn, ms) {
     let timer;
@@ -40,6 +41,20 @@ function debounce(fn, ms) {
             fn.apply(this, arguments);
         }, ms);
     };
+}
+function ValueLabelComponent(props) {
+    const { children, open, value } = props;
+
+    return (
+        <Tooltip
+            open={open}
+            enterTouchDelay={0}
+            placement="top-end"
+            title={value}
+        >
+            {children}
+        </Tooltip>
+    );
 }
 
 function CubePage(props) {
@@ -171,6 +186,7 @@ function CubePage(props) {
                         //ThumbComponent={BiCubeAlt}
                         //track={false}
                         styles={{ height: "30px" }}
+                        ValueLabelComponent={ValueLabelComponent}
                         defaultValue={0}
                         getAriaValueText={(value) => {
                             //console.log(value); //* Getting Values of the the marker

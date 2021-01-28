@@ -259,13 +259,11 @@ const PrettoSlider = withStyles((theme) => ({
         opacity: 1,
         backgroundColor: "#3880ff",
     },
-    markLabel: {
-        " & :nth-child(odd)": {
-            color: "red",
-            opacity: 0.2,
-        },
+    markLabel: { position: "absolute", top: -18 },
+    markLabelActive: {
+        position: "absolute",
+        top: 35,
     },
-    markLabelActive: {},
 }))(Slider);
 
 export { PrettoSlider };

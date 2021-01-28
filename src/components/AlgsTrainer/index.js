@@ -17,18 +17,17 @@ function AlgsTrainer(props) {
                 theme={props.theme}
                 setTheme={props.setTheme}
             />
-            <Container maxWidth="lg">
-                <CardContainer>
-                    <Switch>
-                        <Route exact path={`${url}`}>
-                            <AlgHome />
-                        </Route>
-                        <Route exact path={`${url}/PLL`}>
-                            <AlgsPage />
-                        </Route>
-                    </Switch>
-                </CardContainer>
-            </Container>
+
+            <CardContainer>
+                <Switch>
+                    <Route exact path={`${url}`}>
+                        <AlgHome />
+                    </Route>
+                    <Route exact path={`${url}/PLL`}>
+                        <AlgsPage />
+                    </Route>
+                </Switch>
+            </CardContainer>
         </div>
     );
 }

@@ -1,5 +1,3 @@
-import React from "react";
-import { ButtonSC, TypographySC } from "../BasicElements";
 import { SetCard, HeadCard } from "./algsElement";
 import { useRouteMatch } from "react-router-dom";
 import PLL from "./PLL-step.png";
