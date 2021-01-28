@@ -8,30 +8,31 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        marginTop: theme.spacing(8),
-        display: "flex",
-        flexDirection: "column",
+        marginTop: theme.spacing(0),
+        // display: "flex",
+        // flexDirection: "column",
         alignItems: "center",
-        height: "100%",
-    }}
-));
+        height: "calc(100vh - 5rem)",
+    },
+}));
 const Signup = (props) => {
-
+    const classes = useStyles();
     return (
-        <div>
-            <Navbar
+        <>
+        <Navbar
                 toggle={props.toggle}
                 theme={props.theme}
                 setTheme={props.setTheme}
             />
+        <div className={classes.root}>
+            <Paper elevation={3} style={{width :"100%", height :"100%"}}>
             <LoginHooks />
             <LogoutHooks />
-			 
-            <Paper eleavation = {3}>
+
                 <RegisterMui />
-				</Paper>
-	
+            </Paper>
         </div>
+        </>
     );
 };
 

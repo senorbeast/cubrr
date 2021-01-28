@@ -9,6 +9,7 @@ import {
 // import moment from "moment";
 import { DataGrid } from "@material-ui/data-grid";
 import PLLImg from "./PLL-step.png";
+import Typography from "@material-ui/core/Typography";
 
 const AlgCard = ({ PLL: { nameAlg, id, recogn, alglist } }) => {
     console.log("Alglist", alglist);
@@ -22,26 +23,32 @@ const AlgCard = ({ PLL: { nameAlg, id, recogn, alglist } }) => {
                             alt="PLL"
                             width="280"
                             height="280"
+                            style={{ margin: "none", padding: "none" }}
                         ></img>
                     </SubContainer>
                     <SubContainer2>
-                        <h1>{nameAlg}</h1>
-                        <h4>Recognition: {recogn}</h4>
+                        <Typography variant="h4" gutterBottom>
+                            {nameAlg}
+                        </Typography>
+                        <Typography variant="h5" gutterBottom>
+                            Recognition: {recogn}
+                        </Typography>
                         {/* <p>{JSON.stringify(alglist)}</p> */}
-                        <div style={{ height: 230, width: "100%" }}>
+                        <div style={{ height: 180, width: "100%" }}>
                             <DataGrid
+                                rowHeight={25}
                                 hideFooter={true}
                                 autoHeight={true}
                                 columns={[
                                     {
                                         field: "alg",
-                                        flex: 1,
+                                        width: "90%",
                                         headerName: "Algorithm",
                                         sortable: false,
                                     },
                                     {
                                         field: "rating",
-                                        flex: 0.25,
+                                        width: "10%",
                                         headerName: "Ratings",
                                     },
                                 ]}
