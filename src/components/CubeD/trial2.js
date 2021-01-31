@@ -75,18 +75,7 @@ export const Trial = (props) => {
             FAR
         );
        
-        // camera.position.z = 275;
-        // camera.position.x = 275;
-        // camera.position.y = 300;
-        // camera.tanFOV = Math.tan(((Math.PI / 180) * camera.fov) / 2); //  For maintaining scale on windowResize.
-        // camera.oneToOne = function () {
-        //     //  Return the Z position at which to place an object for exactly 100% scale.
-        //     //  https://github.com/mrdoob/three.js/blob/dev/examples/js/renderers/CSS3DRenderer.js#L142
 
-        //     return (-0.5 / Math.tan((camera.fov * Math.PI) / 360)) * HEIGHT;
-        // };
-        // camera.lookAt(scene.position);
-        // scene.add(camera);
         /* adding webgl renderer */
 
         //   console.log("Width", width, "height", height, mapDimensions);
@@ -122,56 +111,7 @@ export const Trial = (props) => {
         // radius of the fillet used on corners of cube
         var c = document.createElement("canvas");
         var ctx = c.getContext("2d");
-        // const tx1 = document.createElement("canvas").getContext("2d");
-        // tx1.font = "150pt poppins ";
-        // tx1.fillText("F", 100, 140);
-        // const tx2 = document.createElement("canvas").getContext("2d");
-        // tx2.font = "150pt roboto";
-        // tx2.fillText("B", 100, 140);
-        // const tx3 = document.createElement("canvas").getContext("2d");
-        // tx3.font = "150pt roboto";
-        // tx3.fillText("R", 100, 140);
-        // const tx4 = document.createElement("canvas").getContext("2d");
-        // tx4.font = "150pt roboto";
-        // tx4.fillText("L", 100, 140);
-        // const tx5 = document.createElement("canvas").getContext("2d");
-        // tx5.font = "150pt roboto";
-        // tx5.fillText("U", 100, 140);
-        // const tx6 = document.createElement("canvas").getContext("2d");
-        // tx6.font = "150pt roboto";
-        // tx6.fillText("D", 100, 140);
-
-        // // const texture = new THREE.TextureLoader().load("rubiksLogoClassic.png" );
-
-        // let texture1 = new THREE.CanvasTexture(tx1.canvas);
-        // let texture2 = new THREE.CanvasTexture(tx2.canvas);
-        // let texture3 = new THREE.CanvasTexture(tx3.canvas);
-        // let texture4 = new THREE.CanvasTexture(tx4.canvas);
-        // let texture5 = new THREE.CanvasTexture(tx5.canvas);
-        // let texture6 = new THREE.CanvasTexture(tx6.canvas);
-
-        // texture1.anisotropy = renderer.capabilities.getMaxAnisotropy();
-        // texture2.anisotropy = renderer.capabilities.getMaxAnisotropy();
-        // texture3.anisotropy = renderer.capabilities.getMaxAnisotropy();
-        // texture4.anisotropy = renderer.capabilities.getMaxAnisotropy();
-        // texture5.anisotropy = renderer.capabilities.getMaxAnisotropy();
-        // texture6.anisotropy = renderer.capabilities.getMaxAnisotropy();
-        // //loader used for texture
-        // ret = cubelets_form(
-        //     scene,
-        //     3,
-        //     padding,
-        //     texture1,
-        //     texture2,
-        //     texture3,
-        //     texture4,
-        //     texture5,
-        //     texture6
-        // );
-        // meshs = ret[0];
-        // core = ret[1];
-        // face_plane = ret[2];
-        // cube_color(meshs);
+      
         var cube1 = new CUBE(3,camera , renderer,scene);
         cube1.add();
         cube1.color();
@@ -193,14 +133,7 @@ export const Trial = (props) => {
          
             if (tick < cube_soln_animate.length) {
                 cube1.animateMove(cube_soln_animate[tick],400)
-                // animate_execute(
-                //     scene,
-                //     meshs,
-                //     cube_soln_animate[tick],
-                //     padding,
-                //     400,
-                //     0
-                // );
+            
                 tick = tick + 1;
             }
             if (tick == cube_soln_animate.length) {
@@ -252,16 +185,16 @@ export const Trial = (props) => {
                 if (scramble.length > cube.length) 
                 //HERE CUBE IS THE CURRENT STATE OF THE CUBE AND SCRAMBLE IS THE DESIRED STATE 
                 { 
-                    
+                    sc_be_so = 0
                    
                     /*******************this is done to see if user has not added any extra move in between the scramble*************************/
                     var scramble_check = scramble.slice(0,cube.length);
                     console.log(scramble_check)
                     /*********BELOW PART WILL BE DONE IF THE PREVIOUS STATE OF CUBE HAD NO MOVES IN IT i.e : no moves were done on the cube previously**********/
-                    if (cube.length==0)
+                    if ((cube.length==0) && (soln.length == 0))
                     {
                         console.log("!")
-                        // moves = scramble_read(current_move, scramble, cube, 0);
+                       
                    
                         console.log("23232")
                         console.log(scramble.concat(soln))
@@ -293,13 +226,13 @@ export const Trial = (props) => {
                         
 
                     } 
-                    if (( JSON.stringify(soln) === JSON.stringify(cube_sol)) && soln.length !=0 && cube.length!=0)
+                    if (( JSON.stringify(soln) === JSON.stringify(cube_sol)) && soln.length !=0 )
                     {
                         console.log("9")
                         cube1.fastMove(cube.concat(cube_sol),1);
                         cube1.fastMove(scramble.concat(cube_sol),0)
                      
-                        cube = scramble;
+                        
     
                     }
                     cube = scramble;
@@ -326,9 +259,9 @@ export const Trial = (props) => {
                     }
                 }
         //         /******************BELOW PART WILL BE EXECUTED ONLY WHEN THEIR IS NOTHING ENETERED IN SCRAMBLE FIELD AND THEIR ARE MOVES ENTERED IN SOLUTION FIELD*********************/
-                if (scramble.length == 0)
+                if (scramble.length < cube.length && cube.length!= 0)
                 {
-                    if (soln.length >0 && sc_be_so == 0)
+                    if ((soln.length >0 )  && (sc_be_so == 0))
                     {
 
                         cube1.fastMove(cube.concat(cube_sol),1);
@@ -337,15 +270,26 @@ export const Trial = (props) => {
                         sc_be_so = 1;
                         console.log("sol",cube_sol)
                     }
+                    if ((soln.length == 0 )  && (sc_be_so == 0))
+                    {
+
+                        cube1.fastMove(cube.concat(cube_sol),1);
+                 
+                        
+                        sc_be_so = 1;
+                        console.log("sol",cube_sol)
+                    }
+
+
                     cube = scramble;
 
                     
                     
                 }
         //         /*******************THIS CODE ENSURES SOLUTION IS EXECUTED ONLY IF SCRAMBLE IS PRESENT***********************/
-                if (scramble.length > 0) {
+                if ((soln.length > 0 )) {
                     console.log("23");
-                    if (sc_be_so == 1) {
+                    if ((sc_be_so == 1) && (scramble.length!=0)) {
                       
 
                         cube1.fastMove(cube_sol,0);
@@ -409,11 +353,11 @@ export const Trial = (props) => {
             // }
 
             if (play == "true" && (play_flag == 0 || play_flag == 2)) {
-                // var inverse = scramble_read(soln, soln, [], 1); //FINDS THE INVERSE MOVES FOR THE SOLUTION
+               
                 // this is when the user initially presses the play button so that solution moves gets inversed
                 if (play_flag == 0) {
                     cube1.fastMove(soln,1)
-                    // fast_execute(scene, meshs, padding, inverse); // this execcutes the inverse move
+                   
                     mycube = setInterval(cube_play, 600);
                     play_flag = 1; // done so that setinterval is not called recursively
                 }
