@@ -226,8 +226,7 @@ export const Trial = (props) => {
                     
                     {
                         console.log("!!!")
-                        cube1.fastMove(cube.concat(soln),1);
-                        cube1.fastMove(scramble.concat(soln),0);
+                        cube1.liveMove(current_move,scramble,cube,0);
 
                         // console.log(scramble_meshs);
                         cube = scramble;
@@ -271,6 +270,15 @@ export const Trial = (props) => {
                         {
                         console.log("!!!")
                         cube1.liveMove(current_soln,soln,cube_sol,0);
+
+                        // console.log(scramble_meshs);
+                        cube_sol = soln;
+                        }
+                        if(JSON.stringify(soln_check) !== JSON.stringify(cube_sol))
+                        {
+                        console.log("!!!")
+                        cube1.fastMove(cube_sol,1);
+                        cube1.fastMove(soln,0);
 
                         // console.log(scramble_meshs);
                         cube_sol = soln;
