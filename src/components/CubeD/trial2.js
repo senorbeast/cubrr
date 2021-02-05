@@ -205,7 +205,7 @@ export const Trial = (props) => {
 
                     var scramble_check = scramble.slice(0,cube.length);
                     console.log(scramble_check);
-                    if(JSON.stringify(scramble_check) === JSON.stringify(cube) && soln.length == 0)
+                    if((JSON.stringify(scramble_check) === JSON.stringify(cube)) && soln.length == 0)
                     
                     {
                         console.log("!!!")
@@ -215,24 +215,25 @@ export const Trial = (props) => {
                         cube = scramble;
                         
                     }
-                    else if (JSON.stringify(scramble_check) !== JSON.stringify(cube) && soln.length == 0)
+                    else if ((JSON.stringify(scramble_check) !== JSON.stringify(cube)) && soln.length == 0)
                     {
                         console.log("1234");
                         cube1.fastMove(cube.concat(soln),1);
                         cube1.fastMove(scramble.concat(soln),0);
                         cube = scramble;
                     }
-                    if(JSON.stringify(scramble_check) === JSON.stringify(cube) && soln.length > 0)
+                    if((JSON.stringify(scramble_check) === JSON.stringify(cube) )&& soln.length > 0)
                     
                     {
                         console.log("!!!")
-                        cube1.liveMove(current_move,scramble,cube,0);
+                        cube1.fastMove(cube.concat(soln),1);
+                        cube1.fastMove(scramble.concat(soln),0);
 
-                        // console.log(scramble_meshs);
+                        console.log(scramble_check);
                         cube = scramble;
                         
                     }
-                    else if (JSON.stringify(scramble_check) !== JSON.stringify(cube) && soln.length > 0)
+                    else if ((JSON.stringify(scramble_check) !== JSON.stringify(cube)) && soln.length > 0)
                     {
                         console.log("1234");
                         cube1.fastMove(cube.concat(soln),1);
@@ -263,9 +264,10 @@ export const Trial = (props) => {
                    
 
                 }
+                var soln_check = soln.slice(0,cube_sol.length);
                 if (soln.length > cube_sol.length)
                     {
-                        var soln_check = soln.slice(0,cube_sol.length);
+                       
                         if(JSON.stringify(soln_check) === JSON.stringify(cube_sol))
                         {
                         console.log("!!!")
@@ -291,6 +293,19 @@ export const Trial = (props) => {
                         cube_sol = soln;
                     }
                  
+                    if ( soln.length == cube_sol.length)
+                    {
+                        
+                        if(JSON.stringify(soln) !== JSON.stringify(cube_sol))
+                        
+                        {
+                            cube1.fastMove(cube_sol,1);
+                            cube1.fastMove(soln,0);
+                            cube_sol= soln;
+
+                        }
+
+                    }
                 
                     sc_be_so = 0;
                 
