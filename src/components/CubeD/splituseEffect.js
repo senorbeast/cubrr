@@ -45,177 +45,177 @@ export const Trial = (props) => {
         renderer.render(scene, camera);
     };
 
-    useEffect(() => {
-        let width = mount.current.clientWidth;
-        let height = mount.current.clientHeight;
-        var raycaster = new THREE.Raycaster(); //raycaster object
-        var mouse = new THREE.Vector2(); //to get the location of mouse
-        scene = new THREE.Scene();
-        /* variables to create color */
-        var flag = 1;
-        mouse.x = 100;
-        mouse.y = 100;
-        meshs = [];
+   
+    var raycaster = new THREE.Raycaster(); //raycaster object
+    var mouse = new THREE.Vector2(); //to get the location of mouse
+    scene = new THREE.Scene();
+    /* variables to create color */
+    var flag = 1;
+    mouse.x = 100;
+    mouse.y = 100;
+    meshs = [];
 
-        var core = [];
-        var ret = [];
-        var face_plane = [];
+    var core = [];
+    var ret = [];
+    var face_plane = [];
 
-        //   let mapDimensions = this.mount.getBoundingClientRect();
-        //   let width = this.mount.clientWidth;
-        //   let height = this.mount.clientHeight;
-        var FIELD_OF_VIEW = 45,
-            WIDTH = width,
-            HEIGHT = height,
-            ASPECT_RATIO = WIDTH / HEIGHT,
-            NEAR = 1,
-            FAR = 10000;
+    //   let mapDimensions = this.mount.getBoundingClientRect();
+    //   let width = this.mount.clientWidth;
+    //   let height = this.mount.clientHeight;
+    
+    /* adding webgl renderer */
 
-        camera = new THREE.PerspectiveCamera(
-            FIELD_OF_VIEW,
-            ASPECT_RATIO,
-            NEAR,
-            FAR
-        );
-        camera.position.z = 600;
-        camera.position.x = 600;
-        camera.position.y = 300;
-        camera.tanFOV = Math.tan(((Math.PI / 180) * camera.fov) / 2); //  For maintaining scale on windowResize.
-        camera.oneToOne = function () {
-            //  Return the Z position at which to place an object for exactly 100% scale.
-            //  https://github.com/mrdoob/three.js/blob/dev/examples/js/renderers/CSS3DRenderer.js#L142
+    //   console.log("Width", width, "height", height, mapDimensions);
+    
+    //mount.current.appendChild(renderer.domElement);
+    var anisotropy = renderer.capabilities.getMaxAnisotropy();
+    var mov1 = 0;
+    var moves = [];
+    var moves6 = [];
+    var moves_sol = [];
+    var url_scra1 = "a";
+    var url_soln1 = "a";
+    var scramble = [];
+    var soln = [];
+    var cube = [];
+    var current_move = [];
+    var current_soln = [];
+    var cube_sol = [];
+    var scramble_state = [];
+    //var play = "false";
+    const MathUtils = {
+        DEG2RAD: function (deg) {
+            return (Math.PI / 180) * deg;
+        },
 
-            return (-0.5 / Math.tan((camera.fov * Math.PI) / 360)) * HEIGHT;
-        };
-        camera.lookAt(scene.position);
-        scene.add(camera);
-        /* adding webgl renderer */
+        lerp: function (x, y, t) {
+            return (1 - t) * x + t * y;
+        },
+    };
+    var pad = 5;
+    // gap between the layers
+    padding = pad;
+    // radius of the fillet used on corners of cube
+    c = document.createElement("canvas");
+    ctx = c.getContext("2d");
+    const tx1 = document.createElement("canvas").getContext("2d");
+    tx1.font = "150pt poppins ";
+    tx1.fillText("F", 100, 140);
+    const tx2 = document.createElement("canvas").getContext("2d");
+    tx2.font = "150pt roboto";
+    tx2.fillText("B", 100, 140);
+    const tx3 = document.createElement("canvas").getContext("2d");
+    tx3.font = "150pt roboto";
+    tx3.fillText("R", 100, 140);
+    const tx4 = document.createElement("canvas").getContext("2d");
+    tx4.font = "150pt roboto";
+    tx4.fillText("L", 100, 140);
+    const tx5 = document.createElement("canvas").getContext("2d");
+    tx5.font = "150pt roboto";
+    tx5.fillText("U", 100, 140);
+    const tx6 = document.createElement("canvas").getContext("2d");
+    tx6.font = "150pt roboto";
+    tx6.fillText("D", 100, 140);
 
-        //   console.log("Width", width, "height", height, mapDimensions);
-        renderer = new THREE.WebGLRenderer({
-            alpha: true,
-            antialias: true,
-        });
-        renderer.setClearColor(themes[props.theme].primary);
-        renderer.setSize(width, height, true);
-        //mount.current.appendChild(renderer.domElement);
-        var anisotropy = renderer.capabilities.getMaxAnisotropy();
-        var mov1 = 0;
-        var moves = [];
-        var moves6 = [];
-        var moves_sol = [];
-        var url_scra1 = "a";
-        var url_soln1 = "a";
-        var scramble = [];
-        var soln = [];
-        var cube = [];
-        var current_move = [];
-        var current_soln = [];
-        var cube_sol = [];
-        var scramble_state = [];
-        var play = "false";
-        const MathUtils = {
-            DEG2RAD: function (deg) {
-                return (Math.PI / 180) * deg;
-            },
+    // const texture = new THREE.TextureLoader().load("rubiksLogoClassic.png" );
 
-            lerp: function (x, y, t) {
-                return (1 - t) * x + t * y;
-            },
-        };
-        var pad = 5;
-        // gap between the layers
-        padding = pad;
-        // radius of the fillet used on corners of cube
-        c = document.createElement("canvas");
-        ctx = c.getContext("2d");
-        const tx1 = document.createElement("canvas").getContext("2d");
-        tx1.font = "150pt poppins ";
-        tx1.fillText("F", 100, 140);
-        const tx2 = document.createElement("canvas").getContext("2d");
-        tx2.font = "150pt roboto";
-        tx2.fillText("B", 100, 140);
-        const tx3 = document.createElement("canvas").getContext("2d");
-        tx3.font = "150pt roboto";
-        tx3.fillText("R", 100, 140);
-        const tx4 = document.createElement("canvas").getContext("2d");
-        tx4.font = "150pt roboto";
-        tx4.fillText("L", 100, 140);
-        const tx5 = document.createElement("canvas").getContext("2d");
-        tx5.font = "150pt roboto";
-        tx5.fillText("U", 100, 140);
-        const tx6 = document.createElement("canvas").getContext("2d");
-        tx6.font = "150pt roboto";
-        tx6.fillText("D", 100, 140);
+    let texture1 = new THREE.CanvasTexture(tx1.canvas);
+    let texture2 = new THREE.CanvasTexture(tx2.canvas);
+    let texture3 = new THREE.CanvasTexture(tx3.canvas);
+    let texture4 = new THREE.CanvasTexture(tx4.canvas);
+    let texture5 = new THREE.CanvasTexture(tx5.canvas);
+    let texture6 = new THREE.CanvasTexture(tx6.canvas);
 
-        // const texture = new THREE.TextureLoader().load("rubiksLogoClassic.png" );
+    texture1.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    texture2.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    texture3.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    texture4.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    texture5.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    texture6.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    //loader used for texture
+    ret = cubelets_form(
+        //making cubelets
+        scene,
+        3,
+        padding,
+        texture1,
+        texture2,
+        texture3,
+        texture4,
+        texture5,
+        texture6
+    );
+    meshs = ret[0]; //27 cubelets
+    core = ret[1]; //core
+    face_plane = ret[2]; //Letters
+    cube_color(meshs); //color
 
-        let texture1 = new THREE.CanvasTexture(tx1.canvas);
-        let texture2 = new THREE.CanvasTexture(tx2.canvas);
-        let texture3 = new THREE.CanvasTexture(tx3.canvas);
-        let texture4 = new THREE.CanvasTexture(tx4.canvas);
-        let texture5 = new THREE.CanvasTexture(tx5.canvas);
-        let texture6 = new THREE.CanvasTexture(tx6.canvas);
+    const handleResize = () => {
+        width = mount.current.clientWidth;
+        height = mount.current.clientHeight;
+        renderer.setSize(width, height);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderScene();
+    };
 
-        texture1.anisotropy = renderer.capabilities.getMaxAnisotropy();
-        texture2.anisotropy = renderer.capabilities.getMaxAnisotropy();
-        texture3.anisotropy = renderer.capabilities.getMaxAnisotropy();
-        texture4.anisotropy = renderer.capabilities.getMaxAnisotropy();
-        texture5.anisotropy = renderer.capabilities.getMaxAnisotropy();
-        texture6.anisotropy = renderer.capabilities.getMaxAnisotropy();
-        //loader used for texture
-        ret = cubelets_form(
-            //making cubelets
-            scene,
-            3,
-            padding,
-            texture1,
-            texture2,
-            texture3,
-            texture4,
-            texture5,
-            texture6
-        );
-        meshs = ret[0]; //27 cubelets
-        core = ret[1]; //core
-        face_plane = ret[2]; //Letters
-        cube_color(meshs); //color
-
-        const handleResize = () => {
-            width = mount.current.clientWidth;
-            height = mount.current.clientHeight;
-            renderer.setSize(width, height);
-            camera.aspect = width / height;
-            camera.updateProjectionMatrix();
-            renderScene();
-        };
-
-        mount.current.appendChild(renderer.domElement);
-        setmounted(true);
-        console.log("UseEffect 1 ", "Play =", props.play, "Mounted=", mounted);
-        return () => {
-            //Cleanup Code
-            setmounted((prev) => {
-                !prev;
-            });
-            console.log(
-                "UseEffect 1 Cleanup ",
-                "Play =",
-                props.play,
-                "Mounted=",
-                mounted
-            );
-            window.removeEventListener("resize", handleResize);
-            if (mount.current !== null) {
-                mount.current.removeChild(renderer.domElement);
-            }
-            //scene.remove(cube);
-        };
-    }, [props.theme, props.width, props.height]);
+    mount.current.appendChild(renderer.domElement);
+    setmounted(true);
+    console.log("UseEffect 1 ", "Play =", props.play, "Mounted=", mounted);
+    // return () => {
+    //     //Cleanup Code
+    //     setmounted((prev) => {
+    //         !prev;
+    //     });
+    //     console.log(
+    //         "UseEffect 1 Cleanup ",
+    //         "Play =",
+    //         props.play,
+    //         "Mounted=",
+    //         mounted
+    //     );
+    //     window.removeEventListener("resize", handleResize);
+    //     if (mount.current !== null) {
+    //         mount.current.removeChild(renderer.domElement);
+    //     }
+    //     //scene.remove(cube);
+    // };
 
     useEffect(() => {
+         let width = mount.current.clientWidth;
+    let height = mount.current.clientHeight;
+    var FIELD_OF_VIEW = 45,
+        WIDTH = width,
+        HEIGHT = height,
+        ASPECT_RATIO = WIDTH / HEIGHT,
+        NEAR = 1,
+        FAR = 10000;
+
+    camera = new THREE.PerspectiveCamera(
+        FIELD_OF_VIEW,
+        ASPECT_RATIO,
+        NEAR,
+        FAR
+    );
+    camera.position.z = 600;
+    camera.position.x = 600;
+    camera.position.y = 300;
+    camera.tanFOV = Math.tan(((Math.PI / 180) * camera.fov) / 2); //  For maintaining scale on windowResize.
+    camera.oneToOne = function () {
+        //  Return the Z position at which to place an object for exactly 100% scale.
+        //  https://github.com/mrdoob/three.js/blob/dev/examples/js/renderers/CSS3DRenderer.js#L142
+
+        return (-0.5 / Math.tan((camera.fov * Math.PI) / 360)) * HEIGHT;
+    };
+    camera.lookAt(scene.position);
+    scene.add(camera);
+    renderer = new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: true,
+    });
+    renderer.setClearColor(themes[props.theme].primary);
+    renderer.setSize(width, height, true);
         console.log("UseEffect 2 ", "Play =", props.play, "Mounted=", mounted);
-        if (mounted) {
             var animation_flag = 0;
             let frameId;
             var controls = new OrbitControls(camera, renderer.domElement);
@@ -310,7 +310,6 @@ export const Trial = (props) => {
             };
             controls.current = { start, stop };
             start();
-        }
         //window.addEventListener("resize", handleResize);
 
         return () => {
