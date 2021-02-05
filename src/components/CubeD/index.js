@@ -59,7 +59,7 @@ function ValueLabelComponent(props) {
 
 function CubePage(props) {
     const [newSol, setnewSol] = useState("");
-    const [newScra, setnewScra] = useState(""); //using to store the scramble and push it to URL and also to store the initial URl and show in Scramble
+    const [newScra, setnewScra] = useState(); //using to store the scramble and push it to URL and also to store the initial URl and show in Scramble
     const [dimensions, setDimensions] = useState({
         height: window.innerHeight,
         width: window.innerWidth,
@@ -77,7 +77,7 @@ function CubePage(props) {
     const [solMoves, setsolMoves] = useState();
     //var url = new URL("http://localhost:3000/cube");
     useEffect(() => {
-        if (newScra != undefined || newSol != undefined) {
+        if (newScra != undefined) {
             //TODO: run this only 1 onces and combine newScra and newScol in one state
             //*Check how many times this is running
             //!Aditya extremely usefull and not IRRITATING
