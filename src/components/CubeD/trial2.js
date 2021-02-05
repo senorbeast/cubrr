@@ -199,7 +199,11 @@ export const Trial = (props) => {
                     cube1.fastMove(scramble.concat(soln),0);
                     cube = scramble;
                 }
-                
+                if (cube.length == 0 && soln.length > 0 && sc_be_so == 0)
+                {
+                    cube1.fastMove(scramble,0);
+                    cube = scramble;
+                }
                 if ((scramble.length > cube.length) && sc_be_so == 0) 
                 {
 
@@ -212,7 +216,7 @@ export const Trial = (props) => {
                         cube1.liveMove(current_move,scramble,cube,0);
 
                         // console.log(scramble_meshs);
-                        cube = scramble;
+                        
                         
                     }
                     else if ((JSON.stringify(scramble_check) !== JSON.stringify(cube)) && soln.length == 0)
@@ -220,7 +224,7 @@ export const Trial = (props) => {
                         console.log("1234");
                         cube1.fastMove(cube.concat(soln),1);
                         cube1.fastMove(scramble.concat(soln),0);
-                        cube = scramble;
+                    
                     }
                     if((JSON.stringify(scramble_check) === JSON.stringify(cube) )&& soln.length > 0)
                     
@@ -230,7 +234,7 @@ export const Trial = (props) => {
                         cube1.fastMove(scramble.concat(soln),0);
 
                         console.log(scramble_check);
-                        cube = scramble;
+                       
                         
                     }
                     else if ((JSON.stringify(scramble_check) !== JSON.stringify(cube)) && soln.length > 0)
@@ -238,9 +242,9 @@ export const Trial = (props) => {
                         console.log("1234");
                         cube1.fastMove(cube.concat(soln),1);
                         cube1.fastMove(scramble.concat(soln),0);
-                        cube = scramble;
+                        
                     }
-                    
+                    cube = scramble;
                 }
                 if (scramble.length == cube.length)
                 {
@@ -267,6 +271,7 @@ export const Trial = (props) => {
                 var soln_check = soln.slice(0,cube_sol.length);
                 if (soln.length > cube_sol.length)
                     {
+                        console.log(soln_check)
                        
                         if(JSON.stringify(soln_check) === JSON.stringify(cube_sol))
                         {
@@ -274,7 +279,7 @@ export const Trial = (props) => {
                         cube1.liveMove(current_soln,soln,cube_sol,0);
 
                         // console.log(scramble_meshs);
-                        cube_sol = soln;
+                        
                         }
                         if(JSON.stringify(soln_check) !== JSON.stringify(cube_sol))
                         {
@@ -283,8 +288,9 @@ export const Trial = (props) => {
                         cube1.fastMove(soln,0);
 
                         // console.log(scramble_meshs);
-                        cube_sol = soln;
+                        
                         }
+                        cube_sol = soln;
                     }
                     else if (soln.length < cube_sol.length)
                     {
