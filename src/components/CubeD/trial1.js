@@ -388,7 +388,7 @@ export const Trial = (props) => {
             //     camera.position.y = 200;
             //     camera.position.z = 1000;
 
-            //     const line2 = beg_cross(scene,meshs,ctx ,c,padding,renderer)
+            //     const line2 = animation_sequence(scene,meshs,core,camera);
             //     animation_flag = 1;
             // }
 

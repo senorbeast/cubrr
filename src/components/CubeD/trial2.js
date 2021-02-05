@@ -182,166 +182,7 @@ export const Trial = (props) => {
                 //i.e :- For example if user deletes scramble and only solution is present
             
                 /***********BELOW CODE IS EXECUTED ONLY IF USER ENTERS SOMETHING NEW IN SCRAMBLE FIELD***********/
-                if (scramble.length > cube.length) 
-                //HERE CUBE IS THE CURRENT STATE OF THE CUBE AND SCRAMBLE IS THE DESIRED STATE 
-                { 
-                    sc_be_so = 0
-                   
-                    /*******************this is done to see if user has not added any extra move in between the scramble*************************/
-                    var scramble_check = scramble.slice(0,cube.length);
-                    console.log(scramble_check)
-                    /*********BELOW PART WILL BE DONE IF THE PREVIOUS STATE OF CUBE HAD NO MOVES IN IT i.e : no moves were done on the cube previously**********/
-                    if ((cube.length==0) && (soln.length == 0))
-                    {
-                        console.log("!")
-                       
-                   
-                        console.log("23232")
-                        console.log(scramble.concat(soln))
-
-                        cube1.liveMove(current_move, scramble, cube, 0)
-                        // console.log(scramble_meshs);
-                      
-
-                    }
-                     /**************BELOW PART WILL BE DONE IF ANY EXTRA MOVE IS ADDED IN BETWEEN THE SCRAMBLE********************/
                 
-                   else  if (JSON.stringify(scramble_check) === JSON.stringify(cube) && cube.length != 0)
-                    
-                    {
-                        console.log("111")
-                        cube1.liveMove(current_move, scramble, cube, 0)
-                       
-                       
-                        
-                    }
-                    /****************BELOW PART WILL BE DONE IF A NEW MOVE IS ADDED AT THE END OF THE SCRAMBLE********************/
-                    else if (JSON.stringify(scramble_check) !== JSON.stringify(cube) && cube.length != 0)
-                    {
-                        console.log("23232")
-                        cube1.fastMove(cube.concat(cube_sol),1);
-                        cube1.fastMove(scramble.concat(cube_sol),0)
-                       
-                        
-                        
-
-                    } 
-                    if (( JSON.stringify(soln) === JSON.stringify(cube_sol)) && soln.length !=0 )
-                    {
-                        console.log("9")
-                        cube1.fastMove(cube.concat(cube_sol),1);
-                        cube1.fastMove(scramble.concat(cube_sol),0)
-                     
-                        
-    
-                    }
-                    cube = scramble;
-                    
-                }
-                
-
-                /*********************BELOW PART WILL BE EXECUTED IF MOVE/MOVES ARE DELETED FROM SCRAMBLE****************************/
-                if (scramble.length < cube.length && scramble.length != 0) {
-                    console.log("1");
-                    cube1.fastMove(cube.concat(cube_sol),1);
-                    cube1.fastMove(scramble.concat(cube_sol),0)
-                 
-                    cube = scramble;
-                }
-                /****************BELOW PART WILL BE DONE IF USER COPY PASTES A NEW SCRAMBLE WITH EXACT SAME NO.OF MOVES*******************/
-                if (scramble.length == cube.length) {
-                    if (JSON.stringify(scramble) !== JSON.stringify(cube)) {
-              
-                        cube1.fastMove(cube.concat(cube_sol),1);
-                        cube1.fastMove(scramble.concat(cube_sol),0)
-                        cube = scramble;                        
-                         console.log("2");
-                    }
-                }
-        //         /******************BELOW PART WILL BE EXECUTED ONLY WHEN THEIR IS NOTHING ENETERED IN SCRAMBLE FIELD AND THEIR ARE MOVES ENTERED IN SOLUTION FIELD*********************/
-                if (scramble.length < cube.length && cube.length!= 0)
-                {
-                    if ((soln.length >0 )  && (sc_be_so == 0))
-                    {
-
-                        cube1.fastMove(cube.concat(cube_sol),1);
-                 
-                        
-                        sc_be_so = 1;
-                        console.log("sol",cube_sol)
-                    }
-                    if ((soln.length == 0 )  && (sc_be_so == 0))
-                    {
-
-                        cube1.fastMove(cube.concat(cube_sol),1);
-                 
-                        
-                        sc_be_so = 1;
-                        console.log("sol",cube_sol)
-                    }
-
-
-                    cube = scramble;
-
-                    
-                    
-                }
-        //         /*******************THIS CODE ENSURES SOLUTION IS EXECUTED ONLY IF SCRAMBLE IS PRESENT***********************/
-                if ((soln.length > 0 )) {
-                    console.log("23");
-                    if ((sc_be_so == 1) && (scramble.length!=0)) {
-                      
-
-                        cube1.fastMove(cube_sol,0);
-                        
-                    
-                        cube_sol = soln;
-
-                        play_flag = 0;
-                    }
-                    sc_be_so = 0;
-                    if (soln.length > cube_sol.length)
-                     {
-                        var sol_check = soln.slice(0, cube_sol.length );
-                        if (JSON.stringify(sol_check) === JSON.stringify(cube_sol)) 
-                        {
-                            cube1.liveMove(current_soln, soln, cube_sol, 0)
-     
-                            
-                            cube_sol = soln;
-                           
-                            play_flag = 0;
-                            console.log("soln",cube_sol)
-                        } 
-                        else 
-                        {
-
-                            cube1.fastMove(cube_sol,1);
-                            cube1.fastMove(soln,0)
-
-                        
-                             cube_sol = soln;
-                         }
-                   }
-                    if (soln.length < cube_sol.length) {
-                        cube1.fastMove(cube_sol,1);
-                        cube1.fastMove(soln,0)
-
-                 
-                        cube_sol = soln;
-                    }
-                    if (soln.length == cube_sol.length) {
-                       
-                        if (JSON.stringify(soln) !== JSON.stringify(cube_sol)) {
-                            cube1.fastMove(cube_sol,1);
-                            cube1.fastMove(soln,0)
-                            console.log("IAM")
-                           
-                            cube_sol = soln;
-                        }
-                    }
-                }
-            }
             // if (animation_flag == 0) {
             //     var myvar;
             //     camera.position.x = 300;
@@ -351,6 +192,112 @@ export const Trial = (props) => {
             //     const line2 = beg_cross(scene,meshs,ctx ,c,padding,renderer)
             //     animation_flag = 1;
             // }
+            if (scramble.length > 0)
+            {
+                if (sc_be_so == 1)
+                {
+                    cube1.fastMove(scramble.concat(soln),0);
+                    cube = scramble;
+                }
+                
+                if ((scramble.length > cube.length) && sc_be_so == 0) 
+                {
+
+                    var scramble_check = scramble.slice(0,cube.length);
+                    console.log(scramble_check);
+                    if(JSON.stringify(scramble_check) === JSON.stringify(cube) && soln.length == 0)
+                    
+                    {
+                        console.log("!!!")
+                        cube1.liveMove(current_move,scramble,cube,0);
+
+                        // console.log(scramble_meshs);
+                        cube = scramble;
+                        
+                    }
+                    else if (JSON.stringify(scramble_check) !== JSON.stringify(cube) && soln.length == 0)
+                    {
+                        console.log("1234");
+                        cube1.fastMove(cube.concat(soln),1);
+                        cube1.fastMove(scramble.concat(soln),0);
+                        cube = scramble;
+                    }
+                    if(JSON.stringify(scramble_check) === JSON.stringify(cube) && soln.length > 0)
+                    
+                    {
+                        console.log("!!!")
+                        cube1.fastMove(cube.concat(soln),1);
+                        cube1.fastMove(scramble.concat(soln),0);
+
+                        // console.log(scramble_meshs);
+                        cube = scramble;
+                        
+                    }
+                    else if (JSON.stringify(scramble_check) !== JSON.stringify(cube) && soln.length > 0)
+                    {
+                        console.log("1234");
+                        cube1.fastMove(cube.concat(soln),1);
+                        cube1.fastMove(scramble.concat(soln),0);
+                        cube = scramble;
+                    }
+                    
+                }
+                if (scramble.length == cube.length)
+                {
+                    if (JSON.stringify(scramble) !== JSON.stringify(cube))
+                    
+                    {
+                        cube1.fastMove(cube.concat(soln),1);
+                        cube1.fastMove(scramble.concat(soln),0);
+                        cube = scramble;
+                        
+                    }
+
+                }
+                if (scramble.length < cube.length)
+                {
+                    
+                        cube1.fastMove(cube.concat(soln),1);
+                        cube1.fastMove(scramble.concat(soln),0);
+                        cube = scramble;
+                        
+                   
+
+                }
+                if (soln.length > cube_sol.length)
+                    {
+                        var soln_check = soln.slice(0,cube_sol.length);
+                        if(JSON.stringify(soln_check) === JSON.stringify(cube_sol))
+                        {
+                        console.log("!!!")
+                        cube1.liveMove(current_soln,soln,cube_sol,0);
+
+                        // console.log(scramble_meshs);
+                        cube_sol = soln;
+                        }
+                    }
+                    else if (soln.length < cube_sol.length)
+                    {
+                        cube1.fastMove(cube_sol,1);
+                        cube1.fastMove(soln,0);
+                        cube_sol = soln;
+                    }
+                 
+                
+                    sc_be_so = 0;
+                
+
+            }
+
+            if ( scramble.length == 0  && sc_be_so == 0 && cube.length > scramble.length)
+            {
+                console.log("====")
+                sc_be_so = 1;
+                cube1.fastMove(cube.concat(soln),1);
+                cube = scramble;
+                
+            }
+
 
             if (play == "true" && (play_flag == 0 || play_flag == 2)) {
                
@@ -377,7 +324,7 @@ export const Trial = (props) => {
                     play_flag = 0;
                 }
             }
-
+        }
             if (playBtn == "true") {
                 face_plane_make(
                     face_plane,

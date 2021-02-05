@@ -6,12 +6,12 @@ function scramble_read(scramble,url1,cube,but)
     var flag = 0;  
     var ar = 0;
     var lay = []
-    var url = []
+    var url = [...url1];
    /***********USED FOR GENERATING ARRAY FOR INVERSING MOVES *************/
 if ( but == 1)
 {
+    url = url.reverse();
 
-    url = url1.reverse();
    
     for (var i = 0 ; i < url.length ; i++ )
     
@@ -88,7 +88,6 @@ if ( but == 1)
  /***********USED FOR GENERATING ARRAY FOR LEGAL MOVES *************/
 if (but == 0)
 {
-    url = url1;
 if(url.length > cube.length)
 { 
     for (var i = 0 ; i < scramble.length ; i++ )
@@ -175,7 +174,7 @@ if(url.length > cube.length)
     }
 }
 }
- 
+     console.log(lay);
     return lay
 
 }
