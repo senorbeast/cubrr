@@ -56,10 +56,45 @@ function ValueLabelComponent(props) {
         </Tooltip>
     );
 }
+function loadScra() {
+    let urlstr = window.location.href;
+    let splitedurl = urlstr.split("=");
+    if (splitedurl[1] != undefined) {
+        //Runs only if there is some scramble in the URL (so no replace error)
+        let aftereq = splitedurl[1];
+        let scramble = aftereq.split("?");
+        let scra = scramble[0].replace(/%20/g, " "); // (/  /g) to replace globally here it means to replace all values
+        let scra2 = scra.replace(/%27/g, "'");
+        let scra3 = scra2.replace(/\./g, ".\n");
+        //setnewScra(scra2);
+        //console.log("Getting Scramble");
+        return scra2;
+    }
+    return "";
+}
+
+function loadSol() {
+    let urlstr = window.location.href;
+    let splitedurl = urlstr.split("=");
+    //Same for solution
+    if (splitedurl[2] != undefined) {
+        //Runs only if there is some scramble in the URL (so no replace error)
+        let aftereq2 = splitedurl[2];
+        let solution = aftereq2.split("?");
+        let sol = solution[0].replace(/%20/g, " "); // (/  /g) to replace globally here it means to replace all values
+        let sol2 = sol.replace(/%27/g, "'");
+        let sol3 = sol2.replace(/\./g, ".\n");
+        //setnewSol(sol3);
+        //console.log("Getting Solution");
+        return sol3;
+    }
+    return "";
+}
 
 function CubePage(props) {
-    const [newSol, setnewSol] = useState("");
-    const [newScra, setnewScra] = useState(); //using to store the scramble and push it to URL and also to store the initial URl and show in Scramble
+    // To use functions to load scra and sol from URL for first load
+    const [newScra, setnewScra] = useState(loadScra); //using to store the scramble and push it to URL and also to store the initial URl and show in Scramble
+    const [newSol, setnewSol] = useState(loadSol);
     const [dimensions, setDimensions] = useState({
         height: window.innerHeight,
         width: window.innerWidth,
@@ -112,34 +147,6 @@ function CubePage(props) {
         }
     }, [newScra, newSol, play]);
 
-    useEffect(() => {
-        //TODO: This can be made efficient by storing the previous values of scramble and solution and running this only when there is a change in scramble and solution
-        /*Runs only once now */ /*Used to copy the scramble in URL to Scramble Text Area*/
-
-        let urlstr = window.location.href;
-        let splitedurl = urlstr.split("=");
-        if (splitedurl[1] != undefined) {
-            //Runs only if there is some scramble in the URL (so no replace error)
-            let aftereq = splitedurl[1];
-            let scramble = aftereq.split("?");
-            let scra = scramble[0].replace(/%20/g, " "); // (/  /g) to replace globally here it means to replace all values
-            let scra2 = scra.replace(/%27/g, "'");
-            let scra3 = scra2.replace(/\./g, ".\n");
-            setnewScra(scra2);
-            //console.log("Getting Scramble");
-        }
-        //Same for solution
-        if (splitedurl[2] != undefined) {
-            //Runs only if there is some scramble in the URL (so no replace error)
-            let aftereq2 = splitedurl[2];
-            let solution = aftereq2.split("?");
-            let sol = solution[0].replace(/%20/g, " "); // (/  /g) to replace globally here it means to replace all values
-            let sol2 = sol.replace(/%27/g, "'");
-            let sol3 = sol2.replace(/\./g, ".\n");
-            setnewSol(sol3);
-            //console.log("Getting Solution");
-        }
-    }, []);
 
     useEffect(() => {
         //Refresh component after resize
