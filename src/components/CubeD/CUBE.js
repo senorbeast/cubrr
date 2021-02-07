@@ -4,6 +4,7 @@ import { scramble_read } from "./cube_scramble_read_v3";
 import { fast_execute } from "./cube_fast_execute.js";
 import { animate_execute } from "./cube_animate_execute.js";
 import { animate_read } from "./cube_animate_read_3";
+import {draw_text} from "./cube_text";
 import * as THREE from "three";
 export default class CUBE { 
     #mesh = [];// just add "default"
@@ -109,5 +110,9 @@ export default class CUBE {
                     time,
                     0
                 );
+  }
+  text(text,ctx,c)
+  {
+    draw_text(this.scene,text,this.renderer,ctx,c)
   }
 }

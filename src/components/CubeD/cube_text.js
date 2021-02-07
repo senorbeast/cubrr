@@ -19,7 +19,7 @@ function draw_text(scene , text , renderer,ctx,c,reload)
     let guide_text_1 = new THREE.CanvasTexture(c);
     guide_text_1.anisotropy = renderer.capabilities.getMaxAnisotropy();
     const geometry = new THREE.PlaneGeometry(500, 150, 0);
-    const material = new THREE.MeshBasicMaterial({ color: "#fff", side: THREE.DoubleSide, transparent: true, opacity: 1 });
+    const material = new THREE.MeshBasicMaterial({ color: "#fff", side: THREE.DoubleSide });
     const plane = new THREE.Mesh(geometry, material);
     plane.position.set(400,0,-150)
     plane.material.map = guide_text_1

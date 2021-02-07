@@ -27,6 +27,8 @@ import * as THREE from "three";
 import { scramble_read } from "./cube_scramble_read_v3";
 import { animate_read } from "./cube_animate_read_3";
 import  CUBE from "./CUBE.js";
+import getAlgs_URL from "./Parser/getAlgs_URL";
+import validateAlgs from "./Parser/validateAlg";
 export const Trial = (props) => {
     const mount = useRef(null);
     const [count, setCount] = useState(0);
@@ -115,6 +117,7 @@ export const Trial = (props) => {
         var cube1 = new CUBE(3,camera , renderer,scene);
         cube1.add();
         cube1.color();
+        cube1.text("HRISHI BHAII",ctx,c)
 
         const renderScene = () => {
             renderer.render(scene, camera);
@@ -174,7 +177,13 @@ export const Trial = (props) => {
                 url_scra1 = url_scramble.replace(/%27/g, "'");
                 url_soln1 = url_soln.replace(/%27/g, "'");
                 scramble = url_scra1.split("");//the actual scramble input from user
-                soln = url_soln1.split("");//the actual solution input from user 
+                console.log(url_soln1)
+                var s = getAlgs_URL(url_soln1);
+                console.log("getalgs",s)
+                soln = s.split("");
+                // console.log(validateAlgs(s).legalAlg);
+                
+                //the actual solution input from user 
                 current_move = scramble.slice(cube.length);//the current scramble move to be executed
                 current_soln = soln.slice(cube_sol.length);//the current solution move to be executed
                 
