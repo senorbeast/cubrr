@@ -32,16 +32,16 @@ import validateAlgs from "./Parser/validateAlg";
 import getAlgCmtNum from "./Parser/getAlgCmtNum";
 import Tooltip from "@material-ui/core/Tooltip";
 
-function debounce(fn, ms) {
-    let timer;
-    return (_) => {
-        clearTimeout(timer);
-        timer = setTimeout((_) => {
-            timer = null;
-            fn.apply(this, arguments);
-        }, ms);
-    };
-}
+// function debounce(fn, ms) {
+//     let timer;
+//     return (_) => {
+//         clearTimeout(timer);
+//         timer = setTimeout((_) => {
+//             timer = null;
+//             fn.apply(this, arguments);
+//         }, ms);
+//     };
+// }
 function ValueLabelComponent(props) {
     const { children, open, value } = props;
 
@@ -100,6 +100,7 @@ function CubePage(props) {
         width: window.innerWidth,
     });
     const [play, setplay] = useState(false);
+    console.log("Index.js");
     //const [ctrl, setCtrl] = useState(false);
     const [mode, setMode] = useState("scraM"); //for fullscreen mode and Scra/Sol mode
     const Cmarks = useRef([
@@ -113,6 +114,7 @@ function CubePage(props) {
     //var url = new URL("http://localhost:3000/cube");
     useEffect(() => {
         if (newScra != undefined) {
+            console.log("URL UE");
             //TODO: run this only 1 onces and combine newScra and newScol in one state
             //*Check how many times this is running
             //!Aditya extremely usefull and not IRRITATING
@@ -147,20 +149,20 @@ function CubePage(props) {
         }
     }, [newScra, newSol, play]);
 
-
-    useEffect(() => {
-        //Refresh component after resize
-        const debouncedHandleResize = debounce(function handleResize() {
-            setDimensions({
-                height: window.innerHeight,
-                width: window.innerWidth,
-            });
-        }, 1000);
-        window.addEventListener("resize", debouncedHandleResize);
-        return (_) => {
-            window.removeEventListener("resize", debouncedHandleResize);
-        };
-    });
+    // useEffect(() => {
+    //     //Refresh component after resize
+    //     const debouncedHandleResize = debounce(function handleResize() {
+    //         setDimensions({
+    //             height: window.innerHeight,
+    //             width: window.innerWidth,
+    //         });
+    //     }, 1000);
+    //     console.log("Index debouce UE");
+    //     window.addEventListener("resize", debouncedHandleResize);
+    //     return (_) => {
+    //         window.removeEventListener("resize", debouncedHandleResize);
+    //     };
+    // });
 
     const icon = play == false ? <ImPlay2 /> : <ImPause />;
 
@@ -183,8 +185,8 @@ function CubePage(props) {
                     </h1> */}
                     <Trial
                         //play={play}
-                        width={dimensions.width}
-                        height={dimensions.height}
+                        widthp={dimensions.width}
+                        heightp={dimensions.height}
                         theme={props.theme}
                         play={play}
                     />
@@ -241,6 +243,7 @@ function CubePage(props) {
                         defaultValue={newScra}
                     />
                 </ScrambleI>
+
                 <SolutionI mode={modes[mode]}>
                     <Typography variant="h4" component="h4">
                         Solution
@@ -258,6 +261,7 @@ function CubePage(props) {
     );
     //
     function handleChangeScra(event) {
+        console.log("Scra");
         setnewScra(event.target.value);
     }
     //replace(/(.^|\r\n|\n)([^*]|$)/g, "$1*$2")) (Removes the nextlines after reload idk how)

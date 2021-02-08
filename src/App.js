@@ -23,7 +23,7 @@ function getInitialTheme() {
 const App = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [theme, setTheme] = useState(getInitialTheme);
-
+    console.log("App.js");
     const toggle = () => {
         setIsOpen(!isOpen);
     };
