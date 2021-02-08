@@ -24,7 +24,7 @@ import {
 import { ImPlay2, ImPause } from "react-icons/im";
 //import CubeD from "./cube.js";
 import { FullCard } from "./FullCard";
-import Trial from "./trial2";
+import Trial from "./trialFunc";
 import { Typography } from "@material-ui/core";
 import getComments from "./Parser/getComments";
 import getAlgs from "./Parser/getAlgs";

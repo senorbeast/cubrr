@@ -37,7 +37,7 @@ export const Trial = (props) => {
     playBtn.current = props.play;
     // console.log("Play", props.play);
     // console.log("rendered", count);
-
+    
     useEffect(() => {
         // console.log("rendered in UseEffect", count);
         // console.log("Play in UseEFFect", props.play);
