@@ -1,4 +1,3 @@
-import React from "react";
 //import Navbar from "../Navbar";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
