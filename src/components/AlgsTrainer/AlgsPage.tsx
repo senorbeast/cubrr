@@ -2,11 +2,19 @@ import React from "react";
 //import Navbar from "../Navbar";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import { AlgCardContainer, HeadCard } from "./algsElement";
+import { HeadCard } from "./AlgsElement";
 import AlgCard from "./AlgCard";
 
-export const AlgsPage = (props) => {
+interface PLLinfo {
+    nameAlg: string;
+    id: string;
+    recogn: string;
+    alglist: any;
+}
+
+export const AlgsPage = () => {
     const { loading, data } = useQuery(FETCH_PLL_Query);
+    console.log("DAta", data);
     return (
         <>
             {/* <AlgCardContainer> */}
@@ -17,7 +25,9 @@ export const AlgsPage = (props) => {
                 <h1>Loading PLLs.....</h1>
             ) : (
                 data.getPLLs &&
-                data.getPLLs.map((PLL) => <AlgCard key={PLL.id} PLL={PLL} />)
+                data.getPLLs.map((PLL: PLLinfo) => (
+                    <AlgCard key={PLL.id} PLL={PLL} />
+                ))
             )}
             {/* </AlgCardContainer> */}
         </>

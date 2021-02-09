@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../Navbar";
 import Container from "@material-ui/core/Container";
-import { CardContainer } from "./algsElement";
+import { CardContainer } from "./AlgsElement";
 //import { TypographySC } from "../BasicElements";
 import { AlgsPage } from "./AlgsPage";
 import { AlgHome } from "./AlgHome";

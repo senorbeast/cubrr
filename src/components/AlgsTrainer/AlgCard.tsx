@@ -1,18 +1,27 @@
 import React from "react";
 import {
     EachAlgCard,
-    Algorithms,
     SubContainer,
     SubContainer2,
     FlexRow,
-} from "./algsElement";
+} from "./AlgsElement";
 // import moment from "moment";
 import { DataGrid } from "@material-ui/data-grid";
 import PLLImg from "./PLL-step.png";
 import Typography from "@material-ui/core/Typography";
 
-const AlgCard = ({ PLL: { nameAlg, id, recogn, alglist } }) => {
-    console.log("Alglist", alglist);
+interface PLLinfo {
+    nameAlg: string;
+    id: string;
+    recogn: string;
+    alglist: any;
+}
+interface PLLCard {
+    PLL: PLLinfo;
+}
+
+const AlgCard = ({ PLL: { nameAlg, recogn, alglist } }: PLLCard) => {
+    //console.log("Alglist", alglist);
     return (
         <>
             <EachAlgCard>
@@ -42,13 +51,13 @@ const AlgCard = ({ PLL: { nameAlg, id, recogn, alglist } }) => {
                                 columns={[
                                     {
                                         field: "alg",
-                                        width: "90%",
                                         headerName: "Algorithm",
+                                        flex: 1,
                                         sortable: false,
                                     },
                                     {
                                         field: "rating",
-                                        width: "10%",
+                                        width: 92,
                                         headerName: "Ratings",
                                     },
                                 ]}

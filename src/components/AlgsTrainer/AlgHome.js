@@ -1,4 +1,4 @@
-import { SetCard, HeadCard } from "./algsElement";
+import { SetCard, HeadCard } from "./AlgsElement";
 import { useRouteMatch } from "react-router-dom";
 import PLL from "./PLL-step.png";
 
