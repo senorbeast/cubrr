@@ -25,7 +25,7 @@ import { OrbitControls } from "../../../node_modules/three/examples/jsm/controls
 // /import Stats from '/jsm/libs/stats.module.js';
 import * as THREE from "three";
 import { scramble_read } from "./cube_scramble_read_v3";
-import { animate_read } from "./cube_animate_read_3";
+import { animate_read } from "./CubeThree/cube_animate_read_3";
 import CUBE from "./CUBE.js";
 import getAlgs_URL from "./Parser/getAlgs_URL";
 import validateAlgs from "./Parser/validateAlg";
