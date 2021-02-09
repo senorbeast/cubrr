@@ -5,28 +5,12 @@ import React, {
     useEffect,
     useRef,
 } from "react";
-import ReactDOM from "react-dom";
-import createjs from "../../../node_modules/createjs-module/createjs";
 import { TrialStyle } from "./CubeElements";
-import gsap from "gsap";
 import * as themes from "../themes";
-
-// import Stats from '/jsm/libs/stats.module.js';
-import { animation_sequence } from "./cube_animation_sequence.js";
-import { beg_cross } from "./cube_beg_cross.js";
-import { cubelets_form } from "./cubelets.js";
-import { fast_execute } from "./cube_fast_execute.js";
-import { cube_color } from "./cubelet_colors.js";
-
-import { animate_execute } from "./cube_animate_execute.js";
-import { draw_text } from "./cube_text.js";
-import { face_plane_make } from "./cube_face_plane.js";
 import { OrbitControls } from "../../../node_modules/three/examples/jsm/controls/OrbitControls";
 // /import Stats from '/jsm/libs/stats.module.js';
 import * as THREE from "three";
-import { scramble_read } from "./cube_scramble_read_v3";
-import { animate_read } from "./cube_animate_read_3";
-import CUBE from "./CUBE.js";
+import CUBE from "./CubeThree/CUBE";
 import getAlgs_URL from "./Parser/getAlgs_URL";
 import validateAlgs from "./Parser/validateAlg";
 
