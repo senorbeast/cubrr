@@ -25,8 +25,8 @@ import { OrbitControls } from "../../../node_modules/three/examples/jsm/controls
 // /import Stats from '/jsm/libs/stats.module.js';
 import * as THREE from "three";
 import { scramble_read } from "./cube_scramble_read_v3";
-import { animate_read } from "./cube_animate_read_3";
-import  CUBE from "./CUBE.js";
+import { animate_read } from "./CubeThree/cube_animate_read_3";
+import CUBE from "./CUBE.js";
 import getAlgs_URL from "./Parser/getAlgs_URL";
 import validateAlgs from "./Parser/validateAlg";
 export const Trial = (props) => {
@@ -37,7 +37,7 @@ export const Trial = (props) => {
     playBtn.current = props.play;
     // console.log("Play", props.play);
     // console.log("rendered", count);
-    
+
     useEffect(() => {
         // console.log("rendered in UseEffect", count);
         // console.log("Play in UseEFFect", props.play);
@@ -45,8 +45,7 @@ export const Trial = (props) => {
         let height = mount.current.clientHeight;
         let frameId;
         var mycube;
-       
-       
+
         // var scene = new THREE.Scene();
         /* variables to create color */
         var flag = 1;
@@ -76,7 +75,6 @@ export const Trial = (props) => {
             NEAR,
             FAR
         );
-       
 
         /* adding webgl renderer */
 
@@ -113,11 +111,11 @@ export const Trial = (props) => {
         // radius of the fillet used on corners of cube
         var c = document.createElement("canvas");
         var ctx = c.getContext("2d");
-      
-        var cube1 = new CUBE(3,camera , renderer,scene);
+
+        var cube1 = new CUBE(3, camera, renderer, scene);
         cube1.add();
         cube1.color();
-        cube1.text("HRISHI BHAII",ctx,c)
+        cube1.text("HRISHI BHAII", ctx, c);
 
         const renderScene = () => {
             renderer.render(scene, camera);
@@ -133,10 +131,10 @@ export const Trial = (props) => {
         };
         function cube_play() {
             var cube_soln_animate = animate_read(soln, soln, [], 0);
-         
+
             if (tick < cube_soln_animate.length) {
-                cube1.animateMove(cube_soln_animate[tick],400)
-            
+                cube1.animateMove(cube_soln_animate[tick], 400);
+
                 tick = tick + 1;
             }
             if (tick == cube_soln_animate.length) {
@@ -145,18 +143,15 @@ export const Trial = (props) => {
                 clearInterval(mycube);
             }
         }
-        window.addEventListener("visibilitychange", event => {
+        window.addEventListener("visibilitychange", (event) => {
             if (document.visibilityState != "visible") {
                 focus = 1;
-             clearInterval(mycube);
-            } 
-            else if (document.visibilityState == "visible" && focus == 1)
-            {
-                setInterval(mycube,600);
+                clearInterval(mycube);
+            } else if (document.visibilityState == "visible" && focus == 1) {
+                setInterval(mycube, 600);
                 focus = 2;
-
             }
-          })
+        });
         const animate = () => {
             requestAnimationFrame(animate);
             controls.update();
@@ -164,7 +159,6 @@ export const Trial = (props) => {
             var currentURL = window.location.href;
 
             var url_split = currentURL.split("?");
-            
 
             if (url_split.length > 1) {
                 var scramble_arr = url_split[1].split("=");
@@ -176,193 +170,171 @@ export const Trial = (props) => {
                 var url_soln = soln_arr[1].replace(/%20/g, "");
                 url_scra1 = url_scramble.replace(/%27/g, "'");
                 url_soln1 = url_soln.replace(/%27/g, "'");
-                scramble = url_scra1.split("");//the actual scramble input from user
-                console.log(url_soln1)
+                scramble = url_scra1.split(""); //the actual scramble input from user
+                console.log(url_soln1);
                 var s = getAlgs_URL(url_soln1);
-                console.log("getalgs",s)
+                console.log("getalgs", s);
                 soln = s.split("");
                 // console.log(validateAlgs(s).legalAlg);
-                
-                //the actual solution input from user 
-                current_move = scramble.slice(cube.length);//the current scramble move to be executed
-                current_soln = soln.slice(cube_sol.length);//the current solution move to be executed
-                
+
+                //the actual solution input from user
+                current_move = scramble.slice(cube.length); //the current scramble move to be executed
+                current_soln = soln.slice(cube_sol.length); //the current solution move to be executed
+
                 /********THE BELOW PART IS TO HANDLE VARIOUS USER INPUTS*********/
                 //i.e :- For example if user deletes scramble and only solution is present
-            
+
                 /***********BELOW CODE IS EXECUTED ONLY IF USER ENTERS SOMETHING NEW IN SCRAMBLE FIELD***********/
-                
-            // if (animation_flag == 0) {
-            //     var myvar;
-            //     camera.position.x = 300;
-            //     camera.position.y = 200;
-            //     camera.position.z = 1000;
 
-            //     const line2 = beg_cross(scene,meshs,ctx ,c,padding,renderer)
-            //     animation_flag = 1;
-            // }
-            if (scramble.length > 0)
-            {
-                if (sc_be_so == 1)
-                {
-                    cube1.fastMove(scramble.concat(soln),0);
-                    cube = scramble;
-                }
-                if (cube.length == 0 && soln.length > 0 && sc_be_so == 0)
-                {
-                    cube1.fastMove(scramble,0);
-                    cube = scramble;
-                }
-                if ((scramble.length > cube.length) && sc_be_so == 0) 
-                {
+                // if (animation_flag == 0) {
+                //     var myvar;
+                //     camera.position.x = 300;
+                //     camera.position.y = 200;
+                //     camera.position.z = 1000;
 
-                    var scramble_check = scramble.slice(0,cube.length);
-                    console.log(scramble_check);
-                    if((JSON.stringify(scramble_check) === JSON.stringify(cube)) && soln.length == 0)
-                    
-                    {
-                        console.log("!!!")
-                        cube1.liveMove(current_move,scramble,cube,0);
-
-                        // console.log(scramble_meshs);
-                        
-                        
+                //     const line2 = beg_cross(scene,meshs,ctx ,c,padding,renderer)
+                //     animation_flag = 1;
+                // }
+                if (scramble.length > 0) {
+                    if (sc_be_so == 1) {
+                        cube1.fastMove(scramble.concat(soln), 0);
+                        cube = scramble;
                     }
-                    else if ((JSON.stringify(scramble_check) !== JSON.stringify(cube)) && soln.length == 0)
-                    {
-                        console.log("1234");
-                        cube1.fastMove(cube.concat(soln),1);
-                        cube1.fastMove(scramble.concat(soln),0);
-                    
+                    if (cube.length == 0 && soln.length > 0 && sc_be_so == 0) {
+                        cube1.fastMove(scramble, 0);
+                        cube = scramble;
                     }
-                    if((JSON.stringify(scramble_check) === JSON.stringify(cube) )&& soln.length > 0)
-                    
-                    {
-                        console.log("!!!")
-                        cube1.fastMove(cube.concat(soln),1);
-                        cube1.fastMove(scramble.concat(soln),0);
-
+                    if (scramble.length > cube.length && sc_be_so == 0) {
+                        var scramble_check = scramble.slice(0, cube.length);
                         console.log(scramble_check);
-                       
-                        
+                        if (
+                            JSON.stringify(scramble_check) ===
+                                JSON.stringify(cube) &&
+                            soln.length == 0
+                        ) {
+                            console.log("!!!");
+                            cube1.liveMove(current_move, scramble, cube, 0);
+
+                            // console.log(scramble_meshs);
+                        } else if (
+                            JSON.stringify(scramble_check) !==
+                                JSON.stringify(cube) &&
+                            soln.length == 0
+                        ) {
+                            console.log("1234");
+                            cube1.fastMove(cube.concat(soln), 1);
+                            cube1.fastMove(scramble.concat(soln), 0);
+                        }
+                        if (
+                            JSON.stringify(scramble_check) ===
+                                JSON.stringify(cube) &&
+                            soln.length > 0
+                        ) {
+                            console.log("!!!");
+                            cube1.fastMove(cube.concat(soln), 1);
+                            cube1.fastMove(scramble.concat(soln), 0);
+
+                            console.log(scramble_check);
+                        } else if (
+                            JSON.stringify(scramble_check) !==
+                                JSON.stringify(cube) &&
+                            soln.length > 0
+                        ) {
+                            console.log("1234");
+                            cube1.fastMove(cube.concat(soln), 1);
+                            cube1.fastMove(scramble.concat(soln), 0);
+                        }
+                        cube = scramble;
                     }
-                    else if ((JSON.stringify(scramble_check) !== JSON.stringify(cube)) && soln.length > 0)
-                    {
-                        console.log("1234");
-                        cube1.fastMove(cube.concat(soln),1);
-                        cube1.fastMove(scramble.concat(soln),0);
-                        
+                    if (scramble.length == cube.length) {
+                        if (JSON.stringify(scramble) !== JSON.stringify(cube)) {
+                            cube1.fastMove(cube.concat(soln), 1);
+                            cube1.fastMove(scramble.concat(soln), 0);
+                            cube = scramble;
+                        }
                     }
+                    if (scramble.length < cube.length) {
+                        cube1.fastMove(cube.concat(soln), 1);
+                        cube1.fastMove(scramble.concat(soln), 0);
+                        cube = scramble;
+                    }
+                    var soln_check = soln.slice(0, cube_sol.length);
+                    if (soln.length > cube_sol.length) {
+                        console.log(soln_check);
+
+                        if (
+                            JSON.stringify(soln_check) ===
+                            JSON.stringify(cube_sol)
+                        ) {
+                            console.log("!!!");
+                            cube1.liveMove(current_soln, soln, cube_sol, 0);
+
+                            // console.log(scramble_meshs);
+                        }
+                        if (
+                            JSON.stringify(soln_check) !==
+                            JSON.stringify(cube_sol)
+                        ) {
+                            console.log("!!!");
+                            cube1.fastMove(cube_sol, 1);
+                            cube1.fastMove(soln, 0);
+
+                            // console.log(scramble_meshs);
+                        }
+                        cube_sol = soln;
+                    } else if (soln.length < cube_sol.length) {
+                        cube1.fastMove(cube_sol, 1);
+                        cube1.fastMove(soln, 0);
+                        cube_sol = soln;
+                    }
+
+                    if (soln.length == cube_sol.length) {
+                        if (JSON.stringify(soln) !== JSON.stringify(cube_sol)) {
+                            cube1.fastMove(cube_sol, 1);
+                            cube1.fastMove(soln, 0);
+                            cube_sol = soln;
+                        }
+                    }
+
+                    sc_be_so = 0;
+                }
+
+                if (
+                    scramble.length == 0 &&
+                    sc_be_so == 0 &&
+                    cube.length > scramble.length
+                ) {
+                    console.log("====");
+                    sc_be_so = 1;
+                    cube1.fastMove(cube.concat(soln), 1);
                     cube = scramble;
                 }
-                if (scramble.length == cube.length)
-                {
-                    if (JSON.stringify(scramble) !== JSON.stringify(cube))
-                    
-                    {
-                        cube1.fastMove(cube.concat(soln),1);
-                        cube1.fastMove(scramble.concat(soln),0);
-                        cube = scramble;
-                        
-                    }
 
+                if (play == "true" && (play_flag == 0 || play_flag == 2)) {
+                    // this is when the user initially presses the play button so that solution moves gets inversed
+                    if (play_flag == 0) {
+                        cube1.fastMove(soln, 1);
+
+                        mycube = setInterval(cube_play, 600);
+                        play_flag = 1; // done so that setinterval is not called recursively
+                    }
+                    // this is done to see if pause was pressed in between
+                    else if (play_flag == 2) {
+                        mycube = setInterval(cube_play, 600);
+                        play_flag = 1; // done so that setinterval is not called recursively
+                    }
                 }
-                if (scramble.length < cube.length)
-                {
-                    
-                        cube1.fastMove(cube.concat(soln),1);
-                        cube1.fastMove(scramble.concat(soln),0);
-                        cube = scramble;
-                        
-                   
 
-                }
-                var soln_check = soln.slice(0,cube_sol.length);
-                if (soln.length > cube_sol.length)
-                    {
-                        console.log(soln_check)
-                       
-                        if(JSON.stringify(soln_check) === JSON.stringify(cube_sol))
-                        {
-                        console.log("!!!")
-                        cube1.liveMove(current_soln,soln,cube_sol,0);
-
-                        // console.log(scramble_meshs);
-                        
-                        }
-                        if(JSON.stringify(soln_check) !== JSON.stringify(cube_sol))
-                        {
-                        console.log("!!!")
-                        cube1.fastMove(cube_sol,1);
-                        cube1.fastMove(soln,0);
-
-                        // console.log(scramble_meshs);
-                        
-                        }
-                        cube_sol = soln;
+                if (play == "false") {
+                    if (play_flag == 1) {
+                        play_flag = 2; // so that the moves dont get inversed again
+                        clearInterval(mycube);
                     }
-                    else if (soln.length < cube_sol.length)
-                    {
-                        cube1.fastMove(cube_sol,1);
-                        cube1.fastMove(soln,0);
-                        cube_sol = soln;
+                    if (play_flag == 3) {
+                        play_flag = 0;
                     }
-                 
-                    if ( soln.length == cube_sol.length)
-                    {
-                        
-                        if(JSON.stringify(soln) !== JSON.stringify(cube_sol))
-                        
-                        {
-                            cube1.fastMove(cube_sol,1);
-                            cube1.fastMove(soln,0);
-                            cube_sol= soln;
-
-                        }
-
-                    }
-                
-                    sc_be_so = 0;
-                
-
-            }
-
-            if ( scramble.length == 0  && sc_be_so == 0 && cube.length > scramble.length)
-            {
-                console.log("====")
-                sc_be_so = 1;
-                cube1.fastMove(cube.concat(soln),1);
-                cube = scramble;
-                
-            }
-
-
-            if (play == "true" && (play_flag == 0 || play_flag == 2)) {
-               
-                // this is when the user initially presses the play button so that solution moves gets inversed
-                if (play_flag == 0) {
-                    cube1.fastMove(soln,1)
-                   
-                    mycube = setInterval(cube_play, 600);
-                    play_flag = 1; // done so that setinterval is not called recursively
-                }
-                // this is done to see if pause was pressed in between
-                else if (play_flag == 2) {
-                    mycube = setInterval(cube_play, 600);
-                    play_flag = 1; // done so that setinterval is not called recursively
                 }
             }
-
-            if (play == "false") {
-                if (play_flag == 1) {
-                    play_flag = 2; // so that the moves dont get inversed again
-                    clearInterval(mycube);
-                }
-                if (play_flag == 3) {
-                    play_flag = 0;
-                }
-            }
-        }
             if (playBtn == "true") {
                 face_plane_make(
                     face_plane,
