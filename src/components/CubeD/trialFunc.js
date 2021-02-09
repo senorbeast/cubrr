@@ -13,6 +13,7 @@ import * as THREE from "three";
 import CUBE from "./CubeThree/CUBE";
 import getAlgs_URL from "./Parser/getAlgs_URL";
 import validateAlgs from "./Parser/validateAlg";
+import { animate_read } from "./CubeThree/cube_animate_read_3";
 
 export const Trial = (props) => {
     const mount = useRef(null);
