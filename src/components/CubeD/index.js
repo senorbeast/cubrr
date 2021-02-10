@@ -24,7 +24,7 @@ import {
 import { ImPlay2, ImPause } from "react-icons/im";
 //import CubeD from "./cube.js";
 import { FullCard } from "./FullCard";
-import Trial from "./trialFunc";
+import Trial from "./trial2";
 import { Typography } from "@material-ui/core";
 import getComments from "./Parser/getComments";
 import getAlgs from "./Parser/getAlgs";
@@ -90,6 +90,22 @@ function loadSol() {
     }
     return "";
 }
+function loadSlLabels() {
+    var soln = loadSol();
+    var alrg = getAlgs(soln);
+    var cmtLabel = getComments(soln);
+    var cmtValue = getAlgCmtNum(soln);
+    var MarksC = cmtValue.map(function (Cvalue, index) {
+        return { value: Cvalue, label: cmtLabel[index] };
+    });
+    return MarksC;
+}
+
+function loadSolMoves() {
+    var soln = loadSol();
+    var alrg = getAlgs(soln);
+    return validateAlgs(alrg).movesNum;
+}
 
 function CubePage(props) {
     // To use functions to load scra and sol from URL for first load
@@ -103,14 +119,9 @@ function CubePage(props) {
     console.log("Index.js");
     //const [ctrl, setCtrl] = useState(false);
     const [mode, setMode] = useState("scraM"); //for fullscreen mode and Scra/Sol mode
-    const Cmarks = useRef([
-        //To Fix Warning:Each child in a list should have a unique "key" prop
-        {
-            value: 0,
-            label: "Cmts..",
-        },
-    ]);
-    const [solMoves, setsolMoves] = useState();
+    const [Cmarks, setCmarks] = useState(loadSlLabels);
+    const [solMoves, setsolMoves] = useState(loadSolMoves);
+    console.log("props Index", props);
     //var url = new URL("http://localhost:3000/cube");
     useEffect(() => {
         if (newScra != undefined) {
@@ -119,17 +130,6 @@ function CubePage(props) {
             //*Check how many times this is running
             //!Aditya extremely usefull and not IRRITATING
             //TODO: try solMoves and Cmarks without useState
-            var cmtLabel = getComments(newSol);
-            var cmtValue = getAlgCmtNum(newSol);
-            //console.log("Comments", cmtLabel);
-            //console.log("Section Length", cmtValue);
-            var alrg = getAlgs(newSol);
-            setsolMoves(validateAlgs(alrg).movesNum);
-            var MarksC = cmtValue.map(function (Cvalue, index) {
-                return { value: Cvalue, label: cmtLabel[index] };
-            });
-
-            Cmarks.current = MarksC;
             //console.log("Marks", MarksC);
             //console.log("Algs", validateAlgs(alrg).legalAlg);
             //console.log("Valid", !validateAlgs(cmts).IvldTest);
@@ -204,7 +204,7 @@ function CubePage(props) {
                         step={1}
                         max={solMoves}
                         valueLabelDisplay="auto"
-                        marks={Cmarks.current}
+                        marks={Cmarks}
                     />
                     <ButtonArea mode={modes[mode]}>
                         <ThemeBtn>
@@ -267,11 +267,22 @@ function CubePage(props) {
     //replace(/(.^|\r\n|\n)([^*]|$)/g, "$1*$2")) (Removes the nextlines after reload idk how)
     //TODO: Understand the diffin \r\n and \n .
 
+    function SlLabels(soln) {
+        var alrg = getAlgs(soln);
+        setsolMoves(validateAlgs(alrg).movesNum);
+        var cmtLabel = getComments(soln);
+        var cmtValue = getAlgCmtNum(soln);
+        var MarksC = cmtValue.map(function (Cvalue, index) {
+            return { value: Cvalue, label: cmtLabel[index] };
+        });
+        return MarksC;
+    }
+
     function handleChangeSol(event) {
         var dots = event.target.value.replace(/\./g, ""); //Fixed-User Can type dots in Solution box
-        setnewSol(dots.replace(/(.^|\n)([^.]|$)/g, "$1.$2"));
-        // var alrg = getAlgs(newSol);
-        // setsolMoves(() => validateAlgs(alrg).movesNum);
+        var soln = dots.replace(/(.^|\n)([^.]|$)/g, "$1.$2");
+        setnewSol(soln);
+        setCmarks(SlLabels(soln));
     }
     function togglePlay() {
         setplay(!play);

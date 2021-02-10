@@ -11,30 +11,32 @@ import { TrialStyle } from "./CubeElements";
 import gsap from "gsap";
 import * as themes from "../themes";
 
-// import Stats from '/jsm/libs/stats.module.js';
-import { animation_sequence } from "./cube_animation_sequence.js";
-import { beg_cross } from "./cube_beg_cross.js";
-import { cubelets_form } from "./cubelets.js";
-import { fast_execute } from "./cube_fast_execute.js";
-import { cube_color } from "./cubelet_colors.js";
+// // import Stats from '/jsm/libs/stats.module.js';
+// import { animation_sequence } from "./cube_animation_sequence.js";
+// import { beg_cross } from "./cube_beg_cross.js";
+// import { cubelets_form } from "./cubelets.js";
+// import { fast_execute } from "./cube_fast_execute.js";
+// import { cube_color } from "./cubelet_colors.js";
 
-import { animate_execute } from "./cube_animate_execute.js";
-import { draw_text } from "./cube_text.js";
-import { face_plane_make } from "./cube_face_plane.js";
+// import { animate_execute } from "./cube_animate_execute.js";
+// import { draw_text } from "./cube_text.js";
+// import { face_plane_make } from "./cube_face_plane.js";
 import { OrbitControls } from "../../../node_modules/three/examples/jsm/controls/OrbitControls";
 // /import Stats from '/jsm/libs/stats.module.js';
 import * as THREE from "three";
-import { scramble_read } from "./cube_scramble_read_v3";
+import { scramble_read } from "./CubeThree/cube_scramble_read";
 import { animate_read } from "./CubeThree/cube_animate_read_3";
-import CUBE from "./CUBE.js";
+import CUBE from "./CubeThree/CUBE.js";
 import getAlgs_URL from "./Parser/getAlgs_URL";
 import validateAlgs from "./Parser/validateAlg";
+
 export const Trial = (props) => {
     const mount = useRef(null);
     const [count, setCount] = useState(0);
     const playBtn = useRef(props.play);
     const [plays, setPlay] = useState(0);
     playBtn.current = props.play;
+    console.log("props trail", props);
     // console.log("Play", props.play);
     // console.log("rendered", count);
 
@@ -171,9 +173,9 @@ export const Trial = (props) => {
                 url_scra1 = url_scramble.replace(/%27/g, "'");
                 url_soln1 = url_soln.replace(/%27/g, "'");
                 scramble = url_scra1.split(""); //the actual scramble input from user
-                console.log(url_soln1);
+                //console.log(url_soln1);
                 var s = getAlgs_URL(url_soln1);
-                console.log("getalgs", s);
+                //console.log("getalgs", s);
                 soln = s.split("");
                 // console.log(validateAlgs(s).legalAlg);
 
