@@ -1,7 +1,12 @@
 import AlgProvider from "./AlgProvider";
 import CubePage from "./index";
+interface CmProps {
+    toggle: () => void;
+    theme: string;
+    setTheme: React.Dispatch<any>;
+}
 
-const CubeAlgWrap = (props) => {
+const CubeAlgWrap = (props: CmProps) => {
     return (
         <>
             <AlgProvider>

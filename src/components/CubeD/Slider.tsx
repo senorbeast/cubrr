@@ -50,6 +50,7 @@ const Slider = ({ mode }: propsM) => {
     return (
         <>
             <SliderSC
+                // @ts-ignore
                 mode={selMode(mode)}
                 //ThumbComponent={BiCubeAlt}
                 //track={false}

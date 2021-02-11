@@ -4,19 +4,19 @@ import StepLabel from "@material-ui/core/StepLabel";
 import StepContent from "@material-ui/core/StepContent";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
-import React, { useState } from "react";
+import { useState } from "react";
 import { TypographySC } from "../BasicElements";
-import SettingsIcon from '@material-ui/icons/Settings';
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
-import VideoLabelIcon from '@material-ui/icons/VideoLabel';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
+import SettingsIcon from "@material-ui/icons/Settings";
+import GroupAddIcon from "@material-ui/icons/GroupAdd";
+import VideoLabelIcon from "@material-ui/icons/VideoLabel";
+import { makeStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
 
 function getSteps() {
     return ["Select campaign settings", "Create an ad group", "Create an ad"];
 }
 
-function getStepContent(step) {
+function getStepContent(step: number) {
     switch (step) {
         case 0:
             return `For each ad campaign that you create, you can control how much
@@ -35,50 +35,55 @@ function getStepContent(step) {
 }
 
 const useColorlibStepIconStyles = makeStyles({
-  root: {
-    backgroundColor: '#ccc',
-    zIndex: 1,
-    color: '#fff',
-    width: 50,
-    height: 50,
-    display: 'flex',
-    borderRadius: '50%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  active: {
-    backgroundImage:
-      'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
-    boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
-  },
-  completed: {
-    backgroundImage:
-      'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
-  },
+    root: {
+        backgroundColor: "#ccc",
+        zIndex: 1,
+        color: "#fff",
+        width: 50,
+        height: 50,
+        display: "flex",
+        borderRadius: "50%",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    active: {
+        backgroundImage:
+            "linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)",
+        boxShadow: "0 4px 10px 0 rgba(0,0,0,.25)",
+    },
+    completed: {
+        backgroundImage:
+            "linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)",
+    },
 });
 
-function ColorlibStepIcon(props) {
-  const { active, completed } = props;
+interface stepTypes {
+    active: any;
+    completed: any;
+}
+function ColorlibStepIcon(props: stepTypes) {
+    const { active, completed } = props;
     const classes = useColorlibStepIconStyles();
-  const icons = {
-    1: <SettingsIcon />,
-    2: <GroupAddIcon />,
-    3: <VideoLabelIcon />,
-  };
+    const icons = {
+        1: <SettingsIcon />,
+        2: <GroupAddIcon />,
+        3: <VideoLabelIcon />,
+    };
 
-  return (
-    <div
-      className={clsx(classes.root, {
-        [classes.active]: active,
-        [classes.completed]: completed,
-      })}
-    >
-      {icons[String(props.icon)]}
-    </div>
-  );
+    return (
+        <div
+            className={clsx(classes.root, {
+                [classes.active]: active,
+                [classes.completed]: completed,
+            })}
+        >
+            {/* @ts-ignore */}
+            {icons[String(props.icon)]}
+        </div>
+    );
 }
 
-export const FullCard=()=> {
+export const FullCard = () => {
     const [activeStep, setActiveStep] = useState(0);
     const steps = getSteps();
 

@@ -14,11 +14,13 @@ const Solution = ({ mode }: propsM) => {
     let setSol = useSetSol();
     return (
         <>
+            {/* @ts-ignore */}
             <SolutionI mode={selMode(mode)}>
                 <Typography variant="h4" component="h4">
                     Solution
                 </Typography>
                 <InTextArea2
+                    //@ts-ignore
                     type="Text"
                     onChange={handleChangeSol}
                     placeholder="Enter the Solution Here :)"

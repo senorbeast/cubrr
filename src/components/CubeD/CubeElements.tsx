@@ -30,7 +30,7 @@ export const CubeContainer = styled.div`
     margin-left: 5.9rem;
     background-color: ${(props) => props.theme.primary};
     grid-row: span 14 / auto;
-    grid-column: span ${(props) => props.mode.cubecols} / auto;
+    grid-column: span ${(props: any) => props.mode.cubecols} / auto;
     grid-template-rows: repeat(24, 1fr); //for the child tags
     padding: 2rem 2rem 1.8rem 2rem;
     color: ${(props) => props.theme.priopp};
@@ -63,7 +63,7 @@ export const TrialStyle = styled.div`
 `;
 
 export const AlgsCard = styled.div`
-    display: ${(props) => props.mode.alg};
+    display: ${(props: any) => props.mode.alg};
     background-color: ${(props) => props.theme.mprim};
     border-radius: 1.75rem;
     padding: 1rem 2rem 1rem;
@@ -84,7 +84,7 @@ export const AlgsCard = styled.div`
 `;
 
 export const ScrambleI = styled.div`
-    display: ${(props) => props.mode.none};
+    display: ${(props: any) => props.mode.none};
     background-color: ${(props) => props.theme.prialt};
     border-radius: 1.75rem;
     padding: 1.8rem;
@@ -105,7 +105,7 @@ export const ScrambleI = styled.div`
 `;
 
 export const SolutionI = styled.div`
-    display: ${(props) => props.mode.none};
+    display: ${(props: any) => props.mode.none};
     background-color: ${(props) => props.theme.secalt};
     border-radius: 1.75rem;
     grid-row: span 8 / auto;
@@ -197,7 +197,7 @@ export const ThemeBtn = styled.div`
 export const ButtonArea = styled.div`
     display: grid;
     grid-row: span 3 / auto;
-    grid-template-columns: repeat(${(props) => props.mode.nobuts}, 1fr);
+    grid-template-columns: repeat(${(props: any) => props.mode.nobuts}, 1fr);
     font-size: 4rem;
     align-items: center;
     @media screen and (max-width: 768px) {
@@ -210,7 +210,7 @@ import { withStyles } from "@material-ui/core/styles";
 const iOSBoxShadow =
     "0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)";
 
-const PrettoSlider = withStyles((theme) => ({
+const PrettoSlider = withStyles(() => ({
     root: {
         color: "#3880ff",
         height: 2,
@@ -269,6 +269,6 @@ const PrettoSlider = withStyles((theme) => ({
 
 export const SliderSC = styled(PrettoSlider)`
     && {
-        display: ${(props) => props.mode.none};
+        display: ${(props: any) => props.mode.none};
     }
 `;

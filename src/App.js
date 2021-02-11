@@ -9,7 +9,7 @@ import {
     ThemeProvider as TPMaterial,
     createMuiTheme,
 } from "@material-ui/core/styles";
-import * as themes from "./components/themes.js";
+import * as themes from "./components/themes";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CubePage from "./components/CubeD";
 import { reactLocalStorage } from "reactjs-localstorage";

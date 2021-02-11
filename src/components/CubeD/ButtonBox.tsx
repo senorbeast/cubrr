@@ -21,6 +21,7 @@ const ButtonBox = ({ mode, setMode, setPlay }: propsM) => {
     const icon = play == false ? <ImPlay2 /> : <ImPause />;
     return (
         <>
+            {/* @ts-ignore */}
             <ButtonArea mode={selMode(mode)}>
                 <ThemeBtn>
                     <WiRefresh />
