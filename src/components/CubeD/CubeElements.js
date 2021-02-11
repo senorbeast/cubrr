@@ -209,6 +209,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 const iOSBoxShadow =
     "0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)";
+
 const PrettoSlider = withStyles((theme) => ({
     root: {
         color: "#3880ff",
@@ -266,9 +267,8 @@ const PrettoSlider = withStyles((theme) => ({
     },
 }))(Slider);
 
-export { PrettoSlider };
-// export const SliderSC = styled(PrettoSlider)`
-//     && {
-//         display: ${(props) => props.mode.none};
-//     }
-// `;
+export const SliderSC = styled(PrettoSlider)`
+    && {
+        display: ${(props) => props.mode.none};
+    }
+`;

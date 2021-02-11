@@ -12,16 +12,9 @@ import {
     ButtonArea,
     PrettoSlider,
 } from "./CubeElements";
-import * as modes from "./modes.js";
-import { FiCodesandbox } from "react-icons/fi";
-import { WiRefresh } from "react-icons/wi";
-import {
-    CgChevronDoubleRight,
-    CgChevronDoubleLeft,
-    CgChevronRight,
-    CgChevronLeft,
-} from "react-icons/cg";
-import { ImPlay2, ImPause } from "react-icons/im";
+import selMode from "./modes";
+import Scramble from "./Scramble";
+import Solution from "./Solution";
 //import CubeD from "./cube.js";
 import { FullCard } from "./FullCard";
 import Trial from "./trial2";
@@ -30,7 +23,10 @@ import getComments from "./Parser/getComments";
 import getAlgs from "./Parser/getAlgs";
 import validateAlgs from "./Parser/validateAlg";
 import getAlgCmtNum from "./Parser/getAlgCmtNum";
-import Tooltip from "@material-ui/core/Tooltip";
+import ButtonBox from "./ButtonBox";
+import Slider from "./Slider";
+import AlgProvider from "./AlgProvider";
+import { useScra, useSol } from "./AlgProvider";
 
 // function debounce(fn, ms) {
 //     let timer;
@@ -42,112 +38,28 @@ import Tooltip from "@material-ui/core/Tooltip";
 //         }, ms);
 //     };
 // }
-function ValueLabelComponent(props) {
-    const { children, open, value } = props;
-
-    return (
-        <Tooltip
-            open={open}
-            enterTouchDelay={0}
-            placement="top-end"
-            title={value}
-        >
-            {children}
-        </Tooltip>
-    );
-}
-function loadScra() {
-    let urlstr = window.location.href;
-    let splitedurl = urlstr.split("=");
-    if (splitedurl[1] != undefined) {
-        //Runs only if there is some scramble in the URL (so no replace error)
-        let aftereq = splitedurl[1];
-        let scramble = aftereq.split("?");
-        let scra = scramble[0].replace(/%20/g, " "); // (/  /g) to replace globally here it means to replace all values
-        let scra2 = scra.replace(/%27/g, "'");
-        let scra3 = scra2.replace(/\./g, ".\n");
-        //setnewScra(scra2);
-        //console.log("Getting Scramble");
-        return scra2;
-    }
-    return "";
-}
-
-function loadSol() {
-    let urlstr = window.location.href;
-    let splitedurl = urlstr.split("=");
-    //Same for solution
-    if (splitedurl[2] != undefined) {
-        //Runs only if there is some scramble in the URL (so no replace error)
-        let aftereq2 = splitedurl[2];
-        let solution = aftereq2.split("?");
-        let sol = solution[0].replace(/%20/g, " "); // (/  /g) to replace globally here it means to replace all values
-        let sol2 = sol.replace(/%27/g, "'");
-        let sol3 = sol2.replace(/\./g, ".\n");
-        //setnewSol(sol3);
-        //console.log("Getting Solution");
-        return sol3;
-    }
-    return "";
-}
-function loadSlLabels() {
-    var soln = loadSol();
-    var alrg = getAlgs(soln);
-    var cmtLabel = getComments(soln);
-    var cmtValue = getAlgCmtNum(soln);
-    var MarksC = cmtValue.map(function (Cvalue, index) {
-        return { value: Cvalue, label: cmtLabel[index] };
-    });
-    return MarksC;
-}
-
-function loadSolMoves() {
-    var soln = loadSol();
-    var alrg = getAlgs(soln);
-    return validateAlgs(alrg).movesNum;
-}
 
 function CubePage(props) {
-    // To use functions to load scra and sol from URL for first load
-    const [newScra, setnewScra] = useState(loadScra); //using to store the scramble and push it to URL and also to store the initial URl and show in Scramble
-    const [newSol, setnewSol] = useState(loadSol);
+    //TODO: Divide into different Components (acc to states) to avoid rerendering the whole index.js
+    //* Save multiple useRefs in Cubepage and modify them with functions passed to individual components wherer they will be states and will rerender acc.
+
     const [dimensions, setDimensions] = useState({
         height: window.innerHeight,
         width: window.innerWidth,
     });
-    const [play, setplay] = useState(false);
+    // let play = useRef(false);s
     console.log("Index.js");
+    let newSol = useSol();
+    let newScra = useScra();
+    console.log("index", newScra);
+    // let newSol = useSol();
+    // let newScra = useScra();
+    console.log("index,js", newSol, newScra);
     //const [ctrl, setCtrl] = useState(false);
     const [mode, setMode] = useState("scraM"); //for fullscreen mode and Scra/Sol mode
-    const [Cmarks, setCmarks] = useState(loadSlLabels);
-    const [solMoves, setsolMoves] = useState(loadSolMoves);
+
     console.log("props Index", props);
     //var url = new URL("http://localhost:3000/cube");
-    useEffect(() => {
-        if (newScra != undefined) {
-            console.log("URL UE");
-            //TODO: run this only 1 onces and combine newScra and newScol in one state
-            //*Check how many times this is running
-            //!Aditya extremely usefull and not IRRITATING
-            //TODO: try solMoves and Cmarks without useState
-            //console.log("Marks", MarksC);
-            //console.log("Algs", validateAlgs(alrg).legalAlg);
-            //console.log("Valid", !validateAlgs(cmts).IvldTest);
-            //console.log("Move Count", validateAlgs(alrg).movesNum);
-            window.history.pushState(
-                "object or string",
-                "",
-                "/cube/?scramble=" +
-                    newScra +
-                    "?solution=" +
-                    newSol +
-                    "?play=" +
-                    play +
-                    "?"
-            );
-            //console.log("Updating URL");
-        }
-    }, [newScra, newSol, play]);
 
     // useEffect(() => {
     //     //Refresh component after resize
@@ -164,133 +76,42 @@ function CubePage(props) {
     //     };
     // });
 
-    const icon = play == false ? <ImPlay2 /> : <ImPause />;
-
     return (
         <>
-            <CardContainer
-                mode={modes[mode]} //Passing mode object to mode
-            >
-                <SideNav
-                    toggle={props.toggle}
-                    theme={props.theme}
-                    setTheme={props.setTheme}
-                    mode={mode} //Passing mode name to mode
-                    setMode={setMode}
-                />
-                <CubeContainer mode={modes[mode]}>
-                    {/* <h1>
+            <AlgProvider>
+                <CardContainer
+                    mode={selMode(mode)} //Passing mode object to mode
+                >
+                    <SideNav
+                        toggle={props.toggle}
+                        theme={props.theme}
+                        setTheme={props.setTheme}
+                        mode={mode} //Passing mode name to mode
+                        setMode={setMode}
+                    />
+                    <CubeContainer mode={selMode(mode)}>
+                        {/* <h1>
                         Virtual Cube  {dimensions.width} x{" "}
                         {dimensions.height}
                     </h1> */}
-                    <Trial
-                        //play={play}
-                        widthp={dimensions.width}
-                        heightp={dimensions.height}
-                        theme={props.theme}
-                        play={play}
-                    />
-                    <PrettoSlider
-                        mode={modes[mode]}
-                        //ThumbComponent={BiCubeAlt}
-                        //track={false}
-                        styles={{ height: "30px" }}
-                        ValueLabelComponent={ValueLabelComponent}
-                        defaultValue={0}
-                        getAriaValueText={(value) => {
-                            //console.log(value); //* Getting Values of the the marker
-                        }}
-                        //aria-labelledby="discrete-slider-custom"
-                        step={1}
-                        max={solMoves}
-                        valueLabelDisplay="auto"
-                        marks={Cmarks}
-                    />
-                    <ButtonArea mode={modes[mode]}>
-                        <ThemeBtn>
-                            <WiRefresh />
-                        </ThemeBtn>
-                        <ThemeBtn>
-                            <CgChevronDoubleLeft />
-                        </ThemeBtn>
-                        <ThemeBtn>
-                            <CgChevronLeft />
-                        </ThemeBtn>
-                        <ThemeBtn onClick={togglePlay}>{icon}</ThemeBtn>
-                        <ThemeBtn>
-                            <CgChevronRight />
-                        </ThemeBtn>
-                        <ThemeBtn>
-                            <CgChevronDoubleRight />
-                        </ThemeBtn>
-                        <ThemeBtn onClick={toggleMode}>
-                            <FiCodesandbox />
-                        </ThemeBtn>
-                    </ButtonArea>
-                </CubeContainer>
-                <AlgsCard mode={modes[mode]}>
-                    <FullCard />
-                </AlgsCard>
-                <ScrambleI mode={modes[mode]}>
-                    <Typography variant="h4" component="h4">
-                        Scramble
-                    </Typography>
-                    <InTextArea1
-                        autoFocus={true}
-                        type="Text"
-                        onKeyUp={handleChangeScra}
-                        placeholder="Enter the Scramble Here :)"
-                        defaultValue={newScra}
-                    />
-                </ScrambleI>
-
-                <SolutionI mode={modes[mode]}>
-                    <Typography variant="h4" component="h4">
-                        Solution
-                    </Typography>
-                    <InTextArea2
-                        type="Text"
-                        onChange={handleChangeSol}
-                        placeholder="Enter the Solution Here :)"
-                        defaultValue={newSol}
-                        multiline={true}
-                    />
-                </SolutionI>
-            </CardContainer>
+                        <Trial
+                            //play={play}
+                            widthp={dimensions.width}
+                            heightp={dimensions.height}
+                            theme={props.theme}
+                        />
+                        <Slider />
+                        <ButtonBox mode={mode} setMode={setMode} />
+                    </CubeContainer>
+                    <AlgsCard mode={selMode(mode)}>
+                        <FullCard />
+                    </AlgsCard>
+                    <Scramble mode={mode} />
+                    <Solution mode={mode} />
+                </CardContainer>
+            </AlgProvider>
         </>
     );
-    //
-    function handleChangeScra(event) {
-        console.log("Scra");
-        setnewScra(event.target.value);
-    }
-    //replace(/(.^|\r\n|\n)([^*]|$)/g, "$1*$2")) (Removes the nextlines after reload idk how)
-    //TODO: Understand the diffin \r\n and \n .
-
-    function SlLabels(soln) {
-        var alrg = getAlgs(soln);
-        setsolMoves(validateAlgs(alrg).movesNum);
-        var cmtLabel = getComments(soln);
-        var cmtValue = getAlgCmtNum(soln);
-        var MarksC = cmtValue.map(function (Cvalue, index) {
-            return { value: Cvalue, label: cmtLabel[index] };
-        });
-        return MarksC;
-    }
-
-    function handleChangeSol(event) {
-        var dots = event.target.value.replace(/\./g, ""); //Fixed-User Can type dots in Solution box
-        var soln = dots.replace(/(.^|\n)([^.]|$)/g, "$1.$2");
-        setnewSol(soln);
-        setCmarks(SlLabels(soln));
-    }
-    function togglePlay() {
-        setplay(!play);
-    }
-    function toggleMode() {
-        let modeto = mode == "fullM" ? "scraM" : "fullM";
-        setMode(modeto);
-    }
 }
 
 export default CubePage;
