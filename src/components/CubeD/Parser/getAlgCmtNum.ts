@@ -1,6 +1,6 @@
 import validateAlg from "./validateAlg";
 
-const getAlgCmtNum = (solution: string) => {
+const getAlgCmtNum = (solution: string): number[] => {
     var rpdots: string = solution.replace(/\./gm, "");
     var regex = /(\/\/).+/gm;
     var rpcmts: string = rpdots.replace(regex, "%v%");
@@ -10,6 +10,7 @@ const getAlgCmtNum = (solution: string) => {
     //console.log("Alg 1/2 processed", middlestep);
     return adjCmtNum(middlestep);
 };
+
 export default getAlgCmtNum;
 
 const gotCmtNum = (Arr: any) => {

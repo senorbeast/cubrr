@@ -13,7 +13,7 @@ import * as themes from "./components/themes.js";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CubePage from "./components/CubeD";
 import { reactLocalStorage } from "reactjs-localstorage";
-//import storage from "local-storage-fallback";
+import CubeAlgWrap from "./components/CubeD/CubeAlgWrap";
 
 function getInitialTheme() {
     let savedTheme = reactLocalStorage.get("theme", "lightT", true);
@@ -65,7 +65,7 @@ const App = () => {
                                 path="/cube"
                                 exact
                                 render={() => (
-                                    <CubePage
+                                    <CubeAlgWrap
                                         toggle={toggle}
                                         theme={theme}
                                         setTheme={setTheme}
