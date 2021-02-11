@@ -1,13 +1,17 @@
 import React from "react";
 import Navbar from "../Navbar";
-import Container from "@material-ui/core/Container";
 import { CardContainer } from "./AlgsElement";
 //import { TypographySC } from "../BasicElements";
 import { AlgsPage } from "./AlgsPage";
 import { AlgHome } from "./AlgHome";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 
-function AlgsTrainer(props) {
+interface CmProps {
+    toggle: () => void;
+    theme: string;
+    setTheme: React.Dispatch<any>;
+}
+function AlgsTrainer(props: CmProps) {
     let { path, url } = useRouteMatch();
     console.log("Run this", path, url);
     return (

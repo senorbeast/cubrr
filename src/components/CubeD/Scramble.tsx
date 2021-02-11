@@ -32,12 +32,14 @@ const Scramble = ({ mode }: propsM) => {
     }, [newScra, newSol]);
     return (
         <>
+            {/* @ts-ignore */}
             <ScrambleI mode={selMode(mode)}>
                 <Typography variant="h4" component="h4">
                     Scramble
                 </Typography>
                 <InTextArea1
                     autoFocus={true}
+                    //@ts-ignore
                     type="Text"
                     onKeyUp={handleChangeScra}
                     placeholder="Enter the Scramble Here :)"
