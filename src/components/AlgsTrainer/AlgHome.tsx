@@ -3,7 +3,7 @@ import { useRouteMatch } from "react-router-dom";
 import PLL from "./PLL-step.png";
 
 export const AlgHome = () => {
-    let { path, url } = useRouteMatch();
+    let { path } = useRouteMatch(); //path, url
     return (
         <>
             <HeadCard>
