@@ -2,8 +2,18 @@
 //     body{
 //         background-color:none;
 //     }`;
-
-export const lightT = {
+interface Theme {
+    primary: string;
+    priopp: string;
+    secondary: string;
+    secopp: string;
+    highlight: string;
+    highopp: string;
+    prialt: string;
+    secalt: string;
+    mprim: string;
+}
+export const lightT: Theme = {
     primary: "#fff",
     priopp: "#000",
     secondary: "#D9D9D9",
@@ -14,7 +24,7 @@ export const lightT = {
     secalt: "#6cd99b",
     mprim: "#fff",
 };
-export const darkT = {
+export const darkT: Theme = {
     primary: "#272727",
     priopp: "#fff",
     secondary: "#4d4d4d",

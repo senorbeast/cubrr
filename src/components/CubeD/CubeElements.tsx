@@ -2,6 +2,13 @@ import styled from "styled-components";
 //import { Link as LinkR } from "react-router-dom";
 //import { Link as LinkS } from "react-scroll";
 
+interface ModeTypes {
+    none: string;
+    alg: string;
+    cubecols: number;
+    nobuts: number;
+}
+
 export const CardContainer = styled.div`
     display: grid;
     padding: 0.9rem 0.9rem 0.9rem 0.9rem;
@@ -25,12 +32,12 @@ export const CardContainer = styled.div`
     //grid-template-columns:repeat(2
 `;
 
-export const CubeContainer = styled.div`
+export const CubeContainer = styled.div<{ mode: ModeTypes }>`
     display: grid;
     margin-left: 5.9rem;
     background-color: ${(props) => props.theme.primary};
     grid-row: span 14 / auto;
-    grid-column: span ${(props: any) => props.mode.cubecols} / auto;
+    grid-column: span ${(props) => props.mode.cubecols} / auto;
     grid-template-rows: repeat(24, 1fr); //for the child tags
     padding: 2rem 2rem 1.8rem 2rem;
     color: ${(props) => props.theme.priopp};
@@ -62,8 +69,8 @@ export const TrialStyle = styled.div`
     background-color: ${(props) => props.theme.primary};
 `;
 
-export const AlgsCard = styled.div`
-    display: ${(props: any) => props.mode.alg};
+export const AlgsCard = styled.div<{ mode: ModeTypes }>`
+    display: ${(props) => props.mode.alg};
     background-color: ${(props) => props.theme.mprim};
     border-radius: 1.75rem;
     padding: 1rem 2rem 1rem;
@@ -83,8 +90,8 @@ export const AlgsCard = styled.div`
     }
 `;
 
-export const ScrambleI = styled.div`
-    display: ${(props: any) => props.mode.none};
+export const ScrambleI = styled.div<{ mode: ModeTypes }>`
+    display: ${(props) => props.mode.none};
     background-color: ${(props) => props.theme.prialt};
     border-radius: 1.75rem;
     padding: 1.8rem;
@@ -104,8 +111,8 @@ export const ScrambleI = styled.div`
     }
 `;
 
-export const SolutionI = styled.div`
-    display: ${(props: any) => props.mode.none};
+export const SolutionI = styled.div<{ mode: ModeTypes }>`
+    display: ${(props) => props.mode.none};
     background-color: ${(props) => props.theme.secalt};
     border-radius: 1.75rem;
     grid-row: span 8 / auto;
@@ -194,10 +201,10 @@ export const ThemeBtn = styled.div`
     }
 `;
 
-export const ButtonArea = styled.div`
+export const ButtonArea = styled.div<{ mode: ModeTypes }>`
     display: grid;
     grid-row: span 3 / auto;
-    grid-template-columns: repeat(${(props: any) => props.mode.nobuts}, 1fr);
+    grid-template-columns: repeat(${(props) => props.mode.nobuts}, 1fr);
     font-size: 4rem;
     align-items: center;
     @media screen and (max-width: 768px) {
@@ -267,8 +274,8 @@ const PrettoSlider = withStyles(() => ({
     },
 }))(Slider);
 
-export const SliderSC = styled(PrettoSlider)`
+export const SliderSC = styled(PrettoSlider)<{ mode: ModeTypes }>`
     && {
-        display: ${(props: any) => props.mode.none};
+        display: ${(props) => props.mode.none};
     }
 `;

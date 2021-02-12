@@ -33,8 +33,8 @@ function loadSol() {
     }
     return "";
 }
-
-var undA: any = undefined;
+// @ts-ignore
+var undA: (arg0: string) => void = null;
 const ScrambleContext = React.createContext("");
 const SetScrambleContext = React.createContext(undA);
 const SolutionContext = React.createContext("");

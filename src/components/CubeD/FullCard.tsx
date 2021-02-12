@@ -60,6 +60,7 @@ const useColorlibStepIconStyles = makeStyles({
 interface stepTypes {
     active: any;
     completed: any;
+    icon: JSX.Element;
 }
 function ColorlibStepIcon(props: stepTypes) {
     const { active, completed } = props;

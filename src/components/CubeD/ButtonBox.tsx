@@ -13,7 +13,7 @@ import selMode from "./modes";
 
 interface propsM {
     mode: string;
-    setMode: any;
+    setMode: React.Dispatch<React.SetStateAction<string>>;
     setPlay: any;
 }
 const ButtonBox = ({ mode, setMode, setPlay }: propsM) => {
@@ -21,7 +21,6 @@ const ButtonBox = ({ mode, setMode, setPlay }: propsM) => {
     const icon = play == false ? <ImPlay2 /> : <ImPause />;
     return (
         <>
-            {/* @ts-ignore */}
             <ButtonArea mode={selMode(mode)}>
                 <ThemeBtn>
                     <WiRefresh />

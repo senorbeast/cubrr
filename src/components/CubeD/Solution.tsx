@@ -14,7 +14,6 @@ const Solution = ({ mode }: propsM) => {
     let setSol = useSetSol();
     return (
         <>
-            {/* @ts-ignore */}
             <SolutionI mode={selMode(mode)}>
                 <Typography variant="h4" component="h4">
                     Solution
@@ -30,7 +29,7 @@ const Solution = ({ mode }: propsM) => {
             </SolutionI>
         </>
     );
-    function handleChangeSol(event: any) {
+    function handleChangeSol(event: any): void {
         var dots = event.target.value.replace(/\./g, ""); //Fixed-User Can type dots in Solution box
         var soln = dots.replace(/(.^|\n)([^.]|$)/g, "$1.$2");
         // setnewSol(soln);

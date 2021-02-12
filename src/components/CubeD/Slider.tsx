@@ -26,10 +26,14 @@ function ValueLabelComponent(props: any) {
 interface propsM {
     mode: string;
 }
+interface Mark {
+    value: number;
+    label: string;
+}
+
 const Slider = ({ mode }: propsM) => {
-    //TODO props Add props.Sol as state
     let soln = useSol();
-    function loadSlLabels(soln: string) {
+    function loadSlLabels(soln: string): Mark[] {
         //var soln: string = useSol();
         var cmtLabel = getComments(soln);
         var cmtValue: number[] = getAlgCmtNum(soln);
@@ -38,7 +42,7 @@ const Slider = ({ mode }: propsM) => {
         });
         return MarksC;
     }
-    function loadSolMoves(soln: string) {
+    function loadSolMoves(soln: string): number {
         //var soln = loadSol(); //Get sol from props
         var alrg = getAlgs(soln);
         return validateAlgs(alrg).movesNum;
@@ -50,10 +54,10 @@ const Slider = ({ mode }: propsM) => {
     return (
         <>
             <SliderSC
-                // @ts-ignore
                 mode={selMode(mode)}
                 //ThumbComponent={BiCubeAlt}
                 //track={false}
+                // @ts-ignore
                 styles={{ height: "30px" }}
                 ValueLabelComponent={ValueLabelComponent}
                 defaultValue={0}
@@ -68,18 +72,6 @@ const Slider = ({ mode }: propsM) => {
             />
         </>
     );
-
-    // function SlLabels(soln: string) {
-    //     //TODO props
-    //     var alrg = getAlgs(soln);
-    //     setsolMoves(validateAlgs(alrg).movesNum);
-    //     var cmtLabel = getComments(soln);
-    //     var cmtValue = getAlgCmtNum(soln);
-    //     var MarksC = cmtValue.map(function (Cvalue, index) {
-    //         return { value: Cvalue, label: cmtLabel[index] };
-    //     });
-    //     return MarksC;
-    // }
 };
 
 export default Slider;

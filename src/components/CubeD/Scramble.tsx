@@ -5,8 +5,6 @@ import { useScra, useSetScra, useSol } from "./AlgProvider";
 import { useEffect } from "react";
 interface propsM {
     mode: string;
-    // loadScra: any;
-    // handleScra: any;
 }
 const Scramble = ({ mode }: propsM) => {
     //const [newScra, setnewScra] = useState(loadScra);
@@ -32,7 +30,6 @@ const Scramble = ({ mode }: propsM) => {
     }, [newScra, newSol]);
     return (
         <>
-            {/* @ts-ignore */}
             <ScrambleI mode={selMode(mode)}>
                 <Typography variant="h4" component="h4">
                     Scramble
@@ -48,7 +45,7 @@ const Scramble = ({ mode }: propsM) => {
             </ScrambleI>
         </>
     );
-    function handleChangeScra(event: any) {
+    function handleChangeScra(event: any): void {
         console.log("Scra");
         var Scra = event.target.value;
         //setnewScra(Scra);
