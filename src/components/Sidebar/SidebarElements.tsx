@@ -3,7 +3,7 @@ import { FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
 //import { Link as LinkS } from "react-scroll";
 
-export const SidebarContainer = styled.div`
+export const SidebarContainer = styled.div<{ isOpen: boolean }>`
     position: fixed;
     z-index: 999;
     height: 100%;
@@ -73,7 +73,7 @@ export const ThemeBtn = styled.div`
     ${(props) => props.theme.priopp}
     //align-items: center;
     align-items: center;
-    text-decoration:none;
+    text-decoration: none;
     justify-content: center;
     text-align: center;
     position: relative;

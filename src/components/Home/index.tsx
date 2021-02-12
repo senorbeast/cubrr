@@ -1,19 +1,23 @@
 import React from "react";
 import Navbar from "../Navbar";
 import { makeStyles } from "@material-ui/core/styles";
-import { CssBaseline } from "@material-ui/core";
+//import { CssBaseline } from "@material-ui/core";
 import rubiks_bg from "./rubiks_bg.png";
 import { Typography } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     root: {
         height: "calc(100vh - 5rem)",
         backgroundImage: `url(${rubiks_bg})`,
         minHeight: "calc(100vh - 5rem)",
     },
 }));
-
-function Home(props) {
+interface CmProps {
+    toggle: () => void;
+    theme: string;
+    setTheme: React.Dispatch<any>;
+}
+function Home(props: CmProps) {
     const classes = useStyles();
     return (
         <>

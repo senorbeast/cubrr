@@ -1,4 +1,3 @@
-import React from "react";
 import { useGoogleLogin } from "react-google-login";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
@@ -17,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function LoginHooks() {
-    const onSuccess = (res) => {
+    const onSuccess = (res: any) => {
         console.log("Login Success: currentUser:", res.profileObj);
         alert(
             `Logged in successfully welcome ${res.profileObj.name} 😍. \n See console for full profile object.`
@@ -25,7 +24,7 @@ function LoginHooks() {
         refreshTokenSetup(res);
     };
 
-    const onFailure = (res) => {
+    const onFailure = (res: any) => {
         console.log("Login failed: res:", res);
         alert(`Failed to login. 😢`);
     };

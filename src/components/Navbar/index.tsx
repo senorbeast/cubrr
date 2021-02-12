@@ -18,8 +18,12 @@ import {
     ThemeBtnN,
 } from "./NavbarElements";
 import { SignInBut } from "../BasicElements";
-
-const Navbar = (props) => {
+interface CmProps {
+    toggle: () => void;
+    theme: string;
+    setTheme: React.Dispatch<any>;
+}
+const Navbar = (props: CmProps) => {
     function changeTheme() {
         if (props.theme === "lightT") {
             props.setTheme("darkT");

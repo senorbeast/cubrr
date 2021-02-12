@@ -11,7 +11,13 @@ import { FaSun, FaMoon } from "react-icons/fa";
 import { VscBook } from "react-icons/vsc";
 import { TiThList } from "react-icons/ti";
 
-const SideNav = (props) => {
+interface SNprops {
+    mode: string;
+    setMode: React.Dispatch<React.SetStateAction<string>>;
+    theme: string;
+    setTheme: React.Dispatch<any>;
+}
+const SideNav = (props: SNprops) => {
     function changeTheme() {
         if (props.theme === "lightT") {
             props.setTheme("darkT");

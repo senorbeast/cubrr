@@ -15,7 +15,12 @@ const useStyles = makeStyles((theme) => ({
         height: "calc(100vh - 5rem)",
     },
 }));
-const Signup = (props) => {
+interface CmProps {
+    toggle: () => void;
+    theme: string;
+    setTheme: React.Dispatch<any>;
+}
+const Signup = (props: CmProps) => {
     const classes = useStyles();
     return (
         <>

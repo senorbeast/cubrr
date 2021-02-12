@@ -1,21 +1,27 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import { FaSun, FaMoon } from "react-icons/fa";
 import {
     SidebarContainer,
     CloseIcon,
     Icon,
     SidebarLink,
-    SidebarRoute,
     SidebarWrapper,
     SidebarMenu,
     SideBtnWrap,
     ThemeBtn,
 } from "./SidebarElements";
-import { Link } from "react-router-dom";
 import { SignInBut, MTTag } from "../BasicElements";
 
-const Sidebar = (props) => {
+interface SBprops {
+    mode: string;
+    setMode: React.Dispatch<React.SetStateAction<string>>;
+    theme: string;
+    setTheme: React.Dispatch<any>;
+    isOpen: boolean;
+    toggle: () => void;
+}
+
+const Sidebar = (props: SBprops) => {
     function changeTheme() {
         if (props.theme === "lightT") {
             props.setTheme("darkT");
