@@ -14,17 +14,18 @@ import CUBE from "./CubeThree/CUBE";
 import getAlgs_URL from "./Parser/getAlgs_URL";
 import validateAlgs from "./Parser/validateAlg";
 import { animate_read } from "./CubeThree/cube_animate_read_3";
+import { useScra, useSol, usePlay, useToggPlay } from "./AlgProvider";
 
 export const Trial = (props) => {
+    //console.log("Scratrial", useScra(), useSol());
     const mount = useRef(null);
     const tick = useRef(0);
     let cube_sol = useRef([]);
     let cube = useRef([]);
     //TODO: Try using useRef with camera.current, renderer etc
     //const [count, setCount] = useState(0);
-    const playBtn = useRef(props.play);
+    const playBtn = usePlay();
     //const [plays, setPlay] = useState(0);
-    console.log("Play", playBtn.current);
     // console.log("Play", props.play);
     // console.log("rendered", count);
     let camera = useRef(null);
@@ -55,6 +56,7 @@ export const Trial = (props) => {
         renderer.render(scene.current, camera.current);
     };
     console.log("Trial Component");
+    console.log("Play", usePlay());
 
     useEffect(() => {
         width.current = mount.current.clientWidth;
@@ -95,8 +97,7 @@ export const Trial = (props) => {
     }, []);
 
     useEffect(() => {
-        console.log("useEffect2");
-        playBtn.current = props.play;
+        console.log("useEffect2, Play =", playBtn);
         var controls = new OrbitControls(camera.current, renderer.domElement);
         console.log("Controls", controls);
         function cube_play() {
@@ -152,8 +153,8 @@ export const Trial = (props) => {
             if (url_split.length > 1) {
                 var scramble_arr = url_split[1].split("=");
                 var soln_arr = url_split[2].split("=");
-                var play_button = url_split[3].split("=");
-                play = play_button[1];
+                // var play_button = url_split[3].split("=");
+                // play = play_button[1];
 
                 var url_scramble = scramble_arr[1].replace(/%20/g, "");
                 var url_soln = soln_arr[1].replace(/%20/g, "");
@@ -337,10 +338,7 @@ export const Trial = (props) => {
                     cube.current = scramble;
                 }
 
-                if (
-                    playBtn.current == true &&
-                    (play_flag == 0 || play_flag == 2)
-                ) {
+                if (playBtn == true && (play_flag == 0 || play_flag == 2)) {
                     console.log("True");
                     // this is when the user initially presses the play button so that solution moves gets inversed
                     if (play_flag == 0) {
@@ -356,7 +354,7 @@ export const Trial = (props) => {
                     }
                 }
 
-                if (playBtn.current == false) {
+                if (playBtn == false) {
                     console.log("False");
                     if (play_flag == 1) {
                         play_flag = 2; // so that the moves dont get inversed again
@@ -397,7 +395,7 @@ export const Trial = (props) => {
             window.removeEventListener("resize", handleResize);
             //scene.remove(cube);
         };
-    }, [props.play]);
+    }, [playBtn]);
 
     // useEffect(() => {
     //     const handleResize = () => {

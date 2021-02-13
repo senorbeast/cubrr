@@ -1,5 +1,4 @@
 import { ThemeBtn, ButtonArea } from "./CubeElements";
-import { useState } from "react";
 import {
     CgChevronDoubleRight,
     CgChevronDoubleLeft,
@@ -10,14 +9,15 @@ import { FiCodesandbox } from "react-icons/fi";
 import { WiRefresh } from "react-icons/wi";
 import { ImPlay2, ImPause } from "react-icons/im";
 import selMode from "./modes";
+import { usePlay, useToggPlay } from "./AlgProvider";
 
 interface propsM {
     mode: string;
     setMode: React.Dispatch<React.SetStateAction<string>>;
-    setPlay: any;
 }
-const ButtonBox = ({ mode, setMode, setPlay }: propsM) => {
-    const [play, setplay] = useState(false);
+const ButtonBox = ({ mode, setMode }: propsM) => {
+    let play = usePlay();
+    console.log("PlayBut", play);
     const icon = play == false ? <ImPlay2 /> : <ImPause />;
     return (
         <>
@@ -31,7 +31,8 @@ const ButtonBox = ({ mode, setMode, setPlay }: propsM) => {
                 <ThemeBtn>
                     <CgChevronLeft />
                 </ThemeBtn>
-                <ThemeBtn onClick={togglePlay}>{icon}</ThemeBtn>
+                {/* @ts-ignore */}
+                <ThemeBtn onClick={useToggPlay()}>{icon}</ThemeBtn>
                 <ThemeBtn>
                     <CgChevronRight />
                 </ThemeBtn>
@@ -44,10 +45,6 @@ const ButtonBox = ({ mode, setMode, setPlay }: propsM) => {
             </ButtonArea>
         </>
     );
-    function togglePlay() {
-        setplay(!play);
-        setPlay(play);
-    }
     function toggleMode() {
         let modeto = mode == "fullM" ? "scraM" : "fullM";
         setMode(modeto);

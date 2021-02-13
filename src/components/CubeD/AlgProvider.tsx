@@ -35,10 +35,14 @@ function loadSol() {
 }
 // @ts-ignore
 var undA: (arg0: string) => void = null;
+// @ts-ignore
+var undB: () => void = null;
 const ScrambleContext = React.createContext("");
 const SetScrambleContext = React.createContext(undA);
 const SolutionContext = React.createContext("");
 const SetSolutionContext = React.createContext(undA);
+const PlayContext = React.createContext(false);
+const SetPlayContext = React.createContext(undB);
 
 export function useSol() {
     return useContext(SolutionContext);
@@ -54,6 +58,13 @@ export function useScra() {
 export function useSetScra() {
     return useContext(SetScrambleContext);
 }
+export function usePlay() {
+    return useContext(PlayContext);
+}
+
+export function useToggPlay() {
+    return useContext(SetPlayContext);
+}
 
 const AlgProvider = ({ children }: any) => {
     const [newSol, setnewSol] = useState(loadSol());
@@ -66,14 +77,22 @@ const AlgProvider = ({ children }: any) => {
     const setScra = (scra: string) => {
         setnewScra(scra);
     };
+    const [Play, setPlay] = useState(false);
 
+    const toggleplay = () => {
+        setPlay(!Play);
+    };
     return (
         <>
             <SolutionContext.Provider value={newSol}>
                 <SetSolutionContext.Provider value={setSol}>
                     <ScrambleContext.Provider value={newScra}>
                         <SetScrambleContext.Provider value={setScra}>
-                            {children}
+                            <PlayContext.Provider value={Play}>
+                                <SetPlayContext.Provider value={toggleplay}>
+                                    {children}
+                                </SetPlayContext.Provider>
+                            </PlayContext.Provider>
                         </SetScrambleContext.Provider>
                     </ScrambleContext.Provider>
                 </SetSolutionContext.Provider>

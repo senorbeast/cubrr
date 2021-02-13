@@ -17,7 +17,7 @@ import Scramble from "./Scramble";
 import Solution from "./Solution";
 //import CubeD from "./cube.js";
 import { FullCard } from "./FullCard";
-import Trial from "./trial2";
+import Trial from "./trialFunc";
 import { Typography } from "@material-ui/core";
 import getComments from "./Parser/getComments";
 import getAlgs from "./Parser/getAlgs";
@@ -51,7 +51,7 @@ function CubePage(props) {
     console.log("Index.js");
     let newSol = useSol();
     let newScra = useScra();
-
+    //console.log("ScraINDEDX", useScra(), useSol());
     // let newSol = useSol();
     // let newScra = useScra();
     //const [ctrl, setCtrl] = useState(false);

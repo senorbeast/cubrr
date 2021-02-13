@@ -11,19 +11,13 @@ const Scramble = ({ mode }: propsM) => {
     let newScra = useScra();
     let newSol = useSol();
     let setScra = useSetScra();
-    console.log("Scarbmle", newScra);
     useEffect(() => {
         if (newScra != undefined) {
             console.log("URL useEffect");
             window.history.pushState(
                 "object or string",
                 "",
-                "/cube/?scramble=" +
-                    newScra +
-                    "?solution=" +
-                    newSol +
-                    "?play=" +
-                    "?"
+                "/cube/?scramble=" + newScra + "?solution=" + newSol + "?"
             );
             //console.log("Updating URL");
         }
@@ -46,7 +40,7 @@ const Scramble = ({ mode }: propsM) => {
         </>
     );
     function handleChangeScra(event: any): void {
-        console.log("Scra");
+        //console.log("Scra");
         var Scra = event.target.value;
         //setnewScra(Scra);
         setScra(Scra);

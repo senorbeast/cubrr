@@ -29,9 +29,12 @@ import { animate_read } from "./CubeThree/cube_animate_read_3";
 import CUBE from "./CubeThree/CUBE.js";
 import getAlgs_URL from "./Parser/getAlgs_URL";
 import validateAlgs from "./Parser/validateAlg";
+import { useScra, useSol } from "./AlgProvider";
 
 export const Trial = (props) => {
+    console.log("TRAIL2");
     const mount = useRef(null);
+    console.log("Scratrial", useScra(), useSol());
     const [count, setCount] = useState(0);
     const playBtn = useRef(props.play);
     const [plays, setPlay] = useState(0);
@@ -41,7 +44,7 @@ export const Trial = (props) => {
     // console.log("rendered", count);
 
     useEffect(() => {
-        // console.log("rendered in UseEffect", count);
+        console.log("rendered in UseEffect");
         // console.log("Play in UseEFFect", props.play);
         let width = mount.current.clientWidth;
         let height = mount.current.clientHeight;
