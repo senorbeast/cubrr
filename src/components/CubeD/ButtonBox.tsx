@@ -17,6 +17,7 @@ interface propsM {
 }
 const ButtonBox = ({ mode, setMode }: propsM) => {
     let play = usePlay();
+    let toggleP = useToggPlay();
     console.log("PlayBut", play);
     const icon = play == false ? <ImPlay2 /> : <ImPause />;
     return (
@@ -32,7 +33,7 @@ const ButtonBox = ({ mode, setMode }: propsM) => {
                     <CgChevronLeft />
                 </ThemeBtn>
                 {/* @ts-ignore */}
-                <ThemeBtn onClick={useToggPlay()}>{icon}</ThemeBtn>
+                <ThemeBtn onClick={toggle}>{icon}</ThemeBtn>
                 <ThemeBtn>
                     <CgChevronRight />
                 </ThemeBtn>
@@ -45,6 +46,10 @@ const ButtonBox = ({ mode, setMode }: propsM) => {
             </ButtonArea>
         </>
     );
+    function toggle() {
+        console.log("Toggled.");
+        toggleP();
+    }
     function toggleMode() {
         let modeto = mode == "fullM" ? "scraM" : "fullM";
         setMode(modeto);

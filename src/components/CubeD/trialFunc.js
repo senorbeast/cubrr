@@ -14,7 +14,7 @@ import CUBE from "./CubeThree/CUBE";
 import getAlgs_URL from "./Parser/getAlgs_URL";
 import validateAlgs from "./Parser/validateAlg";
 import { animate_read } from "./CubeThree/cube_animate_read_3";
-import { useScra, useSol, usePlay, useToggPlay } from "./AlgProvider";
+import { useScra, useSol, usePlay } from "./AlgProvider";
 
 export const Trial = (props) => {
     //console.log("Scratrial", useScra(), useSol());
@@ -24,7 +24,7 @@ export const Trial = (props) => {
     let cube = useRef([]);
     //TODO: Try using useRef with camera.current, renderer etc
     //const [count, setCount] = useState(0);
-    const playBtn = usePlay();
+    const playC = usePlay();
     //const [plays, setPlay] = useState(0);
     // console.log("Play", props.play);
     // console.log("rendered", count);
@@ -48,7 +48,6 @@ export const Trial = (props) => {
     var play_flag = 0;
     var focus = 0;
     // var scramble_state = [];
-    var play = "false";
     var sc_be_so = 0;
     let frameId;
     var mycube;
@@ -56,7 +55,7 @@ export const Trial = (props) => {
         renderer.render(scene.current, camera.current);
     };
     console.log("Trial Component");
-    console.log("Play", usePlay());
+    console.log("Play", playC);
 
     useEffect(() => {
         width.current = mount.current.clientWidth;
@@ -93,19 +92,24 @@ export const Trial = (props) => {
         cube1.current.add();
         cube1.current.color();
 
-        //return () => {};
+        return () => {
+            if (mount.current !== null) {
+                mount.current.removeChild(renderer.domElement);
+            }
+            //scene.remove(cube);
+        };
     }, []);
 
     useEffect(() => {
-        console.log("useEffect2, Play =", playBtn);
+        console.log("useEffect2, Play =", playC);
         var controls = new OrbitControls(camera.current, renderer.domElement);
-        console.log("Controls", controls);
+        //console.log("Controls", controls);
         function cube_play() {
             var cube_soln_animate = animate_read(soln, soln, [], 0);
             //console.log(cube_soln_animate);
             //console.log("tick teri mkb", tick);
-            console.log(".");
-            console.log("tick", tick.current);
+            //console.log(".");
+            //console.log("tick", tick.current);
             if (tick.current < cube_soln_animate.length) {
                 cube1.current.animateMove(cube_soln_animate[tick.current], 600);
 
@@ -337,9 +341,9 @@ export const Trial = (props) => {
                     cube1.current.fastMove(cube.current.concat(soln), 1);
                     cube.current = scramble;
                 }
-
-                if (playBtn == true && (play_flag == 0 || play_flag == 2)) {
-                    console.log("True");
+                console.log("in Animate, Play =", playC);
+                if (playC && (play_flag == 0 || play_flag == 2)) {
+                    //console.log("True");
                     // this is when the user initially presses the play button so that solution moves gets inversed
                     if (play_flag == 0) {
                         cube1.current.fastMove(soln, 1);
@@ -354,8 +358,8 @@ export const Trial = (props) => {
                     }
                 }
 
-                if (playBtn == false) {
-                    console.log("False");
+                if (!playC) {
+                    //console.log("False");
                     if (play_flag == 1) {
                         play_flag = 2; // so that the moves dont get inversed again
                         clearInterval(mycube);
@@ -395,7 +399,7 @@ export const Trial = (props) => {
             window.removeEventListener("resize", handleResize);
             //scene.remove(cube);
         };
-    }, [playBtn]);
+    }, [playC]);
 
     // useEffect(() => {
     //     const handleResize = () => {

@@ -387,6 +387,7 @@ export const Trial = (props) => {
 
         return () => {
             stop();
+            console.log("Unmount uE1");
             window.removeEventListener("resize", handleResize);
             if (mount.current !== null) {
                 mount.current.removeChild(renderer.domElement);

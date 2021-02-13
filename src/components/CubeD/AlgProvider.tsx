@@ -80,7 +80,7 @@ const AlgProvider = ({ children }: any) => {
     const [Play, setPlay] = useState(false);
 
     const toggleplay = () => {
-        setPlay(!Play);
+        setPlay((prev) => !prev);
     };
     return (
         <>
