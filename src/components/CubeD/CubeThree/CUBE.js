@@ -1,8 +1,8 @@
-import { cubelets_form } from "./cubelets.js";
-import { cube_color } from "./cubelet_colors.js";
+import { cubelets_form } from "./cubelets";
+import { cube_color } from "./cubelet_colors";
 import { scramble_read } from "./cube_scramble_read";
-import { fast_execute } from "./cube_fast_execute.js";
-import { animate_execute } from "./cube_animate_execute.js";
+import { fast_execute } from "./cube_fast_execute";
+import { animate_execute } from "./cube_animate_execute";
 import { animate_read } from "./cube_animate_read_3";
 import { draw_text } from "./cube_text";
 import * as THREE from "three";

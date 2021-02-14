@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as THREE from "three";
 import gsap from "gsap";
 import { draw_text } from "./cube_text.js";

@@ -1,3 +1,4 @@
+// @ts-nocheck
 //  var scramble = ["R","'","F","'","B","L","U"]
 
 function scramble_read(scramble, url1, cube, but) {
