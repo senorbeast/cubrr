@@ -1,44 +1,26 @@
-import React, {
-    Component,
-    useLayoutEffect,
-    useState,
-    useEffect,
-    useRef,
-} from "react";
-import ReactDOM from "react-dom";
-import createjs from "../../../node_modules/createjs-module/createjs";
+import { useEffect, useRef } from "react";
 import { TrialStyle } from "./CubeElements";
-import gsap from "gsap";
 import * as themes from "../themes";
-
-// // import Stats from '/jsm/libs/stats.module.js';
-// import { animation_sequence } from "./cube_animation_sequence.js";
-// import { beg_cross } from "./cube_beg_cross.js";
-// import { cubelets_form } from "./cubelets.js";
-// import { fast_execute } from "./cube_fast_execute.js";
-// import { cube_color } from "./cubelet_colors.js";
-
-// import { animate_execute } from "./cube_animate_execute.js";
-// import { draw_text } from "./cube_text.js";
-// import { face_plane_make } from "./cube_face_plane.js";
 import { OrbitControls } from "../../../node_modules/three/examples/jsm/controls/OrbitControls";
-// /import Stats from '/jsm/libs/stats.module.js';
 import * as THREE from "three";
-import { scramble_read } from "./CubeThree/cube_scramble_read";
 import { animate_read } from "./CubeThree/cube_animate_read_3";
-import CUBE from "./CubeThree/CUBE.js";
+import CUBE from "./CubeThree/CUBE";
 import getAlgs_URL from "./Parser/getAlgs_URL";
-import validateAlgs from "./Parser/validateAlg";
-import { useScra, useSol } from "./AlgProvider";
 
-export const Trial = (props) => {
+import { useScra, useSol, usePlay } from "./AlgProvider";
+// import { face_plane_make } from "./CubeThree/cube_face_plane";
+
+interface TProps {
+    widthp: number;
+    heightp: number;
+    theme: string;
+}
+
+export const Trial = (props: TProps) => {
     console.log("TRAIL2");
     const mount = useRef(null);
+    const playBtn = usePlay();
     console.log("Scratrial", useScra(), useSol());
-    const [count, setCount] = useState(0);
-    const playBtn = useRef(props.play);
-    const [plays, setPlay] = useState(0);
-    playBtn.current = props.play;
     console.log("props trail", props);
     // console.log("Play", props.play);
     // console.log("rendered", count);
@@ -46,24 +28,18 @@ export const Trial = (props) => {
     useEffect(() => {
         console.log("rendered in UseEffect");
         // console.log("Play in UseEFFect", props.play);
-        let width = mount.current.clientWidth;
+        //@ts-ignore
+        let width = mount.current.clientWidth; //@ts-ignore
         let height = mount.current.clientHeight;
-        let frameId;
-        var mycube;
+        let frameId: number | null;
+        var mycube: NodeJS.Timeout;
 
         // var scene = new THREE.Scene();
         /* variables to create color */
-        var flag = 1;
         var scene = new THREE.Scene();
-        var scramble_meshs = [];
-        var meshs = [];
-        var cube_sol = [];
-        var core = [];
-        var ret = [];
-        var face_plane = [];
-        var animation_flag = 0;
+        var cube_sol: string | any[] = [];
+        // var face_plane: never[] = [];
         var tick = 0; //used in time line to keep track on which move to be made
-        var slider_value = 0;
         //   let mapDimensions = this.mount.getBoundingClientRect();
         //   let width = this.mount.clientWidth;
         //   let height = this.mount.clientHeight;
@@ -87,32 +63,28 @@ export const Trial = (props) => {
         var renderer = new THREE.WebGLRenderer({
             alpha: true,
             antialias: true,
-        });
+        }); //@ts-ignore
         renderer.setClearColor(themes[props.theme].primary);
-        renderer.setSize(width, height, true);
+        renderer.setSize(width, height, true); //@ts-ignore
         mount.current.appendChild(renderer.domElement);
         //var anisotropy = renderer.capabilities.getMaxAnisotropy();
         var controls = new OrbitControls(camera, renderer.domElement);
         // var mov1 = 0;
-        var moves = [];
-        var moves6 = [];
         //var moves_sol = [];
         var url_scra1 = "a";
         var url_soln1 = "a";
         var scramble = [];
-        var soln = [];
-        var cube = [];
+        var soln: ConcatArray<any> = [];
+        var cube: any[] = [];
         var current_move = [];
         var current_soln = [];
-        var cube_sol = [];
+        var cube_sol: string | any[] = [];
         var play_flag = 0;
         var focus = 0;
         // var scramble_state = [];
         var play = "false";
         var sc_be_so = 0;
-        var pad = 5;
         // gap between the layers
-        var padding = pad;
         // radius of the fillet used on corners of cube
         var c = document.createElement("canvas");
         var ctx = c.getContext("2d");
@@ -127,7 +99,8 @@ export const Trial = (props) => {
         };
         renderScene();
         const handleResize = () => {
-            width = mount.current.clientWidth;
+            //@ts-ignore
+            width = mount.current.clientWidth; //@ts-ignore
             height = mount.current.clientHeight;
             renderer.setSize(width, height);
             camera.aspect = width / height;
@@ -148,11 +121,12 @@ export const Trial = (props) => {
                 clearInterval(mycube);
             }
         }
-        window.addEventListener("visibilitychange", (event) => {
+        window.addEventListener("visibilitychange", () => {
             if (document.visibilityState != "visible") {
                 focus = 1;
                 clearInterval(mycube);
             } else if (document.visibilityState == "visible" && focus == 1) {
+                //@ts-ignore
                 setInterval(mycube, 600);
                 focus = 2;
             }
@@ -285,18 +259,18 @@ export const Trial = (props) => {
                             cube1.fastMove(soln, 0);
 
                             // console.log(scramble_meshs);
-                        }
+                        } //@ts-ignore
                         cube_sol = soln;
                     } else if (soln.length < cube_sol.length) {
                         cube1.fastMove(cube_sol, 1);
-                        cube1.fastMove(soln, 0);
+                        cube1.fastMove(soln, 0); //@ts-ignore
                         cube_sol = soln;
                     }
 
                     if (soln.length == cube_sol.length) {
                         if (JSON.stringify(soln) !== JSON.stringify(cube_sol)) {
                             cube1.fastMove(cube_sol, 1);
-                            cube1.fastMove(soln, 0);
+                            cube1.fastMove(soln, 0); //@ts-ignore
                             cube_sol = soln;
                         }
                     }
@@ -340,29 +314,30 @@ export const Trial = (props) => {
                     }
                 }
             }
-            if (playBtn == "true") {
-                face_plane_make(
-                    face_plane,
-                    "true",
-                    tx1,
-                    tx2,
-                    tx3,
-                    tx4,
-                    tx5,
-                    tx6
-                );
+            if (playBtn === true) {
+                // @ts-ignore
+                // face_plane_make(
+                //     face_plane,
+                //     "true", // @ts-ignore
+                //     tx1, // @ts-ignore
+                //     tx2, // @ts-ignore
+                //     tx3, // @ts-ignore
+                //     tx4, // @ts-ignore
+                //     tx5, // @ts-ignore
+                //     tx6
+                // );
             }
-            if (playBtn == "false") {
-                face_plane_make(
-                    face_plane,
-                    "false",
-                    tx1,
-                    tx2,
-                    tx3,
-                    tx4,
-                    tx5,
-                    tx6
-                );
+            if (playBtn == false) {
+                // face_plane_make(
+                //     face_plane,
+                //     "false", // @ts-ignore
+                //     tx1, // @ts-ignore
+                //     tx2, // @ts-ignore
+                //     tx3, // @ts-ignore
+                //     tx4, // @ts-ignore
+                //     tx5, // @ts-ignore
+                //     tx6
+                // );
             }
 
             renderScene();
@@ -375,14 +350,15 @@ export const Trial = (props) => {
         };
 
         const stop = () => {
+            // @ts-ignore
             cancelAnimationFrame(frameId);
             frameId = null;
         };
-
+        // @ts-ignore
         mount.current.appendChild(renderer.domElement);
         window.addEventListener("resize", handleResize);
         start();
-
+        // @ts-ignore
         controls.current = { start, stop };
 
         return () => {
@@ -390,11 +366,12 @@ export const Trial = (props) => {
             console.log("Unmount uE1");
             window.removeEventListener("resize", handleResize);
             if (mount.current !== null) {
+                // @ts-ignore
                 mount.current.removeChild(renderer.domElement);
             }
             //scene.remove(cube);
-        };
-    }, [props.theme, props.width, props.height]);
+        }; // @ts-ignore
+    }, [props.theme, props.widthp, props.heightp]);
 
     return (
         <>

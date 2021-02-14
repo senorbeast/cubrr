@@ -13,8 +13,6 @@ import {
 import { SignInBut, MTTag } from "../BasicElements";
 
 interface SBprops {
-    mode: string;
-    setMode: React.Dispatch<React.SetStateAction<string>>;
     theme: string;
     setTheme: React.Dispatch<any>;
     isOpen: boolean;

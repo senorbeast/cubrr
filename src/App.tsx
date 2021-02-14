@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Sidebar from "./components/Sidebar";
 //import CubeD from "./components/CubeD";
 import Home from "./components/Home";
@@ -11,7 +11,6 @@ import {
 } from "@material-ui/core/styles";
 import * as themes from "./components/themes";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import CubePage from "./components/CubeD";
 import { reactLocalStorage } from "reactjs-localstorage";
 import CubeAlgWrap from "./components/CubeD/CubeAlgWrap";
 
@@ -39,6 +38,7 @@ const App = () => {
     }, [theme]);
     return (
         <>
+            {/* @ts-ignore */}
             <ThemeProvider theme={themes[theme]}>
                 <TPMaterial theme={themeMUI}>
                     <Router>

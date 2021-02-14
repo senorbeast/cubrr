@@ -1,4 +1,3 @@
-import React from "react";
 import App from "./App";
 import ApolloClient from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
@@ -9,7 +8,7 @@ const httpLink = createHttpLink({
     uri: "http://localhost:5000",
 });
 
-const client = new ApolloClient({
+const client: any = new ApolloClient({
     link: httpLink,
     cache: new InMemoryCache(),
 });

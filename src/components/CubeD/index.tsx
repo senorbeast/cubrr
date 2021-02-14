@@ -1,28 +1,13 @@
+// @ts-nocheck
 import SideNav from "../SideNav";
 import { useState, useEffect, useRef } from "react";
-import {
-    CardContainer,
-    CubeContainer,
-    AlgsCard,
-    ScrambleI,
-    SolutionI,
-    InTextArea1,
-    InTextArea2,
-    ThemeBtn,
-    ButtonArea,
-    PrettoSlider,
-} from "./CubeElements";
+import { CardContainer, CubeContainer, AlgsCard } from "./CubeElements";
 import selMode from "./modes";
 import Scramble from "./Scramble";
 import Solution from "./Solution";
 //import CubeD from "./cube.js";
 import { FullCard } from "./FullCard";
 import Trial from "./trialFunc";
-import { Typography } from "@material-ui/core";
-import getComments from "./Parser/getComments";
-import getAlgs from "./Parser/getAlgs";
-import validateAlgs from "./Parser/validateAlg";
-import getAlgCmtNum from "./Parser/getAlgCmtNum";
 import ButtonBox from "./ButtonBox";
 import Slider from "./Slider";
 import AlgProvider from "./AlgProvider";
@@ -49,8 +34,6 @@ function CubePage(props) {
     });
     // let play = useRef(false);s
     console.log("Index.js");
-    let newSol = useSol();
-    let newScra = useScra();
     //console.log("ScraINDEDX", useScra(), useSol());
     // let newSol = useSol();
     // let newScra = useScra();
@@ -98,7 +81,7 @@ function CubePage(props) {
                             heightp={dimensions.height}
                             theme={props.theme}
                         />
-                        <Slider />
+                        <Slider mode={mode} />
                         <ButtonBox mode={mode} setMode={setMode} />
                     </CubeContainer>
                     <AlgsCard mode={selMode(mode)}>

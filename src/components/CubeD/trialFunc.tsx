@@ -1,22 +1,16 @@
-import React, {
-    Component,
-    useLayoutEffect,
-    useState,
-    useEffect,
-    useRef,
-} from "react";
+// @ts-nocheck
+import { useEffect, useRef } from "react";
 import { TrialStyle } from "./CubeElements";
-import * as themes from "../themes";
 import { OrbitControls } from "../../../node_modules/three/examples/jsm/controls/OrbitControls";
 // /import Stats from '/jsm/libs/stats.module.js';
 import * as THREE from "three";
 import CUBE from "./CubeThree/CUBE";
 import getAlgs_URL from "./Parser/getAlgs_URL";
-import validateAlgs from "./Parser/validateAlg";
-import { animate_read } from "./CubeThree/cube_animate_read_3";
-import { useScra, useSol, usePlay } from "./AlgProvider";
 
-export const Trial = (props) => {
+import { animate_read } from "./CubeThree/cube_animate_read_3";
+import { usePlay } from "./AlgProvider";
+
+export const Trial = () => {
     //console.log("Scratrial", useScra(), useSol());
     const mount = useRef(null);
     const tick = useRef(0);
@@ -40,7 +34,7 @@ export const Trial = (props) => {
     var url_scra1 = "a";
     var url_soln1 = "a";
     var scramble = [];
-    var soln = [];
+    var soln: any[] | ConcatArray<string> = [];
     //   var cube = [];
     var current_move = [];
     var current_soln = [];
@@ -49,8 +43,8 @@ export const Trial = (props) => {
     var focus = 0;
     // var scramble_state = [];
     var sc_be_so = 0;
-    let frameId;
-    var mycube;
+    let frameId: number | null;
+    var mycube: NodeJS.Timeout;
     const renderScene = () => {
         renderer.render(scene.current, camera.current);
     };
@@ -62,10 +56,8 @@ export const Trial = (props) => {
         height.current = mount.current.clientHeight;
         console.log("Mount", mount);
         console.log("useEffect1");
-        var flag = 1;
         scene.current = new THREE.Scene();
         // var face_plane = [];
-        var animation_flag = 0;
         //used in time line to keep track on which move to be made
         var FIELD_OF_VIEW = 45,
             WIDTH = width.current,
@@ -121,7 +113,7 @@ export const Trial = (props) => {
                 clearInterval(mycube);
             }
         }
-        window.addEventListener("visibilitychange", (event) => {
+        window.addEventListener("visibilitychange", () => {
             if (document.visibilityState != "visible") {
                 focus = 1;
                 clearInterval(mycube);
