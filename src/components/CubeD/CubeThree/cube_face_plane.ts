@@ -1,7 +1,15 @@
-// @ts-nocheck
-import * as THREE from "three";
-function face_plane_make(plane, t, tx1, tx2, tx3, tx4, tx5, tx6) {
-    var name_plane = [];
+// @ts-ignore
+function face_plane_make(
+    plane: any,
+    t: any, // @ts-ignore
+    tx1: any, // @ts-ignore
+    tx2: any, // @ts-ignore
+    tx3: any, // @ts-ignore
+    tx4: any, // @ts-ignore
+    tx5: any, // @ts-ignore
+    tx6: any
+): void {
+    // var name_plane = [];
 
     if (t == "true") {
         for (var j = 0; j < 6; j++) {

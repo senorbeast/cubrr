@@ -1,7 +1,11 @@
-// @ts-nocheck
 //  var scramble = ["R","'","F","'","B","L","U"]
 
-function scramble_read(scramble, url1, cube, but) {
+function scramble_read(
+    scramble: any,
+    url1: any,
+    cube: any,
+    but: any
+): string[] {
     var flag = 0;
     var ar = 0;
     var lay = [];

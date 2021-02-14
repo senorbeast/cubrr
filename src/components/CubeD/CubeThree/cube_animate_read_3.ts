@@ -1,6 +1,6 @@
 //  var scramble = ["R","'","F","'","B","L","U"]
-// @ts-nocheck
-function animate_read(scramble, url, cube, but) {
+// @ts-ignore
+function animate_read(scramble: any, url: any, cube: any, but: any): string[] {
     var flag = 0;
     var lay = [];
 

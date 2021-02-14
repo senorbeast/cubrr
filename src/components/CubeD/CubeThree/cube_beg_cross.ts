@@ -1,12 +1,18 @@
-// @ts-nocheck
 import * as THREE from "three";
 import gsap from "gsap";
 import { draw_text } from "./cube_text.js";
-import { animate_read } from "./CubeThree/cube_animate_read_3.js";
-import { scramble_read } from "./cube_scramble_read_v3.js";
+import { animate_read } from "./cube_animate_read_3";
+import { scramble_read } from "./cube_scramble_read";
 import { fast_execute } from "./cube_fast_execute.js";
 import { animate_execute } from "./cube_animate_execute.js";
-function beg_cross(scene, meshs, ctx, c, padding, renderer) {
+function beg_cross(
+    scene: any,
+    meshs: any,
+    ctx: any,
+    c: any,
+    padding: any,
+    renderer: any
+): void {
     var scramble = scramble_read(
         [
             "R",

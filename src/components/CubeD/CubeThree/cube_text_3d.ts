@@ -1,6 +1,5 @@
-// @ts-nocheck
 import * as THREE from "three";
-function draw_text_3d(scene, text, ypos) {
+function draw_text_3d(scene: any, text: any, ypos: any): void {
     const fontJson = require("./fonts/Poppins_Medium_Regular.json");
     const font = new THREE.Font(fontJson);
     var textGeo = new THREE.TextGeometry(text, {
@@ -23,4 +22,4 @@ function draw_text_3d(scene, text, ypos) {
 
     scene.add(textMesh1);
 }
-export { draw_text };
+export { draw_text_3d };

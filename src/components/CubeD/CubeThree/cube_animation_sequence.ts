@@ -1,14 +1,19 @@
-// @ts-nocheck
 import * as THREE from "three";
 import gsap from "gsap";
-
-function animation_sequence(scene, meshs, core, camera) {
+// @ts-ignore
+function animation_sequence(
+    scene: any,
+    meshs: any,
+    core: any, // @ts-ignore
+    camera: any
+): void {
     var edges = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25, 13];
     var corners = [0, 2, 6, 8, 18, 20, 24, 26, 13];
     var centre = [4, 10, 12, 14, 16, 22, 13];
     var pivot = new THREE.Object3D();
     var positions = [];
     var core_grp = new THREE.Object3D();
+    //@ts-ignore
     var v4 = new THREE.Vector3();
     for (var j = 0; j < meshs.length; j++) {
         var v3 = new THREE.Vector3();

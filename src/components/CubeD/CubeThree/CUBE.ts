@@ -1,15 +1,17 @@
+// @ts-nocheck
 import { cubelets_form } from "./cubelets";
 import { cube_color } from "./cubelet_colors";
 import { scramble_read } from "./cube_scramble_read";
 import { fast_execute } from "./cube_fast_execute";
 import { animate_execute } from "./cube_animate_execute";
-import { animate_read } from "./cube_animate_read_3";
+// import { animate_read } from "./cube_animate_read_3";
 import { draw_text } from "./cube_text";
 import * as THREE from "three";
 export default class CUBE {
+    // @ts-ignore
     #mesh = []; // just add "default"
 
-    constructor(cube_size, camera, renderer, scene) {
+    constructor(cube_size: any, camera: any, renderer: any, scene: any) {
         this.scene = scene;
         this.camera = camera;
         this.camera.position.z = 275;

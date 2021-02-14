@@ -1,7 +1,14 @@
-// @ts-nocheck
 import * as THREE from "three";
 import canvasTxt from "canvas-txt";
-function draw_text(scene, text, renderer, ctx, c, reload) {
+//@ts-ignore
+function draw_text(
+    scene: any,
+    text: any,
+    renderer: any,
+    ctx: any,
+    c: any, //@ts-ignore
+    reload: any
+): void {
     c.height = 300;
     c.width = 750;
     //ctx.clearRect(0,0,c.width,c.height);

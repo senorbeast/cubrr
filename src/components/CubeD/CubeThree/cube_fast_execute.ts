@@ -1,6 +1,5 @@
-// @ts-nocheck
-import { layer_group } from "./cubelet_group.js";
-function fast_execute(scene, meshs, padding, moves) {
+import { layer_group } from "./cubelet_group";
+function fast_execute(scene: any, meshs: any, padding: any, moves: any): void {
     for (var i = 0; i < moves.length; i++) {
         var moves2 = moves[i];
         var moves3 = moves2.split("_");
@@ -13,7 +12,7 @@ function fast_execute(scene, meshs, padding, moves) {
             Number(moves3[0]),
             moves3[2]
         );
-
+        //@ts-ignore
         moves1[0].rotateOnWorldAxis(moves1[1], moves1[2]);
     }
 }
