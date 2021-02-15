@@ -11,7 +11,12 @@ export default class CUBE {
     // @ts-ignore
     #mesh = []; // just add "default"
 
-    constructor(cube_size: any, camera: any, renderer: any, scene: any) {
+    constructor(
+        cube_size: number,
+        camera: THREE.PerspectiveCamera | null,
+        renderer: THREE.WebGLRenderer,
+        scene: THREE.Scene | null
+    ) {
         this.scene = scene;
         this.camera = camera;
         this.camera.position.z = 275;
@@ -72,20 +77,29 @@ export default class CUBE {
     color() {
         cube_color(this.meshs);
     }
-    liveMove(current_move, currentfull, previous, num) {
+    liveMove(
+        current_move: string | any[],
+        currentfull: ConcatArray<any>,
+        previous: string | any[],
+        num: number
+    ) {
         var moves = scramble_read(current_move, currentfull, previous, num);
 
         fast_execute(this.scene, this.meshs, 5, moves);
     }
-    fastMove(moves, num) {
+    fastMove(moves: string | ConcatArray<any>, num: number) {
         var moves1 = scramble_read(moves, moves, [], num);
         fast_execute(this.scene, this.meshs, 5, moves1);
     }
-    animateMove(move, time) {
+    animateMove(move: string, time: number) {
         //   var moves = animate_read(move, move, [], 0);
         animate_execute(this.scene, this.meshs, move, 5, time, 0);
     }
-    text(text, ctx, c) {
+    text(
+        text: string,
+        ctx: CanvasRenderingContext2D | null,
+        c: HTMLCanvasElement | HTMLImageElement | HTMLVideoElement
+    ) {
         draw_text(this.scene, text, this.renderer, ctx, c);
     }
 }

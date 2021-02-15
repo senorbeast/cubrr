@@ -2,12 +2,16 @@ import * as THREE from "three";
 import canvasTxt from "canvas-txt";
 //@ts-ignore
 function draw_text(
-    scene: any,
+    scene: {
+        add: (
+            arg0: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>
+        ) => void;
+    },
     text: any,
-    renderer: any,
-    ctx: any,
-    c: any, //@ts-ignore
-    reload: any
+    renderer: { capabilities: { getMaxAnisotropy: () => number } },
+    ctx: CanvasRenderingContext2D,
+    c: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement, //@ts-ignore
+    reload: undefined
 ): void {
     c.height = 300;
     c.width = 750;

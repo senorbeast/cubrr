@@ -1,7 +1,11 @@
 // @ts-nocheck
-import { orange } from "@material-ui/core/colors";
+import THREE from "three";
 import { fast_execute } from "./cube_fast_execute.js";
-function pll_recog(scene, meshs, pll_color) {
+export function pll_recog(
+    scene: { add: any },
+    meshs: string | any[],
+    pll_color: any
+) {
     var pll_vec = new THREE.Vector3();
     var pll_side = new THREE.Object3D();
     switch (plll_color) {

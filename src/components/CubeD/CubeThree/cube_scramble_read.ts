@@ -1,10 +1,10 @@
 //  var scramble = ["R","'","F","'","B","L","U"]
 
 function scramble_read(
-    scramble: any,
-    url1: any,
-    cube: any,
-    but: any
+    scramble: string | any[],
+    url1: string[],
+    cube: string | any[],
+    but: number
 ): string[] {
     var flag = 0;
     var ar = 0;

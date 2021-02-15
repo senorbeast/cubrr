@@ -1,5 +1,11 @@
+import { Object3D } from "three";
 import { layer_group } from "./cubelet_group";
-function fast_execute(scene: any, meshs: any, padding: any, moves: any): void {
+function fast_execute(
+    scene: { add: (arg0: Object3D) => void },
+    meshs: string | any[],
+    padding: number,
+    moves: string | any[]
+): void {
     for (var i = 0; i < moves.length; i++) {
         var moves2 = moves[i];
         var moves3 = moves2.split("_");

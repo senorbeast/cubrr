@@ -1,6 +1,11 @@
 //  var scramble = ["R","'","F","'","B","L","U"]
-// @ts-ignore
-function animate_read(scramble: any, url: any, cube: any, but: any): string[] {
+
+function animate_read(
+    scramble: string | ConcatArray<any>,
+    url: string | ConcatArray<any>,
+    cube: string | any[],
+    _but: number
+): string[] {
     var flag = 0;
     var lay = [];
 

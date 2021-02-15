@@ -1,15 +1,21 @@
 import * as THREE from "three";
 
 function cubelets_form(
-    scene: any, //@ts-ignore
+    scene: {
+        add: (
+            arg0:
+                | THREE.Mesh<THREE.CylinderGeometry, THREE.MeshBasicMaterial>
+                | THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>
+        ) => void;
+    }, //@ts-ignore
     size: any,
-    padding: any,
-    tx1: any,
-    tx2: any,
-    tx3: any,
-    tx4: any,
-    tx5: any,
-    tx6: any
+    padding: number,
+    tx1: THREE.Texture | null,
+    tx2: THREE.Texture | null,
+    tx3: THREE.Texture | null,
+    tx4: THREE.Texture | null,
+    tx5: THREE.Texture | null,
+    tx6: THREE.Texture | null
 ):
     | THREE.Mesh<THREE.CylinderGeometry, THREE.MeshBasicMaterial>[]
     | THREE.Mesh<any> {

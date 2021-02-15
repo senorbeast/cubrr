@@ -6,8 +6,8 @@ import { scramble_read } from "./cube_scramble_read";
 import { fast_execute } from "./cube_fast_execute.js";
 import { animate_execute } from "./cube_animate_execute.js";
 function beg_cross(
-    scene: any,
-    meshs: any,
+    scene: { add: (arg0: THREE.Object3D) => void },
+    meshs: string | any[],
     ctx: any,
     c: any,
     padding: any,

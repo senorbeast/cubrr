@@ -1,13 +1,15 @@
+// @ts-nocheck
 import gsap from "gsap";
+import { Object3D } from "three";
 import { layer_group } from "./cubelet_group";
 var mov1 = 0;
 function animate_execute(
-    scene: any,
-    meshs: any,
-    soln: any,
-    padding: any,
-    time: any,
-    si_mu: any
+    scene: { add: (arg0: Object3D) => void },
+    meshs: string | any[],
+    soln: string | string[],
+    padding: number,
+    time: number,
+    si_mu: number
 ): void {
     if (si_mu == 0) {
         rotate(scene, meshs, soln, padding, time);
@@ -30,11 +32,11 @@ function comp1(scene: any, meshs: any, soln: any, padding: any): void {
 }
 
 function rotate(
-    scene: any,
-    meshs: any,
-    soln: any,
-    padding: any,
-    time: any
+    scene: { add: any },
+    meshs: string | any[],
+    soln: string | string[],
+    padding: number,
+    time: number
 ): void {
     time = time / 1000;
 
@@ -56,9 +58,8 @@ function rotate(
         moves3[1] == "y" ||
         moves3[1] == "E"
     ) {
-        // @ts-ignore
         gsap.to(moves1[0].rotation, {
-            duration: time, // @ts-ignore
+            duration: time,
             y: moves1[0].rotation.y + moves1[2],
         });
     } else if (
@@ -69,9 +70,8 @@ function rotate(
         moves3[1] == "z" ||
         moves3[1] == "S"
     ) {
-        // @ts-ignore
         gsap.to(moves1[0].rotation, {
-            duration: time, // @ts-ignore
+            duration: time,
             z: moves1[0].rotation.z + moves1[2],
         });
     } else if (
@@ -82,14 +82,19 @@ function rotate(
         moves3[1] == "x" ||
         moves3[1] == "M"
     ) {
-        // @ts-ignore
         gsap.to(moves1[0].rotation, {
-            duration: time, // @ts-ignore
+            duration: time,
             x: moves1[0].rotation.x + moves1[2],
         });
     }
 }
-function mu_rotate(scene: any, meshs: any, soln: any, padding: any, time: any) {
+function mu_rotate(
+    scene: { add: (arg0: Object3D) => void },
+    meshs: string | any[],
+    soln: string | string[],
+    padding: number,
+    time: number
+) {
     time = time / 1000;
     console.log(soln);
     var moves3 = soln[mov1].split("_");
@@ -110,9 +115,8 @@ function mu_rotate(scene: any, meshs: any, soln: any, padding: any, time: any) {
         moves3[1] == "y" ||
         moves3[1] == "E"
     ) {
-        // @ts-ignore
         gsap.to(moves1[0].rotation, {
-            duration: time, // @ts-ignore
+            duration: time,
             y: moves1[0].rotation.y + moves1[2],
             onComplete: comp,
             onCompleteParams: [scene, meshs, soln, padding],
@@ -125,9 +129,8 @@ function mu_rotate(scene: any, meshs: any, soln: any, padding: any, time: any) {
         moves3[1] == "z" ||
         moves3[1] == "S"
     ) {
-        // @ts-ignore
         gsap.to(moves1[0].rotation, {
-            duration: time, // @ts-ignore
+            duration: time,
             z: moves1[0].rotation.z + moves1[2],
             onComplete: comp,
             onCompleteParams: [scene, meshs, soln, padding],
@@ -140,9 +143,8 @@ function mu_rotate(scene: any, meshs: any, soln: any, padding: any, time: any) {
         moves3[1] == "x" ||
         moves3[1] == "M"
     ) {
-        // @ts-ignore
         gsap.to(moves1[0].rotation, {
-            duration: time, // @ts-ignore
+            duration: time,
             x: moves1[0].rotation.x + moves1[2],
             onComplete: comp,
             onCompleteParams: [scene, meshs, soln, padding],

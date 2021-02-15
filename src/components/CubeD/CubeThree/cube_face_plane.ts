@@ -1,7 +1,6 @@
-// @ts-ignore
 function face_plane_make(
-    plane: any,
-    t: any, // @ts-ignore
+    plane: { material: { opacity: number } }[],
+    t: string, // @ts-ignore
     tx1: any, // @ts-ignore
     tx2: any, // @ts-ignore
     tx3: any, // @ts-ignore

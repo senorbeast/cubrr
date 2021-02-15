@@ -1,11 +1,11 @@
 import * as THREE from "three";
 import gsap from "gsap";
-// @ts-ignore
+
 function animation_sequence(
-    scene: any,
-    meshs: any,
-    core: any, // @ts-ignore
-    camera: any
+    scene: { add: (arg0: THREE.Object3D) => void },
+    meshs: string | any[],
+    core: string | any[],
+    _camera: any
 ): void {
     var edges = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25, 13];
     var corners = [0, 2, 6, 8, 18, 20, 24, 26, 13];

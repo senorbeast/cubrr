@@ -1,11 +1,11 @@
 import * as THREE from "three";
 function layer_group(
-    scene: any,
-    meshs: any,
-    layer: any,
-    padding: any,
-    dir: any,
-    number: any
+    scene: { add: any },
+    meshs: string | any[],
+    layer: string,
+    padding: number,
+    dir: number,
+    number: number
 ): (number | THREE.Object3D | THREE.Vector3)[] | undefined {
     var my_return = [];
     var v1 = new THREE.Vector3();
@@ -324,6 +324,7 @@ function layer_group(
         my_return[1] = axis;
         return my_return;
     }
+    return my_return;
 }
 
 export { layer_group };

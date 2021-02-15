@@ -1,5 +1,13 @@
 import * as THREE from "three";
-function draw_text_3d(scene: any, text: any, ypos: any): void {
+function draw_text_3d(
+    scene: {
+        add: (
+            arg0: THREE.Mesh<THREE.TextGeometry, THREE.MeshBasicMaterial[]>
+        ) => void;
+    },
+    text: string,
+    ypos: number
+): void {
     const fontJson = require("./fonts/Poppins_Medium_Regular.json");
     const font = new THREE.Font(fontJson);
     var textGeo = new THREE.TextGeometry(text, {

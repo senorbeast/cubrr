@@ -1,5 +1,7 @@
 import * as THREE from "three";
-function cube_color(meshs: any): void {
+function cube_color(
+    meshs: { geometry: { faces: { color: THREE.Color }[] } }[]
+): void {
     var F = [6, 7, 8, 15, 16, 17, 24, 25, 26];
     var B = [0, 1, 2, 9, 10, 11, 18, 19, 20];
     var L = [0, 3, 6, 9, 12, 15, 18, 21, 24];
