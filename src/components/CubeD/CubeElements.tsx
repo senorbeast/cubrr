@@ -22,7 +22,7 @@ export const CardContainer = styled.div`
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(14, 1fr);
     color: ${(props) => props.theme.priopp};
-    transition: all 0.3s ease-in-out;
+    //transition: all 0.3s ease-in-out;
 
     @media screen and (max-width: 768px) {
         grid-template-rows: repeat(15, 1fr);
@@ -45,7 +45,7 @@ export const CubeContainer = styled.div<{ mode: ModeTypes }>`
     color: ${(props) => props.theme.priopp};
     border-radius: 1.75rem;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
-    transition: all 0.5s ease;
+    //transition: all 0.5s ease;
 
     @media screen and (max-width: 768px) {
         grid-row: span 7 / auto;
@@ -62,12 +62,14 @@ export const CubeContainer = styled.div<{ mode: ModeTypes }>`
 `;
 
 export const TrialStyle = styled.div`
-    display: grid;
+    display: block;
     grid-row: span 20 / auto;
     border: none;
     margin: none;
     box-shadow: none;
-    border-radius: 1.75rem;
+    overflow: hidden; //*IMPORTANT for Threejs Resizing
+    box-sizing: inherit;
+    border-radius: 1rem;
     background-color: ${(props) => props.theme.primary};
 `;
 
@@ -100,7 +102,7 @@ export const ScrambleI = styled.div<{ mode: ModeTypes }>`
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
     grid-row: span 6 / auto;
     grid-template-rows: repeat(8, 1fr);
-    transition: all 0.5s ease;
+    //transition: all 0.5s ease;
     @media screen and (max-width: 768px) {
         grid-column: span 3 / auto;
         grid-row: span 3 / auto;
@@ -121,7 +123,7 @@ export const SolutionI = styled.div<{ mode: ModeTypes }>`
     padding: 1.8rem;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
     grid-template-rows: repeat(10, 1fr);
-    transition: all 0.5s ease;
+    //transition: all 0.5s ease;
     @media screen and (max-width: 768px) {
         grid-column: span 3 / auto;
         grid-row: span 4 / auto;
@@ -143,7 +145,7 @@ export const InTextArea1 = styled.textarea`
     padding: 0.9rem 0rem;
     padding: none;
     grid-row: span 6 / auto;
-    transition: all 0.5s ease;
+    //transition: all 0.5s ease;
     //box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
     resize: none;
     outline: none;
@@ -170,7 +172,7 @@ export const InTextArea2 = styled.textarea`
     //border-radius: 1.2rem;
     padding: none;
     grid-row: span 8 / auto;
-    transition: all 0.5s ease;
+    //transition: all 0.5s ease;
     //box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
     resize: none;
     outline: none;

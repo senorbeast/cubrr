@@ -8,7 +8,7 @@ export const SideNavContainer = styled.div`
     position: fixed;
     background-color: ${(props) => props.theme.primary};
     border-radius: 0.75rem;
-    transition: all 0.3s ease;
+    /* transition: all 0.3s ease; */
     @media screen and (max-width: 768px) {
         position: static;
         display: grid;
@@ -88,11 +88,4 @@ export const SideNavItemBtn = styled(LinkR)`
         filter: brightness(1.2);
         transition: 0.2s ease-in-out;
     }
-    /* &:last-child {
-        margin-top: auto;
-    } */
 `;
-
-// export const SideNavContainer = styled.div`
-
-// `;
