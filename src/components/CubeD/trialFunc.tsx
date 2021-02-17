@@ -11,17 +11,15 @@ import { animate_read } from "./CubeThree/cube_animate_read_3";
 import { usePlay } from "./AlgProvider";
 
 export const Trial = () => {
-    //console.log("Scratrial", useScra(), useSol());
     const mount = useRef(null);
     const tick = useRef(0);
     let cube_sol = useRef([]);
     let cube = useRef([]);
     //TODO: Try using useRef with camera.current, renderer etc
     //const [count, setCount] = useState(0);
-    const playC = usePlay();
+    var playC = usePlay();
     //const [plays, setPlay] = useState(0);
-    // console.log("Play", props.play);
-    // console.log("rendered", count);
+
     let camera = useRef(null);
     let scene = useRef(null);
     let width = useRef(null);
@@ -31,6 +29,7 @@ export const Trial = () => {
         antialias: true,
     });
     let cube1 = useRef(null);
+    const controlsA = useRef(null);
     var url_scra1 = "a";
     var url_soln1 = "a";
     var scramble = [];
@@ -43,19 +42,16 @@ export const Trial = () => {
     var focus = 0;
     // var scramble_state = [];
     var sc_be_so = 0;
-    let frameId: number | null;
+    let frameId: number;
     var mycube: NodeJS.Timeout;
     const renderScene = () => {
         renderer.render(scene.current, camera.current);
     };
-    console.log("Trial Component");
-    console.log("Play", playC);
 
     useEffect(() => {
         width.current = mount.current.clientWidth;
         height.current = mount.current.clientHeight;
-        console.log("Mount", mount);
-        console.log("useEffect1");
+
         scene.current = new THREE.Scene();
         // var face_plane = [];
         //used in time line to keep track on which move to be made
@@ -93,15 +89,11 @@ export const Trial = () => {
     }, []);
 
     useEffect(() => {
-        console.log("useEffect2, Play =", playC);
         var controls = new OrbitControls(camera.current, renderer.domElement);
-        //console.log("Controls", controls);
+
         function cube_play() {
             var cube_soln_animate = animate_read(soln, soln, [], 0);
-            //console.log(cube_soln_animate);
-            //console.log("tick teri mkb", tick);
-            //console.log(".");
-            //console.log("tick", tick.current);
+
             if (tick.current < cube_soln_animate.length) {
                 cube1.current.animateMove(cube_soln_animate[tick.current], 600);
 
@@ -161,7 +153,6 @@ export const Trial = () => {
                 var s = getAlgs_URL(url_soln1);
 
                 soln = s.split("");
-                // console.log(validateAlgs(s).legalAlg);
 
                 //the actual solution input from user
                 current_move = scramble.slice(cube.current.length); //the current scramble move to be executed
@@ -202,27 +193,23 @@ export const Trial = () => {
                             0,
                             cube.current.length
                         );
-                        //console.log(scramble_check);
+
                         if (
                             JSON.stringify(scramble_check) ===
                                 JSON.stringify(cube.current) &&
                             soln.length == 0
                         ) {
-                            //console.log("!!!");
                             cube1.current.liveMove(
                                 current_move,
                                 scramble,
                                 cube.current,
                                 0
                             );
-
-                            // console.log(scramble_meshs);
                         } else if (
                             JSON.stringify(scramble_check) !==
                                 JSON.stringify(cube.current) &&
                             soln.length == 0
                         ) {
-                            //console.log("1234");
                             cube1.current.fastMove(
                                 cube.current.concat(soln),
                                 1
@@ -234,20 +221,16 @@ export const Trial = () => {
                                 JSON.stringify(cube.current) &&
                             soln.length > 0
                         ) {
-                            //console.log("!!!");
                             cube1.current.fastMove(
                                 cube.current.concat(soln),
                                 1
                             );
                             cube1.current.fastMove(scramble.concat(soln), 0);
-
-                            //console.log(scramble_check);
                         } else if (
                             JSON.stringify(scramble_check) !==
                                 JSON.stringify(cube.current) &&
                             soln.length > 0
                         ) {
-                            //console.log("1234");
                             cube1.current.fastMove(
                                 cube.current.concat(soln),
                                 1
@@ -276,31 +259,23 @@ export const Trial = () => {
                     }
                     var soln_check = soln.slice(0, cube_sol.current.length);
                     if (soln.length > cube_sol.current.length) {
-                        //console.log(soln_check);
-
                         if (
                             JSON.stringify(soln_check) ===
                             JSON.stringify(cube_sol.current)
                         ) {
-                            //console.log("!!!");
                             cube1.current.liveMove(
                                 current_soln,
                                 soln,
                                 cube_sol.current,
                                 0
                             );
-
-                            // console.log(scramble_meshs);
                         }
                         if (
                             JSON.stringify(soln_check) !==
                             JSON.stringify(cube_sol.current)
                         ) {
-                            console.log("!!!");
                             cube1.current.fastMove(cube_sol.current, 1);
                             cube1.current.fastMove(soln, 0);
-
-                            // console.log(scramble_meshs);
                         }
                         cube_sol.current = soln;
                     } else if (soln.length < cube_sol.current.length) {
@@ -328,14 +303,12 @@ export const Trial = () => {
                     sc_be_so == 0 &&
                     cube.current.length > scramble.length
                 ) {
-                    //console.log("====");
                     sc_be_so = 1;
                     cube1.current.fastMove(cube.current.concat(soln), 1);
                     cube.current = scramble;
                 }
-                console.log("in Animate, Play =", playC);
-                if (playC && (play_flag == 0 || play_flag == 2)) {
-                    //console.log("True");
+
+                if (playC == "true" && (play_flag == 0 || play_flag == 2)) {
                     // this is when the user initially presses the play button so that solution moves gets inversed
                     if (play_flag == 0) {
                         cube1.current.fastMove(soln, 1);
@@ -350,8 +323,7 @@ export const Trial = () => {
                     }
                 }
 
-                if (!playC) {
-                    //console.log("False");
+                if (playC == "false") {
                     if (play_flag == 1) {
                         play_flag = 2; // so that the moves dont get inversed again
                         clearInterval(mycube);
@@ -369,6 +341,7 @@ export const Trial = () => {
             //   }
 
             renderScene();
+            frameId = window.requestAnimationFrame(animate);
         };
         const start = () => {
             if (!frameId) {
@@ -384,7 +357,7 @@ export const Trial = () => {
         window.addEventListener("resize", handleResize);
         start();
 
-        controls.current = { start, stop };
+        controlsA.current = { start, stop };
 
         return () => {
             stop();
@@ -392,22 +365,6 @@ export const Trial = () => {
             //scene.remove(cube);
         };
     }, [playC]);
-
-    // useEffect(() => {
-    //     const handleResize = () => {
-    //         let width = mount.current.clientWidth;
-    //         let height = mount.current.clientHeight;
-    //         renderer.setSize(width, height);
-    //         camera.current.aspect = width / height;
-    //         camera.current.updateProjectionMatrix();
-    //         renderScene();
-    //     };
-    //     console.log("Resized");
-    //     window.addEventListener("resize", handleResize);
-    //     return () => {
-    //         window.removeEventListener("resize", handleResize);
-    //     };
-    // }, [props.widthp, props.heightp]);
 
     return (
         <>

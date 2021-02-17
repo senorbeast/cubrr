@@ -38,11 +38,11 @@ var undA: (arg0: string) => void = null;
 // @ts-ignore
 var undB: () => void = null;
 const ScrambleContext = React.createContext("");
-const SetScrambleContext = React.createContext(undA);
+const SetScrambleContext = React.createContext((_arg0: string): void => {});
 const SolutionContext = React.createContext("");
-const SetSolutionContext = React.createContext(undA);
+const SetSolutionContext = React.createContext((_arg0: string): void => {});
 const PlayContext = React.createContext(false);
-const SetPlayContext = React.createContext(undB);
+const SetPlayContext = React.createContext((): void => {});
 
 export function useSol() {
     return useContext(SolutionContext);

@@ -62,7 +62,7 @@ export const CubeContainer = styled.div<{ mode: ModeTypes }>`
 `;
 
 export const TrialStyle = styled.div`
-    display: block;
+    display: grid;
     grid-row: span 20 / auto;
     border: none;
     margin: none;
