@@ -1,0 +1,72 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "airbnb",
+    "prettier",
+    "airbnb-typescript-prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": [
+      "error"
+    ],
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": [
+      2,
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      }
+    ],
+    "import/extensions": "off",
+    "camelcase": "off",
+    "func-names": "off",
+    "import/no-unresolved": [
+      2,
+      {
+        "caseSensitive": false
+      }
+    ],
+    "eqeqeq": "off",
+    "block-scoped-var ": "off",
+    "no-var": "off",
+    "prefer-destructuring": "off",
+    "prefer-const": "off",
+    "no-unused-vars": "off",
+    "vars-on-top": "off",
+    "react/no-unused-state": "off",
+    "react/prop-types": "off",
+    "no-undef": "off",
+    "spaced-comment": "off",
+    "block-scoped-var": "off",
+    "no-redeclare ": "off",
+    "object-curly-newline": "off",
+    "operator-assignment": "off",
+    "operator-linebreak": "off",
+    "no-redeclare": "off",
+    "react/destructuring-as": "off",
+    "react/sort-comp": "off",
+    "@typescript-eslint/no-unused-vars": "off"
+  }
+}
