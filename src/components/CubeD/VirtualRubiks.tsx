@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { RubiksStyle as RubiksStyle } from './CubeElements';
+import { RubiksStyle as CubeStyle } from './CubeElements';
 import * as themes from '../themes';
 import { OrbitControls } from '../../../node_modules/three/examples/jsm/controls/OrbitControls';
 import * as THREE from 'three';
@@ -16,7 +16,7 @@ interface TProps {
     theme: string;
 }
 
-export const RubiksThree = (props: TProps) => {
+export const VirtualRubiksC = (props: TProps) => {
     const mount = useRef(null);
     let playBtn = useRef(false);
     playBtn.current = usePlay();
@@ -350,9 +350,9 @@ export const RubiksThree = (props: TProps) => {
 
     return (
         <>
-            <RubiksStyle ref={mount} />
+            <CubeStyle ref={mount} />
         </>
     );
 };
 
-export default RubiksThree;
+export default VirtualRubiksC;

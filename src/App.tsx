@@ -1,40 +1,37 @@
-import { useState, useEffect } from "react";
-import Sidebar from "./components/Sidebar";
+import { useState, useEffect } from 'react';
+import Sidebar from './components/Sidebar';
 //import CubeD from "./components/CubeD";
-import Home from "./components/Home";
-import AlgsTrainer from "./components/AlgsTrainer";
-import Signup from "./components/Signup";
-import { ThemeProvider } from "styled-components";
-import {
-    ThemeProvider as TPMaterial,
-    createMuiTheme,
-} from "@material-ui/core/styles";
-import * as themes from "./components/themes";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { reactLocalStorage } from "reactjs-localstorage";
-import CubeAlgWrap from "./components/CubeD/CubeAlgWrap";
+import Home from './components/Home';
+import AlgsTrainer from './components/AlgsTrainer';
+import Signup from './components/Signup';
+import { ThemeProvider } from 'styled-components';
+import { ThemeProvider as TPMaterial, createMuiTheme } from '@material-ui/core/styles';
+import * as themes from './components/themes';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { reactLocalStorage } from 'reactjs-localstorage';
+import CubeAlgWrap from './components/CubeD';
 
 function getInitialTheme() {
-    let savedTheme = reactLocalStorage.get("theme", "lightT", true);
+    let savedTheme = reactLocalStorage.get('theme', 'lightT', true);
     return savedTheme;
 }
 
 const App = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [theme, setTheme] = useState(getInitialTheme);
-    console.log("App.js");
+    console.log('App.js');
     const toggle = () => {
         setIsOpen(!isOpen);
     };
 
     const themeMUI = createMuiTheme({
         palette: {
-            type: theme == "lightT" ? "light" : "dark",
+            type: theme == 'lightT' ? 'light' : 'dark',
         },
     });
 
     useEffect(() => {
-        reactLocalStorage.set("theme", theme);
+        reactLocalStorage.set('theme', theme);
     }, [theme]);
     return (
         <>
@@ -54,11 +51,7 @@ const App = () => {
                                 path="/"
                                 exact
                                 render={() => (
-                                    <Home
-                                        toggle={toggle}
-                                        theme={theme}
-                                        setTheme={setTheme}
-                                    />
+                                    <Home toggle={toggle} theme={theme} setTheme={setTheme} />
                                 )}
                             />
                             <Route
@@ -86,11 +79,7 @@ const App = () => {
                                 path="/signin"
                                 exact
                                 render={() => (
-                                    <Signup
-                                        toggle={toggle}
-                                        theme={theme}
-                                        setTheme={setTheme}
-                                    />
+                                    <Signup toggle={toggle} theme={theme} setTheme={setTheme} />
                                 )}
                             />
                         </Switch>

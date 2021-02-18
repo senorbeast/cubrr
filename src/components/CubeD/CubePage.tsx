@@ -7,7 +7,7 @@ import Scramble from './Scramble';
 import Solution from './Solution';
 //import CubeD from "./cube.js";
 import { FullCard } from './FullCard';
-import RubiksThree from './VirtualRubiks';
+import VirtualRubiksC from './VirtualRubiks';
 import ButtonBox from './ButtonBox';
 import Slider from './Slider';
 import AlgProvider from './AlgProvider';
@@ -39,7 +39,7 @@ function CubePage(props) {
                         setMode={setMode}
                     />
                     <CubeContainer mode={selMode(mode)}>
-                        <RubiksThree
+                        <VirtualRubiksC
                             //play={play}
                             theme={props.theme}
                         />
