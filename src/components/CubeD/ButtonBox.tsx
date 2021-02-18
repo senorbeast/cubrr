@@ -1,15 +1,15 @@
-import { ThemeBtn, ButtonArea } from "./CubeElements";
+import { ThemeBtn, ButtonArea } from './CubeElements';
 import {
     CgChevronDoubleRight,
     CgChevronDoubleLeft,
     CgChevronRight,
     CgChevronLeft,
-} from "react-icons/cg";
-import { FiCodesandbox } from "react-icons/fi";
-import { WiRefresh } from "react-icons/wi";
-import { ImPlay2, ImPause } from "react-icons/im";
-import selMode from "./modes";
-import { usePlay, useToggPlay } from "./AlgProvider";
+} from 'react-icons/cg';
+import { FiCodesandbox } from 'react-icons/fi';
+import { WiRefresh } from 'react-icons/wi';
+import { ImPlay2, ImPause } from 'react-icons/im';
+import selMode from './modes';
+import { usePlay, useToggPlay } from './AlgProvider';
 
 interface propsM {
     mode: string;
@@ -18,7 +18,7 @@ interface propsM {
 const ButtonBox = ({ mode, setMode }: propsM) => {
     let play = usePlay();
     let toggleP = useToggPlay();
-    console.log("PlayBut", play);
+    // console.log('PlayBut', play);
     const icon = play == false ? <ImPlay2 /> : <ImPause />;
     return (
         <>
@@ -47,11 +47,11 @@ const ButtonBox = ({ mode, setMode }: propsM) => {
         </>
     );
     function toggle() {
-        console.log("Toggled.");
-        toggleP();
+        // console.log('Toggled.');
+        toggleP(!play);
     }
     function toggleMode() {
-        let modeto = mode == "fullM" ? "scraM" : "fullM";
+        let modeto = mode == 'fullM' ? 'scraM' : 'fullM';
         setMode(modeto);
     }
 };

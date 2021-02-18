@@ -1,23 +1,18 @@
-import { SliderSC } from "./CubeElements";
+import { SliderSC } from './CubeElements';
 //import { useState } from "react";
-import Tooltip from "@material-ui/core/Tooltip";
-import selMode from "./modes";
-import getComments from "./Parser/getComments";
-import getAlgs from "./Parser/getAlgs";
-import validateAlgs from "./Parser/validateAlg";
-import getAlgCmtNum from "./Parser/getAlgCmtNum";
-import { useSol } from "./AlgProvider";
+import Tooltip from '@material-ui/core/Tooltip';
+import selMode from './modes';
+import getComments from './Parser/getComments';
+import getAlgs from './Parser/getAlgs';
+import validateAlgs from './Parser/validateAlg';
+import getAlgCmtNum from './Parser/getAlgCmtNum';
+import { useSol, useSetMoveNum, useToggPlay } from './AlgProvider';
 
 function ValueLabelComponent(props: any) {
     const { children, open, value } = props;
 
     return (
-        <Tooltip
-            open={open}
-            enterTouchDelay={0}
-            placement="top-end"
-            title={value}
-        >
+        <Tooltip open={open} enterTouchDelay={0} placement="top-end" title={value}>
             {children}
         </Tooltip>
     );
@@ -33,6 +28,9 @@ interface Mark {
 
 const Slider = ({ mode }: propsM) => {
     let soln = useSol();
+    let changeSlider = useSetMoveNum();
+    // @ts-ignore
+    let toggleP = useToggPlay();
     function loadSlLabels(soln: string): Mark[] {
         //var soln: string = useSol();
         var cmtLabel = getComments(soln);
@@ -58,10 +56,11 @@ const Slider = ({ mode }: propsM) => {
                 //ThumbComponent={BiCubeAlt}
                 //track={false}
                 // @ts-ignore
-                styles={{ height: "30px" }}
+                styles={{ height: '30px' }}
                 ValueLabelComponent={ValueLabelComponent}
                 defaultValue={0}
-                // getAriaValueText={(value) => {
+                // @ts-ignore
+                onChangeCommitted={setChangeValue}
                 //console.log(value); //* Getting Values of the the marker
                 // }}
                 //aria-labelledby="discrete-slider-custom"
@@ -72,6 +71,13 @@ const Slider = ({ mode }: propsM) => {
             />
         </>
     );
+    // @ts-ignore
+    function setChangeValue(event, value: number) {
+        toggleP(false);
+        // @ts-ignore
+        changeSlider(value);
+        console.log('SLider', value);
+    }
 };
 
 export default Slider;
