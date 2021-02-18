@@ -1,5 +1,5 @@
-import AlgProvider from "./AlgProvider";
-import CubePage from "./index";
+import AlgProvider from './AlgProvider';
+import CubePage from './CubePage';
 interface CmProps {
     toggle: () => void;
     theme: string;
@@ -10,11 +10,7 @@ const CubeAlgWrap = (props: CmProps) => {
     return (
         <>
             <AlgProvider>
-                <CubePage
-                    toggle={props.toggle}
-                    theme={props.theme}
-                    setTheme={props.setTheme}
-                />
+                <CubePage toggle={props.toggle} theme={props.theme} setTheme={props.setTheme} />
             </AlgProvider>
         </>
     );

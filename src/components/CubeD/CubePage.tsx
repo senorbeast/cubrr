@@ -1,28 +1,28 @@
 // @ts-nocheck
-import SideNav from "../SideNav";
-import { useState, useEffect, useRef } from "react";
-import { CardContainer, CubeContainer, AlgsCard } from "./CubeElements";
-import selMode from "./modes";
-import Scramble from "./Scramble";
-import Solution from "./Solution";
+import SideNav from '../SideNav';
+import { useState, useEffect, useRef } from 'react';
+import { CardContainer, CubeContainer, AlgsCard } from './CubeElements';
+import selMode from './modes';
+import Scramble from './Scramble';
+import Solution from './Solution';
 //import CubeD from "./cube.js";
-import { FullCard } from "./FullCard";
-import Trial from "./trial2";
-import ButtonBox from "./ButtonBox";
-import Slider from "./Slider";
-import AlgProvider from "./AlgProvider";
-import { useScra, useSol } from "./AlgProvider";
+import { FullCard } from './FullCard';
+import RubiksThree from './VirtualRubiks';
+import ButtonBox from './ButtonBox';
+import Slider from './Slider';
+import AlgProvider from './AlgProvider';
+import { useScra, useSol } from './AlgProvider';
 
 function CubePage(props) {
     //TODO: Divide into different Components (acc to states) to avoid rerendering the whole index.js
     //* Save multiple useRefs in Cubepage and modify them with functions passed to individual components wherer they will be states and will rerender acc.
     // let play = useRef(false);s
-    console.log("Index.js");
+    console.log('Index.js');
     //console.log("ScraINDEDX", useScra(), useSol());
     // let newSol = useSol();
     // let newScra = useScra();
     //const [ctrl, setCtrl] = useState(false);
-    const [mode, setMode] = useState("scraM"); //for fullscreen mode and Scra/Sol mode
+    const [mode, setMode] = useState('scraM'); //for fullscreen mode and Scra/Sol mode
     //var url = new URL("http://localhost:3000/cube");
 
     return (
@@ -39,7 +39,7 @@ function CubePage(props) {
                         setMode={setMode}
                     />
                     <CubeContainer mode={selMode(mode)}>
-                        <Trial
+                        <RubiksThree
                             //play={play}
                             theme={props.theme}
                         />

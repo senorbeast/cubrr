@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 //import { Link as LinkR } from "react-router-dom";
-import Slider from "@material-ui/core/Slider";
-import { withStyles } from "@material-ui/core/styles";
+import Slider from '@material-ui/core/Slider';
+import { withStyles } from '@material-ui/core/styles';
 //import { Link as LinkS } from "react-scroll";
 
 interface ModeTypes {
@@ -61,7 +61,7 @@ export const CubeContainer = styled.div<{ mode: ModeTypes }>`
     }
 `;
 
-export const TrialStyle = styled.div`
+export const RubiksStyle = styled.div`
     display: grid;
     grid-row: span 20 / auto;
     border: none;
@@ -217,26 +217,26 @@ export const ButtonArea = styled.div<{ mode: ModeTypes }>`
 `;
 
 const iOSBoxShadow =
-    "0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)";
+    '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)';
 
 const PrettoSlider = withStyles(() => ({
     root: {
-        color: "#3880ff",
+        color: '#3880ff',
         height: 2,
-        padding: "15px 0",
+        padding: '15px 0',
     },
     thumb: {
         height: 28,
         width: 28,
-        backgroundColor: "#fff",
+        backgroundColor: '#fff',
         boxShadow: iOSBoxShadow,
         marginTop: -14,
         marginLeft: -14,
-        "&:focus, &:hover, &$active": {
+        '&:focus, &:hover, &$active': {
             boxShadow:
-                "0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)",
+                '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
             // Reset on touch devices, it doesn't add specificity
-            "@media (hover: none)": {
+            '@media (hover: none)': {
                 boxShadow: iOSBoxShadow,
             },
         },
@@ -244,11 +244,11 @@ const PrettoSlider = withStyles(() => ({
     active: {},
     focusVisible: {},
     valueLabel: {
-        left: "calc(-50% + 12px)",
-        bottom: "50px",
-        "& *": {
-            background: "#3880ff",
-            color: "#000",
+        left: 'calc(-50% + 12px)',
+        bottom: '50px',
+        '& *': {
+            background: '#3880ff',
+            color: '#000',
         },
     },
     track: {
@@ -257,21 +257,21 @@ const PrettoSlider = withStyles(() => ({
     rail: {
         height: 2,
         opacity: 0.5,
-        backgroundColor: "#bfbfbf",
+        backgroundColor: '#bfbfbf',
     },
     mark: {
-        backgroundColor: "#bfbfbf",
+        backgroundColor: '#bfbfbf',
         height: 8,
         width: 1,
         marginTop: -3,
     },
     markActive: {
         opacity: 1,
-        backgroundColor: "#3880ff",
+        backgroundColor: '#3880ff',
     },
-    markLabel: { position: "absolute", top: -18 },
+    markLabel: { position: 'absolute', top: -18 },
     markLabelActive: {
-        position: "absolute",
+        position: 'absolute',
         top: 35,
     },
 }))(Slider);

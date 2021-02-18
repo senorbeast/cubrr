@@ -1,13 +1,13 @@
-import { useEffect, useRef } from "react";
-import { TrialStyle } from "./CubeElements";
-import * as themes from "../themes";
-import { OrbitControls } from "../../../node_modules/three/examples/jsm/controls/OrbitControls";
-import * as THREE from "three";
-import { animate_read } from "./CubeThree/cube_animate_read_3";
-import CUBE from "./CubeThree/CUBE";
-import getAlgs_URL from "./Parser/getAlgs_URL";
+import { useEffect, useRef } from 'react';
+import { RubiksStyle as RubiksStyle } from './CubeElements';
+import * as themes from '../themes';
+import { OrbitControls } from '../../../node_modules/three/examples/jsm/controls/OrbitControls';
+import * as THREE from 'three';
+import { animate_read } from './CubeThree/cube_animate_read_3';
+import CUBE from './CubeThree/CUBE';
+import getAlgs_URL from './Parser/getAlgs_URL';
 
-import { usePlay } from "./AlgProvider";
+import { usePlay } from './AlgProvider';
 // import { face_plane_make } from "./CubeThree/cube_face_plane";
 
 interface TProps {
@@ -16,15 +16,15 @@ interface TProps {
     theme: string;
 }
 
-export const Trial = (props: TProps) => {
+export const RubiksThree = (props: TProps) => {
     const mount = useRef(null);
     let playBtn = useRef(false);
     playBtn.current = usePlay();
     //console.log("Scratrial", useScra(), useSol());
-    console.log("trail2", playBtn.current);
+    console.log('trail2', playBtn.current);
 
     useEffect(() => {
-        console.log("rendered in UseEffect", playBtn.current);
+        console.log('rendered in UseEffect', playBtn.current);
         //@ts-ignore
         let width = mount.current.clientWidth; //@ts-ignore
         let height = mount.current.clientHeight;
@@ -44,12 +44,7 @@ export const Trial = (props: TProps) => {
             NEAR = 1,
             FAR = 10000;
 
-        var camera = new THREE.PerspectiveCamera(
-            FIELD_OF_VIEW,
-            ASPECT_RATIO,
-            NEAR,
-            FAR
-        );
+        var camera = new THREE.PerspectiveCamera(FIELD_OF_VIEW, ASPECT_RATIO, NEAR, FAR);
 
         /* adding webgl renderer */
 
@@ -65,8 +60,8 @@ export const Trial = (props: TProps) => {
         var controls = new OrbitControls(camera, renderer.domElement);
         // var mov1 = 0;
         //var moves_sol = [];
-        var url_scra1 = "a";
-        var url_soln1 = "a";
+        var url_scra1 = 'a';
+        var url_soln1 = 'a';
         var scramble = [];
         var soln: ConcatArray<any> = [];
         var cube: any[] = [];
@@ -80,13 +75,13 @@ export const Trial = (props: TProps) => {
         var sc_be_so = 0;
         // gap between the layers
         // radius of the fillet used on corners of cube
-        var c = document.createElement("canvas");
-        var ctx = c.getContext("2d");
+        var c = document.createElement('canvas');
+        var ctx = c.getContext('2d');
 
         var cube1 = new CUBE(3, camera, renderer, scene);
         cube1.add();
         cube1.color();
-        cube1.text("HRISHI BHAII", ctx, c);
+        cube1.text('HRISHI BHAII', ctx, c);
 
         const renderScene = () => {
             renderer.render(scene, camera);
@@ -115,11 +110,11 @@ export const Trial = (props: TProps) => {
                 clearInterval(mycube);
             }
         }
-        window.addEventListener("visibilitychange", () => {
-            if (document.visibilityState != "visible") {
+        window.addEventListener('visibilitychange', () => {
+            if (document.visibilityState != 'visible') {
                 focus = 1;
                 clearInterval(mycube);
-            } else if (document.visibilityState == "visible" && focus == 1) {
+            } else if (document.visibilityState == 'visible' && focus == 1) {
                 //@ts-ignore
                 setInterval(mycube, 600);
                 focus = 2;
@@ -131,23 +126,23 @@ export const Trial = (props: TProps) => {
 
             var currentURL = window.location.href;
 
-            var url_split = currentURL.split("?");
+            var url_split = currentURL.split('?');
 
             if (url_split.length > 1) {
-                var scramble_arr = url_split[1].split("=");
-                var soln_arr = url_split[2].split("=");
+                var scramble_arr = url_split[1].split('=');
+                var soln_arr = url_split[2].split('=');
                 // var play_button = url_split[3].split("=");
                 // play = play_button[1];
 
-                var url_scramble = scramble_arr[1].replace(/%20/g, "");
-                var url_soln = soln_arr[1].replace(/%20/g, "");
+                var url_scramble = scramble_arr[1].replace(/%20/g, '');
+                var url_soln = soln_arr[1].replace(/%20/g, '');
                 url_scra1 = url_scramble.replace(/%27/g, "'");
                 url_soln1 = url_soln.replace(/%27/g, "'");
-                scramble = url_scra1.split(""); //the actual scramble input from user
+                scramble = url_scra1.split(''); //the actual scramble input from user
                 //console.log(url_soln1);
                 var s = getAlgs_URL(url_soln1);
                 //console.log("getalgs", s);
-                soln = s.split("");
+                soln = s.split('');
                 // console.log(validateAlgs(s).legalAlg);
 
                 //the actual solution input from user
@@ -181,39 +176,35 @@ export const Trial = (props: TProps) => {
                         var scramble_check = scramble.slice(0, cube.length);
                         console.log(scramble_check);
                         if (
-                            JSON.stringify(scramble_check) ===
-                                JSON.stringify(cube) &&
+                            JSON.stringify(scramble_check) === JSON.stringify(cube) &&
                             soln.length == 0
                         ) {
-                            console.log("!!!");
+                            console.log('!!!');
                             cube1.liveMove(current_move, scramble, cube, 0);
 
                             // console.log(scramble_meshs);
                         } else if (
-                            JSON.stringify(scramble_check) !==
-                                JSON.stringify(cube) &&
+                            JSON.stringify(scramble_check) !== JSON.stringify(cube) &&
                             soln.length == 0
                         ) {
-                            console.log("1234");
+                            console.log('1234');
                             cube1.fastMove(cube.concat(soln), 1);
                             cube1.fastMove(scramble.concat(soln), 0);
                         }
                         if (
-                            JSON.stringify(scramble_check) ===
-                                JSON.stringify(cube) &&
+                            JSON.stringify(scramble_check) === JSON.stringify(cube) &&
                             soln.length > 0
                         ) {
-                            console.log("!!!");
+                            console.log('!!!');
                             cube1.fastMove(cube.concat(soln), 1);
                             cube1.fastMove(scramble.concat(soln), 0);
 
                             console.log(scramble_check);
                         } else if (
-                            JSON.stringify(scramble_check) !==
-                                JSON.stringify(cube) &&
+                            JSON.stringify(scramble_check) !== JSON.stringify(cube) &&
                             soln.length > 0
                         ) {
-                            console.log("1234");
+                            console.log('1234');
                             cube1.fastMove(cube.concat(soln), 1);
                             cube1.fastMove(scramble.concat(soln), 0);
                         }
@@ -235,20 +226,14 @@ export const Trial = (props: TProps) => {
                     if (soln.length > cube_sol.length) {
                         //console.log(soln_check);
 
-                        if (
-                            JSON.stringify(soln_check) ===
-                            JSON.stringify(cube_sol)
-                        ) {
+                        if (JSON.stringify(soln_check) === JSON.stringify(cube_sol)) {
                             //console.log("!!!");
                             cube1.liveMove(current_soln, soln, cube_sol, 0);
 
                             // console.log(scramble_meshs);
                         }
-                        if (
-                            JSON.stringify(soln_check) !==
-                            JSON.stringify(cube_sol)
-                        ) {
-                            console.log("!!!");
+                        if (JSON.stringify(soln_check) !== JSON.stringify(cube_sol)) {
+                            console.log('!!!');
                             cube1.fastMove(cube_sol, 1);
                             cube1.fastMove(soln, 0);
 
@@ -272,12 +257,8 @@ export const Trial = (props: TProps) => {
                     sc_be_so = 0;
                 }
 
-                if (
-                    scramble.length == 0 &&
-                    sc_be_so == 0 &&
-                    cube.length > scramble.length
-                ) {
-                    console.log("====");
+                if (scramble.length == 0 && sc_be_so == 0 && cube.length > scramble.length) {
+                    console.log('====');
                     sc_be_so = 1;
                     cube1.fastMove(cube.concat(soln), 1);
                     cube = scramble;
@@ -350,15 +331,15 @@ export const Trial = (props: TProps) => {
         };
         // @ts-ignore
         mount.current.appendChild(renderer.domElement);
-        window.addEventListener("resize", handleResize);
+        window.addEventListener('resize', handleResize);
         start();
         // @ts-ignore
         controls.current = { start, stop };
 
         return () => {
             stop();
-            console.log("Unmount uE1");
-            window.removeEventListener("resize", handleResize);
+            console.log('Unmount uE1');
+            window.removeEventListener('resize', handleResize);
             if (mount.current !== null) {
                 // @ts-ignore
                 mount.current.removeChild(renderer.domElement);
@@ -369,9 +350,9 @@ export const Trial = (props: TProps) => {
 
     return (
         <>
-            <TrialStyle ref={mount} />
+            <RubiksStyle ref={mount} />
         </>
     );
 };
 
-export default Trial;
+export default RubiksThree;
