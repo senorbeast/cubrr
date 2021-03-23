@@ -6,8 +6,10 @@ import * as THREE from 'three';
 import { animate_read } from './CubeThree/cube_animate_read_3';
 import CUBE from './CubeThree/CUBE';
 import getAlgs_URL from './Parser/getAlgs_URL';
-
+import { useMoveNum } from'./AlgProvider';
+import {useSetMoveNum} from './AlgProvider';
 import { usePlay } from './AlgProvider';
+import validateAlgs from './Parser/validateAlg';
 // import { face_plane_make } from "./CubeThree/cube_face_plane";
 
 interface TProps {
@@ -20,8 +22,12 @@ export const VirtualRubiksC = (props: TProps) => {
     const mount = useRef(null);
     let playBtn = useRef(false);
     playBtn.current = usePlay();
+    let MoveNum =useRef(0);
+    MoveNum.current = useMoveNum();
+    let MoveSet = useRef((_arg0: number): void => {});
+    MoveSet.current = useSetMoveNum();
     //console.log("Scratrial", useScra(), useSol());
-    console.log('trail2', playBtn.current);
+    console.log('trail2 let MoveSetNum = useSetMoveNum();', playBtn.current);
 
     useEffect(() => {
         console.log('rendered in UseEffect', playBtn.current);
@@ -64,6 +70,7 @@ export const VirtualRubiksC = (props: TProps) => {
         var url_soln1 = 'a';
         var scramble = [];
         var soln: ConcatArray<any> = [];
+        var val_soln: ConcatArray<any> = [];
         var cube: any[] = [];
         var current_move = [];
         var current_soln = [];
@@ -77,7 +84,7 @@ export const VirtualRubiksC = (props: TProps) => {
         // radius of the fillet used on corners of cube
         var c = document.createElement('canvas');
         var ctx = c.getContext('2d');
-
+        var slider_no = 0;
         var cube1 = new CUBE(3, camera, renderer, scene);
         cube1.add();
         cube1.color();
@@ -103,6 +110,8 @@ export const VirtualRubiksC = (props: TProps) => {
                 cube1.animateMove(cube_soln_animate[tick], 400);
 
                 tick = tick + 1;
+                console.log("Move values",tick);
+                MoveSet.current(tick);
             }
             if (tick == cube_soln_animate.length) {
                 tick = 0;
@@ -142,9 +151,10 @@ export const VirtualRubiksC = (props: TProps) => {
                 //console.log(url_soln1);
                 var s = getAlgs_URL(url_soln1);
                 //console.log("getalgs", s);
+            
                 soln = s.split('');
-                // console.log(validateAlgs(s).legalAlg);
-
+                //console.log(validateAlgs(s).legalAlg);
+                val_soln = validateAlgs(s).legalAlg
                 //the actual solution input from user
                 current_move = scramble.slice(cube.length); //the current scramble move to be executed
                 current_soln = soln.slice(cube_sol.length); //the current solution move to be executed
@@ -289,6 +299,49 @@ export const VirtualRubiksC = (props: TProps) => {
                     }
                 }
             }
+           
+            console.log(MoveNum.current);
+            //DONE:
+            /*IF SLIDER VALUE GREATER THAN CURRENT VALUE */
+            //TODO:
+            /*
+            1. IF SLIDER VALUE LESS THAN CURRENT VALUE
+               PROCDEDURE:
+               1.INVERSE THE MOVES TO SLIDER VALUE 
+               2.STORE THIS AS CURRENT STATE OF CUBE(TICK == SLIDER VALUE) 
+            2. WHENEVER USER ENTERS SOLUTION OR SCRAMBLE WHILE THE ANIMATION IS GOING CUBE NEEDS 
+               TO GO TO THE END MOVE AND THEN DO THE CHANGES FROM USER 
+            
+            */
+            //ERROR TO BE RESOLVED :
+            /*
+            1. WHEN SCRAMBLE IS DELETED FIRST AND SOLUTION AFTERWARDS AND THEN SCRAMBLE IS TYPED CUBE DOESNT TO GO
+            TO CORRECT POSITION
+            
+            */
+
+            if (MoveNum.current>tick+1 && slider_no != MoveNum.current)
+            {
+                var v = val_soln.slice(tick,MoveNum.current).toString()
+                var slider_soln = v.split('')
+                console.log(slider_soln)
+                if (slider_soln.length>0 )
+                {
+                    
+                    cube1.fastMove(slider_soln, 0);
+                    slider_no = MoveNum.current;
+                    tick = MoveNum.current;
+                }
+                //cube1.fastMove(soln, 1);
+                //var cube_soln_slider = animate_read(slider_soln.split(''), slider_soln.split(''), [], 0);
+                //console.log(cube_soln_slider)
+                
+
+
+
+            }   
+            
+            
             // if (playBtn.current ) {
             // @ts-ignore
             // face_plane_make(
