@@ -111,7 +111,10 @@ export const VirtualRubiksC = (props: TProps) => {
 
                 tick = tick + 1;
                 console.log("Move values",tick);
+                console.log(cube_soln_animate[tick])
                 MoveSet.current(tick);
+                //ISSUE : -Moveset not working 
+                console.log(MoveSet.current)
             }
             if (tick == cube_soln_animate.length) {
                 tick = 0;
@@ -320,7 +323,7 @@ export const VirtualRubiksC = (props: TProps) => {
             
             */
 
-            if (MoveNum.current>tick+1 && slider_no != MoveNum.current)
+            if (MoveNum.current>tick+1 && slider_no != MoveNum.current && MoveNum.current != validateAlgs(val_soln.toString()).movesNum )
             {
                 var v = val_soln.slice(tick,MoveNum.current).toString()
                 var slider_soln = v.split('')
@@ -340,7 +343,12 @@ export const VirtualRubiksC = (props: TProps) => {
 
 
             }   
-            
+
+            if (MoveNum.current<tick+1 && slider_no != MoveNum.current && MoveNum.current != validateAlgs(val_soln.toString()).movesNum)
+            {
+               
+                console.log("Slider value less than current")
+            } 
             
             // if (playBtn.current ) {
             // @ts-ignore
