@@ -33,8 +33,7 @@
         "reactjs-localstorage": "^1.0.1",
         "redux": "^4.1.0",
         "styled-components": "^5.3.0",
-        "three": "^0.124.0",
-        "typescript": "^4.2.4"
+        "three": "^0.124.0"
     },
     "scripts": {
         "start": "react-scripts start",
@@ -60,6 +59,7 @@
         "last 1 safari version"
     ],
     "devDependencies": {
+        "typescript": "^4.2.4",
         "@types/canvas-txt": "^3.0.0",
         "@types/reactjs-localstorage": "^1.0.0",
         "@types/styled-components": "^5.1.9",
