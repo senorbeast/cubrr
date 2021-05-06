@@ -27,7 +27,7 @@ export const VirtualRubiksC = (props: TProps) => {
     let MoveSet = useRef((_arg0: number): void => {});
     MoveSet.current = useSetMoveNum();
     //console.log("Scratrial", useScra(), useSol());
-    console.log('trail2 let MoveSetNum = useSetMoveNum();', playBtn.current);
+    // console.log('Play', playBtn.current);
 
     useEffect(() => {
         console.log('rendered in UseEffect', playBtn.current);
@@ -111,10 +111,10 @@ export const VirtualRubiksC = (props: TProps) => {
 
                 tick = tick + 1;
                 console.log('Move values', tick);
-                console.log(cube_soln_animate[tick]);
+                // console.log(cube_soln_animate[tick]);
                 MoveSet.current(tick);
-                //ISSUE : -Moveset not working
-                console.log(MoveSet.current);
+                //ISSUE : -Moveset not working  -- Fixed
+                // console.log(MoveSet.current);
             }
             if (tick == cube_soln_animate.length) {
                 tick = 0;
@@ -135,9 +135,8 @@ export const VirtualRubiksC = (props: TProps) => {
         const animate = () => {
             requestAnimationFrame(animate);
             controls.update();
-
             var currentURL = window.location.href;
-
+            //console.log('Current MoveNumn', MoveNum.current);
             var url_split = currentURL.split('?');
 
             if (url_split.length > 1) {
@@ -303,7 +302,7 @@ export const VirtualRubiksC = (props: TProps) => {
                 }
             }
 
-            console.log(MoveNum.current);
+            // console.log(MoveNum.current);
             //DONE:
             /*IF SLIDER VALUE GREATER THAN CURRENT VALUE */
             //TODO:
@@ -346,7 +345,7 @@ export const VirtualRubiksC = (props: TProps) => {
                 slider_no != MoveNum.current &&
                 MoveNum.current != validateAlgs(val_soln.toString()).movesNum
             ) {
-                console.log('Slider value less than current');
+                // console.log('Slider value less than current');
             }
 
             // if (playBtn.current ) {

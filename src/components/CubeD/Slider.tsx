@@ -6,7 +6,7 @@ import getComments from './Parser/getComments';
 import getAlgs from './Parser/getAlgs';
 import validateAlgs from './Parser/validateAlg';
 import getAlgCmtNum from './Parser/getAlgCmtNum';
-import { useSol, useSetMoveNum, useToggPlay } from './AlgProvider';
+import { useSol, useMoveNum, useSetMoveNum, useToggPlay } from './AlgProvider';
 
 function ValueLabelComponent(props: any) {
     const { children, open, value } = props;
@@ -29,6 +29,7 @@ interface Mark {
 const Slider = ({ mode }: propsM) => {
     let soln = useSol();
     let changeSlider = useSetMoveNum();
+    let sliderValue = useMoveNum();
     // @ts-ignore
     let toggleP = useToggPlay();
     function loadSlLabels(soln: string): Mark[] {
@@ -56,6 +57,7 @@ const Slider = ({ mode }: propsM) => {
                 //ThumbComponent={BiCubeAlt}
                 //track={false}
                 // @ts-ignore
+                value={sliderValue}
                 styles={{ height: '30px' }}
                 ValueLabelComponent={ValueLabelComponent}
                 defaultValue={0}
@@ -76,7 +78,7 @@ const Slider = ({ mode }: propsM) => {
         toggleP(false);
         // @ts-ignore
         changeSlider(value);
-        console.log('SLider', value);
+        console.log('SLider Changes (in Slider.ts)', value);
     }
 };
 
