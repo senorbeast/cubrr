@@ -1,3 +1,4 @@
+//@ts-nocheck
 import * as THREE from "three";
 function draw_text_3d(
     scene: {
@@ -20,6 +21,7 @@ function draw_text_3d(
         bevelEnabled: true,
     });
     var materials = [
+        //@ts-ignore
         new THREE.MeshBasicMaterial({ color: "#ffffff", flatShading: false }), // front
         new THREE.MeshBasicMaterial({ color: "#fff" }), // side
     ];

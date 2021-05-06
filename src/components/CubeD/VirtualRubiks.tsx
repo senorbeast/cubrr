@@ -1,13 +1,13 @@
 import { useEffect, useRef } from 'react';
 import { RubiksStyle as CubeStyle } from './CubeElements';
 import * as themes from '../themes';
-import { OrbitControls } from '../../../node_modules/three/examples/jsm/controls/OrbitControls';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as THREE from 'three';
 import { animate_read } from './CubeThree/cube_animate_read_3';
 import CUBE from './CubeThree/CUBE';
 import getAlgs_URL from './Parser/getAlgs_URL';
-import { useMoveNum } from'./AlgProvider';
-import {useSetMoveNum} from './AlgProvider';
+import { useMoveNum } from './AlgProvider';
+import { useSetMoveNum } from './AlgProvider';
 import { usePlay } from './AlgProvider';
 import validateAlgs from './Parser/validateAlg';
 // import { face_plane_make } from "./CubeThree/cube_face_plane";
@@ -22,7 +22,7 @@ export const VirtualRubiksC = (props: TProps) => {
     const mount = useRef(null);
     let playBtn = useRef(false);
     playBtn.current = usePlay();
-    let MoveNum =useRef(0);
+    let MoveNum = useRef(0);
     MoveNum.current = useMoveNum();
     let MoveSet = useRef((_arg0: number): void => {});
     MoveSet.current = useSetMoveNum();
@@ -110,11 +110,11 @@ export const VirtualRubiksC = (props: TProps) => {
                 cube1.animateMove(cube_soln_animate[tick], 400);
 
                 tick = tick + 1;
-                console.log("Move values",tick);
-                console.log(cube_soln_animate[tick])
+                console.log('Move values', tick);
+                console.log(cube_soln_animate[tick]);
                 MoveSet.current(tick);
-                //ISSUE : -Moveset not working 
-                console.log(MoveSet.current)
+                //ISSUE : -Moveset not working
+                console.log(MoveSet.current);
             }
             if (tick == cube_soln_animate.length) {
                 tick = 0;
@@ -154,10 +154,10 @@ export const VirtualRubiksC = (props: TProps) => {
                 //console.log(url_soln1);
                 var s = getAlgs_URL(url_soln1);
                 //console.log("getalgs", s);
-            
+
                 soln = s.split('');
                 //console.log(validateAlgs(s).legalAlg);
-                val_soln = validateAlgs(s).legalAlg
+                val_soln = validateAlgs(s).legalAlg;
                 //the actual solution input from user
                 current_move = scramble.slice(cube.length); //the current scramble move to be executed
                 current_soln = soln.slice(cube_sol.length); //the current solution move to be executed
@@ -302,7 +302,7 @@ export const VirtualRubiksC = (props: TProps) => {
                     }
                 }
             }
-           
+
             console.log(MoveNum.current);
             //DONE:
             /*IF SLIDER VALUE GREATER THAN CURRENT VALUE */
@@ -323,14 +323,15 @@ export const VirtualRubiksC = (props: TProps) => {
             
             */
 
-            if (MoveNum.current>tick+1 && slider_no != MoveNum.current && MoveNum.current != validateAlgs(val_soln.toString()).movesNum )
-            {
-                var v = val_soln.slice(tick,MoveNum.current).toString()
-                var slider_soln = v.split('')
-                console.log(slider_soln)
-                if (slider_soln.length>0 )
-                {
-                    
+            if (
+                MoveNum.current > tick + 1 &&
+                slider_no != MoveNum.current &&
+                MoveNum.current != validateAlgs(val_soln.toString()).movesNum
+            ) {
+                var v = val_soln.slice(tick, MoveNum.current).toString();
+                var slider_soln = v.split('');
+                console.log(slider_soln);
+                if (slider_soln.length > 0) {
                     cube1.fastMove(slider_soln, 0);
                     slider_no = MoveNum.current;
                     tick = MoveNum.current;
@@ -338,18 +339,16 @@ export const VirtualRubiksC = (props: TProps) => {
                 //cube1.fastMove(soln, 1);
                 //var cube_soln_slider = animate_read(slider_soln.split(''), slider_soln.split(''), [], 0);
                 //console.log(cube_soln_slider)
-                
+            }
 
+            if (
+                MoveNum.current < tick + 1 &&
+                slider_no != MoveNum.current &&
+                MoveNum.current != validateAlgs(val_soln.toString()).movesNum
+            ) {
+                console.log('Slider value less than current');
+            }
 
-
-            }   
-
-            if (MoveNum.current<tick+1 && slider_no != MoveNum.current && MoveNum.current != validateAlgs(val_soln.toString()).movesNum)
-            {
-               
-                console.log("Slider value less than current")
-            } 
-            
             // if (playBtn.current ) {
             // @ts-ignore
             // face_plane_make(
