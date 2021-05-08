@@ -1,3 +1,9 @@
+const cleanComments = (values: string) => {
+    //TODO: Remove blank space at the start
+    var slash = values.replace(/(\/\/)/g, '');
+    return slash.replace(/\./g, '');
+};
+
 const getComments = (solution: string): RegExpMatchArray => {
     var regex = /(\/\/).+/gm;
     var cmts = solution.match(regex); //For an Array of comments
@@ -12,9 +18,3 @@ const getComments = (solution: string): RegExpMatchArray => {
     return [];
 };
 export default getComments;
-
-const cleanComments = (values: string) => {
-    //TODO: Remove blank space at the start
-    var slash = values.replace(/(\/\/)/g, '');
-    return slash.replace(/\./g, '');
-};
