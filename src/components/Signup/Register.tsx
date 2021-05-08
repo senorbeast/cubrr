@@ -1,26 +1,25 @@
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { TypographySC } from "../BasicElements";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import { TypographySC } from '../BasicElements';
 
 function Copyright() {
     return (
         // @ts-ignore
         <TypographySC variant="body2" color="textSecondary" align="center">
-            {"Copyright © "}
+            {'Copyright © '}
             <Link color="inherit" href="https://material-ui.com/">
                 Cubba
-            </Link>{" "}
-            {new Date().getFullYear()}
-            {"."}
+            </Link>{' '}
+            {new Date().getFullYear()}.
         </TypographySC>
     );
 }
@@ -28,10 +27,10 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
     paper: {
         marginTop: theme.spacing(8),
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        height: "100%",
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        height: '100%',
     },
     avatar: {
         margin: theme.spacing(1),
@@ -109,12 +108,7 @@ export default function RegisterMui() {
                         </Grid>
                         <Grid item xs={12}>
                             <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        value="allowExtraEmails"
-                                        color="primary"
-                                    />
-                                }
+                                control={<Checkbox value="allowExtraEmails" color="primary" />}
                                 label="I want to receives Cubba updates via email."
                             />
                         </Grid>

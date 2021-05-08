@@ -1,51 +1,45 @@
-import React, {
-    Component,
-    useLayoutEffect,
-    useState,
-    useEffect,
-    useRef,
-} from "react";
-import ReactDOM from "react-dom";
-import createjs from "createjs-module";
-import { TrialStyle } from "./CubeElements";
-import gsap from "gsap";
-import * as themes from "../themes";
+import React, { Component, useLayoutEffect, useState, useEffect, useRef } from 'react';
+import ReactDOM from 'react-dom';
+import createjs from 'createjs-module';
+import gsap from 'gsap';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import * as THREE from 'three';
+import { TrialStyle } from './CubeElements';
+import * as themes from '../themes';
 
 // import Stats from '/jsm/libs/stats.module.js';
-import { animation_sequence } from "./cube_animation_sequence.js";
-import { beg_cross } from "./cube_beg_cross.js";
-import { cubelets_form } from "./cubelets.js";
-import { fast_execute } from "./cube_fast_execute.js";
-import { cube_color } from "./cubelet_colors.js";
-import { layer_group } from "./cubelet_group.js";
-import { animate_execute } from "./cube_animate_execute.js";
-import { draw_text } from "./cube_text.js";
-import { face_plane_make } from "./cube_face_plane.js";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { animation_sequence } from './cube_animation_sequence.js';
+import { beg_cross } from './cube_beg_cross.js';
+import { cubelets_form } from './cubelets.js';
+import { fast_execute } from './cube_fast_execute.js';
+import { cube_color } from './cubelet_colors.js';
+import { layer_group } from './cubelet_group.js';
+import { animate_execute } from './cube_animate_execute.js';
+import { draw_text } from './cube_text.js';
+import { face_plane_make } from './cube_face_plane.js';
 // /import Stats from '/jsm/libs/stats.module.js';
-import * as THREE from "three";
-import { scramble_read } from "./cube_scramble_read_v3";
+import { scramble_read } from './cube_scramble_read_v3';
 
 export const Trial = (props) => {
     const mount = useRef(null);
     var [mounted, setmounted] = useState(true);
     const playBtn = useRef(props.play);
     const [plays, setPlay] = useState(0);
-    console.log("rendered", props.play);
-    let camera = undefined;
-    let renderer = undefined;
-    let scene = undefined;
-    let meshs = undefined;
-    let ctx = undefined;
-    let c = undefined;
-    let padding = undefined;
+    console.log('rendered', props.play);
+    let camera;
+    let renderer;
+    let scene;
+    let meshs;
+    let ctx;
+    let c;
+    let padding;
     //var anisotropy = renderer.capabilities.getMaxAnisotropy();
     var mov1 = 0;
     var moves = [];
     var moves6 = [];
     var moves_sol = [];
-    var url_scra1 = "a";
-    var url_soln1 = "a";
+    var url_scra1 = 'a';
+    var url_soln1 = 'a';
     var scramble = [];
     var soln = [];
     var cube = [];
@@ -53,8 +47,8 @@ export const Trial = (props) => {
     var current_soln = [];
     var cube_sol = [];
     var scramble_state = [];
-    var play1 = "false";
-    var play_flag = "false";
+    var play1 = 'false';
+    var play_flag = 'false';
     var mycube;
     let play = props.play;
     var tx1;
@@ -84,19 +78,14 @@ export const Trial = (props) => {
     //   let mapDimensions = this.mount.getBoundingClientRect();
     //   let width = this.mount.clientWidth;
     //   let height = this.mount.clientHeight;
-    var FIELD_OF_VIEW = 45,
-        WIDTH = width,
-        HEIGHT = height,
-        ASPECT_RATIO = WIDTH / HEIGHT,
-        NEAR = 1,
-        FAR = 10000;
+    var FIELD_OF_VIEW = 45;
+    var WIDTH = width;
+    var HEIGHT = height;
+    var ASPECT_RATIO = WIDTH / HEIGHT;
+    var NEAR = 1;
+    var FAR = 10000;
 
-    camera = new THREE.PerspectiveCamera(
-        FIELD_OF_VIEW,
-        ASPECT_RATIO,
-        NEAR,
-        FAR
-    );
+    camera = new THREE.PerspectiveCamera(FIELD_OF_VIEW, ASPECT_RATIO, NEAR, FAR);
     camera.position.z = 600;
     camera.position.x = 600;
     camera.position.y = 300;
@@ -121,11 +110,11 @@ export const Trial = (props) => {
     //mount.current.appendChild(renderer.domElement);
 
     const MathUtils = {
-        DEG2RAD: function (deg) {
+        DEG2RAD(deg) {
             return (Math.PI / 180) * deg;
         },
 
-        lerp: function (x, y, t) {
+        lerp(x, y, t) {
             return (1 - t) * x + t * y;
         },
     };
@@ -133,26 +122,26 @@ export const Trial = (props) => {
     // gap between the layers
     padding = pad;
     // radius of the fillet used on corners of cube
-    c = document.createElement("canvas");
-    ctx = c.getContext("2d");
-    const tx1 = document.createElement("canvas").getContext("2d");
-    tx1.font = "150pt poppins ";
-    tx1.fillText("F", 100, 140);
-    const tx2 = document.createElement("canvas").getContext("2d");
-    tx2.font = "150pt roboto";
-    tx2.fillText("B", 100, 140);
-    const tx3 = document.createElement("canvas").getContext("2d");
-    tx3.font = "150pt roboto";
-    tx3.fillText("R", 100, 140);
-    const tx4 = document.createElement("canvas").getContext("2d");
-    tx4.font = "150pt roboto";
-    tx4.fillText("L", 100, 140);
-    const tx5 = document.createElement("canvas").getContext("2d");
-    tx5.font = "150pt roboto";
-    tx5.fillText("U", 100, 140);
-    const tx6 = document.createElement("canvas").getContext("2d");
-    tx6.font = "150pt roboto";
-    tx6.fillText("D", 100, 140);
+    c = document.createElement('canvas');
+    ctx = c.getContext('2d');
+    const tx1 = document.createElement('canvas').getContext('2d');
+    tx1.font = '150pt poppins ';
+    tx1.fillText('F', 100, 140);
+    const tx2 = document.createElement('canvas').getContext('2d');
+    tx2.font = '150pt roboto';
+    tx2.fillText('B', 100, 140);
+    const tx3 = document.createElement('canvas').getContext('2d');
+    tx3.font = '150pt roboto';
+    tx3.fillText('R', 100, 140);
+    const tx4 = document.createElement('canvas').getContext('2d');
+    tx4.font = '150pt roboto';
+    tx4.fillText('L', 100, 140);
+    const tx5 = document.createElement('canvas').getContext('2d');
+    tx5.font = '150pt roboto';
+    tx5.fillText('U', 100, 140);
+    const tx6 = document.createElement('canvas').getContext('2d');
+    tx6.font = '150pt roboto';
+    tx6.fillText('D', 100, 140);
 
     // const texture = new THREE.TextureLoader().load("rubiksLogoClassic.png" );
 
@@ -180,7 +169,7 @@ export const Trial = (props) => {
         texture3,
         texture4,
         texture5,
-        texture6
+        texture6,
     );
     meshs = ret[0]; //27 cubelets
     core = ret[1]; //core
@@ -206,7 +195,7 @@ export const Trial = (props) => {
 
     //Animate
     useEffect(() => {
-        console.log("UseEffect 2 ", "Play =", props.play, "Mounted=", mounted);
+        console.log('UseEffect 2 ', 'Play =', props.play, 'Mounted=', mounted);
         if (mounted) {
             //&& domElement !== undefined
             var animation_flag = 0;
@@ -234,20 +223,20 @@ export const Trial = (props) => {
 
                 var currentURL = window.location.href;
 
-                var url_split = currentURL.split("?");
+                var url_split = currentURL.split('?');
 
                 if (url_split.length > 1) {
-                    var scramble_arr = url_split[1].split("=");
-                    var soln_arr = url_split[2].split("=");
-                    var play_button = url_split[3].split("=");
+                    var scramble_arr = url_split[1].split('=');
+                    var soln_arr = url_split[2].split('=');
+                    var play_button = url_split[3].split('=');
                     play1 = play_button[1];
 
-                    var url_scramble = scramble_arr[1].replace(/%20/g, "");
-                    var url_soln = soln_arr[1].replace(/%20/g, "");
+                    var url_scramble = scramble_arr[1].replace(/%20/g, '');
+                    var url_soln = soln_arr[1].replace(/%20/g, '');
                     url_scra1 = url_scramble.replace(/%27/g, "'");
                     url_soln1 = url_soln.replace(/%27/g, "'");
-                    scramble = url_scra1.split("");
-                    soln = url_soln1.split("");
+                    scramble = url_scra1.split('');
+                    soln = url_soln1.split('');
                     current_move = scramble.slice(cube.length);
                     current_soln = soln.slice(cube_sol.length);
 
@@ -283,7 +272,7 @@ export const Trial = (props) => {
                 //     // const line2 = setTimeout(draw_text(scene,"Nobista", renderer) ,2500)
                 //     animation_flag = 1;
                 // }
-                if (play1 == "true" && (play_flag == 0 || play_flag == 2)) {
+                if (play1 == 'true' && (play_flag == 0 || play_flag == 2)) {
                     var inverse = scramble_read(soln, soln, [], 1); //FINDS THE INVERSE MOVES FOR THE SOLUTION
                     // this is when the user initially presses the play button so that solution moves gets inversed
                     if (play_flag == 0) {
@@ -298,7 +287,7 @@ export const Trial = (props) => {
                     }
                 }
 
-                if (play1 == "false") {
+                if (play1 == 'false') {
                     if (play_flag == 1) {
                         play_flag = 2; // so that the moves dont get inversed again
                         clearInterval(mycube);
@@ -308,29 +297,11 @@ export const Trial = (props) => {
                     }
                 }
 
-                if (playBtn == "true") {
-                    face_plane_make(
-                        face_plane,
-                        "true",
-                        tx1,
-                        tx2,
-                        tx3,
-                        tx4,
-                        tx5,
-                        tx6
-                    );
+                if (playBtn == 'true') {
+                    face_plane_make(face_plane, 'true', tx1, tx2, tx3, tx4, tx5, tx6);
                 }
-                if (playBtn == "false") {
-                    face_plane_make(
-                        face_plane,
-                        "false",
-                        tx1,
-                        tx2,
-                        tx3,
-                        tx4,
-                        tx5,
-                        tx6
-                    );
+                if (playBtn == 'false') {
+                    face_plane_make(face_plane, 'false', tx1, tx2, tx3, tx4, tx5, tx6);
                 }
 
                 renderScene();
@@ -353,13 +324,7 @@ export const Trial = (props) => {
 
         return () => {
             stop();
-            console.log(
-                "UseEffect 2 cleanup",
-                "Play =",
-                props.play,
-                "Mounted=",
-                mounted
-            );
+            console.log('UseEffect 2 cleanup', 'Play =', props.play, 'Mounted=', mounted);
             //window.removeEventListener("resize", handleResize);
             //scene.remove(cube);
 

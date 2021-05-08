@@ -15,6 +15,6 @@ export default getComments;
 
 const cleanComments = (values: string) => {
     //TODO: Remove blank space at the start
-    var slash = values.replace(/(\/\/)/g, "");
-    return slash.replace(/\./g, "");
+    var slash = values.replace(/(\/\/)/g, '');
+    return slash.replace(/\./g, '');
 };

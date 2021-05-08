@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 // import { Link } from "react-router-dom";
 // import logo from "./cubelogo.jpg";
-import { FaBars, FaSun, FaMoon } from "react-icons/fa";
-import { SiNintendogamecube } from "react-icons/si";
-import { HiChevronDown } from "react-icons/hi";
-import { MdStyle } from "react-icons/md";
+import { FaBars, FaSun, FaMoon } from 'react-icons/fa';
+import { SiNintendogamecube } from 'react-icons/si';
+import { HiChevronDown } from 'react-icons/hi';
+import { MdStyle } from 'react-icons/md';
 import {
     Nav,
     NavbarContainer,
@@ -16,8 +16,9 @@ import {
     NavBtn,
     LinkItemBtn,
     ThemeBtnN,
-} from "./NavbarElements";
-import { SignInBut } from "../BasicElements";
+} from './NavbarElements';
+import { SignInBut } from '../BasicElements';
+
 interface CmProps {
     toggle: () => void;
     theme: string;
@@ -25,14 +26,13 @@ interface CmProps {
 }
 const Navbar = (props: CmProps) => {
     function changeTheme() {
-        if (props.theme === "lightT") {
-            props.setTheme("darkT");
+        if (props.theme === 'lightT') {
+            props.setTheme('darkT');
         } else {
-            props.setTheme("lightT");
+            props.setTheme('lightT');
         }
     }
-    const icon =
-        props.theme === "lightT" ? <FaMoon size={30} /> : <FaSun size={30} />;
+    const icon = props.theme === 'lightT' ? <FaMoon size={30} /> : <FaSun size={30} />;
     return (
         <Nav>
             <NavbarContainer>

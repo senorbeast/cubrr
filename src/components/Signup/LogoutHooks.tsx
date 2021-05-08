@@ -1,10 +1,9 @@
-import { useGoogleLogout } from "react-google-login";
-import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core/styles";
-import { FcGoogle } from "react-icons/fc";
+import { useGoogleLogout } from 'react-google-login';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import { FcGoogle } from 'react-icons/fc';
 
-const clientId =
-    "372426328177-edic722e7ta9aj8lsan1g8mp7bh3f9td.apps.googleusercontent.com";
+const clientId = '372426328177-edic722e7ta9aj8lsan1g8mp7bh3f9td.apps.googleusercontent.com';
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -14,12 +13,12 @@ const useStyles = makeStyles((theme) => ({
 
 function LogoutHooks() {
     const onLogoutSuccess = () => {
-        console.log("Logged out Success");
-        alert("Logged out Successfully ✌");
+        console.log('Logged out Success');
+        alert('Logged out Successfully ✌');
     };
 
     const onFailure = () => {
-        console.log("Handle failure cases");
+        console.log('Handle failure cases');
     };
 
     const { signOut } = useGoogleLogout({

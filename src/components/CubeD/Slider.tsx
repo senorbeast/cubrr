@@ -1,6 +1,6 @@
+import Tooltip from '@material-ui/core/Tooltip';
 import { SliderSC } from './CubeElements';
 //import { useState } from "react";
-import Tooltip from '@material-ui/core/Tooltip';
 import selMode from './modes';
 import getComments from './Parser/getComments';
 import getAlgs from './Parser/getAlgs';

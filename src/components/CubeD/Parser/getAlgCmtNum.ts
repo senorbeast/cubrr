@@ -1,9 +1,9 @@
-import validateAlg from "./validateAlg";
+import validateAlg from './validateAlg';
 
 const getAlgCmtNum = (solution: string): number[] => {
-    var rpdots: string = solution.replace(/\./gm, "");
+    var rpdots: string = solution.replace(/\./gm, '');
     var regex = /(\/\/).+/gm;
-    var rpcmts: string = rpdots.replace(regex, "%v%");
+    var rpcmts: string = rpdots.replace(regex, '%v%');
     var withCmt = validateAlg(rpcmts)?.legalAlg;
     //console.log("Alg with Cmt ", withCmt);
     var middlestep = gotCmtNum(withCmt);
@@ -18,7 +18,7 @@ const gotCmtNum = (Arr: any) => {
     var cmtNum: Array<number> = [];
     for (var i = 0; i < Arr.length; i++) {
         //Position of %v% gives size of array befor it
-        if (Arr[i] == "%v%") {
+        if (Arr[i] == '%v%') {
             cmtNum.push(i);
         }
     }

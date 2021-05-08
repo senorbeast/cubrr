@@ -1,11 +1,12 @@
-import * as THREE from "three";
+import * as THREE from 'three';
+
 function layer_group(
     scene: { add: any },
     meshs: string | any[],
     layer: string,
     padding: number,
     dir: number,
-    number: number
+    number: number,
 ): (number | THREE.Object3D | THREE.Vector3)[] | undefined {
     var my_return = [];
     var v1 = new THREE.Vector3();
@@ -38,7 +39,7 @@ function layer_group(
     if (number == 2) {
         my_return[2] = Math.PI;
     }
-    if (layer == "D") {
+    if (layer == 'D') {
         for (var qi = 0; qi < 27; qi++) {
             meshs[qi].getWorldPosition(v1);
 
@@ -55,7 +56,7 @@ function layer_group(
         return my_return;
     }
 
-    if (layer == "U") {
+    if (layer == 'U') {
         for (var qi = 0; qi < 27; qi++) {
             meshs[qi].getWorldPosition(v1);
 
@@ -72,7 +73,7 @@ function layer_group(
         return my_return;
     }
 
-    if (layer == "F") {
+    if (layer == 'F') {
         for (var qi = 0; qi < 27; qi++) {
             meshs[qi].getWorldPosition(v1);
 
@@ -89,7 +90,7 @@ function layer_group(
         return my_return;
     }
 
-    if (layer == "B") {
+    if (layer == 'B') {
         for (var qi = 0; qi < 27; qi++) {
             meshs[qi].getWorldPosition(v1);
 
@@ -106,7 +107,7 @@ function layer_group(
         return my_return;
     }
 
-    if (layer == "R") {
+    if (layer == 'R') {
         for (var qi = 0; qi < 27; qi++) {
             meshs[qi].getWorldPosition(v1);
 
@@ -123,7 +124,7 @@ function layer_group(
         return my_return;
     }
 
-    if (layer == "L") {
+    if (layer == 'L') {
         for (var qi = 0; qi < 27; qi++) {
             meshs[qi].getWorldPosition(v1);
 
@@ -138,7 +139,7 @@ function layer_group(
         my_return[1] = axis;
         return my_return;
     }
-    if (layer == "r") {
+    if (layer == 'r') {
         for (var qi = 0; qi < 27; qi++) {
             meshs[qi].getWorldPosition(v1);
 
@@ -154,7 +155,7 @@ function layer_group(
         my_return[1] = axis;
         return my_return;
     }
-    if (layer == "l") {
+    if (layer == 'l') {
         for (var qi = 0; qi < 27; qi++) {
             meshs[qi].getWorldPosition(v1);
 
@@ -170,7 +171,7 @@ function layer_group(
         my_return[1] = axis;
         return my_return;
     }
-    if (layer == "u") {
+    if (layer == 'u') {
         for (var qi = 0; qi < 27; qi++) {
             meshs[qi].getWorldPosition(v1);
 
@@ -186,7 +187,7 @@ function layer_group(
         my_return[1] = axis;
         return my_return;
     }
-    if (layer == "d") {
+    if (layer == 'd') {
         for (var qi = 0; qi < 27; qi++) {
             meshs[qi].getWorldPosition(v1);
 
@@ -202,7 +203,7 @@ function layer_group(
         my_return[1] = axis;
         return my_return;
     }
-    if (layer == "b") {
+    if (layer == 'b') {
         for (var qi = 0; qi < 27; qi++) {
             meshs[qi].getWorldPosition(v1);
 
@@ -218,7 +219,7 @@ function layer_group(
         my_return[1] = axis;
         return my_return;
     }
-    if (layer == "f") {
+    if (layer == 'f') {
         for (var qi = 0; qi < 27; qi++) {
             meshs[qi].getWorldPosition(v1);
 
@@ -234,7 +235,7 @@ function layer_group(
         my_return[1] = axis;
         return my_return;
     }
-    if (layer == "x") {
+    if (layer == 'x') {
         for (var qi = 0; qi < 27; qi++) {
             meshs[qi].getWorldPosition(v1);
 
@@ -248,7 +249,7 @@ function layer_group(
         my_return[1] = axis;
         return my_return;
     }
-    if (layer == "y") {
+    if (layer == 'y') {
         for (var qi = 0; qi < 27; qi++) {
             meshs[qi].getWorldPosition(v1);
 
@@ -262,7 +263,7 @@ function layer_group(
         my_return[1] = axis;
         return my_return;
     }
-    if (layer == "z") {
+    if (layer == 'z') {
         for (var qi = 0; qi < 27; qi++) {
             meshs[qi].getWorldPosition(v1);
 
@@ -277,7 +278,7 @@ function layer_group(
         return my_return;
     }
 
-    if (layer == "M") {
+    if (layer == 'M') {
         for (var qi = 0; qi < 27; qi++) {
             meshs[qi].getWorldPosition(v1);
 
@@ -293,7 +294,7 @@ function layer_group(
         return my_return;
     }
 
-    if (layer == "S") {
+    if (layer == 'S') {
         for (var qi = 0; qi < 27; qi++) {
             meshs[qi].getWorldPosition(v1);
 
@@ -309,7 +310,7 @@ function layer_group(
         return my_return;
     }
 
-    if (layer == "E") {
+    if (layer == 'E') {
         for (var qi = 0; qi < 27; qi++) {
             meshs[qi].getWorldPosition(v1);
 

@@ -1,15 +1,10 @@
-import React from "react";
-import {
-    SideNavContainer,
-    SideNavMenu,
-    SideNavItem,
-    SideNavItemBtn,
-} from "./SideNavElements";
+import React from 'react';
 //import * as modes from "../CubeD/modes";
-import { BiHomeHeart } from "react-icons/bi";
-import { FaSun, FaMoon } from "react-icons/fa";
-import { VscBook } from "react-icons/vsc";
-import { TiThList } from "react-icons/ti";
+import { BiHomeHeart } from 'react-icons/bi';
+import { FaSun, FaMoon } from 'react-icons/fa';
+import { VscBook } from 'react-icons/vsc';
+import { TiThList } from 'react-icons/ti';
+import { SideNavContainer, SideNavMenu, SideNavItem, SideNavItemBtn } from './SideNavElements';
 
 interface SNprops {
     mode: string;
@@ -19,14 +14,13 @@ interface SNprops {
 }
 const SideNav = (props: SNprops) => {
     function changeTheme() {
-        if (props.theme === "lightT") {
-            props.setTheme("darkT");
+        if (props.theme === 'lightT') {
+            props.setTheme('darkT');
         } else {
-            props.setTheme("lightT");
+            props.setTheme('lightT');
         }
     }
-    const icon =
-        props.theme === "lightT" ? <FaMoon size={30} /> : <FaSun size={30} />;
+    const icon = props.theme === 'lightT' ? <FaMoon size={30} /> : <FaSun size={30} />;
     return (
         <SideNavContainer>
             <SideNavMenu>
@@ -47,8 +41,8 @@ const SideNav = (props: SNprops) => {
         </SideNavContainer>
     );
     function algModeT() {
-        console.log("Alg mode ", props.mode);
-        let amodeto = props.mode === "algM" ? "scraM" : "algM";
+        console.log('Alg mode ', props.mode);
+        let amodeto = props.mode === 'algM' ? 'scraM' : 'algM';
         props.setMode(amodeto);
     }
 };

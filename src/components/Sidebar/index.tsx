@@ -1,5 +1,5 @@
-import * as React from "react";
-import { FaSun, FaMoon } from "react-icons/fa";
+import * as React from 'react';
+import { FaSun, FaMoon } from 'react-icons/fa';
 import {
     SidebarContainer,
     CloseIcon,
@@ -9,8 +9,8 @@ import {
     SidebarMenu,
     SideBtnWrap,
     ThemeBtn,
-} from "./SidebarElements";
-import { SignInBut, MTTag } from "../BasicElements";
+} from './SidebarElements';
+import { SignInBut, MTTag } from '../BasicElements';
 
 interface SBprops {
     theme: string;
@@ -21,14 +21,13 @@ interface SBprops {
 
 const Sidebar = (props: SBprops) => {
     function changeTheme() {
-        if (props.theme === "lightT") {
-            props.setTheme("darkT");
+        if (props.theme === 'lightT') {
+            props.setTheme('darkT');
         } else {
-            props.setTheme("lightT");
+            props.setTheme('lightT');
         }
     }
-    const icon =
-        props.theme == "lightT" ? <FaMoon size={30} /> : <FaSun size={30} />;
+    const icon = props.theme == 'lightT' ? <FaMoon size={30} /> : <FaSun size={30} />;
     return (
         <>
             <SidebarContainer onClick={props.toggle} isOpen={props.isOpen}>
@@ -38,16 +37,14 @@ const Sidebar = (props: SBprops) => {
                 <SidebarWrapper>
                     <SidebarMenu>
                         <SidebarLink to="/cube">Cube</SidebarLink>
-                        <SidebarLink to="/algstrainer">
-                            Algs Trainer
-                        </SidebarLink>
+                        <SidebarLink to="/algstrainer">Algs Trainer</SidebarLink>
                         <SidebarLink to="/signup">Sign Up</SidebarLink>
                     </SidebarMenu>
 
                     <SideBtnWrap>
                         <SignInBut to="/signin">Sign In</SignInBut>
                     </SideBtnWrap>
-                    <MTTag></MTTag>
+                    <MTTag />
                     <ThemeBtn onClick={changeTheme}>{icon}</ThemeBtn>
                 </SidebarWrapper>
             </SidebarContainer>

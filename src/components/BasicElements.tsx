@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import Button from "@material-ui/core/Button";
-import { Typography } from "@material-ui/core";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+import { Typography } from '@material-ui/core';
 
 export const TypographySC = styled(Typography)`
     && {

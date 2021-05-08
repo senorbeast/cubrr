@@ -1,6 +1,6 @@
-import { SetCard, HeadCard } from "./AlgsElement";
-import { useRouteMatch } from "react-router-dom";
-import PLL from "./PLL-step.png";
+import { useRouteMatch } from 'react-router-dom';
+import { SetCard, HeadCard } from './AlgsElement';
+import PLL from './PLL-step.png';
 
 export const AlgHome = () => {
     let { path } = useRouteMatch(); //path, url
@@ -11,27 +11,27 @@ export const AlgHome = () => {
             </HeadCard>
             <SetCard to={`${path}/PLL`}>
                 <h1>PLL</h1>
-                <img src={PLL} alt="PLL"></img>
+                <img src={PLL} alt="PLL" />
             </SetCard>
             <SetCard to="/">
                 <h1>Card</h1>
-                <img src={PLL} alt="PLL"></img>
+                <img src={PLL} alt="PLL" />
             </SetCard>
             <SetCard to="/">
                 <h1>Card</h1>
-                <img src={PLL} alt="PLL"></img>
+                <img src={PLL} alt="PLL" />
             </SetCard>
             <SetCard to="/">
                 <h1>Card</h1>
-                <img src={PLL} alt="PLL"></img>
+                <img src={PLL} alt="PLL" />
             </SetCard>
             <SetCard to="/">
                 <h1>Card</h1>
-                <img src={PLL} alt="PLL"></img>
+                <img src={PLL} alt="PLL" />
             </SetCard>
             <SetCard to="/">
                 <h1>Card</h1>
-                <img src={PLL} alt="PLL"></img>
+                <img src={PLL} alt="PLL" />
             </SetCard>
         </>
     );

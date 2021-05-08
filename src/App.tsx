@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
+import { ThemeProvider } from 'styled-components';
+import { ThemeProvider as TPMaterial, createMuiTheme } from '@material-ui/core/styles';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { reactLocalStorage } from 'reactjs-localstorage';
 import Sidebar from './components/Sidebar';
 //import CubeD from "./components/CubeD";
 import Home from './components/Home';
 import AlgsTrainer from './components/AlgsTrainer';
 import Signup from './components/Signup';
-import { ThemeProvider } from 'styled-components';
-import { ThemeProvider as TPMaterial, createMuiTheme } from '@material-ui/core/styles';
 import * as themes from './components/themes';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { reactLocalStorage } from 'reactjs-localstorage';
 import CubeAlgWrap from './components/CubeD';
 
 function getInitialTheme() {

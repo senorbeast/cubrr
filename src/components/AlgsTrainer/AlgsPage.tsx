@@ -1,8 +1,8 @@
 //import Navbar from "../Navbar";
-import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag";
-import { HeadCard } from "./AlgsElement";
-import AlgCard from "./AlgCard";
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import { HeadCard } from './AlgsElement';
+import AlgCard from './AlgCard';
 
 interface PLLinfo {
     nameAlg: string;
@@ -13,7 +13,7 @@ interface PLLinfo {
 
 export const AlgsPage = () => {
     const { loading, data } = useQuery(FETCH_PLL_Query);
-    console.log("DAta", data);
+    console.log('DAta', data);
     return (
         <>
             {/* <AlgCardContainer> */}
@@ -24,9 +24,7 @@ export const AlgsPage = () => {
                 <h1>Loading PLLs.....</h1>
             ) : (
                 data.getPLLs &&
-                data.getPLLs.map((PLL: PLLinfo) => (
-                    <AlgCard key={PLL.id} PLL={PLL} />
-                ))
+                data.getPLLs.map((PLL: PLLinfo) => <AlgCard key={PLL.id} PLL={PLL} />)
             )}
             {/* </AlgCardContainer> */}
         </>

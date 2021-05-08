@@ -25,8 +25,9 @@
   ],
   "rules": {
     "prettier/prettier": [
-      "error"
-    ],
+    "error",{
+    "endOfLine": "auto"
+    }],
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [
       2,

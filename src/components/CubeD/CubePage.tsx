@@ -1,6 +1,6 @@
 // @ts-nocheck
-import SideNav from '../SideNav';
 import { useState, useEffect, useRef } from 'react';
+import SideNav from '../SideNav';
 import { CardContainer, CubeContainer, AlgsCard } from './CubeElements';
 import selMode from './modes';
 import Scramble from './Scramble';
@@ -10,8 +10,7 @@ import { FullCard } from './FullCard';
 import VirtualRubiksC from './VirtualRubiks';
 import ButtonBox from './ButtonBox';
 import Slider from './Slider';
-import AlgProvider from './AlgProvider';
-import { useScra, useSol } from './AlgProvider';
+import AlgProvider, { useScra, useSol } from './AlgProvider';
 
 function CubePage(props) {
     //TODO: Divide into different Components (acc to states) to avoid rerendering the whole index.js

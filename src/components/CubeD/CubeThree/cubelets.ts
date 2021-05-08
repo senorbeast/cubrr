@@ -1,12 +1,12 @@
 // @ts-nocheck
-import * as THREE from "three";
+import * as THREE from 'three';
 
 function cubelets_form(
     scene: {
         add: (
             arg0:
                 | THREE.Mesh<THREE.CylinderGeometry, THREE.MeshBasicMaterial>
-                | THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>
+                | THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>,
         ) => void;
     }, //@ts-ignore
     size: any,
@@ -16,10 +16,8 @@ function cubelets_form(
     tx3: THREE.Texture | null,
     tx4: THREE.Texture | null,
     tx5: THREE.Texture | null,
-    tx6: THREE.Texture | null
-):
-    | THREE.Mesh<THREE.CylinderGeometry, THREE.MeshBasicMaterial>[]
-    | THREE.Mesh<any> {
+    tx6: THREE.Texture | null,
+): THREE.Mesh<THREE.CylinderGeometry, THREE.MeshBasicMaterial>[] | THREE.Mesh<any> {
     var meshs = [];
     var core = [];
     var name_plane = [];
@@ -62,18 +60,20 @@ function cubelets_form(
                         transparent: true,
                         opacity: 1,
                         side: THREE.DoubleSide,
-                    })
+                    }),
                 );
 
                 scene.add(cube2);
 
-                var space, spacex, spacey;
+                var space;
+                var spacex;
+                var spacey;
                 spacex = (50 + padding) * k;
                 // setting position of rubiks in the scene
                 cube2.position.set(
                     -(50 + padding) + spacex,
                     -(50 + padding) + spacey,
-                    -(50 + padding) + space
+                    -(50 + padding) + space,
                 );
                 cube2.updateMatrixWorld(true);
                 cube2.matrixAutoUpdate = true;

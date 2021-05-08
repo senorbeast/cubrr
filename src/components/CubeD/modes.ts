@@ -52,31 +52,33 @@ interface ModeTypes {
 // };
 
 const fullM = {
-    none: "none",
-    alg: "none",
+    none: 'none',
+    alg: 'none',
     cubecols: 3,
     nobuts: 11,
 };
 const scraM = {
-    none: "grid",
-    alg: "none",
+    none: 'grid',
+    alg: 'none',
     cubecols: 2,
     nobuts: 7,
 };
 
 const algM = {
-    none: "none",
-    alg: "grid",
+    none: 'none',
+    alg: 'grid',
     cubecols: 2,
     nobuts: 7,
 };
 
 const selMode = (mode: string): ModeTypes => {
-    if (mode === "fullM") {
+    if (mode === 'fullM') {
         return fullM;
-    } else if (mode === "algM") {
+    }
+    if (mode === 'algM') {
         return algM;
-    } else if (mode === "scraM") {
+    }
+    if (mode === 'scraM') {
         return scraM;
     }
     return scraM;

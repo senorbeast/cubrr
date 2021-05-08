@@ -1,8 +1,9 @@
-import { ScrambleI, InTextArea1 } from "./CubeElements";
-import { Typography } from "@material-ui/core";
-import selMode from "./modes";
-import { useScra, useSetScra, useSol } from "./AlgProvider";
-import { useEffect } from "react";
+import { Typography } from '@material-ui/core';
+import { useEffect } from 'react';
+import { ScrambleI, InTextArea1 } from './CubeElements';
+import selMode from './modes';
+import { useScra, useSetScra, useSol } from './AlgProvider';
+
 interface propsM {
     mode: string;
 }
@@ -13,11 +14,11 @@ const Scramble = ({ mode }: propsM) => {
     let setScra = useSetScra();
     useEffect(() => {
         if (newScra != undefined) {
-            console.log("URL useEffect");
+            console.log('URL useEffect');
             window.history.pushState(
-                "object or string",
-                "",
-                "/cube/?scramble=" + newScra + "?solution=" + newSol + "?"
+                'object or string',
+                '',
+                `/cube/?scramble=${newScra}?solution=${newSol}?`,
             );
             //console.log("Updating URL");
         }
@@ -29,7 +30,7 @@ const Scramble = ({ mode }: propsM) => {
                     Scramble
                 </Typography>
                 <InTextArea1
-                    autoFocus={true}
+                    autoFocus
                     //@ts-ignore
                     type="Text"
                     onKeyUp={handleChangeScra}

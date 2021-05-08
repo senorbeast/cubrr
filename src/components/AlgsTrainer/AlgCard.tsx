@@ -1,13 +1,8 @@
-import {
-    EachAlgCard,
-    SubContainer,
-    SubContainer2,
-    FlexRow,
-} from "./AlgsElement";
+import { DataGrid } from '@material-ui/data-grid';
+import Typography from '@material-ui/core/Typography';
+import { EachAlgCard, SubContainer, SubContainer2, FlexRow } from './AlgsElement';
 // import moment from "moment";
-import { DataGrid } from "@material-ui/data-grid";
-import PLLImg from "./PLL-step.png";
-import Typography from "@material-ui/core/Typography";
+import PLLImg from './PLL-step.png';
 
 interface PLLinfo {
     nameAlg: string;
@@ -31,8 +26,8 @@ const AlgCard = ({ PLL: { nameAlg, recogn, alglist } }: PLLCard) => {
                             alt="PLL"
                             width="280"
                             height="280"
-                            style={{ margin: "none", padding: "none" }}
-                        ></img>
+                            style={{ margin: 'none', padding: 'none' }}
+                        />
                     </SubContainer>
                     <SubContainer2>
                         <Typography variant="h4" gutterBottom>
@@ -42,22 +37,22 @@ const AlgCard = ({ PLL: { nameAlg, recogn, alglist } }: PLLCard) => {
                             Recognition: {recogn}
                         </Typography>
                         {/* <p>{JSON.stringify(alglist)}</p> */}
-                        <div style={{ height: 180, width: "100%" }}>
+                        <div style={{ height: 180, width: '100%' }}>
                             <DataGrid
                                 rowHeight={25}
-                                hideFooter={true}
-                                autoHeight={true}
+                                hideFooter
+                                autoHeight
                                 columns={[
                                     {
-                                        field: "alg",
-                                        headerName: "Algorithm",
+                                        field: 'alg',
+                                        headerName: 'Algorithm',
                                         flex: 1,
                                         sortable: false,
                                     },
                                     {
-                                        field: "rating",
+                                        field: 'rating',
                                         width: 92,
-                                        headerName: "Ratings",
+                                        headerName: 'Ratings',
                                     },
                                 ]}
                                 rows={alglist}

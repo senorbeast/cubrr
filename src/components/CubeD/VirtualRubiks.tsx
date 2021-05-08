@@ -1,14 +1,13 @@
 import { useEffect, useRef } from 'react';
-import { RubiksStyle as CubeStyle } from './CubeElements';
-import * as themes from '../themes';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as THREE from 'three';
+import { RubiksStyle as CubeStyle } from './CubeElements';
+import * as themes from '../themes';
 import { animate_read } from './CubeThree/cube_animate_read_3';
 import CUBE from './CubeThree/CUBE';
 import getAlgs_URL from './Parser/getAlgs_URL';
-import { useMoveNum } from './AlgProvider';
-import { useSetMoveNum } from './AlgProvider';
-import { usePlay } from './AlgProvider';
+import { useMoveNum, useSetMoveNum, usePlay } from './AlgProvider';
+
 import validateAlgs from './Parser/validateAlg';
 // import { face_plane_make } from "./CubeThree/cube_face_plane";
 
@@ -43,12 +42,12 @@ export const VirtualRubiksC = (props: TProps) => {
 
         var tick = 0; //used in time line to keep track on which move to be made
 
-        var FIELD_OF_VIEW = 45,
-            WIDTH = width,
-            HEIGHT = height,
-            ASPECT_RATIO = WIDTH / HEIGHT,
-            NEAR = 1,
-            FAR = 10000;
+        var FIELD_OF_VIEW = 45;
+        var WIDTH = width;
+        var HEIGHT = height;
+        var ASPECT_RATIO = WIDTH / HEIGHT;
+        var NEAR = 1;
+        var FAR = 10000;
 
         var camera = new THREE.PerspectiveCamera(FIELD_OF_VIEW, ASPECT_RATIO, NEAR, FAR);
 

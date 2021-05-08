@@ -1,7 +1,7 @@
 // @ts-nocheck
-import { useEffect, useRef, useState } from "react";
-import * as THREE from "three";
-import { TrialStyle } from "./CubeElements";
+import { useEffect, useRef, useState } from 'react';
+import * as THREE from 'three';
+import { TrialStyle } from './CubeElements';
 
 const Trial = () => {
     const mount = useRef(null);
@@ -14,12 +14,7 @@ const Trial = () => {
         let frameId;
 
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(
-            75,
-            width / height,
-            0.1,
-            1000
-        );
+        const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         const geometry = new THREE.BoxGeometry(1, 1, 1);
         const material = new THREE.MeshBasicMaterial({ color: 0xff00ff });
@@ -27,7 +22,7 @@ const Trial = () => {
 
         camera.position.z = 4;
         scene.add(cube);
-        renderer.setClearColor("#000000");
+        renderer.setClearColor('#000000');
         renderer.setSize(width, height);
 
         const renderScene = () => {
@@ -63,14 +58,14 @@ const Trial = () => {
         };
 
         mount.current.appendChild(renderer.domElement);
-        window.addEventListener("resize", handleResize);
+        window.addEventListener('resize', handleResize);
         start();
 
         controls.current = { start, stop };
 
         return () => {
             stop();
-            window.removeEventListener("resize", handleResize);
+            window.removeEventListener('resize', handleResize);
             mount.current.removeChild(renderer.domElement);
 
             scene.remove(cube);
@@ -87,12 +82,6 @@ const Trial = () => {
         }
     }, [isAnimating]);
 
-    return (
-        <TrialStyle
-            className="vis"
-            ref={mount}
-            onClick={() => setAnimating(!isAnimating)}
-        />
-    );
+    return <TrialStyle className="vis" ref={mount} onClick={() => setAnimating(!isAnimating)} />;
 };
 export default Trial;

@@ -1,21 +1,20 @@
-import * as THREE from "three";
-function cube_color(
-    meshs: { geometry: { faces: { color: THREE.Color }[] } }[]
-): void {
+import * as THREE from 'three';
+
+function cube_color(meshs: { geometry: { faces: { color: THREE.Color }[] } }[]): void {
     var F = [6, 7, 8, 15, 16, 17, 24, 25, 26];
     var B = [0, 1, 2, 9, 10, 11, 18, 19, 20];
     var L = [0, 3, 6, 9, 12, 15, 18, 21, 24];
     var R = [2, 5, 8, 11, 14, 17, 20, 23, 26];
     var U = [18, 19, 20, 21, 22, 23, 24, 25, 26];
     var D = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-    var black = new THREE.Color("#000000");
-    var white = new THREE.Color("#FFFFFF");
+    var black = new THREE.Color('#000000');
+    var white = new THREE.Color('#FFFFFF');
     // var base = new THREE.Color("#E9EBB3");
-    var yellow = new THREE.Color("#F3FF00");
-    var red = new THREE.Color("#d40f0f");
-    var orange = new THREE.Color("#fa7d00");
-    var blue = new THREE.Color("#260db5");
-    var green = new THREE.Color("#66FF00");
+    var yellow = new THREE.Color('#F3FF00');
+    var red = new THREE.Color('#d40f0f');
+    var orange = new THREE.Color('#fa7d00');
+    var blue = new THREE.Color('#260db5');
+    var green = new THREE.Color('#66FF00');
     for (var i = 0; i < 27; i++) {
         for (var j = 0; j < 12; j++) {
             meshs[i].geometry.faces[j].color = black;

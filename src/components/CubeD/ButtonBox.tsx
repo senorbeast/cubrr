@@ -1,4 +1,3 @@
-import { ThemeBtn, ButtonArea } from './CubeElements';
 import {
     CgChevronDoubleRight,
     CgChevronDoubleLeft,
@@ -8,6 +7,7 @@ import {
 import { FiCodesandbox } from 'react-icons/fi';
 import { WiRefresh } from 'react-icons/wi';
 import { ImPlay2, ImPause } from 'react-icons/im';
+import { ThemeBtn, ButtonArea } from './CubeElements';
 import selMode from './modes';
 import { usePlay, useToggPlay } from './AlgProvider';
 

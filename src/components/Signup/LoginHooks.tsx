@@ -1,13 +1,12 @@
-import { useGoogleLogin } from "react-google-login";
-import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core/styles";
-import { FcGoogle } from "react-icons/fc";
+import { useGoogleLogin } from 'react-google-login';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import { FcGoogle } from 'react-icons/fc';
 
 // refresh token
-import { refreshTokenSetup } from "./../../utils/refreshToken";
+import { refreshTokenSetup } from '../../utils/refreshToken';
 
-const clientId =
-    "372426328177-edic722e7ta9aj8lsan1g8mp7bh3f9td.apps.googleusercontent.com";
+const clientId = '372426328177-edic722e7ta9aj8lsan1g8mp7bh3f9td.apps.googleusercontent.com';
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -17,15 +16,15 @@ const useStyles = makeStyles((theme) => ({
 
 function LoginHooks() {
     const onSuccess = (res: any) => {
-        console.log("Login Success: currentUser:", res.profileObj);
+        console.log('Login Success: currentUser:', res.profileObj);
         alert(
-            `Logged in successfully welcome ${res.profileObj.name} 😍. \n See console for full profile object.`
+            `Logged in successfully welcome ${res.profileObj.name} 😍. \n See console for full profile object.`,
         );
         refreshTokenSetup(res);
     };
 
     const onFailure = (res: any) => {
-        console.log("Login failed: res:", res);
+        console.log('Login failed: res:', res);
         alert(`Failed to login. 😢`);
     };
 
@@ -34,7 +33,7 @@ function LoginHooks() {
         onFailure,
         clientId,
         isSignedIn: true,
-        accessType: "offline",
+        accessType: 'offline',
         // responseType: 'code',
         // prompt: 'consent',
     });

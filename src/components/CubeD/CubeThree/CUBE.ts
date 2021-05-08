@@ -1,12 +1,13 @@
 // @ts-nocheck
-import { cubelets_form } from "./cubelets";
-import { cube_color } from "./cubelet_colors";
-import { scramble_read } from "./cube_scramble_read";
-import { fast_execute } from "./cube_fast_execute";
-import { animate_execute } from "./cube_animate_execute";
+import * as THREE from 'three';
+import { cubelets_form } from './cubelets';
+import { cube_color } from './cubelet_colors';
+import { scramble_read } from './cube_scramble_read';
+import { fast_execute } from './cube_fast_execute';
+import { animate_execute } from './cube_animate_execute';
 // import { animate_read } from "./cube_animate_read_3";
-import { draw_text } from "./cube_text";
-import * as THREE from "three";
+import { draw_text } from './cube_text';
+
 export default class CUBE {
     // @ts-ignore
     #mesh = []; // just add "default"
@@ -15,7 +16,7 @@ export default class CUBE {
         cube_size: number,
         camera: THREE.PerspectiveCamera | null,
         renderer: THREE.WebGLRenderer,
-        scene: THREE.Scene | null
+        scene: THREE.Scene | null,
     ) {
         this.scene = scene;
         this.camera = camera;
@@ -34,25 +35,26 @@ export default class CUBE {
         this.cube_size = cube_size;
         this.renderer = renderer;
     }
+
     add() {
-        const tx1 = document.createElement("canvas").getContext("2d");
-        tx1.font = "150pt poppins ";
-        tx1.fillText("F", 100, 140);
-        const tx2 = document.createElement("canvas").getContext("2d");
-        tx2.font = "150pt roboto";
-        tx2.fillText("B", 100, 140);
-        const tx3 = document.createElement("canvas").getContext("2d");
-        tx3.font = "150pt roboto";
-        tx3.fillText("R", 100, 140);
-        const tx4 = document.createElement("canvas").getContext("2d");
-        tx4.font = "150pt roboto";
-        tx4.fillText("L", 100, 140);
-        const tx5 = document.createElement("canvas").getContext("2d");
-        tx5.font = "150pt roboto";
-        tx5.fillText("U", 100, 140);
-        const tx6 = document.createElement("canvas").getContext("2d");
-        tx6.font = "150pt roboto";
-        tx6.fillText("D", 100, 140);
+        const tx1 = document.createElement('canvas').getContext('2d');
+        tx1.font = '150pt poppins ';
+        tx1.fillText('F', 100, 140);
+        const tx2 = document.createElement('canvas').getContext('2d');
+        tx2.font = '150pt roboto';
+        tx2.fillText('B', 100, 140);
+        const tx3 = document.createElement('canvas').getContext('2d');
+        tx3.font = '150pt roboto';
+        tx3.fillText('R', 100, 140);
+        const tx4 = document.createElement('canvas').getContext('2d');
+        tx4.font = '150pt roboto';
+        tx4.fillText('L', 100, 140);
+        const tx5 = document.createElement('canvas').getContext('2d');
+        tx5.font = '150pt roboto';
+        tx5.fillText('U', 100, 140);
+        const tx6 = document.createElement('canvas').getContext('2d');
+        tx6.font = '150pt roboto';
+        tx6.fillText('D', 100, 140);
 
         // const texture = new THREE.TextureLoader().load("rubiksLogoClassic.png" );
 
@@ -74,31 +76,36 @@ export default class CUBE {
             this.meshs = ret[0];
         }
     }
+
     color() {
         cube_color(this.meshs);
     }
+
     liveMove(
         current_move: string | any[],
         currentfull: ConcatArray<any>,
         previous: string | any[],
-        num: number
+        num: number,
     ) {
         var moves = scramble_read(current_move, currentfull, previous, num);
 
         fast_execute(this.scene, this.meshs, 5, moves);
     }
+
     fastMove(moves: string | ConcatArray<any>, num: number) {
         var moves1 = scramble_read(moves, moves, [], num);
         fast_execute(this.scene, this.meshs, 5, moves1);
     }
+
     animateMove(move: string, time: number) {
         //   var moves = animate_read(move, move, [], 0);
         animate_execute(this.scene, this.meshs, move, 5, time, 0);
     }
+
     text(
         text: string,
         ctx: CanvasRenderingContext2D | null,
-        c: HTMLCanvasElement | HTMLImageElement | HTMLVideoElement
+        c: HTMLCanvasElement | HTMLImageElement | HTMLVideoElement,
     ) {
         draw_text(this.scene, text, this.renderer, ctx, c);
     }

@@ -6,15 +6,15 @@ function face_plane_make(
     tx3: any, // @ts-ignore
     tx4: any, // @ts-ignore
     tx5: any, // @ts-ignore
-    tx6: any
+    tx6: any,
 ): void {
     // var name_plane = [];
 
-    if (t == "true") {
+    if (t == 'true') {
         for (var j = 0; j < 6; j++) {
             plane[j].material.opacity = 1;
         }
-    } else if (t == "false") {
+    } else if (t == 'false') {
         for (var j = 0; j < 6; j++) {
             plane[j].material.opacity = 0;
         }

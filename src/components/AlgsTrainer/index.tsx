@@ -1,10 +1,10 @@
-import React from "react";
-import Navbar from "../Navbar";
-import { CardContainer } from "./AlgsElement";
+import React from 'react';
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import Navbar from '../Navbar';
+import { CardContainer } from './AlgsElement';
 //import { TypographySC } from "../BasicElements";
-import { AlgsPage } from "./AlgsPage";
-import { AlgHome } from "./AlgHome";
-import { Switch, Route, useRouteMatch } from "react-router-dom";
+import { AlgsPage } from './AlgsPage';
+import { AlgHome } from './AlgHome';
 
 interface CmProps {
     toggle: () => void;
@@ -13,14 +13,10 @@ interface CmProps {
 }
 function AlgsTrainer(props: CmProps) {
     let { path, url } = useRouteMatch();
-    console.log("Run this", path, url);
+    console.log('Run this', path, url);
     return (
         <div>
-            <Navbar
-                toggle={props.toggle}
-                theme={props.theme}
-                setTheme={props.setTheme}
-            />
+            <Navbar toggle={props.toggle} theme={props.theme} setTheme={props.setTheme} />
 
             <CardContainer>
                 <Switch>

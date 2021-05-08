@@ -1,8 +1,8 @@
-import { SolutionI, InTextArea2 } from "./CubeElements";
-import { Typography } from "@material-ui/core";
+import { Typography } from '@material-ui/core';
+import { SolutionI, InTextArea2 } from './CubeElements';
 //import { useState } from "react";
-import selMode from "./modes";
-import { useSol, useSetSol } from "./AlgProvider";
+import selMode from './modes';
+import { useSol, useSetSol } from './AlgProvider';
 
 interface propsM {
     mode: string;
@@ -24,14 +24,14 @@ const Solution = ({ mode }: propsM) => {
                     onChange={handleChangeSol}
                     placeholder="Enter the Solution Here :)"
                     defaultValue={newSol}
-                    multiline={true}
+                    multiline
                 />
             </SolutionI>
         </>
     );
     function handleChangeSol(event: any): void {
-        var dots = event.target.value.replace(/\./g, ""); //Fixed-User Can type dots in Solution box
-        var soln = dots.replace(/(.^|\n)([^.]|$)/g, "$1.$2");
+        var dots = event.target.value.replace(/\./g, ''); //Fixed-User Can type dots in Solution box
+        var soln = dots.replace(/(.^|\n)([^.]|$)/g, '$1.$2');
         // setnewSol(soln);
         setSol(soln);
         //setCmarks(SlLabels(soln));

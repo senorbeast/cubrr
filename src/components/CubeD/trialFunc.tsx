@@ -1,14 +1,14 @@
 // @ts-nocheck
-import { useEffect, useRef } from "react";
-import { TrialStyle } from "./CubeElements";
-import { OrbitControls } from "../../../node_modules/three/examples/jsm/controls/OrbitControls";
+import { useEffect, useRef } from 'react';
+import * as THREE from 'three';
+import { TrialStyle } from './CubeElements';
+import { OrbitControls } from '../../../node_modules/three/examples/jsm/controls/OrbitControls';
 // /import Stats from '/jsm/libs/stats.module.js';
-import * as THREE from "three";
-import CUBE from "./CubeThree/CUBE";
-import getAlgs_URL from "./Parser/getAlgs_URL";
+import CUBE from './CubeThree/CUBE';
+import getAlgs_URL from './Parser/getAlgs_URL';
 
-import { animate_read } from "./CubeThree/cube_animate_read_3";
-import { usePlay } from "./AlgProvider";
+import { animate_read } from './CubeThree/cube_animate_read_3';
+import { usePlay } from './AlgProvider';
 
 export const Trial = () => {
     const mount = useRef(null);
@@ -30,8 +30,8 @@ export const Trial = () => {
     });
     let cube1 = useRef(null);
     const controlsA = useRef(null);
-    var url_scra1 = "a";
-    var url_soln1 = "a";
+    var url_scra1 = 'a';
+    var url_soln1 = 'a';
     var scramble = [];
     var soln: any[] | ConcatArray<string> = [];
     //   var cube = [];
@@ -55,22 +55,17 @@ export const Trial = () => {
         scene.current = new THREE.Scene();
         // var face_plane = [];
         //used in time line to keep track on which move to be made
-        var FIELD_OF_VIEW = 45,
-            WIDTH = width.current,
-            HEIGHT = height.current,
-            ASPECT_RATIO = WIDTH / HEIGHT,
-            NEAR = 1,
-            FAR = 10000;
+        var FIELD_OF_VIEW = 45;
+        var WIDTH = width.current;
+        var HEIGHT = height.current;
+        var ASPECT_RATIO = WIDTH / HEIGHT;
+        var NEAR = 1;
+        var FAR = 10000;
 
-        camera.current = new THREE.PerspectiveCamera(
-            FIELD_OF_VIEW,
-            ASPECT_RATIO,
-            NEAR,
-            FAR
-        );
+        camera.current = new THREE.PerspectiveCamera(FIELD_OF_VIEW, ASPECT_RATIO, NEAR, FAR);
 
         //renderer.setClearColor(themes[props.theme].primary);
-        renderer.setClearColor("#fff");
+        renderer.setClearColor('#fff');
         renderer.setSize(width.current, height.current, true);
         mount.current.appendChild(renderer.domElement);
 
@@ -105,11 +100,11 @@ export const Trial = () => {
                 clearInterval(mycube);
             }
         }
-        window.addEventListener("visibilitychange", () => {
-            if (document.visibilityState != "visible") {
+        window.addEventListener('visibilitychange', () => {
+            if (document.visibilityState != 'visible') {
                 focus = 1;
                 clearInterval(mycube);
-            } else if (document.visibilityState == "visible" && focus == 1) {
+            } else if (document.visibilityState == 'visible' && focus == 1) {
                 setInterval(mycube, 600);
                 focus = 2;
             }
@@ -136,23 +131,23 @@ export const Trial = () => {
 
             var currentURL = window.location.href;
 
-            var url_split = currentURL.split("?");
+            var url_split = currentURL.split('?');
 
             if (url_split.length > 1) {
-                var scramble_arr = url_split[1].split("=");
-                var soln_arr = url_split[2].split("=");
+                var scramble_arr = url_split[1].split('=');
+                var soln_arr = url_split[2].split('=');
                 // var play_button = url_split[3].split("=");
                 // play = play_button[1];
 
-                var url_scramble = scramble_arr[1].replace(/%20/g, "");
-                var url_soln = soln_arr[1].replace(/%20/g, "");
+                var url_scramble = scramble_arr[1].replace(/%20/g, '');
+                var url_soln = soln_arr[1].replace(/%20/g, '');
                 url_scra1 = url_scramble.replace(/%27/g, "'");
                 url_soln1 = url_soln.replace(/%27/g, "'");
-                scramble = url_scra1.split(""); //the actual scramble input from user
+                scramble = url_scra1.split(''); //the actual scramble input from user
 
                 var s = getAlgs_URL(url_soln1);
 
-                soln = s.split("");
+                soln = s.split('');
 
                 //the actual solution input from user
                 current_move = scramble.slice(cube.current.length); //the current scramble move to be executed
@@ -177,77 +172,43 @@ export const Trial = () => {
                         cube1.current.fastMove(scramble.concat(soln), 0);
                         cube.current = scramble;
                     }
-                    if (
-                        cube.current.length == 0 &&
-                        soln.length > 0 &&
-                        sc_be_so == 0
-                    ) {
+                    if (cube.current.length == 0 && soln.length > 0 && sc_be_so == 0) {
                         cube1.current.fastMove(scramble, 0);
                         cube.current = scramble;
                     }
-                    if (
-                        scramble.length > cube.current.length &&
-                        sc_be_so == 0
-                    ) {
-                        var scramble_check = scramble.slice(
-                            0,
-                            cube.current.length
-                        );
+                    if (scramble.length > cube.current.length && sc_be_so == 0) {
+                        var scramble_check = scramble.slice(0, cube.current.length);
 
                         if (
-                            JSON.stringify(scramble_check) ===
-                                JSON.stringify(cube.current) &&
+                            JSON.stringify(scramble_check) === JSON.stringify(cube.current) &&
                             soln.length == 0
                         ) {
-                            cube1.current.liveMove(
-                                current_move,
-                                scramble,
-                                cube.current,
-                                0
-                            );
+                            cube1.current.liveMove(current_move, scramble, cube.current, 0);
                         } else if (
-                            JSON.stringify(scramble_check) !==
-                                JSON.stringify(cube.current) &&
+                            JSON.stringify(scramble_check) !== JSON.stringify(cube.current) &&
                             soln.length == 0
                         ) {
-                            cube1.current.fastMove(
-                                cube.current.concat(soln),
-                                1
-                            );
+                            cube1.current.fastMove(cube.current.concat(soln), 1);
                             cube1.current.fastMove(scramble.concat(soln), 0);
                         }
                         if (
-                            JSON.stringify(scramble_check) ===
-                                JSON.stringify(cube.current) &&
+                            JSON.stringify(scramble_check) === JSON.stringify(cube.current) &&
                             soln.length > 0
                         ) {
-                            cube1.current.fastMove(
-                                cube.current.concat(soln),
-                                1
-                            );
+                            cube1.current.fastMove(cube.current.concat(soln), 1);
                             cube1.current.fastMove(scramble.concat(soln), 0);
                         } else if (
-                            JSON.stringify(scramble_check) !==
-                                JSON.stringify(cube.current) &&
+                            JSON.stringify(scramble_check) !== JSON.stringify(cube.current) &&
                             soln.length > 0
                         ) {
-                            cube1.current.fastMove(
-                                cube.current.concat(soln),
-                                1
-                            );
+                            cube1.current.fastMove(cube.current.concat(soln), 1);
                             cube1.current.fastMove(scramble.concat(soln), 0);
                         }
                         cube.current = scramble;
                     }
                     if (scramble.length == cube.current.length) {
-                        if (
-                            JSON.stringify(scramble) !==
-                            JSON.stringify(cube.current)
-                        ) {
-                            cube1.current.fastMove(
-                                cube.current.concat(soln),
-                                1
-                            );
+                        if (JSON.stringify(scramble) !== JSON.stringify(cube.current)) {
+                            cube1.current.fastMove(cube.current.concat(soln), 1);
                             cube1.current.fastMove(scramble.concat(soln), 0);
                             cube.current = scramble;
                         }
@@ -259,21 +220,10 @@ export const Trial = () => {
                     }
                     var soln_check = soln.slice(0, cube_sol.current.length);
                     if (soln.length > cube_sol.current.length) {
-                        if (
-                            JSON.stringify(soln_check) ===
-                            JSON.stringify(cube_sol.current)
-                        ) {
-                            cube1.current.liveMove(
-                                current_soln,
-                                soln,
-                                cube_sol.current,
-                                0
-                            );
+                        if (JSON.stringify(soln_check) === JSON.stringify(cube_sol.current)) {
+                            cube1.current.liveMove(current_soln, soln, cube_sol.current, 0);
                         }
-                        if (
-                            JSON.stringify(soln_check) !==
-                            JSON.stringify(cube_sol.current)
-                        ) {
+                        if (JSON.stringify(soln_check) !== JSON.stringify(cube_sol.current)) {
                             cube1.current.fastMove(cube_sol.current, 1);
                             cube1.current.fastMove(soln, 0);
                         }
@@ -285,10 +235,7 @@ export const Trial = () => {
                     }
 
                     if (soln.length == cube_sol.current.length) {
-                        if (
-                            JSON.stringify(soln) !==
-                            JSON.stringify(cube_sol.current)
-                        ) {
+                        if (JSON.stringify(soln) !== JSON.stringify(cube_sol.current)) {
                             cube1.current.fastMove(cube_sol.current, 1);
                             cube1.current.fastMove(soln, 0);
                             cube_sol.current = soln;
@@ -308,7 +255,7 @@ export const Trial = () => {
                     cube.current = scramble;
                 }
 
-                if (playC == "true" && (play_flag == 0 || play_flag == 2)) {
+                if (playC == 'true' && (play_flag == 0 || play_flag == 2)) {
                     // this is when the user initially presses the play button so that solution moves gets inversed
                     if (play_flag == 0) {
                         cube1.current.fastMove(soln, 1);
@@ -323,7 +270,7 @@ export const Trial = () => {
                     }
                 }
 
-                if (playC == "false") {
+                if (playC == 'false') {
                     if (play_flag == 1) {
                         play_flag = 2; // so that the moves dont get inversed again
                         clearInterval(mycube);
@@ -354,14 +301,14 @@ export const Trial = () => {
             frameId = null;
         };
 
-        window.addEventListener("resize", handleResize);
+        window.addEventListener('resize', handleResize);
         start();
 
         controlsA.current = { start, stop };
 
         return () => {
             stop();
-            window.removeEventListener("resize", handleResize);
+            window.removeEventListener('resize', handleResize);
             //scene.remove(cube);
         };
     }, [playC]);

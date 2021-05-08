@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import myImage from "../../icons/google.svg";
+import styled from 'styled-components';
+import myImage from '../../icons/google.svg';
 
 export const GSignbtn = styled.ul`
     cursor: pointer;

@@ -1,11 +1,11 @@
-import * as THREE from "three";
-import gsap from "gsap";
+import * as THREE from 'three';
+import gsap from 'gsap';
 
 function animation_sequence(
     scene: { add: (arg0: THREE.Object3D) => void },
     meshs: string | any[],
     core: string | any[],
-    _camera: any
+    _camera: any,
 ): void {
     var edges = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25, 13];
     var corners = [0, 2, 6, 8, 18, 20, 24, 26, 13];
@@ -32,17 +32,13 @@ function animation_sequence(
     var v2 = new THREE.Vector3();
     var timeline = gsap.timeline({ duration: 2 });
     var tween = gsap.to(pivot.position, { y: v2.y + 40 });
-    timeline.add(tween, "anime1");
+    timeline.add(tween, 'anime1');
     var tween1 = gsap.to(pivot.rotation, { y: 2 * Math.PI });
-    timeline.add(tween1, "anime1");
-    var tween2 = gsap.to(pivot.position, { y: v2.y, ease: "strong.inOut" });
-    timeline.add(tween2, "anime2");
-    var tween3 = gsap.fromTo(
-        pivot.rotation,
-        { y: 2 * Math.PI },
-        { y: 4 * Math.PI, ease: "sine" }
-    );
-    timeline.add(tween3, "anime3");
+    timeline.add(tween1, 'anime1');
+    var tween2 = gsap.to(pivot.position, { y: v2.y, ease: 'strong.inOut' });
+    timeline.add(tween2, 'anime2');
+    var tween3 = gsap.fromTo(pivot.rotation, { y: 2 * Math.PI }, { y: 4 * Math.PI, ease: 'sine' });
+    timeline.add(tween3, 'anime3');
 
     for (var i = 0; i < meshs.length; i++) {
         meshs[i].getWorldPosition(v2);
@@ -54,9 +50,9 @@ function animation_sequence(
             x: v2.x + Math.floor(Math.random() * 12) * v2.x,
             y: v2.y + Math.floor(Math.random() * 12) * v2.y,
             z: v2.z + Math.floor(Math.random() * 12) * v2.z,
-            ease: "sine",
+            ease: 'sine',
         });
-        timeline.add(tween4, "anime3");
+        timeline.add(tween4, 'anime3');
     }
 
     var tween5 = gsap.to(pivot.rotation, {
@@ -64,18 +60,18 @@ function animation_sequence(
         x: Math.PI,
         y: Math.PI,
         z: Math.PI,
-        ease: "sine",
+        ease: 'sine',
     });
-    timeline.add(tween5, "anime4");
+    timeline.add(tween5, 'anime4');
 
     var tween11 = gsap.to(core_grp.rotation, {
         duration: 3,
         x: 2 * Math.PI,
         y: 2 * Math.PI,
         z: 2 * Math.PI,
-        ease: "sine",
+        ease: 'sine',
     });
-    timeline.add(tween11, "anime4");
+    timeline.add(tween11, 'anime4');
 
     for (var k = 0; k < meshs.length; k++) {
         var x1 = Math.round(positions[k].x);
@@ -86,9 +82,9 @@ function animation_sequence(
             x: x1,
             y: y1,
             z: z1,
-            ease: "sine",
+            ease: 'sine',
         });
-        timeline.add(tween6, "anime4");
+        timeline.add(tween6, 'anime4');
     }
 
     for (var k = 0; k < meshs.length; k++) {
@@ -96,7 +92,7 @@ function animation_sequence(
             duration: 0.3,
             opacity: 0.2,
         });
-        timeline.add(tween7, "anime5");
+        timeline.add(tween7, 'anime5');
     }
 
     for (var p = 0; p < centre.length; p++) {
@@ -104,7 +100,7 @@ function animation_sequence(
             duration: 0.5,
             opacity: 1,
         });
-        timeline.add(tween8, "anime5");
+        timeline.add(tween8, 'anime5');
     }
 
     for (var g = 0; g < centre.length; g++) {
@@ -113,21 +109,21 @@ function animation_sequence(
                 duration: 1,
                 y: 2 * Math.PI,
             });
-            timeline.add(tween9, "anime6");
+            timeline.add(tween9, 'anime6');
         }
         if (centre[g] == 10 || centre[g] == 16) {
             var tween9 = gsap.to(meshs[centre[g]].rotation, {
                 duration: 1,
                 z: 2 * Math.PI,
             });
-            timeline.add(tween9, "anime7");
+            timeline.add(tween9, 'anime7');
         }
         if (centre[g] == 12 || centre[g] == 14) {
             var tween9 = gsap.to(meshs[centre[g]].rotation, {
                 duration: 1,
                 x: 2 * Math.PI,
             });
-            timeline.add(tween9, "anime8");
+            timeline.add(tween9, 'anime8');
         }
     }
     for (var k = 0; k < meshs.length; k++) {
@@ -135,28 +131,28 @@ function animation_sequence(
             duration: 0.3,
             opacity: 0.1,
         });
-        timeline.add(tween10, "anime9");
+        timeline.add(tween10, 'anime9');
     }
     for (var p = 0; p < edges.length; p++) {
         var tween8 = gsap.to(meshs[edges[p]].material, {
             duration: 3,
             opacity: 1,
         });
-        timeline.add(tween8, "anime10");
+        timeline.add(tween8, 'anime10');
     }
     for (var k = 0; k < meshs.length; k++) {
         var tween10 = gsap.to(meshs[k].material, {
             duration: 0.3,
             opacity: 0.1,
         });
-        timeline.add(tween10, "anime11");
+        timeline.add(tween10, 'anime11');
     }
     for (var p = 0; p < corners.length; p++) {
         var tween8 = gsap.to(meshs[corners[p]].material, {
             duration: 3,
             opacity: 1,
         });
-        timeline.add(tween8, "anime12");
+        timeline.add(tween8, 'anime12');
     }
 
     timeline.play();

@@ -1,5 +1,6 @@
 import AlgProvider from './AlgProvider';
 import CubePage from './CubePage';
+
 interface CmProps {
     toggle: () => void;
     theme: string;
