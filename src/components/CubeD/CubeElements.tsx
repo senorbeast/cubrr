@@ -26,7 +26,7 @@ export const CardContainer = styled.div`
 
     @media screen and (max-width: 768px) {
         grid-template-rows: repeat(15, 1fr);
-        height: 160vh;
+        height: 180vh;
         padding: 0.2rem;
         gap: 0.2rem;
     }
@@ -138,7 +138,7 @@ export const SolutionI = styled.div<{ mode: ModeTypes }>`
 export const InTextArea1 = styled.textarea`
     display: grid;
     height: 100%;
-    font-size: 2.3rem;
+    font-size: 2.2rem;
     background-color: ${(props) => props.theme.prialt};
     color: ${(props) => props.theme.priopp};
     //background: papayawhip;
@@ -153,6 +153,7 @@ export const InTextArea1 = styled.textarea`
     @media screen and (max-width: 768px) {
         grid-column: span 3 / auto;
         grid-row: span 6 / auto;
+        font-size: 1.5rem;
     }
     &:hover {
         filter: contrast(100%);
@@ -165,7 +166,7 @@ export const InTextArea1 = styled.textarea`
 export const InTextArea2 = styled.textarea`
     display: grid;
     height: 100%;
-    font-size: 2.3rem;
+    font-size: 2.2rem;
     padding: 0.9rem 0rem;
     background: ${(props) => props.theme.secalt};
     color: ${(props) => props.theme.priopp};
@@ -180,6 +181,7 @@ export const InTextArea2 = styled.textarea`
     @media screen and (max-width: 768px) {
         grid-column: span 3 / auto;
         grid-row: span 8 / auto;
+        font-size: 1.5rem;
     }
     &:hover {
         filter: contrast(100%);
