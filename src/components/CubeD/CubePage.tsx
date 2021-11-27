@@ -13,7 +13,7 @@ import Slider from './Slider';
 import AlgProvider, { useScra, useSol } from './AlgProvider';
 
 function CubePage(props) {
-    //TODO: Divide into different Components (acc to states) to avoid rerendering the whole index.js
+    //TODO: Divide into different Components (acc to states) to avoid rerendering the whole index.js -Done (React handles its)
     //* Save multiple useRefs in Cubepage and modify them with functions passed to individual components wherer they will be states and will rerender acc.
     // let play = useRef(false);s
     console.log('Index.js');
