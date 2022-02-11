@@ -1,7 +1,7 @@
 
 # Cubrr
 
-### 3D Relization of Rubik's Cube, with much more...
+### 3D Realization of Rubik's Cube, with much more...
 
 ### To run the project 
 In the project directory, you can run:
