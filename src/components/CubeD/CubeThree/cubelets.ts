@@ -1,6 +1,15 @@
 // @ts-nocheck
 import * as THREE from 'three';
-
+/* FUNCTION NAME: CUBELETS_FORM
+   DESC : TO ADD CUBELETS TO THE 3D SCENE
+   INPUT PARAMETERS : scene - SCENE( THREE.SCENE ) 
+                      size - SIZE OF CUBE 
+                      padding -ADDING BETWEEN THE PIECES( NUMBER ) 
+                      tx1 - tx6 - TEXTURE FOR FACE NAMES 
+   RETURN : ARRAY [ 3 ] : - ARRAY [ 0 ] - MESH OF THE ALL CUBELETS USED 
+                            ARRAY [ 1 ] - MESH OF THE CORE
+                            ARRAY [ 3 ] - MESH OF NAME PLANE WHICH CONTAINS NAME OF EACH FACE PLANE
+*/
 function cubelets_form(
     scene: {
         add: (

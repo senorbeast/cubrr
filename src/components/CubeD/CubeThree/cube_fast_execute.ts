@@ -1,12 +1,16 @@
 import { Object3D } from 'three';
 import { layer_group } from './cubelet_group';
-
+/* FUNCTION NAME : FAST_EXECUTE
+   INPUT PARAMETERS : 3D SCENE , CUBE MESHS ( GIVE INFO ABOUT POSITION OF CUBELET IN 3D SPACE )IN FORM OF STRINGS  , PADDING BETWEEN EACH CUBELET , MOVES IN THE FORMAT RETURNED BY SCRAMBLE READ
+   RETURN : NONE
+   */
 function fast_execute(
     scene: { add: (arg0: Object3D) => void },
     meshs: string | any[],
     padding: number,
     moves: string | any[],
 ): void {
+    //ROTATION OF EVERY MOVE ALONG THE SPECIFIED FACE AXIS
     for (var i = 0; i < moves.length; i++) {
         var moves2 = moves[i];
         var moves3 = moves2.split('_');

@@ -1,5 +1,8 @@
 import * as THREE from 'three';
-
+/* FUNCTION NAME : CUBE_COLOR 
+   DESC : ADDS COLOR TO EACH CUBELET ACCORDING TO STANDARDIZED COLOR SCHEME
+   INPUT PARAMETER : meshs - the meshs of all the cubeletes added 
+   RETURN : NONE */
 function cube_color(meshs: { geometry: { faces: { color: THREE.Color }[] } }[]): void {
     var F = [6, 7, 8, 15, 16, 17, 24, 25, 26];
     var B = [0, 1, 2, 9, 10, 11, 18, 19, 20];
