@@ -4,6 +4,16 @@ import { Object3D } from 'three';
 import { layer_group } from './cubelet_group';
 
 var mov1 = 0;
+/* FUNCTION NAME : ANIMATE_EXECUTE
+   INPUT PARAMETER : scene - 3d scene
+                     meshs - the meshs of all cubelets added
+                     soln - the array of moves that need to be animated
+                     padding - the gaps between pieces 
+                     time - the time gap between each move animation
+                     si_mu - 0 - single move rotation 
+                             1 - multiple move rotation
+    RETURN : NONE 
+*/
 function animate_execute(
     scene: { add: (arg0: Object3D) => void },
     meshs: string | any[],

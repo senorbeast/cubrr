@@ -1,6 +1,13 @@
 import * as THREE from 'three';
 import gsap from 'gsap';
-
+/* FUNCTION NAME :ANIMATION_SEQUENCE
+   DESC : This function will play the animation sequence that was to be implemented on home page 
+   INPUT PARAMETER : scene - 3d scene
+                     meshs - the meshs of all cubelets that need to be added
+                     core - the mesh of core that has been created to be used in animation
+                     camera - the perspective camera which we use to view our scene in threejs
+   RETURN : NONE
+*/
 function animation_sequence(
     scene: { add: (arg0: THREE.Object3D) => void },
     meshs: string | any[],

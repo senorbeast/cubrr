@@ -2,6 +2,14 @@
 import * as THREE from 'three';
 import canvasTxt from 'canvas-txt';
 //@ts-ignore
+/* FUNCTION NAME : DRAW_TEXT
+   INPUT PARAMETER : scene - 3d scene 
+                     text - the text that developer wants to show on the 2d canvas
+                     renderer - webgl renderer used for rendering scene
+                     ctx - forgot what this is :)
+                     c - 2d canvas
+                     reload - forgot what this is :)
+*/
 function draw_text(
     scene: {
         add: (arg0: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>) => void;
