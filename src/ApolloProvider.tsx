@@ -13,6 +13,7 @@ const client: any = new ApolloClient({
     cache: new InMemoryCache(),
 });
 
+// Wrapping the whole ReactApp - the ApolloClient  with ApolloProvider linked with the hosted Backend
 export default (
     <ApolloProvider client={client}>
         <App />

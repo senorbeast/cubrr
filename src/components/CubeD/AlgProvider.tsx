@@ -1,5 +1,11 @@
 import React, { useContext, useState } from 'react';
+/*
+Welcome to the Data Storage Center or Context Store of Cubrr React App
 
+Variables: 
+
+Scra, Sol, 
+*/
 function loadScra() {
     let urlstr = window.location.href;
     let splitedurl = urlstr.split('=');

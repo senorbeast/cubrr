@@ -26,32 +26,30 @@ function CubePage(props) {
 
     return (
         <>
-            <AlgProvider>
-                <CardContainer
-                    mode={selMode(mode)} //Passing mode object to mode
-                >
-                    <SideNav
-                        toggle={props.toggle}
+            <CardContainer
+                mode={selMode(mode)} //Passing mode object to mode
+            >
+                <SideNav
+                    toggle={props.toggle}
+                    theme={props.theme}
+                    setTheme={props.setTheme}
+                    mode={mode} //Passing mode name to mode
+                    setMode={setMode}
+                />
+                <CubeContainer mode={selMode(mode)}>
+                    <VirtualRubiksC
+                        //play={play}
                         theme={props.theme}
-                        setTheme={props.setTheme}
-                        mode={mode} //Passing mode name to mode
-                        setMode={setMode}
                     />
-                    <CubeContainer mode={selMode(mode)}>
-                        <VirtualRubiksC
-                            //play={play}
-                            theme={props.theme}
-                        />
-                        <Slider mode={mode} />
-                        <ButtonBox mode={mode} setMode={setMode} />
-                    </CubeContainer>
-                    <AlgsCard mode={selMode(mode)}>
-                        <FullCard />
-                    </AlgsCard>
-                    <Scramble mode={mode} />
-                    <Solution mode={mode} />
-                </CardContainer>
-            </AlgProvider>
+                    <Slider mode={mode} />
+                    <ButtonBox mode={mode} setMode={setMode} />
+                </CubeContainer>
+                <AlgsCard mode={selMode(mode)}>
+                    <FullCard />
+                </AlgsCard>
+                <Scramble mode={mode} />
+                <Solution mode={mode} />
+            </CardContainer>
         </>
     );
 }
