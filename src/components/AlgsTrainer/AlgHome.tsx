@@ -2,7 +2,7 @@ import { useRouteMatch } from 'react-router-dom';
 import { SetCard, HeadCard } from './AlgsElement';
 import PLL from './PLL-step.png';
 
-export const AlgHome = () => {
+export default function AlgHome() {
     let { path } = useRouteMatch(); //path, url
     return (
         <>
@@ -35,4 +35,4 @@ export const AlgHome = () => {
             </SetCard>
         </>
     );
-};
+}

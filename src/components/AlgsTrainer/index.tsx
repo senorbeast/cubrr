@@ -1,10 +1,11 @@
-import React from 'react';
+import { lazy, Suspense } from 'react';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
-import Navbar from '../Navbar';
 import { CardContainer } from './AlgsElement';
 //import { TypographySC } from "../BasicElements";
-import { AlgsPage } from './AlgsPage';
-import { AlgHome } from './AlgHome';
+
+const Navbar = lazy(() => import('../Navbar'));
+const AlgsPage = lazy(() => import('./AlgsPage'));
+const AlgHome = lazy(() => import('./AlgHome'));
 
 interface CmProps {
     toggle: () => void;
@@ -15,20 +16,22 @@ function AlgsTrainer(props: CmProps) {
     let { path, url } = useRouteMatch();
     console.log('Run this', path, url);
     return (
-        <div>
-            <Navbar toggle={props.toggle} theme={props.theme} setTheme={props.setTheme} />
+        <>
+            <Suspense fallback={<div>Loading Algs...</div>}>
+                <Navbar toggle={props.toggle} theme={props.theme} setTheme={props.setTheme} />
 
-            <CardContainer>
-                <Switch>
-                    <Route exact path={`${url}`}>
-                        <AlgHome />
-                    </Route>
-                    <Route exact path={`${url}/PLL`}>
-                        <AlgsPage />
-                    </Route>
-                </Switch>
-            </CardContainer>
-        </div>
+                <CardContainer>
+                    <Switch>
+                        <Route exact path={`${url}`}>
+                            <AlgHome />
+                        </Route>
+                        <Route exact path={`${url}/PLL`}>
+                            <AlgsPage />
+                        </Route>
+                    </Switch>
+                </CardContainer>
+            </Suspense>
+        </>
     );
 }
 

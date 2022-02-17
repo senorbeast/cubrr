@@ -11,7 +11,7 @@ interface PLLinfo {
     alglist: any;
 }
 
-export const AlgsPage = () => {
+export default function AlgsPage() {
     const { loading, data } = useQuery(FETCH_PLL_Query);
     console.log('DAta', data);
     return (
@@ -29,7 +29,7 @@ export const AlgsPage = () => {
             {/* </AlgCardContainer> */}
         </>
     );
-};
+}
 
 const FETCH_PLL_Query = gql`
     {
