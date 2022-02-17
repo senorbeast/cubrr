@@ -84,7 +84,7 @@ function ColorlibStepIcon(props: stepTypes) {
     );
 }
 
-export const FullCard = () => {
+export default function FullCard() {
     const [activeStep, setActiveStep] = useState(0);
     const steps = getSteps();
 
@@ -134,4 +134,4 @@ export const FullCard = () => {
             )}
         </div>
     );
-};
+}

@@ -1,7 +1,6 @@
 import AlgProvider from './AlgProvider';
-import { lazy } from 'react';
+import CubePage from './CubePage';
 
-const CubePage = lazy(() => import('./CubePage'));
 interface CmProps {
     toggle: () => void;
     theme: string;
