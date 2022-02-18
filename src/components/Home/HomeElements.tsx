@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { MdKeyboardArrowRight, MdArrowForward } from 'react-icons/md';
-import {Link} from 'react-scroll'
+import { Link } from 'react-scroll';
 
 export const HeroContainer = styled.div`
     background-color: ${(props) => props.theme.secondary};
@@ -8,11 +8,21 @@ export const HeroContainer = styled.div`
     justify-content: center;
     align-items: center;
     padding: 0 30px;
-    height: 800px;
+    height: calc(100vh - 5rem);
     position: relative;
     z-index: 1;
+
+    :before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%),
+            linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, transparent);
+    }
 `;
-// Add :before styles
 
 export const HeroBg = styled.div`
     position: absolute;
@@ -43,29 +53,29 @@ export const HeroContent = styled.div`
 `;
 export const HeroH1 = styled.h1`
     color: ${(props) => props.theme.highopp};
-    font-size: 2rem;
+    font-size: 2.2rem;
     text-align: center;
 
     @media screen and (max-width: 768px) {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
     }
     @media screen and (max-width: 480px) {
-        font-size: 1.1rem;
+        font-size: 1.5rem;
     }
 `;
 
 export const HeroP = styled.p`
     color: ${(props) => props.theme.highlight};
-    font-size: 1rem;
+    font-size: 1.5rem;
     text-align: center;
     max-width: 600px;
     margin-top: 0.8rem;
 
     @media screen and (max-width: 768px) {
-        font-size: 0.8rem;
+        font-size: 1.2rem;
     }
     @media screen and (max-width: 480px) {
-        font-size: 0.5rem;
+        font-size: 1rem;
     }
 `;
 
@@ -91,7 +101,7 @@ export const Button = styled(Link)`
     white-space: nowrap;
     padding: 14px 48px;
     color: ${(props) => props.theme.highopp};
-    font-size: 20px;
+    font-size: 1.2rem;
     outline: none;
     border: none;
     cursor: pointer;
@@ -102,6 +112,16 @@ export const Button = styled(Link)`
 
     &:hover {
         transition: all 0.2s ease-in-out;
-        background: ${(props) => props.theme.highopp};
+        background: ${(props) => props.theme.primary};
+        color: ${(props) => props.theme.priopp};
+    }
+    @media screen and (max-width: 768px) {
+        font-size: 1rem;
+        border-radius: 50px;
+        white-space: nowrap;
+        padding: 14px 48px;
+    }
+    @media screen and (max-width: 480px) {
+        font-size: 1rem;
     }
 `;
