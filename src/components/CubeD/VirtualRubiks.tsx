@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as THREE from 'three';
-import { RubiksStyle as CubeStyle } from './UX/CubeElements';
+import { RubiksStyle } from './UX/CubeElements';
 import * as themes from '../themes';
 import { animate_read } from './CubeThree/cube_animate_read_3';
 import CUBE from './CubeThree/CUBE';
@@ -433,7 +433,7 @@ export const VirtualRubiksC = (props: TProps) => {
 
     return (
         <>
-            <CubeStyle ref={mount} />
+            <RubiksStyle ref={mount} />
         </>
     );
 };

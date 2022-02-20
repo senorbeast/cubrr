@@ -2,7 +2,7 @@ import { Typography } from '@material-ui/core';
 import { SolutionI, InTextArea2 } from './CubeElements';
 //import { useState } from "react";
 import selMode from './modes';
-import { useSol, useSetSol } from './AlgProvider';
+import { useSol, useSetSol } from '../AlgProvider';
 
 interface propsM {
     mode: string;

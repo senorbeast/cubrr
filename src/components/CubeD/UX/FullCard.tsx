@@ -10,7 +10,7 @@ import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import VideoLabelIcon from '@material-ui/icons/VideoLabel';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import { TypographySC } from '../BasicElements';
+import { TypographySC } from '../../BasicElements';
 
 function getSteps() {
     return ['Select campaign settings', 'Create an ad group', 'Create an ad'];

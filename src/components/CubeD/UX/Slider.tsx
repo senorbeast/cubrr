@@ -2,11 +2,11 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { SliderSC } from './CubeElements';
 //import { useState } from "react";
 import selMode from './modes';
-import getComments from './Parser/getComments';
-import getAlgs from './Parser/getAlgs';
-import validateAlgs from './Parser/validateAlg';
-import getAlgCmtNum from './Parser/getAlgCmtNum';
-import { useSol, useMoveNum, useSetMoveNum, useToggPlay } from './AlgProvider';
+import getComments from '../Parser/getComments';
+import getAlgs from '../Parser/getAlgs';
+import validateAlgs from '../Parser/validateAlg';
+import getAlgCmtNum from '../Parser/getAlgCmtNum';
+import { useSol, useMoveNum, useSetMoveNum, useToggPlay } from '../AlgProvider';
 
 function ValueLabelComponent(props: any) {
     const { children, open, value } = props;

@@ -1,16 +1,16 @@
 // @ts-nocheck
 import { useState, useEffect, useRef, Suspense, lazy } from 'react';
 import SideNav from '../SideNav';
-import { CardContainer, CubeContainer, AlgsCard } from './CubeElements';
-import selMode from './modes';
+import { CardContainer, CubeContainer, AlgsCard } from './UX/CubeElements';
+import selMode from './UX/modes';
 import AlgProvider, { useScra, useSol } from './AlgProvider';
 
-const Scramble = lazy(() => import('./Scramble'));
-const Solution = lazy(() => import('./Solution'));
+const Scramble = lazy(() => import('./UX/Scramble'));
+const Solution = lazy(() => import('./UX/Solution'));
 const VirtualRubiksC = lazy(() => import('./VirtualRubiks'));
-const ButtonBox = lazy(() => import('./ButtonBox'));
-const Slider = lazy(() => import('./Slider'));
-const FullCard = lazy(() => import('./FullCard'));
+const ButtonBox = lazy(() => import('./UX/ButtonBox'));
+const Slider = lazy(() => import('./UX/Slider'));
+const FullCard = lazy(() => import('./UX/FullCard'));
 
 function CubePage(props) {
     //TODO: Divide into different Components (acc to states) to avoid rerendering the whole index.js -Done (React handles its)

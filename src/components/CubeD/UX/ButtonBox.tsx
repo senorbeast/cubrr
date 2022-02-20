@@ -9,7 +9,7 @@ import { WiRefresh } from 'react-icons/wi';
 import { ImPlay2, ImPause } from 'react-icons/im';
 import { ThemeBtn, ButtonArea } from './CubeElements';
 import selMode from './modes';
-import { usePlay, useToggPlay } from './AlgProvider';
+import { usePlay, useToggPlay } from '../AlgProvider';
 
 interface propsM {
     mode: string;

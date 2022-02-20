@@ -2,7 +2,7 @@ import { Typography } from '@material-ui/core';
 import { useEffect } from 'react';
 import { ScrambleI, InTextArea1 } from './CubeElements';
 import selMode from './modes';
-import { useScra, useSetScra, useSol } from './AlgProvider';
+import { useScra, useSetScra, useSol } from '../AlgProvider';
 
 interface propsM {
     mode: string;
