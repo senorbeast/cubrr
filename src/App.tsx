@@ -1,18 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { ThemeProvider as TPMaterial, createTheme } from '@material-ui/core/styles';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { reactLocalStorage } from 'reactjs-localstorage';
-import Sidebar from './components/Sidebar';
-//import CubeD from "./components/CubeD";
-import Home from './components/Home';
-import AlgsTrainer from './components/AlgsTrainer';
-import Signup from './components/Signup';
 import * as themes from './components/themes';
-import CubeAlgWrap from './components/CubeD';
-/* 
-main App
+import Home from './components/Home';
+// import Sidebar from './components/Sidebar';
+// import CubeAlgWrap from './components/CubeD';
+// import AlgsTrainer from './components/AlgsTrainer';
+// import Signup from './components/Signup';
 
+// const Home = lazy(() => import('./components/Home'));
+const Sidebar = lazy(() => import('./components/Sidebar'));
+const CubeAlgWrap = lazy(() => import('./components/CubeD'));
+const AlgsTrainer = lazy(() => import('./components/AlgsTrainer'));
+const Signup = lazy(() => import('./components/Signup'));
+
+/*
 States Used and their useStates: 
     For Sidebar : isOpen
     For Theme : theme 
@@ -50,52 +54,55 @@ const App = () => {
             {/* @ts-ignore */}
             <ThemeProvider theme={themes[theme]}>
                 <TPMaterial theme={themeMUI}>
-                    <Router>
-                        <Sidebar
-                            isOpen={isOpen}
-                            toggle={toggle}
-                            theme={theme}
-                            setTheme={setTheme}
-                        />
-                        {/* <Navbar toggle={toggle} theme={theme} setTheme={setTheme} /> */}
-                        <Switch>
-                            <Route
-                                path="/"
-                                exact
-                                render={() => (
-                                    <Home toggle={toggle} theme={theme} setTheme={setTheme} />
-                                )}
+                    <Suspense fallback={<div> Loading Appx</div>}>
+                        <Router>
+                            <Sidebar
+                                isOpen={isOpen}
+                                toggle={toggle}
+                                theme={theme}
+                                setTheme={setTheme}
                             />
-                            <Route
-                                path="/cube"
-                                exact
-                                render={() => (
-                                    <CubeAlgWrap
-                                        toggle={toggle}
-                                        theme={theme}
-                                        setTheme={setTheme}
-                                    />
-                                )}
-                            />
-                            <Route
-                                path="/algstrainer"
-                                render={() => (
-                                    <AlgsTrainer
-                                        toggle={toggle}
-                                        theme={theme}
-                                        setTheme={setTheme}
-                                    />
-                                )}
-                            />
-                            <Route
-                                path="/signin"
-                                exact
-                                render={() => (
-                                    <Signup toggle={toggle} theme={theme} setTheme={setTheme} />
-                                )}
-                            />
-                        </Switch>
-                    </Router>
+                            {/* <Navbar toggle={toggle} theme={theme} setTheme={setTheme} /> */}
+                            <Switch>
+                                <Route
+                                    path="/"
+                                    exact
+                                    render={() => (
+                                        <Home toggle={toggle} theme={theme} setTheme={setTheme} />
+                                    )}
+                                />
+
+                                <Route
+                                    path="/cube"
+                                    exact
+                                    render={() => (
+                                        <CubeAlgWrap
+                                            toggle={toggle}
+                                            theme={theme}
+                                            setTheme={setTheme}
+                                        />
+                                    )}
+                                />
+                                <Route
+                                    path="/algstrainer"
+                                    render={() => (
+                                        <AlgsTrainer
+                                            toggle={toggle}
+                                            theme={theme}
+                                            setTheme={setTheme}
+                                        />
+                                    )}
+                                />
+                                <Route
+                                    path="/signin"
+                                    exact
+                                    render={() => (
+                                        <Signup toggle={toggle} theme={theme} setTheme={setTheme} />
+                                    )}
+                                />
+                            </Switch>
+                        </Router>
+                    </Suspense>
                 </TPMaterial>
             </ThemeProvider>
         </>

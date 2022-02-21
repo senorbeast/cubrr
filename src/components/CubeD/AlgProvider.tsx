@@ -1,11 +1,24 @@
 import React, { useContext, useState } from 'react';
+
+// PROS: Lighter than Redux
+// CONS: Need to implement Redux features by hand Persist into Local Storage, Sagas and much more etc
+//! Rerenders/Performance issues for frequently updated states.
+//@Aditya, We are shifting to Redux, ( a bit more package size, but better performance for frequently updated states like Scra, sol, MoveNum)
+
 /*
-Welcome to the Data Storage Center or Context Store of Cubrr React App
+Welcome to the State Storage Center or Context Store of Cubrr React App
 
-Variables: 
+Context Variables   
 
-Scra, Sol, 
+Scra
+Sol
+Play
+MoveNum
+
+and their resp setFunctions or hooks
+
 */
+
 function loadScra() {
     let urlstr = window.location.href;
     let splitedurl = urlstr.split('=');
@@ -43,6 +56,8 @@ function loadSol() {
 var undA: (arg0: string) => void = null;
 // @ts-ignore
 var undB: () => void = null;
+
+// Create Context gives Provider and Consumer
 const ScrambleContext = React.createContext('');
 const SetScrambleContext = React.createContext((_arg0: string): void => {});
 const SolutionContext = React.createContext('');
@@ -51,6 +66,10 @@ const PlayContext = React.createContext(false);
 const SetPlayContext = React.createContext((_arg0: boolean): void => {});
 const MoveNumContext = React.createContext(0);
 const SetMoveNumContext = React.createContext((_arg0: number): void => {});
+
+//# Easy Custom (Wrapping) Hooks to *Consume* Context API
+// Will consume diff Variables and their setFuncs will all are Hooks
+// Cosuming context is easy due to useContext ( earlier we needed to wrap with Consumer Tags)
 
 export function useSol() {
     return useContext(SolutionContext);
@@ -105,6 +124,7 @@ const AlgProvider = ({ children }: any) => {
 
     return (
         <>
+            {/*  Providing Created Context */}
             <SolutionContext.Provider value={newSol}>
                 <SetSolutionContext.Provider value={setSol}>
                     <ScrambleContext.Provider value={newScra}>

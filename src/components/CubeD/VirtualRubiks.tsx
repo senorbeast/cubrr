@@ -2,7 +2,7 @@
 import { useEffect, useRef } from 'react';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as THREE from 'three';
-import { RubiksStyle as CubeStyle } from './CubeElements';
+import { RubiksStyle } from './UX/CubeElements';
 import * as themes from '../themes';
 import { animate_read } from './CubeThree/cube_animate_read_3';
 import CUBE from './CubeThree/CUBE';
@@ -38,7 +38,7 @@ export const VirtualRubiksC = (props: TProps) => {
         var mycube: NodeJS.Timeout;
 
         /* variables to create color */
-        var scene = new THREE.Scene();//https://threejs.org/docs/index.html?q=SCENE#api/en/scenes/Scene
+        var scene = new THREE.Scene(); //https://threejs.org/docs/index.html?q=SCENE#api/en/scenes/Scene
         var cube_sol: string | any[] = [];
 
         var tick = 0; //used in time line to keep track on which move to be made
@@ -49,47 +49,47 @@ export const VirtualRubiksC = (props: TProps) => {
         var ASPECT_RATIO = WIDTH / HEIGHT;
         var NEAR = 1;
         var FAR = 10000;
-        //var animation_flag = 0;
-        var camera = new THREE.PerspectiveCamera(FIELD_OF_VIEW, ASPECT_RATIO, NEAR, FAR);//https://threejs.org/docs/index.html?q=CAMERA#api/en/cameras/PerspectiveCamera
+        var animation_flag = 0;
+        var camera = new THREE.PerspectiveCamera(FIELD_OF_VIEW, ASPECT_RATIO, NEAR, FAR); //https://threejs.org/docs/index.html?q=CAMERA#api/en/cameras/PerspectiveCamera
 
         /* adding webgl renderer */
 
         var renderer = new THREE.WebGLRenderer({
             alpha: true, // OUR CANVAS CONTAINS A TRANSPARENCY BUFFER
-            antialias: true,//GIVES OUT BETTER CUBE QUALITY
+            antialias: true, //GIVES OUT BETTER CUBE QUALITY
         }); //@ts-ignore
-        renderer.setClearColor(themes[props.theme].primary);//PRIMARY COLOR SAME AS THE WEBSITE THEME
-        renderer.setSize(width, height, true);//SIZE OF CUBE RENDERER ACCORDING TO WEBSITE 
+        renderer.setClearColor(themes[props.theme].primary); //PRIMARY COLOR SAME AS THE WEBSITE THEME
+        renderer.setSize(width, height, true); //SIZE OF CUBE RENDERER ACCORDING TO WEBSITE
         //@ts-ignore
-        mount.current.appendChild(renderer.domElement);//MOUNTING RENDERER ONTO THE WEBSITE
+        mount.current.appendChild(renderer.domElement); //MOUNTING RENDERER ONTO THE WEBSITE
         //var anisotropy = renderer.capabilities.getMaxAnisotropy();
-        var controls = new OrbitControls(camera, renderer.domElement);//https://threejs.org/docs/index.html?q=CONTROLS#examples/en/controls/OrbitControls
-        //var mov1 = 0;
+        var controls = new OrbitControls(camera, renderer.domElement); //https://threejs.org/docs/index.html?q=CONTROLS#examples/en/controls/OrbitControls
+        // var mov1 = 0;
         //var moves_sol = [];
-        var url_scra1 = 'a';//ACTUAL SCRAMBLE WRITTEN BY THE USER TEMPORARILY STORED HERE (NOTE : THIS VARIABLE CAN BE REMOVED)
-        var url_soln1 = 'a';//ACTUAL SOLUTION WRITTEN BY THE USER TEMPORARILY STORED HERE (NOTE : THIS VARIABLE CAN BE REMOVED)
-        var scramble = [];//SCRAMBLE AFTER REPLACING THE HTML URL REFERENCE CODES
-        var soln: ConcatArray<any> = [];//SOLUTION AFTER REPLACING THE HTML URL REFERENCE CODES
+        var url_scra1 = 'a'; //ACTUAL SCRAMBLE WRITTEN BY THE USER TEMPORARILY STORED HERE (NOTE : THIS VARIABLE CAN BE REMOVED)
+        var url_soln1 = 'a'; //ACTUAL SOLUTION WRITTEN BY THE USER TEMPORARILY STORED HERE (NOTE : THIS VARIABLE CAN BE REMOVED)
+        var scramble = []; //SCRAMBLE AFTER REPLACING THE HTML URL REFERENCE CODES
+        var soln: ConcatArray<any> = []; //SOLUTION AFTER REPLACING THE HTML URL REFERENCE CODES
         var val_soln: ConcatArray<any> = [];
-        var cube: any[] = [];//SCRAMBLE MOVES DONE ON THE CUBE IS STORED HERE WHICH WILL USE DURING OUR RUNTIME
-        var current_move = [];//CURRENT SCRAMBLE TO BE DONE ON THE CUBE THIS WILL CHANGE WITH THE USER ADDING SCRAMBLE
-        var current_soln = [];//CURRENT SOLUTION TO BE DONE ON THE CUBE THIS WILL CHANGE WITT THE USER ADDING SOLUTION
-       var cube_sol: string | any[] = [];//SOLUTION MOVES DONE ON THE CUBE IS STORED HERE WHICH WILL USE DURING OUR RUNTIME
-        var play_flag = 0;/* 0 : CUBE IS INITIAL POSITION FROM WHERE YOU CAN PLAY THE CUBE IT WILL START FROM THE BEGINNING OR FROM WHERE YOU HAVE PAUSED 
+        var cube: any[] = []; //SCRAMBLE MOVES DONE ON THE CUBE IS STORED HERE WHICH WILL USE DURING OUR RUNTIME
+        var current_move = []; //CURRENT SCRAMBLE TO BE DONE ON THE CUBE THIS WILL CHANGE WITH THE USER ADDING SCRAMBLE
+        var current_soln = []; //CURRENT SOLUTION TO BE DONE ON THE CUBE THIS WILL CHANGE WITT THE USER ADDING SOLUTION
+        var cube_sol: string | any[] = []; //SOLUTION MOVES DONE ON THE CUBE IS STORED HERE WHICH WILL USE DURING OUR RUNTIME
+        var play_flag = 0; /* 0 : CUBE IS INITIAL POSITION FROM WHERE YOU CAN PLAY THE CUBE IT WILL START FROM THE BEGINNING OR FROM WHERE YOU HAVE PAUSED 
                              1 : CUBE IS IN PAUSED POSITION ( NOTE: HERE WE STOP THE SETINTERVAL FUNCTION )
                              2 : CUBE WAS PAUSED NOW THE USER WANTS TO PLAY THE CUBE FROM THE CURRENT POSITION
                              3 : ALL THE MOVES ENTERED BY USER HAVE BEEN PLAYED ON THE CUBE SO STOP THE ANIMATIO*/
-        var focus = 0;//NEED TO DISCUSS WITH HRISHI BHAI
-        //var scramble_state = [];
+        var focus = 0; //NEED TO DISCUSS WITH HRISHI BHAI
+        // var scramble_state = [];
         //var play = "false";
-        var sc_be_so = 0;//SCRAMBLE BEFORE SOLUTION VALUE : 0 - SCRAMBLE IS GIVEN BY USER BEFORE SOLUTION 
-                                                        //  1 - SCRAMBLE IS GIVEN BY USER AFTER SOLUTION BUT THE GIVEN SSOLUTION IS IMPLEMENTED ON THE CUBE
+        var sc_be_so = 0; //SCRAMBLE BEFORE SOLUTION VALUE : 0 - SCRAMBLE IS GIVEN BY USER BEFORE SOLUTION
+        //  1 - SCRAMBLE IS GIVEN BY USER AFTER SOLUTION BUT THE GIVEN SSOLUTION IS IMPLEMENTED ON THE CUBE
         // gap between the layers
         // radius of the fillet used on corners of cube
-        var c = document.createElement('canvas');//2D CANVAS TO ADD TEXT 
+        var c = document.createElement('canvas'); //2D CANVAS TO ADD TEXT
         var ctx = c.getContext('2d');
-        var slider_no = 0; // TELLS IF THE USER WANTS TO A SPECIFIC POINT ON THE CUBE 
-        var cube1 = new CUBE(3, camera, renderer, scene);//CREATING A OBJECT OF CUBE CLASS
+        var slider_no = 0; // TELLS IF THE USER WANTS TO A SPECIFIC POINT ON THE CUBE
+        var cube1 = new CUBE(3, camera, renderer, scene); //CREATING A OBJECT OF CUBE CLASS
         /* FORMING CUBELETS AND ADDING CUBE TO SCENE */
         cube1.add();
         /* ADDING COLOR TO CUBE */
@@ -146,7 +146,7 @@ export const VirtualRubiksC = (props: TProps) => {
             /* CONTROLS NEEDS TO BE UPDATED EVERYTIME WE RENDER THE SCENE */
             controls.update();
             var currentURL = window.location.href;
-            
+
             /* URL NEEDS TO BE SPLITTED TO GET THE SCRAMBLE AND SOLUTION ( EVERTHING AFTER ? IS SCRAMBLE AND SOLUTION ) */
             var url_split = currentURL.split('?');
             /* IF USER ENTERS SCRAMBLE OR SOLUTION */
@@ -154,22 +154,22 @@ export const VirtualRubiksC = (props: TProps) => {
                 /* SPLITTING SCRAMBLE AND SOLUTION ( SCRAMBLE = SOLUTION ) */
                 var scramble_arr = url_split[1].split('=');
                 var soln_arr = url_split[2].split('=');
-               
+
                 /* REPLACING HTML URL ENCODING REFERENCE CODES BY STRINGS EASIER TO HANDLE */
                 var url_scramble = scramble_arr[1].replace(/%20/g, '');
                 var url_soln = soln_arr[1].replace(/%20/g, '');
                 url_scra1 = url_scramble.replace(/%27/g, "'");
                 url_soln1 = url_soln.replace(/%27/g, "'");
-               
+
                 /* THE ACTUAL SCRAMBLE INPUT FROM THE USER */
-                scramble = url_scra1.split(''); 
-                
+                scramble = url_scra1.split('');
+
                 /* USING THE API TO GET SOLUTION FROM THE URL */
                 var s = getAlgs_URL(url_soln1);
-               
+
                 /* THE ACTUAL SOLUTION INPUT FROM USER */
                 soln = s.split('');
-                
+
                 val_soln = validateAlgs(s).legalAlg;
                 current_move = scramble.slice(cube.length); //the current scramble move to be executed
                 current_soln = soln.slice(cube_sol.length); //the current solution move to be executed
@@ -437,7 +437,7 @@ export const VirtualRubiksC = (props: TProps) => {
 
     return (
         <>
-            <CubeStyle ref={mount} />
+            <RubiksStyle ref={mount} />
         </>
     );
 };

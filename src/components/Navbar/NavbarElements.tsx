@@ -5,7 +5,6 @@ import { Link as LinkR } from 'react-router-dom';
 export const Nav = styled.nav`
     background: ${(props) => props.theme.highopp};
     height: 5rem;
-    /* margin-top: -80px; */
     display: flex;
     justify-content: center;
     align-items: center;

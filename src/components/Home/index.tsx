@@ -1,33 +1,65 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
+import { useState, lazy, Suspense } from 'react';
+//import { makeStyles } from '@material-ui/core/styles';
+//import { Typography } from '@material-ui/core';
 import Navbar from '../Navbar';
-//import { CssBaseline } from "@material-ui/core";
-import rubiks_bg from './rubiks_bg.png';
+import { homeObject1 } from './Info/Data';
+import {
+    HeroContainer,
+    HeroBg,
+    HeroContent,
+    HeroH1,
+    HeroP,
+    ArrowForward,
+    ArrowRight,
+    Button,
+    HeroBtnWrapper,
+} from './HomeElements';
 
-const useStyles = makeStyles(() => ({
-    root: {
-        height: 'calc(100vh - 5rem)',
-        backgroundImage: `url(${rubiks_bg})`,
-        minHeight: 'calc(100vh - 5rem)',
-    },
-}));
+const InfoSection = lazy(() => import('./Info/InfoSection'));
+
 interface CmProps {
     toggle: () => void;
     theme: string;
     setTheme: React.Dispatch<any>;
 }
-function Home(props: CmProps) {
-    const classes = useStyles();
+
+export default function Home(props: CmProps) {
+    // const classes = useStyles();
+
+    const [hover, setHover] = useState(false);
+
     return (
         <>
-            <Navbar toggle={props.toggle} theme={props.theme} setTheme={props.setTheme} />
-            {/* <CssBaseline /> */}
-            <div className={classes.root}>
-                <Typography>Its Hoome</Typography>
-            </div>
+            <Suspense fallback={<div>Loading infosection</div>}>
+                <Navbar toggle={props.toggle} theme={props.theme} setTheme={props.setTheme} />
+                {/* <CssBaseline /> */}
+                <div>
+                    {/* <Typography>Its Hoome</Typography> */}
+                    <HeroContainer>
+                        <HeroBg>
+                            {/* <VideoBg autoPlay loop muted src={Video} type='video/mp4'></VideoBg> */}
+                        </HeroBg>
+                        <HeroContent>
+                            <HeroH1>Interactive Rubiks Cube Simulator</HeroH1>
+                            <HeroP>Visualize your solves, analyse them and share them.</HeroP>
+                            <HeroBtnWrapper>
+                                <Button
+                                    to="cube"
+                                    onMouseEnter={() => {
+                                        setHover(!hover);
+                                    }}
+                                    onMouseLeave={() => {
+                                        setHover(!hover);
+                                    }}
+                                >
+                                    Get Started {hover ? <ArrowForward /> : <ArrowRight />}
+                                </Button>
+                            </HeroBtnWrapper>
+                        </HeroContent>
+                    </HeroContainer>
+                    <InfoSection {...homeObject1}></InfoSection>
+                </div>
+            </Suspense>
         </>
     );
 }
-
-export default Home;
