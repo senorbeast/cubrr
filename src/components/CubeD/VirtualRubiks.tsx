@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { useEffect, useRef } from 'react';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as THREE from 'three';
@@ -48,7 +49,7 @@ export const VirtualRubiksC = (props: TProps) => {
         var ASPECT_RATIO = WIDTH / HEIGHT;
         var NEAR = 1;
         var FAR = 10000;
-        var animation_flag = 0;
+        //var animation_flag = 0;
         var camera = new THREE.PerspectiveCamera(FIELD_OF_VIEW, ASPECT_RATIO, NEAR, FAR);//https://threejs.org/docs/index.html?q=CAMERA#api/en/cameras/PerspectiveCamera
 
         /* adding webgl renderer */
@@ -63,7 +64,7 @@ export const VirtualRubiksC = (props: TProps) => {
         mount.current.appendChild(renderer.domElement);//MOUNTING RENDERER ONTO THE WEBSITE
         //var anisotropy = renderer.capabilities.getMaxAnisotropy();
         var controls = new OrbitControls(camera, renderer.domElement);//https://threejs.org/docs/index.html?q=CONTROLS#examples/en/controls/OrbitControls
-        // var mov1 = 0;
+        //var mov1 = 0;
         //var moves_sol = [];
         var url_scra1 = 'a';//ACTUAL SCRAMBLE WRITTEN BY THE USER TEMPORARILY STORED HERE (NOTE : THIS VARIABLE CAN BE REMOVED)
         var url_soln1 = 'a';//ACTUAL SOLUTION WRITTEN BY THE USER TEMPORARILY STORED HERE (NOTE : THIS VARIABLE CAN BE REMOVED)
@@ -73,13 +74,13 @@ export const VirtualRubiksC = (props: TProps) => {
         var cube: any[] = [];//SCRAMBLE MOVES DONE ON THE CUBE IS STORED HERE WHICH WILL USE DURING OUR RUNTIME
         var current_move = [];//CURRENT SCRAMBLE TO BE DONE ON THE CUBE THIS WILL CHANGE WITH THE USER ADDING SCRAMBLE
         var current_soln = [];//CURRENT SOLUTION TO BE DONE ON THE CUBE THIS WILL CHANGE WITT THE USER ADDING SOLUTION
-        var cube_sol: string | any[] = [];//SOLUTION MOVES DONE ON THE CUBE IS STORED HERE WHICH WILL USE DURING OUR RUNTIME
+       var cube_sol: string | any[] = [];//SOLUTION MOVES DONE ON THE CUBE IS STORED HERE WHICH WILL USE DURING OUR RUNTIME
         var play_flag = 0;/* 0 : CUBE IS INITIAL POSITION FROM WHERE YOU CAN PLAY THE CUBE IT WILL START FROM THE BEGINNING OR FROM WHERE YOU HAVE PAUSED 
                              1 : CUBE IS IN PAUSED POSITION ( NOTE: HERE WE STOP THE SETINTERVAL FUNCTION )
                              2 : CUBE WAS PAUSED NOW THE USER WANTS TO PLAY THE CUBE FROM THE CURRENT POSITION
                              3 : ALL THE MOVES ENTERED BY USER HAVE BEEN PLAYED ON THE CUBE SO STOP THE ANIMATIO*/
         var focus = 0;//NEED TO DISCUSS WITH HRISHI BHAI
-        // var scramble_state = [];
+        //var scramble_state = [];
         //var play = "false";
         var sc_be_so = 0;//SCRAMBLE BEFORE SOLUTION VALUE : 0 - SCRAMBLE IS GIVEN BY USER BEFORE SOLUTION 
                                                         //  1 - SCRAMBLE IS GIVEN BY USER AFTER SOLUTION BUT THE GIVEN SSOLUTION IS IMPLEMENTED ON THE CUBE
@@ -177,7 +178,7 @@ export const VirtualRubiksC = (props: TProps) => {
                 //i.e :- For example if user deletes scramble and only solution is present
 
                 /***********BELOW CODE IS EXECUTED ONLY IF USER ENTERS SOMETHING NEW IN SCRAMBLE FIELD***********/
-
+                cube1.move_handler( scramble );
                 /* PLAY CUBE ANIMATION */
                 if (animation_flag == 0) {
                     //var myvar;
@@ -190,143 +191,143 @@ export const VirtualRubiksC = (props: TProps) => {
                 }
                 /* SCRAMBLE AND SOLUTION HANDLER */
                 // REFER THIS FOR THE MOVES HANDLER IMPLEMENTATION WILL BE DONE IN THE PACKAGE ITSELF https://drive.google.com/file/d/1oIhS2a-5cExQxtVM7U2Dl7XwmcAsL6R7/view?usp=sharing
-                if (scramble.length > 0) {
-                    //SCRAMBLE AFTER SOLUTION
-                    if (sc_be_so == 1) 
-                    {
-                        cube1.fastMove(scramble.concat(soln), 0);
-                        cube = scramble;
-                    }
-                    //ONLY SOLUTION WAS ENTERED AND SCRAMBLE IS GIVEN BY USER NOW
-                    if (cube.length == 0 && soln.length > 0 && sc_be_so == 0) {
-                        cube1.fastMove(scramble, 0);
-                        cube = scramble;
-                    }
-                    //SCRAMBLE IS APPENEDED BY USER
-                    if (scramble.length > cube.length && sc_be_so == 0) {
-                        var scramble_check = scramble.slice(0, cube.length);
-                        console.log(scramble_check);
-                        //IF THE PREVIOUSLY ENTERED SCRAMBLE BY THE USER IS NOT DIFFERENT FROM ONE WHICH WAS IMPLEMENTED
-                        if (
-                            JSON.stringify(scramble_check) === JSON.stringify(cube) &&
-                            soln.length == 0
-                        ) 
-                        {
-                            console.log('!!!');
-                            cube1.liveMove(current_move, scramble, cube, 0);
+                // if (scramble.length > 0) {
+                //     //SCRAMBLE AFTER SOLUTION
+                //     if (sc_be_so == 1) 
+                //     {
+                //         cube1.fastMove(scramble.concat(soln), 0);
+                //         cube = scramble;
+                //     }
+                //     //ONLY SOLUTION WAS ENTERED AND SCRAMBLE IS GIVEN BY USER NOW
+                //     if (cube.length == 0 && soln.length > 0 && sc_be_so == 0) {
+                //         cube1.fastMove(scramble, 0);
+                //         cube = scramble;
+                //     }
+                //     //SCRAMBLE IS APPENEDED BY USER
+                //     if (scramble.length > cube.length && sc_be_so == 0) {
+                //         var scramble_check = scramble.slice(0, cube.length);
+                //         console.log(scramble_check);
+                //         //IF THE PREVIOUSLY ENTERED SCRAMBLE BY THE USER IS NOT DIFFERENT FROM ONE WHICH WAS IMPLEMENTED
+                //         if (
+                //             JSON.stringify(scramble_check) === JSON.stringify(cube) &&
+                //             soln.length == 0
+                //         ) 
+                //         {
+                //             console.log('!!!');
+                //             cube1.liveMove(current_move, scramble, cube, 0);
 
-                            // console.log(scramble_meshs);
-                        }
-                        //USER ENTERED SCRAMBLE DIFFERENT FROM ONE WHICH WAS IMPLEMENTED 
-                        else if (
-                            JSON.stringify(scramble_check) !== JSON.stringify(cube) &&
-                            soln.length == 0
-                        ) 
-                        {
-                            console.log('1234');
-                            cube1.fastMove(cube.concat(soln), 1);
-                            cube1.fastMove(scramble.concat(soln), 0);
-                        }
-                        //TO BE READ LOOKS FISHY
-                        if (
-                            JSON.stringify(scramble_check) === JSON.stringify(cube) &&
-                            soln.length > 0
-                        ) {
-                            console.log('!!!');
-                            cube1.fastMove(cube.concat(soln), 1);
-                            cube1.fastMove(scramble.concat(soln), 0);
+                //             // console.log(scramble_meshs);
+                //         }
+                //         //USER ENTERED SCRAMBLE DIFFERENT FROM ONE WHICH WAS IMPLEMENTED 
+                //         else if (
+                //             JSON.stringify(scramble_check) !== JSON.stringify(cube) &&
+                //             soln.length == 0
+                //         ) 
+                //         {
+                //             console.log('1234');
+                //             cube1.fastMove(cube.concat(soln), 1);
+                //             cube1.fastMove(scramble.concat(soln), 0);
+                //         }
+                //         //TO BE READ LOOKS FISHY
+                //         if (
+                //             JSON.stringify(scramble_check) === JSON.stringify(cube) &&
+                //             soln.length > 0
+                //         ) {
+                //             console.log('!!!');
+                //             cube1.fastMove(cube.concat(soln), 1);
+                //             cube1.fastMove(scramble.concat(soln), 0);
 
-                            console.log(scramble_check);
-                        } else if (
-                            JSON.stringify(scramble_check) !== JSON.stringify(cube) &&
-                            soln.length > 0
-                        ) {
-                            console.log('1234');
-                            cube1.fastMove(cube.concat(soln), 1);
-                            cube1.fastMove(scramble.concat(soln), 0);
-                        }
-                        cube = scramble;
-                    }
-                    //IF THE SCRAMBLE GIVEN BY USER AND THE SCRAMBLE IMPLEMENTED ON THE CUBE ARE OF SAME LENGTH BUT ARE DIFFERENT
-                    if (scramble.length == cube.length) {
-                        if (JSON.stringify(scramble) !== JSON.stringify(cube)) {
-                            cube1.fastMove(cube.concat(soln), 1);
-                            cube1.fastMove(scramble.concat(soln), 0);
-                            cube = scramble;
-                        }
-                    }
-                    //IF THE USER DELETES OR EDITS THE SCRAMBLE
-                    if (scramble.length < cube.length) {
-                        cube1.fastMove(cube.concat(soln), 1);
-                        cube1.fastMove(scramble.concat(soln), 0);
-                        cube = scramble;
-                    }
-                    var soln_check = soln.slice(0, cube_sol.length);
-                    if (soln.length > cube_sol.length) {
-                        //console.log(soln_check);
+                //             console.log(scramble_check);
+                //         } else if (
+                //             JSON.stringify(scramble_check) !== JSON.stringify(cube) &&
+                //             soln.length > 0
+                //         ) {
+                //             console.log('1234');
+                //             cube1.fastMove(cube.concat(soln), 1);
+                //             cube1.fastMove(scramble.concat(soln), 0);
+                //         }
+                //         cube = scramble;
+                //     }
+                //     //IF THE SCRAMBLE GIVEN BY USER AND THE SCRAMBLE IMPLEMENTED ON THE CUBE ARE OF SAME LENGTH BUT ARE DIFFERENT
+                //     if (scramble.length == cube.length) {
+                //         if (JSON.stringify(scramble) !== JSON.stringify(cube)) {
+                //             cube1.fastMove(cube.concat(soln), 1);
+                //             cube1.fastMove(scramble.concat(soln), 0);
+                //             cube = scramble;
+                //         }
+                //     }
+                //     //IF THE USER DELETES OR EDITS THE SCRAMBLE
+                //     if (scramble.length < cube.length) {
+                //         cube1.fastMove(cube.concat(soln), 1);
+                //         cube1.fastMove(scramble.concat(soln), 0);
+                //         cube = scramble;
+                //     }
+                //     var soln_check = soln.slice(0, cube_sol.length);
+                //     if (soln.length > cube_sol.length) {
+                //         //console.log(soln_check);
 
-                        if (JSON.stringify(soln_check) === JSON.stringify(cube_sol)) {
-                            //console.log("!!!");
-                            cube1.liveMove(current_soln, soln, cube_sol, 0);
+                //         if (JSON.stringify(soln_check) === JSON.stringify(cube_sol)) {
+                //             //console.log("!!!");
+                //             cube1.liveMove(current_soln, soln, cube_sol, 0);
 
-                            // console.log(scramble_meshs);
-                        }
-                        if (JSON.stringify(soln_check) !== JSON.stringify(cube_sol)) {
-                            console.log('!!!');
-                            cube1.fastMove(cube_sol, 1);
-                            cube1.fastMove(soln, 0);
+                //             // console.log(scramble_meshs);
+                //         }
+                //         if (JSON.stringify(soln_check) !== JSON.stringify(cube_sol)) {
+                //             console.log('!!!');
+                //             cube1.fastMove(cube_sol, 1);
+                //             cube1.fastMove(soln, 0);
 
-                            // console.log(scramble_meshs);
-                        } //@ts-ignore
-                        cube_sol = soln;
-                    } else if (soln.length < cube_sol.length) {
-                        cube1.fastMove(cube_sol, 1);
-                        cube1.fastMove(soln, 0); //@ts-ignore
-                        cube_sol = soln;
-                    }
+                //             // console.log(scramble_meshs);
+                //         } //@ts-ignore
+                //         cube_sol = soln;
+                //     } else if (soln.length < cube_sol.length) {
+                //         cube1.fastMove(cube_sol, 1);
+                //         cube1.fastMove(soln, 0); //@ts-ignore
+                //         cube_sol = soln;
+                //     }
 
-                    if (soln.length == cube_sol.length) {
-                        if (JSON.stringify(soln) !== JSON.stringify(cube_sol)) {
-                            cube1.fastMove(cube_sol, 1);
-                            cube1.fastMove(soln, 0); //@ts-ignore
-                            cube_sol = soln;
-                        }
-                    }
+                //     if (soln.length == cube_sol.length) {
+                //         if (JSON.stringify(soln) !== JSON.stringify(cube_sol)) {
+                //             cube1.fastMove(cube_sol, 1);
+                //             cube1.fastMove(soln, 0); //@ts-ignore
+                //             cube_sol = soln;
+                //         }
+                //     }
 
-                    sc_be_so = 0;
-                }
+                //     sc_be_so = 0;
+                // }
 
-                if (scramble.length == 0 && sc_be_so == 0 && cube.length > scramble.length) {
-                    console.log('====');
-                    sc_be_so = 1;
-                    cube1.fastMove(cube.concat(soln), 1);
-                    cube = scramble;
-                }
+                // if (scramble.length == 0 && sc_be_so == 0 && cube.length > scramble.length) {
+                //     console.log('====');
+                //     sc_be_so = 1;
+                //     cube1.fastMove(cube.concat(soln), 1);
+                //     cube = scramble;
+                // }
 
-                if (playBtn.current && (play_flag == 0 || play_flag == 2)) {
-                    // this is when the user initially presses the play button so that solution moves gets inversed
-                    if (play_flag == 0) {
-                        cube1.fastMove(soln, 1);
+                // if (playBtn.current && (play_flag == 0 || play_flag == 2)) {
+                //     // this is when the user initially presses the play button so that solution moves gets inversed
+                //     if (play_flag == 0) {
+                //         cube1.fastMove(soln, 1);
 
-                        mycube = setInterval(cube_play, 600);
-                        play_flag = 1; // done so that setinterval is not called recursively
-                    }
-                    // this is done to see if pause was pressed in between
-                    else if (play_flag == 2) {
-                        mycube = setInterval(cube_play, 600);
-                        play_flag = 1; // done so that setinterval is not called recursively
-                    }
-                }
+                //         mycube = setInterval(cube_play, 600);
+                //         play_flag = 1; // done so that setinterval is not called recursively
+                //     }
+                //     // this is done to see if pause was pressed in between
+                //     else if (play_flag == 2) {
+                //         mycube = setInterval(cube_play, 600);
+                //         play_flag = 1; // done so that setinterval is not called recursively
+                //     }
+                // }
 
-                if (!playBtn.current) {
-                    if (play_flag == 1) {
-                        play_flag = 2; // so that the moves dont get inversed again
-                        clearInterval(mycube);
-                    }
-                    if (play_flag == 3) {
-                        play_flag = 0;
-                    }
-                }
+                // if (!playBtn.current) {
+                //     if (play_flag == 1) {
+                //         play_flag = 2; // so that the moves dont get inversed again
+                //         clearInterval(mycube);
+                //     }
+                //     if (play_flag == 3) {
+                //         play_flag = 0;
+                //     }
+                // }
             }
 
             // console.log(MoveNum.current);

@@ -13,6 +13,8 @@ export default class CUBE {
     // @ts-ignore
     #mesh = []; // just add "default"
     // @ts-ignore
+    #current_state = [];
+    // @ts-ignore
     #core = [];
     constructor(
         cube_size: number,
@@ -150,5 +152,52 @@ export default class CUBE {
     animate_sequence()
     {
         animation_sequence( this.scene , this.meshs , this.core ,this.camera)
+    }
+    /* FUNCTION NAME : MOVE_HANDLER
+       DESC : The moves that need to be done on the cube without animation
+       INPUT PARAMETER : moves - the array of total moves ( scramble + solution ) that need to be done on cube
+       RETURN : NONE                      
+    */
+    move_handler( moves: string | ConcatArray<any>)
+    {
+        //USER APPENDED MOVES
+        if ( moves.length > this.current_state.length )
+        {
+            console.log(moves.length);
+            if( this.current_state.length == 0 )
+            {
+                var moves1 = scramble_read(moves, moves, [], num);
+                fast_execute(this.scene, this.meshs, 5, moves1);
+                this.current_state = moves;//storing the moves done on the cube
+            }
+            else if ( this.current_state.length > 0 )
+            {
+                var moves_check = moves.slice( 0, this.current_state.length );
+                //previously done moves are same on the cube
+                if( JSON.stringify(moves_check) === JSON.stringify(current_state) )
+                {
+                    var current_moves = moves.slice( this.current_state.length );
+                    fastMove(moves.concat(this.current_state), 0);//do the current moves
+                }
+                else
+                {
+                    fastMove(this.current_state, 1);//inverse the previously done moves
+                    fastMove(moves.concat(this.current_state), 0);//do the current moves
+                }
+            }
+        }        
+        //USER DELETED MOVES
+        else if ( moves.length < this.current_state.length )
+        {
+
+        }
+        //USER MIGHT HAVE EDITED MOVES
+        else if ( moves.length == this.current_state.length )
+        {
+            if( moves.length == 0 && this.current_state.length == 0 )
+            {
+                console.log( moves.length );
+            }
+        }
     }
 }
