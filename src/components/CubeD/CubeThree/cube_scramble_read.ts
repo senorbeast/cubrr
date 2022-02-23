@@ -1,5 +1,6 @@
 //  var scramble = ["R","'","F","'","B","L","U"]
-/* FUNCTION NAME : SCRAMBLE READ 
+/**
+   FUNCTION NAME : SCRAMBLE READ 
    DESC : THIS GIVES A FORMATTED ARRAY FOR THE MOVES ARRAY PASSED 
    INPUT PARAMETERS : scramble  -  MOVES TBD IN ( STRING )  
                       url1 - MOVES TBD IN ( STRING )  

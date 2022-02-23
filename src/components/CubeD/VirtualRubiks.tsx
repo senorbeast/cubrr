@@ -176,9 +176,8 @@ export const VirtualRubiksC = (props: TProps) => {
 
                 /********THE BELOW PART IS TO HANDLE VARIOUS USER INPUTS*********/
                 //i.e :- For example if user deletes scramble and only solution is present
+                //https://app.diagrams.net/#G1oIhS2a-5cExQxtVM7U2Dl7XwmcAsL6R7
 
-                /***********BELOW CODE IS EXECUTED ONLY IF USER ENTERS SOMETHING NEW IN SCRAMBLE FIELD***********/
-                cube1.move_handler( scramble );
                 /* PLAY CUBE ANIMATION */
                 // if (animation_flag == 0) {
                 //     //var myvar;
@@ -191,118 +190,13 @@ export const VirtualRubiksC = (props: TProps) => {
                 // }
                 /* SCRAMBLE AND SOLUTION HANDLER */
                 // REFER THIS FOR THE MOVES HANDLER IMPLEMENTATION WILL BE DONE IN THE PACKAGE ITSELF https://drive.google.com/file/d/1oIhS2a-5cExQxtVM7U2Dl7XwmcAsL6R7/view?usp=sharing
-                // if (scramble.length > 0) {
-                //     //SCRAMBLE AFTER SOLUTION
-                //     if (sc_be_so == 1) 
-                //     {
-                //         cube1.fastMove(scramble.concat(soln), 0);
-                //         cube = scramble;
-                //     }
-                //     //ONLY SOLUTION WAS ENTERED AND SCRAMBLE IS GIVEN BY USER NOW
-                //     if (cube.length == 0 && soln.length > 0 && sc_be_so == 0) {
-                //         cube1.fastMove(scramble, 0);
-                //         cube = scramble;
-                //     }
-                //     //SCRAMBLE IS APPENEDED BY USER
-                //     if (scramble.length > cube.length && sc_be_so == 0) {
-                //         var scramble_check = scramble.slice(0, cube.length);
-                //         console.log(scramble_check);
-                //         //IF THE PREVIOUSLY ENTERED SCRAMBLE BY THE USER IS NOT DIFFERENT FROM ONE WHICH WAS IMPLEMENTED
-                //         if (
-                //             JSON.stringify(scramble_check) === JSON.stringify(cube) &&
-                //             soln.length == 0
-                //         ) 
-                //         {
-                //             console.log('!!!');
-                //             cube1.liveMove(current_move, scramble, cube, 0);
+                /***********BELOW CODE IS EXECUTED ONLY IF USER ENTERS SOMETHING NEW IN SCRAMBLE FIELD***********/
 
-                //             // console.log(scramble_meshs);
-                //         }
-                //         //USER ENTERED SCRAMBLE DIFFERENT FROM ONE WHICH WAS IMPLEMENTED 
-                //         else if (
-                //             JSON.stringify(scramble_check) !== JSON.stringify(cube) &&
-                //             soln.length == 0
-                //         ) 
-                //         {
-                //             console.log('1234');
-                //             cube1.fastMove(cube.concat(soln), 1);
-                //             cube1.fastMove(scramble.concat(soln), 0);
-                //         }
-                //         //TO BE READ LOOKS FISHY
-                //         if (
-                //             JSON.stringify(scramble_check) === JSON.stringify(cube) &&
-                //             soln.length > 0
-                //         ) {
-                //             console.log('!!!');
-                //             cube1.fastMove(cube.concat(soln), 1);
-                //             cube1.fastMove(scramble.concat(soln), 0);
-
-                //             console.log(scramble_check);
-                //         } else if (
-                //             JSON.stringify(scramble_check) !== JSON.stringify(cube) &&
-                //             soln.length > 0
-                //         ) {
-                //             console.log('1234');
-                //             cube1.fastMove(cube.concat(soln), 1);
-                //             cube1.fastMove(scramble.concat(soln), 0);
-                //         }
-                //         cube = scramble;
-                //     }
-                //     //IF THE SCRAMBLE GIVEN BY USER AND THE SCRAMBLE IMPLEMENTED ON THE CUBE ARE OF SAME LENGTH BUT ARE DIFFERENT
-                //     if (scramble.length == cube.length) {
-                //         if (JSON.stringify(scramble) !== JSON.stringify(cube)) {
-                //             cube1.fastMove(cube.concat(soln), 1);
-                //             cube1.fastMove(scramble.concat(soln), 0);
-                //             cube = scramble;
-                //         }
-                //     }
-                //     //IF THE USER DELETES OR EDITS THE SCRAMBLE
-                //     if (scramble.length < cube.length) {
-                //         cube1.fastMove(cube.concat(soln), 1);
-                //         cube1.fastMove(scramble.concat(soln), 0);
-                //         cube = scramble;
-                //     }
-                //     var soln_check = soln.slice(0, cube_sol.length);
-                //     if (soln.length > cube_sol.length) {
-                //         //console.log(soln_check);
-
-                //         if (JSON.stringify(soln_check) === JSON.stringify(cube_sol)) {
-                //             //console.log("!!!");
-                //             cube1.liveMove(current_soln, soln, cube_sol, 0);
-
-                //             // console.log(scramble_meshs);
-                //         }
-                //         if (JSON.stringify(soln_check) !== JSON.stringify(cube_sol)) {
-                //             console.log('!!!');
-                //             cube1.fastMove(cube_sol, 1);
-                //             cube1.fastMove(soln, 0);
-
-                //             // console.log(scramble_meshs);
-                //         } //@ts-ignore
-                //         cube_sol = soln;
-                //     } else if (soln.length < cube_sol.length) {
-                //         cube1.fastMove(cube_sol, 1);
-                //         cube1.fastMove(soln, 0); //@ts-ignore
-                //         cube_sol = soln;
-                //     }
-
-                //     if (soln.length == cube_sol.length) {
-                //         if (JSON.stringify(soln) !== JSON.stringify(cube_sol)) {
-                //             cube1.fastMove(cube_sol, 1);
-                //             cube1.fastMove(soln, 0); //@ts-ignore
-                //             cube_sol = soln;
-                //         }
-                //     }
-
-                //     sc_be_so = 0;
-                // }
-
-                // if (scramble.length == 0 && sc_be_so == 0 && cube.length > scramble.length) {
-                //     console.log('====');
-                //     sc_be_so = 1;
-                //     cube1.fastMove(cube.concat(soln), 1);
-                //     cube = scramble;
-                // }
+                if( typeof scramble !== "undefined" && typeof soln !== "undefined" )
+                {
+                    cube1.move_handler( scramble.concat(soln) );
+                }
+                                
 
                 // if (playBtn.current && (play_flag == 0 || play_flag == 2)) {
                 //     // this is when the user initially presses the play button so that solution moves gets inversed

@@ -40,7 +40,7 @@ const validateAlgs = (algs: string): VTypes => {
     //TODO: Handelling only ' and only 2 moves
     //TODO: Handelling Commutators, the whole inverse type of moves
     var movesNum = legalAlg.length;
-    console.log(legalAlg)
+    //console.log(legalAlg)
     //Returns Legal Moves and Invalid Flag
     return { legalAlg, IvldTest, movesNum };
 };
