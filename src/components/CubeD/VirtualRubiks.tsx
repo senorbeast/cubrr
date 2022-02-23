@@ -180,15 +180,15 @@ export const VirtualRubiksC = (props: TProps) => {
                 /***********BELOW CODE IS EXECUTED ONLY IF USER ENTERS SOMETHING NEW IN SCRAMBLE FIELD***********/
                 cube1.move_handler( scramble );
                 /* PLAY CUBE ANIMATION */
-                if (animation_flag == 0) {
-                    //var myvar;
-                    camera.position.x = 300;
-                    camera.position.y = 200;
-                    camera.position.z = 1000;
+                // if (animation_flag == 0) {
+                //     //var myvar;
+                //     camera.position.x = 300;
+                //     camera.position.y = 200;
+                //     camera.position.z = 1000;
 
-                    cube1.animate_sequence();
-                    animation_flag = 1;
-                }
+                //     cube1.animate_sequence();
+                //     animation_flag = 1;
+                // }
                 /* SCRAMBLE AND SOLUTION HANDLER */
                 // REFER THIS FOR THE MOVES HANDLER IMPLEMENTATION WILL BE DONE IN THE PACKAGE ITSELF https://drive.google.com/file/d/1oIhS2a-5cExQxtVM7U2Dl7XwmcAsL6R7/view?usp=sharing
                 // if (scramble.length > 0) {
