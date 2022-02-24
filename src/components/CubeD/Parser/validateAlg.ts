@@ -36,11 +36,11 @@ const validateAlgs = (algs: string): VTypes => {
     var legal = /(R'|L'|U'|D'|F'|B'|R2|L2|U2|D2|F2|B2|R|L|U|D|F|B|r'|l'|u'|d'|f'|b'|r2|l2|u2|d2|f2|b2|r|l|u|d|f|b|x'|y'|z'|x2|y2|z2|x|y|z|M2|S2|E2|M'|S'|E'|M|S|E|%v%)/gm;
     var legalAlg: Array<string> = formatted.match(legal) || [];
     var IvldTest = invalidAlg(formatted);
-    //console.log("Validity Test", formatted);
+    //console.log("Validity Test", formatted);s
     //TODO: Handelling only ' and only 2 moves
     //TODO: Handelling Commutators, the whole inverse type of moves
     var movesNum = legalAlg.length;
-    //console.log(legalAlg)
+    // console.log(legalAlg)
     //Returns Legal Moves and Invalid Flag
     return { legalAlg, IvldTest, movesNum };
 };
