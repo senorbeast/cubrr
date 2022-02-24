@@ -39,7 +39,7 @@ const Slider = ({ mode }: propsM) => {
         var MarksC = cmtValue.map(function (Cvalue, index) {
             return { value: Cvalue, label: cmtLabel[index] };
         });
-        console.log(MarksC);
+        // console.log(MarksC);
         return MarksC;
     }
     function loadSolMoves(soln: string): number {

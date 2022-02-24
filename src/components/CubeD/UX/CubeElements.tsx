@@ -166,7 +166,7 @@ export const InTextArea1 = styled.textarea`
 export const InTextArea2 = styled.textarea`
     display: grid;
     height: 100%;
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     padding: 0.9rem 0rem;
     background: ${(props) => props.theme.secalt};
     color: ${(props) => props.theme.priopp};
