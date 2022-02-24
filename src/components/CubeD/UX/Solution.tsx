@@ -3,7 +3,7 @@ import { SolutionI, InTextArea2 } from './CubeElements';
 //import { useState } from "react";
 import selMode from './modes';
 import { useSol, useSetSol } from '../AlgProvider';
-import movesMapRawString from '../Parser/movesMapRawString';
+// import movesMapRawString from '../Parser/movesMapRawString';
 interface propsM {
     mode: string;
 }
@@ -34,7 +34,7 @@ const Solution = ({ mode }: propsM) => {
         var soln = dots.replace(/(.^|\n)([^.]|$)/g, '$1.$2');
         // setnewSol(soln);
         //@ts-ignore
-        var sizee = movesMapRawString(soln);
+        // var sizee = movesMapRawString(soln);
         setSol(soln);
         //setCmarks(SlLabels(soln));
     }
