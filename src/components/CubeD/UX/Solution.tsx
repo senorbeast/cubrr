@@ -2,7 +2,9 @@ import { Typography } from '@material-ui/core';
 import { SolutionI, InTextArea2 } from './CubeElements';
 //import { useState } from "react";
 import selMode from './modes';
-import { useSol, useSetSol } from '../AlgProvider';
+import { useSol, useSetSol, useSetMoveNum } from '../AlgProvider';
+import getAlgs from '../Parser/getAlgs';
+import validateAlgs from '../Parser/validateAlg';
 // import movesMapRawString from '../Parser/movesMapRawString';
 interface propsM {
     mode: string;
@@ -12,6 +14,7 @@ const Solution = ({ mode }: propsM) => {
     // const [newSol, setnewSol] = useState(loadSol);
     let newSol = useSol();
     let setSol = useSetSol();
+    let setCMovNum = useSetMoveNum();
     return (
         <>
             <SolutionI mode={selMode(mode)}>
@@ -36,6 +39,7 @@ const Solution = ({ mode }: propsM) => {
         //@ts-ignore
         // var sizee = movesMapRawString(soln);
         setSol(soln);
+        setCMovNum(validateAlgs(getAlgs(soln)).movesNum);
         //setCmarks(SlLabels(soln));
     }
     //replace(/(.^|\r\n|\n)([^*]|$)/g, "$1*$2")) (Removes the nextlines after reload idk how)
