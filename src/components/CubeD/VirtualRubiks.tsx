@@ -198,30 +198,30 @@ export const VirtualRubiksC = (props: TProps) => {
                 }
                                 
 
-                // if (playBtn.current && (play_flag == 0 || play_flag == 2)) {
-                //     // this is when the user initially presses the play button so that solution moves gets inversed
-                //     if (play_flag == 0) {
-                //         cube1.fastMove(soln, 1);
+                if (playBtn.current && (play_flag == 0 || play_flag == 2)) {
+                    // this is when the user initially presses the play button so that solution moves gets inversed
+                    if (play_flag == 0) {
+                        cube1.fastMove(soln, 1);
 
-                //         mycube = setInterval(cube_play, 600);
-                //         play_flag = 1; // done so that setinterval is not called recursively
-                //     }
-                //     // this is done to see if pause was pressed in between
-                //     else if (play_flag == 2) {
-                //         mycube = setInterval(cube_play, 600);
-                //         play_flag = 1; // done so that setinterval is not called recursively
-                //     }
-                // }
+                        mycube = setInterval(cube_play, 600);
+                        play_flag = 1; // done so that setinterval is not called recursively
+                    }
+                    // this is done to see if pause was pressed in between
+                    else if (play_flag == 2) {
+                        mycube = setInterval(cube_play, 600);
+                        play_flag = 1; // done so that setinterval is not called recursively
+                    }
+                }
 
-                // if (!playBtn.current) {
-                //     if (play_flag == 1) {
-                //         play_flag = 2; // so that the moves dont get inversed again
-                //         clearInterval(mycube);
-                //     }
-                //     if (play_flag == 3) {
-                //         play_flag = 0;
-                //     }
-                // }
+                if (!playBtn.current) {
+                    if (play_flag == 1) {
+                        play_flag = 2; // so that the moves dont get inversed again
+                        clearInterval(mycube);
+                    }
+                    if (play_flag == 3) {
+                        play_flag = 0;
+                    }
+                }
             }
 
             // console.log(MoveNum.current);
