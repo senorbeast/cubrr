@@ -198,27 +198,53 @@ export const VirtualRubiksC = (props: TProps) => {
                 }
                                 
 
-                if (playBtn.current && (play_flag == 0 || play_flag == 2)) {
+                if (playBtn.current && ( play_flag == 0 || play_flag == 2 )) 
+                {
                     // this is when the user initially presses the play button so that solution moves gets inversed
-                    if (play_flag == 0) {
-                        cube1.fastMove(soln, 1);
-
+                    if (play_flag == 0) 
+                    {
+                        //INVERSE THE SOLUTION ONLY IF THE SLIDER WAS AT LAST MOVES
+                        if( MoveNum.current == validateAlgs(val_soln.toString()).movesNum )
+                        {
+                            cube1.fastMove(soln, 1);
+                        }
+                        //IF SLIDER NOT AT LAST MOVES START PLAYING ANIMATION FROM THE SLIDER MOVE
+                        else
+                        {
+                            tick = slider_no ;
+                        }
+                        
+                        
                         mycube = setInterval(cube_play, 600);
                         play_flag = 1; // done so that setinterval is not called recursively
                     }
                     // this is done to see if pause was pressed in between
                     else if (play_flag == 2) {
-                        mycube = setInterval(cube_play, 600);
+                        //if slider is not where it was previously paused then move the tick value to current slider position
+                        if( tick != slider_no )
+                        {
+                            tick = slider_no;
+                            mycube = setInterval(cube_play, 600);
+                        }
+                        else
+                        {
+                            mycube = setInterval(cube_play, 600);
+                        }
+                        
                         play_flag = 1; // done so that setinterval is not called recursively
                     }
                 }
 
                 if (!playBtn.current) {
-                    if (play_flag == 1) {
+                    if (play_flag == 1) 
+                    
+                    {
+                        slider_no = MovesNum.current;//storing the slider current value 
                         play_flag = 2; // so that the moves dont get inversed again
                         clearInterval(mycube);
                     }
-                    if (play_flag == 3) {
+                    if (play_flag == 3) 
+                    {
                         play_flag = 0;
                     }
                 }
@@ -246,27 +272,15 @@ export const VirtualRubiksC = (props: TProps) => {
 
             if (
                 slider_no != MoveNum.current &&
-                MoveNum.current != validateAlgs(val_soln.toString()).movesNum
+                MoveNum.current != validateAlgs(val_soln.toString()).movesNum &&
+                ( play_flag == 0 || play_flag == 2 ) //to see if user is not playing animation
             ) 
             {
 
                 console.log("*787878787");
                 slider_no = MoveNum.current;
                 cube1.move_handler( scramble.concat( soln ) , 1 , scramble.length , MoveNum.current - 1  );
-
-                //cube1.fastMove(soln, 1);
-                //var cube_soln_slider = animate_read(slider_soln.split(''), slider_soln.split(''), [], 0);
-                //console.log(cube_soln_slider)
             }
-
-            if (
-                MoveNum.current < tick + 1 &&
-                slider_no != MoveNum.current &&
-                MoveNum.current != validateAlgs(val_soln.toString()).movesNum
-            ) {
-                // console.log('Slider value less than current');
-            }
-
             // if (playBtn.current ) {
             // @ts-ignore
             // face_plane_make(
