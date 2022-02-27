@@ -128,7 +128,7 @@ export default class CUBE {
         fast_execute(this.scene, this.meshs, 5, moves1);
     }
     /**
-       FUNCTION NAME : ANIMATEMOVE
+       FUNCTION NAME : ANIMATE MOVE
        DESC : TO DO ANIMATED MOVES ON CUBE 
        INPUT PARAMETERS : move - the moves that have to be played with animation 
                           time - time taken for each move animation to play
@@ -159,81 +159,97 @@ export default class CUBE {
     /**
        FUNCTION NAME : MOVE_HANDLER
        DESC : The moves that need to be done on the cube without animation
-       INPUT PARAMETER : moves - the array of total moves ( scramble + solution ) that need to be done on cube
+       INPUT PARAMETER : moves - the array of total moves ( scramble + solution ) that need to be done on cube , slider_mot :- 0 - slider is not moved by user , 1 - slider is moved by user
+       scramble_length - length of scramble , slider_number - position of slider
        RETURN : NONE                      
     */
-    move_handler( moves: string | ConcatArray<any>)
+    move_handler( moves: string | ConcatArray<any> , slider_mot : number , scramble_length : number , slider_number)
     {
-        //FIRST MOVE ENTERED BY USER 
-        if( typeof this.current_state === "undefined" )
+        //HANDLE NORMALE MOVES
+        if( slider_mot == 0 )
         {
-            console.log( moves );
-            var moves1 = scramble_read(moves, moves, [], 0);
-            fast_execute(this.scene, this.meshs, 5, moves1);
-            this.current_state = moves;//storing the moves done on the cube
-        }
-        else 
-        {
-            //USER APPENDED MOVES
-            if ( moves.length > this.current_state.length )
+            //FIRST MOVE ENTERED BY USER 
+            if( typeof this.current_state === "undefined" )
             {
-                console.log( this.current_state );
-                if( this.current_state.length == 0 )
+                console.log( moves );
+                var moves1 = scramble_read(moves, moves, [], 0);
+                fast_execute(this.scene, this.meshs, 5, moves1);
+                this.current_state = moves;//storing the moves done on the cube
+            }
+            else 
+            {
+                //USER APPENDED MOVES
+                if ( moves.length > this.current_state.length )
                 {
-                    
-                    var moves1 = scramble_read(moves, moves, [], 0);
-                    fast_execute(this.scene, this.meshs, 5, moves1);
-                    this.current_state = moves;//storing the moves done on the cube
-                }
-                else if ( this.current_state.length > 0 )
-                {
-                    var moves_check = moves.slice( 0, this.current_state.length );
-                    //previously done moves are same on the cube
-                    if( JSON.stringify(moves_check) === JSON.stringify(this.current_state) )
+                    console.log( this.current_state );
+                    if( this.current_state.length == 0 )
                     {
-                        console.log( "**!!" );
-                        var current_moves = moves.slice( this.current_state.length );
-                        this.liveMove(current_moves, moves, this.current_state, 0);//do the current moves
+                        
+                        var moves1 = scramble_read(moves, moves, [], 0);
+                        fast_execute(this.scene, this.meshs, 5, moves1);
+                        this.current_state = moves;//storing the moves done on the cube
                     }
-                    else
+                    else if ( this.current_state.length > 0 )
                     {
-                        console.log( "****" );
-                        console.log( moves );
+                        var moves_check = moves.slice( 0, this.current_state.length );
+                        //previously done moves are same on the cube
+                        if( JSON.stringify(moves_check) === JSON.stringify(this.current_state) )
+                        {
+                            console.log( "**!!" );
+                            var current_moves = moves.slice( this.current_state.length );
+                            this.liveMove(current_moves, moves, this.current_state, 0);//do the current moves
+                        }
+                        else
+                        {
+                            console.log( "****" );
+                            console.log( moves );
+                            this.fastMove(this.current_state, 1);//inverse the previously done moves
+                            this.fastMove(moves, 0);//do the current moves
+                        }
+                        this.current_state = moves;//store the moves done on the cube
+                    }
+                }        
+                //USER DELETED MOVES
+                else if ( moves.length < this.current_state.length )
+                {
+                    if( moves.length != 0 )
+                    {
                         this.fastMove(this.current_state, 1);//inverse the previously done moves
                         this.fastMove(moves, 0);//do the current moves
+                        this.current_state = moves;//store the moves done on the cube
                     }
-                    this.current_state = moves;//store the moves done on the cube
-                }
-            }        
-            //USER DELETED MOVES
-            else if ( moves.length < this.current_state.length )
-            {
-                if( moves.length != 0 )
-                {
-                    this.fastMove(this.current_state, 1);//inverse the previously done moves
-                    this.fastMove(moves, 0);//do the current moves
-                    this.current_state = moves;//store the moves done on the cube
-                }
-                else 
-                {
-                    this.fastMove(this.current_state, 1);//inverse the previously done move
-                    this.current_state = moves;//store the moves done on the cube
-                }
+                    else 
+                    {
+                        this.fastMove(this.current_state, 1);//inverse the previously done move
+                        this.current_state = moves;//store the moves done on the cube
+                    }
 
-               
-            }
-            //USER MIGHT HAVE EDITED MOVES
-            else if ( moves.length == this.current_state.length )
-            {
-                //MOVES ARE NOT SAME
-                if(JSON.stringify(moves) !== JSON.stringify(this.current_state) )
+                
+                }
+                //USER MIGHT HAVE EDITED MOVES
+                else if ( moves.length == this.current_state.length )
                 {
-                    this.fastMove(this.current_state, 1);//inverse the previously done moves
-                    this.fastMove(moves.concat(this.current_state), 0);//do the current moves
-                    this.current_state = moves;
+                    //MOVES ARE NOT SAME
+                    if(JSON.stringify(moves) !== JSON.stringify(this.current_state) )
+                    {
+                        this.fastMove(this.current_state, 1);//inverse the previously done moves
+                        this.fastMove(moves.concat(this.current_state), 0);//do the current moves
+                        this.current_state = moves;
+                    }
                 }
             }
         }
+        //HANDLE SLIDER MOVES
+        else if ( slider_mot == 1 )
+        {
+            var slider_moves = moves.slice( 0 , scramble_length + slider_number + 1 );//moves till slider position
+            console.log( slider_moves );
+            this.fastMove(this.current_state, 1);//inverse the previously done moves   
+            this.fastMove( slider_moves , 0 );//do the current moves        
+            this.current_state = slider_moves;//store the moves in current state
+        }
+        
+
 
     }
 }

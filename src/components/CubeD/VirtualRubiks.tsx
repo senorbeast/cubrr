@@ -192,9 +192,9 @@ export const VirtualRubiksC = (props: TProps) => {
                 // REFER THIS FOR THE MOVES HANDLER IMPLEMENTATION WILL BE DONE IN THE PACKAGE ITSELF https://drive.google.com/file/d/1oIhS2a-5cExQxtVM7U2Dl7XwmcAsL6R7/view?usp=sharing
                 /***********BELOW CODE IS EXECUTED ONLY IF USER ENTERS SOMETHING NEW IN SCRAMBLE FIELD***********/
 
-                if( typeof scramble !== "undefined" && typeof soln !== "undefined" )
+                if( typeof scramble !== "undefined" && typeof soln !== "undefined"  && MoveNum.current == validateAlgs(val_soln.toString()).movesNum )
                 {
-                    cube1.move_handler( scramble.concat(soln) );
+                    cube1.move_handler( scramble.concat(soln) , 0 , scramble.length , MoveNum.current );
                 }
                                 
 
@@ -245,18 +245,15 @@ export const VirtualRubiksC = (props: TProps) => {
             */
 
             if (
-                MoveNum.current > tick + 1 &&
                 slider_no != MoveNum.current &&
                 MoveNum.current != validateAlgs(val_soln.toString()).movesNum
-            ) {
-                var v = val_soln.slice(tick, MoveNum.current).toString();
-                var slider_soln = v.split('');
-                console.log(slider_soln);
-                if (slider_soln.length > 0) {
-                    cube1.fastMove(slider_soln, 0);
-                    slider_no = MoveNum.current;
-                    tick = MoveNum.current;
-                }
+            ) 
+            {
+
+                console.log("*787878787");
+                slider_no = MoveNum.current;
+                cube1.move_handler( scramble.concat( soln ) , 1 , scramble.length , MoveNum.current - 1  );
+
                 //cube1.fastMove(soln, 1);
                 //var cube_soln_slider = animate_read(slider_soln.split(''), slider_soln.split(''), [], 0);
                 //console.log(cube_soln_slider)
