@@ -106,13 +106,11 @@ export default class CUBE {
        */
     liveMove(
         current_move: string | any[],
-        currentfull: ConcatArray<any>,
-        previous: string | any[],
         num: number,
     )
     {
         //generate an formated array of moves to be done on cube
-        var moves = scramble_read(current_move, currentfull, previous, num);
+        var moves = scramble_read(current_move , num);
          
         //pass the array so that moves are executed on cube
         fast_execute(this.scene, this.meshs, 5, moves);
@@ -124,7 +122,7 @@ export default class CUBE {
        RETURN : NONE
        */
     fastMove(moves: string | ConcatArray<any>, num: number) {
-        var moves1 = scramble_read(moves, moves, [], num);
+        var moves1 = scramble_read(moves, num);
         fast_execute(this.scene, this.meshs, 5, moves1);
     }
     /**
@@ -172,7 +170,7 @@ export default class CUBE {
             if( typeof this.current_state === "undefined" )
             {
                 console.log( moves );
-                var moves1 = scramble_read(moves, moves, [], 0);
+                var moves1 = scramble_read( moves, 0 );
                 fast_execute(this.scene, this.meshs, 5, moves1);
                 this.current_state = moves;//storing the moves done on the cube
             }
@@ -185,7 +183,8 @@ export default class CUBE {
                     if( this.current_state.length == 0 )
                     {
                         
-                        var moves1 = scramble_read(moves, moves, [], 0);
+                        var moves1 = scramble_read( moves, 0 );
+                        console.log( moves1 );
                         fast_execute(this.scene, this.meshs, 5, moves1);
                         this.current_state = moves;//storing the moves done on the cube
                     }
@@ -197,7 +196,7 @@ export default class CUBE {
                         {
                             console.log( "**!!" );
                             var current_moves = moves.slice( this.current_state.length );
-                            this.liveMove(current_moves, moves, this.current_state, 0);//do the current moves
+                            this.liveMove(current_moves, 0);//do the current moves
                         }
                         else
                         {
@@ -232,9 +231,13 @@ export default class CUBE {
                     //MOVES ARE NOT SAME
                     if(JSON.stringify(moves) !== JSON.stringify(this.current_state) )
                     {
+                        console.log( "!===" );
+                        console.log( this.current_state );
+                        console.log( moves );
                         this.fastMove(this.current_state, 1);//inverse the previously done moves
-                        this.fastMove(moves.concat(this.current_state), 0);//do the current moves
+                        this.fastMove(moves, 0);//do the current moves
                         this.current_state = moves;
+                        console.log( this.current_state );
                     }
                 }
             }
@@ -244,6 +247,7 @@ export default class CUBE {
         {
             var slider_moves = moves.slice( 0 , scramble_length + slider_number + 1 );//moves till slider position
             console.log( slider_moves );
+            console.log(this.current_state);
             this.fastMove(this.current_state, 1);//inverse the previously done moves   
             this.fastMove( slider_moves , 0 );//do the current moves        
             this.current_state = slider_moves;//store the moves in current state

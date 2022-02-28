@@ -8,7 +8,8 @@ import { animate_read } from './CubeThree/cube_animate_read_3';
 import CUBE from './CubeThree/CUBE';
 import getAlgs_URL from './Parser/getAlgs_URL';
 import { useMoveNum, useSetMoveNum, usePlay } from './AlgProvider';
-
+// import useSol from './AlgProvider';
+// import useScra from './AlgProvider';
 import validateAlgs from './Parser/validateAlg';
 // import { face_plane_make } from "./CubeThree/cube_face_plane";
 
@@ -70,6 +71,7 @@ export const VirtualRubiksC = (props: TProps) => {
         var url_soln1 = 'a'; //ACTUAL SOLUTION WRITTEN BY THE USER TEMPORARILY STORED HERE (NOTE : THIS VARIABLE CAN BE REMOVED)
         var scramble = []; //SCRAMBLE AFTER REPLACING THE HTML URL REFERENCE CODES
         var soln: ConcatArray<any> = []; //SOLUTION AFTER REPLACING THE HTML URL REFERENCE CODES
+        var val_scra: ConcatArray<any> = [];
         var val_soln: ConcatArray<any> = [];
         var cube: any[] = []; //SCRAMBLE MOVES DONE ON THE CUBE IS STORED HERE WHICH WILL USE DURING OUR RUNTIME
         var current_move = []; //CURRENT SCRAMBLE TO BE DONE ON THE CUBE THIS WILL CHANGE WITH THE USER ADDING SCRAMBLE
@@ -162,17 +164,21 @@ export const VirtualRubiksC = (props: TProps) => {
                 url_soln1 = url_soln.replace(/%27/g, "'");
 
                 /* THE ACTUAL SCRAMBLE INPUT FROM THE USER */
-                scramble = url_scra1.split('');
-
+                //scramble = url_scra1.split('');
+                /* USING THE API TO GET SCRAMBLE FROM THE URL */
+                var sa = getAlgs_URL( url_scra1 );
                 /* USING THE API TO GET SOLUTION FROM THE URL */
-                var s = getAlgs_URL(url_soln1);
+                var s = getAlgs_URL( url_soln1 );
 
                 /* THE ACTUAL SOLUTION INPUT FROM USER */
-                soln = s.split('');
-
-                val_soln = validateAlgs(s).legalAlg;
-                current_move = scramble.slice(cube.length); //the current scramble move to be executed
-                current_soln = soln.slice(cube_sol.length); //the current solution move to be executed
+                //soln = s.split('');
+                
+                val_scra = validateAlgs( sa ).legalAlg;//validated scramble entered by user
+                val_soln = validateAlgs( s ).legalAlg;//validated solution entered by user
+                //console.log( val_scra );
+                //console.log( val_soln );
+                //current_move = scramble.slice(cube.length); //the current scramble move to be executed
+                //current_soln = soln.slice(cube_sol.length); //the current solution move to be executed
 
                 /********THE BELOW PART IS TO HANDLE VARIOUS USER INPUTS*********/
                 //i.e :- For example if user deletes scramble and only solution is present
@@ -194,7 +200,7 @@ export const VirtualRubiksC = (props: TProps) => {
 
                 if( typeof scramble !== "undefined" && typeof soln !== "undefined"  && MoveNum.current == validateAlgs(val_soln.toString()).movesNum )
                 {
-                    cube1.move_handler( scramble.concat(soln) , 0 , scramble.length , MoveNum.current );
+                    cube1.move_handler( val_scra.concat( val_soln ) , 0 , val_scra.length , MoveNum.current );
                 }
                                 
 
@@ -239,7 +245,7 @@ export const VirtualRubiksC = (props: TProps) => {
                     if (play_flag == 1) 
                     
                     {
-                        slider_no = MovesNum.current;//storing the slider current value 
+                        slider_no = MoveNum.current;//storing the slider current value 
                         play_flag = 2; // so that the moves dont get inversed again
                         clearInterval(mycube);
                     }
