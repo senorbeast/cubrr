@@ -14,7 +14,7 @@ export default class CUBE {
     // @ts-ignore
     #mesh = []; // just add "default"
     // @ts-ignore
-    #current_state = [];
+    #current_state = string ;
     // @ts-ignore
     #core = [];
     constructor(

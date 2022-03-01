@@ -1,4 +1,4 @@
-//@ts-nocheck
+
 import { useEffect, useRef } from 'react';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as THREE from 'three';
