@@ -198,7 +198,7 @@ export const VirtualRubiksC = (props: TProps) => {
                 // REFER THIS FOR THE MOVES HANDLER IMPLEMENTATION WILL BE DONE IN THE PACKAGE ITSELF https://drive.google.com/file/d/1oIhS2a-5cExQxtVM7U2Dl7XwmcAsL6R7/view?usp=sharing
                 /***********BELOW CODE IS EXECUTED ONLY IF USER ENTERS SOMETHING NEW IN SCRAMBLE FIELD***********/
 
-                if( typeof scramble !== "undefined" && typeof soln !== "undefined"  && MoveNum.current == validateAlgs(val_soln.toString()).movesNum )
+                if( typeof val_scra !== "undefined" && typeof val_soln !== "undefined"  && MoveNum.current == validateAlgs(val_soln.toString()).movesNum )
                 {
                     cube1.move_handler( val_scra.concat( val_soln ) , 0 , val_scra.length , MoveNum.current );
                 }
@@ -285,7 +285,7 @@ export const VirtualRubiksC = (props: TProps) => {
 
                 console.log("*787878787");
                 slider_no = MoveNum.current;
-                cube1.move_handler( scramble.concat( soln ) , 1 , scramble.length , MoveNum.current - 1  );
+                cube1.move_handler( val_scra.concat( val_soln ) , 1 , val_scra.length , MoveNum.current - 1  );
             }
             // if (playBtn.current ) {
             // @ts-ignore
