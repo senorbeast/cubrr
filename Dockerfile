@@ -1,18 +1,15 @@
-
-FROM node:12
-
+# Docker will cache the results of the code
+FROM node:lts-alpine
+ENV NODE_ENV development
+# Add a work directory
 WORKDIR /app
-
-COPY package*.json ./
-
-RUN npm install yarn
-
+# Installing some dependencies ( Only when package.json is change code below runs)
+COPY package.json .
+COPY yarn.lock .
 RUN yarn install
 
+# Copy app files ( If any file is changed then code below runs)
 COPY . .
 
-ENV PORT=3000
-
-EXPOSE 5000
-
-CMD [ "yarn", "start" ]
+EXPOSE 3000
+CMD ["yarn", "start"]

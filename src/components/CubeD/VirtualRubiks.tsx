@@ -1,4 +1,4 @@
-
+//@ts-nocheck
 import { useEffect, useRef } from 'react';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as THREE from 'three';
@@ -166,15 +166,15 @@ export const VirtualRubiksC = (props: TProps) => {
                 /* THE ACTUAL SCRAMBLE INPUT FROM THE USER */
                 //scramble = url_scra1.split('');
                 /* USING THE API TO GET SCRAMBLE FROM THE URL */
-                var sa = getAlgs_URL( url_scra1 );
+                var sa = getAlgs_URL(url_scra1);
                 /* USING THE API TO GET SOLUTION FROM THE URL */
-                var s = getAlgs_URL( url_soln1 );
+                var s = getAlgs_URL(url_soln1);
 
                 /* THE ACTUAL SOLUTION INPUT FROM USER */
                 //soln = s.split('');
-                
-                val_scra = validateAlgs( sa ).legalAlg;//validated scramble entered by user
-                val_soln = validateAlgs( s ).legalAlg;//validated solution entered by user
+
+                val_scra = validateAlgs(sa).legalAlg; //validated scramble entered by user
+                val_soln = validateAlgs(s).legalAlg; //validated solution entered by user
                 //console.log( val_scra );
                 //console.log( val_soln );
                 //current_move = scramble.slice(cube.length); //the current scramble move to be executed
@@ -198,59 +198,55 @@ export const VirtualRubiksC = (props: TProps) => {
                 // REFER THIS FOR THE MOVES HANDLER IMPLEMENTATION WILL BE DONE IN THE PACKAGE ITSELF https://drive.google.com/file/d/1oIhS2a-5cExQxtVM7U2Dl7XwmcAsL6R7/view?usp=sharing
                 /***********BELOW CODE IS EXECUTED ONLY IF USER ENTERS SOMETHING NEW IN SCRAMBLE FIELD***********/
 
-                if( typeof val_scra !== "undefined" && typeof val_soln !== "undefined"  && MoveNum.current == validateAlgs(val_soln.toString()).movesNum )
-                {
-                    cube1.move_handler( val_scra.concat( val_soln ) , 0 , val_scra.length , MoveNum.current );
+                if (
+                    typeof val_scra !== 'undefined' &&
+                    typeof val_soln !== 'undefined' &&
+                    MoveNum.current == validateAlgs(val_soln.toString()).movesNum
+                ) {
+                    cube1.move_handler(
+                        val_scra.concat(val_soln),
+                        0,
+                        val_scra.length,
+                        MoveNum.current,
+                    );
                 }
-                                
 
-                if (playBtn.current && ( play_flag == 0 || play_flag == 2 )) 
-                {
+                if (playBtn.current && (play_flag == 0 || play_flag == 2)) {
                     // this is when the user initially presses the play button so that solution moves gets inversed
-                    if (play_flag == 0) 
-                    {
+                    if (play_flag == 0) {
                         //INVERSE THE SOLUTION ONLY IF THE SLIDER WAS AT LAST MOVES
-                        if( MoveNum.current == validateAlgs(val_soln.toString()).movesNum )
-                        {
+                        if (MoveNum.current == validateAlgs(val_soln.toString()).movesNum) {
                             cube1.fastMove(soln, 1);
                         }
                         //IF SLIDER NOT AT LAST MOVES START PLAYING ANIMATION FROM THE SLIDER MOVE
-                        else
-                        {
-                            tick = slider_no ;
+                        else {
+                            tick = slider_no;
                         }
-                        
-                        
+
                         mycube = setInterval(cube_play, 600);
                         play_flag = 1; // done so that setinterval is not called recursively
                     }
                     // this is done to see if pause was pressed in between
                     else if (play_flag == 2) {
                         //if slider is not where it was previously paused then move the tick value to current slider position
-                        if( tick != slider_no )
-                        {
+                        if (tick != slider_no) {
                             tick = slider_no;
                             mycube = setInterval(cube_play, 600);
-                        }
-                        else
-                        {
+                        } else {
                             mycube = setInterval(cube_play, 600);
                         }
-                        
+
                         play_flag = 1; // done so that setinterval is not called recursively
                     }
                 }
 
                 if (!playBtn.current) {
-                    if (play_flag == 1) 
-                    
-                    {
-                        slider_no = MoveNum.current;//storing the slider current value 
+                    if (play_flag == 1) {
+                        slider_no = MoveNum.current; //storing the slider current value
                         play_flag = 2; // so that the moves dont get inversed again
                         clearInterval(mycube);
                     }
-                    if (play_flag == 3) 
-                    {
+                    if (play_flag == 3) {
                         play_flag = 0;
                     }
                 }
@@ -279,13 +275,16 @@ export const VirtualRubiksC = (props: TProps) => {
             if (
                 slider_no != MoveNum.current &&
                 MoveNum.current != validateAlgs(val_soln.toString()).movesNum &&
-                ( play_flag == 0 || play_flag == 2 ) //to see if user is not playing animation
-            ) 
-            {
-
-                console.log("*787878787");
+                (play_flag == 0 || play_flag == 2) //to see if user is not playing animation
+            ) {
+                console.log('*787878787');
                 slider_no = MoveNum.current;
-                cube1.move_handler( val_scra.concat( val_soln ) , 1 , val_scra.length , MoveNum.current - 1  );
+                cube1.move_handler(
+                    val_scra.concat(val_soln),
+                    1,
+                    val_scra.length,
+                    MoveNum.current - 1,
+                );
             }
             // if (playBtn.current ) {
             // @ts-ignore

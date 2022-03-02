@@ -1,19 +1,47 @@
-
 # Cubrr
 
 ### 3D Realization of Rubik's Cube, with much more...
 
-### To run the project 
+### To run the project
+
 In the project directory, you can run:
+
 ```
 yarn install
 yarn start
 ```
+
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
+
+<hr>
+
+## Docker
+
+```bash
+docker build -t cubrr-image . # Build Docker Image named cubrr-image
+
+docker run -d -p 3000:3000 --name cubrr-app cubrr-image # Run docker image
+
+#1st 3000 : Outsider
+#2nd 3000 : Port of Container
+
+docker exec -it cubrr-app sh # Access the container
+```
+
+### Run Conatiner when /src contents changes
+
+`docker run -v $(pwd)/src:/app/src:ro -d -p 3000:3000 --name cubrr-app cubrr-image`
+2 way sync b/w project /src and docker /src (ro -> read only for container)
+For ENV variables : -e REACT_APP_NAME=
+or in Dockerfile or ENV file
+
+To kill docker container
+
+`docker rm cubrr-app -f`
 
 <hr>
 
