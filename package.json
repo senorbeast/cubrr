@@ -8,7 +8,7 @@
         "@material-ui/data-grid": "^4.0.0-alpha.27",
         "@material-ui/icons": "^4.11.2",
         "@material-ui/types": "^5.1.0",
-        "@reduxjs/toolkit": "^1.7.2",
+        "@reduxjs/toolkit": "^1.8.0",
         "alg": "^0.9.23",
         "apollo-cache-inmemory": "^1.6.6",
         "apollo-client": "^2.6.10",
