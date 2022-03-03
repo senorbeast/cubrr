@@ -2,6 +2,8 @@
 
 ### 3D Realization of Rubik's Cube, with much more...
 
+[Live Demo](https://zealous-sky-085e4cf00.1.azurestaticapps.net/)
+
 ### To run the project
 
 In the project directory, you can run:
