@@ -71,8 +71,8 @@ export const VirtualRubiksC = (props: TProps) => {
         var url_soln1 = 'a'; //ACTUAL SOLUTION WRITTEN BY THE USER TEMPORARILY STORED HERE (NOTE : THIS VARIABLE CAN BE REMOVED)
         var scramble = []; //SCRAMBLE AFTER REPLACING THE HTML URL REFERENCE CODES
         var soln: ConcatArray<any> = []; //SOLUTION AFTER REPLACING THE HTML URL REFERENCE CODES
-        var val_scra: Array<string> = [];
-        var val_soln: Array<string> = [];
+        var val_scra: ConcatArray<any> = [];;
+        var val_soln: ConcatArray<any> = [];;
         var cube: any[] = []; //SCRAMBLE MOVES DONE ON THE CUBE IS STORED HERE WHICH WILL USE DURING OUR RUNTIME
         var current_move = []; //CURRENT SCRAMBLE TO BE DONE ON THE CUBE THIS WILL CHANGE WITH THE USER ADDING SCRAMBLE
         var current_soln = []; //CURRENT SOLUTION TO BE DONE ON THE CUBE THIS WILL CHANGE WITT THE USER ADDING SOLUTION

@@ -172,7 +172,7 @@ export default class CUBE {
                 console.log( moves );
                 var moves1 = scramble_read( moves, 0 );
                 fast_execute(this.scene, this.meshs, 5, moves1);
-                this.#current_state = moves;//storing the moves done on the cube
+                this.#current_state = movess.slice();//storing the moves done on the cube
             }
             else 
             {
@@ -186,7 +186,7 @@ export default class CUBE {
                         var moves1 = scramble_read( moves, 0 );
                         console.log( moves1 );
                         fast_execute(this.scene, this.meshs, 5, moves1);
-                        this.#current_state = moves;//storing the moves done on the cube
+                        this.#current_state = moves.slice();//storing the moves done on the cube
                     }
                     else if ( this.#current_state.length > 0 )
                     {
@@ -205,7 +205,7 @@ export default class CUBE {
                             this.fastMove(this.#current_state, 1);//inverse the previously done moves
                             this.fastMove(moves, 0);//do the current moves
                         }
-                        this.#current_state = moves;//store the moves done on the cube
+                        this.#current_state = moves.slice();//store the moves done on the cube
                     }
                 }        
                 //USER DELETED MOVES
@@ -215,12 +215,12 @@ export default class CUBE {
                     {
                         this.fastMove(this.#current_state, 1);//inverse the previously done moves
                         this.fastMove(moves, 0);//do the current moves
-                        this.#current_state = moves;//store the moves done on the cube
+                        this.#current_state = moves.slice();//store the moves done on the cube
                     }
                     else 
                     {
                         this.fastMove(this.#current_state, 1);//inverse the previously done move
-                        this.#current_state = moves;//store the moves done on the cube
+                        this.#current_state = moves.slice();//store the moves done on the cube
                     }
 
                 
@@ -228,17 +228,31 @@ export default class CUBE {
                 //USER MIGHT HAVE EDITED MOVES
                 else if ( moves.length == this.#current_state.length )
                 {
-                    //MOVES ARE NOT SAME
-                    if(JSON.stringify(moves) !== JSON.stringify(this.#current_state) )
+                    console.log( JSON.stringify(moves) );
+                    if(JSON.stringify(moves) !== JSON.stringify(this.#current_state))
                     {
-                        console.log( "!===" );
-                        console.log( this.#current_state );
-                        console.log( moves );
+                        console.log( JSON.stringify(moves) );
+                        
                         this.fastMove(this.#current_state, 1);//inverse the previously done moves
                         this.fastMove(moves, 0);//do the current moves
-                        this.#current_state = moves;
-                        console.log( this.#current_state );
+                        this.#current_state = moves.slice();//store the moves done on the cube
+
                     }
+                    
+                
+                    //MOVES ARE NOT SAME
+                    // var compare = moves.slice();
+                    // if(JSON.stringify(compare) !==  )
+                    // {
+                    //     console.log( "!===" );
+                    //     // console.log( this.#current_state );
+                    //     // console.log( moves );
+                    //     this.fastMove(this.#current_state, 1);//inverse the previously done moves
+                    //     this.fastMove(moves, 0);//do the current moves
+                        
+                        
+                        
+                    // }
                 }
             }
         }
