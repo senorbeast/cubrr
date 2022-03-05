@@ -7,11 +7,14 @@ import { animate_read } from './CubeThree/cube_animate_read_3';
 import CUBE from './CubeThree/CUBE';
 import getAlgs_URL from './Parser/getAlgs_URL';
 import { useMoveNum, useSetMoveNum, usePlay } from './AlgProvider';
+import { scramble_read } from './CubeThree/cube_scramble_read';
 // import useSol from './AlgProvider';
 // import useScra from './AlgProvider';
 import validateAlgs from './Parser/validateAlg';
 // import { face_plane_make } from "./CubeThree/cube_face_plane";
-
+import { useAppSelector, useAppDispatch } from '../ReduxStore/hooks';
+import { toggleplay } from '../ReduxStore/playSlice';
+//let dispatch = useAppDispatch();
 interface TProps {
     widthp: number;
     heightp: number;
@@ -21,7 +24,7 @@ interface TProps {
 export const VirtualRubiksC = (props: TProps) => {
     const mount = useRef(null);
     let playBtn = useRef(false);
-    playBtn.current = usePlay();
+    playBtn.current = useAppSelector((state) => state.playBtn.value);
     let MoveNum = useRef(0);
     MoveNum.current = useMoveNum();
     let MoveSet = useRef((_arg0: number): void => {});
@@ -114,9 +117,10 @@ export const VirtualRubiksC = (props: TProps) => {
         };
         /* CUBE ANIMATION HANDLER */
         function cube_play() {
-            var cube_soln_animate = animate_read(soln, soln, [], 0);
+            var cube_soln_animate = scramble_read( val_soln ,0);
 
             if (tick < cube_soln_animate.length) {
+                cube1.current_state = val_scra.concat( val_soln.slice( 0 , tick + 1 ) );
                 cube1.animateMove(cube_soln_animate[tick], 400);
 
                 tick = tick + 1;
@@ -210,16 +214,17 @@ export const VirtualRubiksC = (props: TProps) => {
                         MoveNum.current,
                     );
                 }
-
+                //console.log( play_flag);
                 if (playBtn.current && (play_flag == 0 || play_flag == 2)) {
                     // this is when the user initially presses the play button so that solution moves gets inversed
                     if (play_flag == 0) {
                         //INVERSE THE SOLUTION ONLY IF THE SLIDER WAS AT LAST MOVES
                         if (MoveNum.current == validateAlgs(val_soln.toString()).movesNum) {
-                            cube1.fastMove(soln, 1);
+                            cube1.fastMove(val_soln, 1);
                         }
                         //IF SLIDER NOT AT LAST MOVES START PLAYING ANIMATION FROM THE SLIDER MOVE
-                        else {
+                        else
+                        {
                             tick = slider_no;
                         }
 
@@ -229,10 +234,19 @@ export const VirtualRubiksC = (props: TProps) => {
                     // this is done to see if pause was pressed in between
                     else if (play_flag == 2) {
                         //if slider is not where it was previously paused then move the tick value to current slider position
-                        if (tick != slider_no) {
+                        if (tick != slider_no) 
+                        {
+                            if (MoveNum.current == validateAlgs(val_soln.toString()).movesNum) {
+                                cube1.fastMove(val_soln, 1);
+                            }
                             tick = slider_no;
                             mycube = setInterval(cube_play, 600);
-                        } else {
+                        } 
+                        else 
+                        {
+                            if (MoveNum.current == validateAlgs(val_soln.toString()).movesNum) {
+                                cube1.fastMove(val_soln, 1);
+                            }
                             mycube = setInterval(cube_play, 600);
                         }
 

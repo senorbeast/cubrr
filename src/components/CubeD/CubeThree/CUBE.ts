@@ -13,7 +13,7 @@ export default class CUBE {
     // @ts-ignore
     #mesh = []; // just add "default"
     // @ts-ignore
-    #current_state:string[] = [] ;
+    current_state:string[] = [] ;
     // @ts-ignore
     #core = [];
     scene: THREE.Scene;
@@ -178,74 +178,68 @@ export default class CUBE {
         if( slider_mot == 0 )
         {
             //FIRST MOVE ENTERED BY USER 
-            if( typeof this.#current_state === "undefined" )
+            if( typeof this.current_state === "undefined" )
             {
-                console.log( moves );
                 var moves1 = scramble_read( moves, 0 );
                 fast_execute(this.scene, this.#mesh, 5, moves1);
-                this.#current_state = moves.slice();//storing the moves done on the cube
+                this.current_state = moves.slice();//storing the moves done on the cube
             }
             else 
             {
                 //USER APPENDED MOVES
-                if ( moves.length > this.#current_state.length )
+                if ( moves.length > this.current_state.length )
                 {
-                    console.log( this.#current_state );
-                    if( this.#current_state.length == 0 )
+                   
+                    if( this.current_state.length == 0 )
                     {
                         
                         var moves1 = scramble_read( moves, 0 );
-                        console.log( moves1 );
                         fast_execute(this.scene, this.#mesh, 5, moves1);
-                        this.#current_state = moves.slice();//storing the moves done on the cube
+                        this.current_state = moves.slice();//storing the moves done on the cube
                     }
-                    else if ( this.#current_state.length > 0 )
+                    else if ( this.current_state.length > 0 )
                     {
-                        var moves_check = moves.slice( 0, this.#current_state.length );
+                        var moves_check = moves.slice( 0, this.current_state.length );
                         //previously done moves are same on the cube
-                        if( JSON.stringify(moves_check) === JSON.stringify(this.#current_state) )
+                        if( JSON.stringify(moves_check) === JSON.stringify(this.current_state) )
                         {
-                            console.log( "**!!", typeof this.#mesh, this.#mesh );
-                            var current_moves = moves.slice( this.#current_state.length );
+                            var current_moves = moves.slice( this.current_state.length );
                             this.liveMove(current_moves, 0);//do the current moves
                         }
                         else
                         {
-                            console.log( "****" );
-                            console.log( moves );
-                            this.fastMove(this.#current_state, 1);//inverse the previously done moves
+
+                            this.fastMove(this.current_state, 1);//inverse the previously done moves
                             this.fastMove(moves, 0);//do the current moves
                         }
-                        this.#current_state = moves.slice();//store the moves done on the cube
+                        this.current_state = moves.slice();//store the moves done on the cube
                     }
                 }        
                 //USER DELETED MOVES
-                else if ( moves.length < this.#current_state.length )
+                else if ( moves.length < this.current_state.length )
                 {
                     if( moves.length != 0 )
                     {
-                        this.fastMove(this.#current_state, 1);//inverse the previously done moves
+                        this.fastMove(this.current_state, 1);//inverse the previously done moves
                         this.fastMove(moves, 0);//do the current moves
-                        this.#current_state = moves.slice();//store the moves done on the cube
+                        this.current_state = moves.slice();//store the moves done on the cube
                     }
                     else 
                     {
-                        this.fastMove(this.#current_state, 1);//inverse the previously done move
-                        this.#current_state = moves.slice();//store the moves done on the cube
+                        this.fastMove(this.current_state, 1);//inverse the previously done move
+                        this.current_state = moves.slice();//store the moves done on the cube
                     }
 
                 
                 }
                 //USER MIGHT HAVE EDITED MOVES
-                else if ( moves.length == this.#current_state.length )
+                else if ( moves.length == this.current_state.length )
                 {
-                    if(JSON.stringify(moves) !== JSON.stringify(this.#current_state))
+                    if(JSON.stringify(moves) !== JSON.stringify(this.current_state))
                     {
-                        console.log( JSON.stringify(moves) );
-                        
-                        this.fastMove(this.#current_state, 1);//inverse the previously done moves
+                        this.fastMove(this.current_state, 1);//inverse the previously done moves
                         this.fastMove(moves, 0);//do the current moves
-                        this.#current_state = moves.slice();//store the moves done on the cube
+                        this.current_state = moves.slice();//store the moves done on the cube
 
                     }
                     
@@ -255,9 +249,9 @@ export default class CUBE {
                     // if(JSON.stringify(compare) !==  )
                     // {
                     //     console.log( "!===" );
-                    //     // console.log( this.#current_state );
+                    //     // console.log( this.current_state );
                     //     // console.log( moves );
-                    //     this.fastMove(this.#current_state, 1);//inverse the previously done moves
+                    //     this.fastMove(this.current_state, 1);//inverse the previously done moves
                     //     this.fastMove(moves, 0);//do the current moves
                         
                         
@@ -270,11 +264,12 @@ export default class CUBE {
         else if ( slider_mot == 1 )
         {
             var slider_moves = moves.slice( 0 , scramble_length + slider_number + 1 );//moves till slider position
+            console.log( this.current_state );
             console.log( slider_moves );
-            console.log(this.#current_state);
-            this.fastMove(this.#current_state, 1);//inverse the previously done moves   
+            this.fastMove(this.current_state, 1);//inverse the previously done moves   
             this.fastMove( slider_moves , 0 );//do the current moves        
-            this.#current_state = slider_moves;//store the moves in current state
+            this.current_state = slider_moves;//store the moves in current state
+            
         }
         
 
