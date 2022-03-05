@@ -1,4 +1,3 @@
-//@ts-nocheck
 import { useEffect, useRef } from 'react';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as THREE from 'three';
@@ -43,13 +42,14 @@ export const VirtualRubiksC = (props: TProps) => {
         var cube_sol: string | any[] = [];
 
         var tick = 0; //used in time line to keep track on which move to be made
-
-        var FIELD_OF_VIEW = 45;
         var WIDTH = width;
         var HEIGHT = height;
+        // Frustum
+        var FIELD_OF_VIEW = 45;
         var ASPECT_RATIO = WIDTH / HEIGHT;
         var NEAR = 1;
         var FAR = 10000;
+
         var animation_flag = 0;
         var camera = new THREE.PerspectiveCamera(FIELD_OF_VIEW, ASPECT_RATIO, NEAR, FAR); //https://threejs.org/docs/index.html?q=CAMERA#api/en/cameras/PerspectiveCamera
 
@@ -70,9 +70,9 @@ export const VirtualRubiksC = (props: TProps) => {
         var url_scra1 = 'a'; //ACTUAL SCRAMBLE WRITTEN BY THE USER TEMPORARILY STORED HERE (NOTE : THIS VARIABLE CAN BE REMOVED)
         var url_soln1 = 'a'; //ACTUAL SOLUTION WRITTEN BY THE USER TEMPORARILY STORED HERE (NOTE : THIS VARIABLE CAN BE REMOVED)
         var scramble = []; //SCRAMBLE AFTER REPLACING THE HTML URL REFERENCE CODES
-        var soln: ConcatArray<any> = []; //SOLUTION AFTER REPLACING THE HTML URL REFERENCE CODES
-        var val_scra: ConcatArray<any> = [];;
-        var val_soln: ConcatArray<any> = [];;
+        var soln: string[] = []; //SOLUTION AFTER REPLACING THE HTML URL REFERENCE CODES
+        var val_scra: string[] = [];
+        var val_soln: string[] = [];
         var cube: any[] = []; //SCRAMBLE MOVES DONE ON THE CUBE IS STORED HERE WHICH WILL USE DURING OUR RUNTIME
         var current_move = []; //CURRENT SCRAMBLE TO BE DONE ON THE CUBE THIS WILL CHANGE WITH THE USER ADDING SCRAMBLE
         var current_soln = []; //CURRENT SOLUTION TO BE DONE ON THE CUBE THIS WILL CHANGE WITT THE USER ADDING SOLUTION

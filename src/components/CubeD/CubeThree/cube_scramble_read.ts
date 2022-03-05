@@ -2,14 +2,14 @@
 /**
    FUNCTION NAME : SCRAMBLE READ 
    DESC : THIS GIVES A FORMATTED ARRAY FOR THE MOVES ARRAY PASSED 
-   INPUT PARAMETERS : scramble  -  MOVES TBD IN ( STRING )  
+   INPUT PARAMETERS : scramble  -  MOVES TBD IN ( string[] )  
                       url1 - MOVES TBD IN ( STRING )  
                       cube -  MOVES ALREADY DONE ON THE CUBE ( STRING )
                       but - 0- TBD IN NORMAL SEQUENCE 1- TBD IN REVERSE SEQUENCE
    OUTPUT PARAMETERS : LEGAL MOVES ARRAY ( FORMAT( -1/1_MOVES_1/2 ) : 1: - CLOCKWISE FOR ( F,R,U,X,Y,Z,S ), -1 : - CLOCKWISE FOR ( L,D,B,M,E ) , MOVES , NO.OF ROTATIONS ) 
    */
 function scramble_read(
-    scramble: Array<string>,
+    scramble: string[],
     but: number,
 ): string[] {
     var flag = 0;//USED TO KEEP TRACK HOW MANY MOVES HAVE BEEN EXECUTED ON THE CUBE

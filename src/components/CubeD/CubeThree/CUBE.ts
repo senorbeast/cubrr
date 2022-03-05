@@ -1,4 +1,3 @@
-// @ts-nocheck
 import * as THREE from 'three';
 import { cubelets_form } from './cubelets';
 import { cube_color } from './cubelet_colors';
@@ -8,31 +7,38 @@ import { animate_execute } from './cube_animate_execute';
 import { animation_sequence } from './cube_animation_sequence'
 // import { animate_read } from "./cube_animate_read_3";
 import { draw_text } from './cube_text';
-import { ContactsOutlined } from '@material-ui/icons';
 
 export default class CUBE {
+    //Field declarations
     // @ts-ignore
     #mesh = []; // just add "default"
     // @ts-ignore
-    #current_state = [] ;
+    #current_state:string[] = [] ;
     // @ts-ignore
     #core = [];
+    scene: THREE.Scene;
+    camera: THREE.PerspectiveCamera ;
+    cube_size: number;
+    renderer: THREE.WebGLRenderer;
     constructor(
         cube_size: number,
-        camera: THREE.PerspectiveCamera | null,
+        camera: THREE.PerspectiveCamera ,
         renderer: THREE.WebGLRenderer,
-        scene: THREE.Scene | null,
+        scene: THREE.Scene,
     ) {
+        //Initializing2 field declarations
         this.scene = scene;
         this.camera = camera;
         this.camera.position.z = 275;
         this.camera.position.x = 275;
         this.camera.position.y = 300;
+        //@ts-ignore
         this.camera.tanFOV = Math.tan(((Math.PI / 180) * camera.fov) / 2); //  For maintaining scale on windowResize.
+        //@ts-ignore
         this.camera.oneToOne = function () {
             //  Return the Z position at which to place an object for exactly 100% scale.
             //  https://github.com/mrdoob/three.js/blob/dev/examples/js/renderers/CSS3DRenderer.js#L142
-
+            //@ts-ignore
             return (-0.5 / Math.tan((camera.fov * Math.PI) / 360)) * HEIGHT;
         };
         this.camera.lookAt(this.scene.position);
@@ -45,34 +51,35 @@ export default class CUBE {
        INPUT PARAMETERS : NONE 
        OUTPUT PARAMETERS : NONE
        */
-    add() {
+    add(): void {
         const tx1 = document.createElement('canvas').getContext('2d');
-        tx1.font = '150pt poppins ';
-        tx1.fillText('F', 100, 140);
+        //not-null assertion operator (!)
+        tx1!.font = '150pt poppins '; 
+        tx1!.fillText('F', 100, 140);
         const tx2 = document.createElement('canvas').getContext('2d');
-        tx2.font = '150pt roboto';
-        tx2.fillText('B', 100, 140);
+        tx2!.font = '150pt roboto';
+        tx2!.fillText('B', 100, 140);
         const tx3 = document.createElement('canvas').getContext('2d');
-        tx3.font = '150pt roboto';
-        tx3.fillText('R', 100, 140);
+        tx3!.font = '150pt roboto';
+        tx3!.fillText('R', 100, 140);
         const tx4 = document.createElement('canvas').getContext('2d');
-        tx4.font = '150pt roboto';
-        tx4.fillText('L', 100, 140);
+        tx4!.font = '150pt roboto';
+        tx4!.fillText('L', 100, 140);
         const tx5 = document.createElement('canvas').getContext('2d');
-        tx5.font = '150pt roboto';
-        tx5.fillText('U', 100, 140);
+        tx5!.font = '150pt roboto';
+        tx5!.fillText('U', 100, 140);
         const tx6 = document.createElement('canvas').getContext('2d');
-        tx6.font = '150pt roboto';
-        tx6.fillText('D', 100, 140);
+        tx6!.font = '150pt roboto';
+        tx6!.fillText('D', 100, 140);
 
         //const texture = new THREE.TextureLoader().load("rubiksLogoClassic.png" );
 
-        let texture1 = new THREE.CanvasTexture(tx1.canvas);
-        let texture2 = new THREE.CanvasTexture(tx2.canvas);
-        let texture3 = new THREE.CanvasTexture(tx3.canvas);
-        let texture4 = new THREE.CanvasTexture(tx4.canvas);
-        let texture5 = new THREE.CanvasTexture(tx5.canvas);
-        let texture6 = new THREE.CanvasTexture(tx6.canvas);
+        let texture1 = new THREE.CanvasTexture(tx1!.canvas);
+        let texture2 = new THREE.CanvasTexture(tx2!.canvas);
+        let texture3 = new THREE.CanvasTexture(tx3!.canvas);
+        let texture4 = new THREE.CanvasTexture(tx4!.canvas);
+        let texture5 = new THREE.CanvasTexture(tx5!.canvas);
+        let texture6 = new THREE.CanvasTexture(tx6!.canvas);
 
         texture1.anisotropy = this.renderer.capabilities.getMaxAnisotropy();
         texture2.anisotropy = this.renderer.capabilities.getMaxAnisotropy();
@@ -83,18 +90,20 @@ export default class CUBE {
         /* FOR CREATING A 3*3 CUBE */
         if (this.cube_size == 3) {
             //ADDING CUBELETS TO SCENE
-            var ret = cubelets_form(this.scene, this.cube_size, 5);
-            this.meshs = ret[0];
-            this.core = ret[1];
+            //@ts-ignore
+            var ret = cubelets_form(this.scene, this.cube_size, 5); //!
+            //@ts-ignore
+            this.#mesh = ret[0]; //@ts-ignore
+            this.#core = ret[1];
         }
     }
-    /* FUNCTION NAME : COLOR 
-       DESC: TAKES MESHS AS INPUT FOR FUNCTION AND ADDS COLOR ACCORDING TO THE STANDARDIZED COLOR SCHEME TO EACH CUBELET
-       INPUT PARAMETER : NONE
-       OUTPUT PARAMETER : NONE
-       */
-    color() {
-        cube_color(this.meshs);
+    /** FUNCTION NAME : COLOR 
+      * DESC: TAKES MESHS AS INPUT FOR FUNCTION AND ADDS COLOR ACCORDING TO THE STANDARDIZED COLOR SCHEME TO EACH CUBELET
+      * INPUT PARAMETER : NONE
+      * OUTPUT PARAMETER : NONE
+    */
+    color(): void {
+        cube_color(this.#mesh);
     }
     /* FUNCTION NAME : LIVEMOVE 
        DESC : THIS IS TO DO LIVE MOVES ENTERED BY USER ( EITHER NORMAL OR INVERESE ) WITHOUT ANIMATION ON THE CUBE  
@@ -105,15 +114,15 @@ export default class CUBE {
                                1: means the array generated by scramble read will be for the inverse moves
        */
     liveMove(
-        current_move: string | any[],
+        current_move: string[],
         num: number,
-    )
+    ): void
     {
         //generate an formated array of moves to be done on cube
         var moves = scramble_read(current_move , num);
          
         //pass the array so that moves are executed on cube
-        fast_execute(this.scene, this.meshs, 5, moves);
+        fast_execute(this.scene, this.#mesh, 5, moves);
     }
     /* FUNCTION NAME : FAST MOVE 
        DESC : TO DO FAST MOVES ON CUBE WITHOUT ANIMATION 
@@ -121,9 +130,9 @@ export default class CUBE {
                           num - NUMBER : 0 - TO BE DONE IN SEQUENCE  1 :- TO BE DONE IN INVERSE SEQUENCE
        RETURN : NONE
        */
-    fastMove(moves: string | ConcatArray<any>, num: number) {
+    fastMove(moves: string[] , num: number): void {
         var moves1 = scramble_read(moves, num);
-        fast_execute(this.scene, this.meshs, 5, moves1);
+        fast_execute(this.scene, this.#mesh, 5, moves1);
     }
     /**
        FUNCTION NAME : ANIMATE MOVE
@@ -132,16 +141,18 @@ export default class CUBE {
                           time - time taken for each move animation to play
        RETURN : NONE    
     */
-    animateMove(move: string, time: number) {
-        //   var moves = animate_read(move, move, [], 0);
-        animate_execute(this.scene, this.meshs, move, 5, time, 0);
+    animateMove(move: string, time: number): void {
+        //!   var moves = animate_read(move, move, [], 0);
+        //@ts-ignore
+        animate_execute(this.scene, this.#mesh, move, 5, time, 0);
     }
 
     text(
         text: string,
         ctx: CanvasRenderingContext2D | null,
         c: HTMLCanvasElement | HTMLImageElement | HTMLVideoElement,
-    ) {
+    ): void {
+        //@ts-ignore
         draw_text(this.scene, text, this.renderer, ctx, c);
     }
     /**
@@ -150,9 +161,9 @@ export default class CUBE {
        INPUT PARAMETERS : NONE 
        RETURN : NONE 
        */
-    animate_sequence()
+    animate_sequence(): void
     {
-        animation_sequence( this.scene , this.meshs , this.core ,this.camera)
+        animation_sequence( this.scene , this.#mesh , this.#core ,this.camera)
     }
     /**
        FUNCTION NAME : MOVE_HANDLER
@@ -161,7 +172,7 @@ export default class CUBE {
        scramble_length - length of scramble , slider_number - position of slider
        RETURN : NONE                      
     */
-    move_handler( moves: string | ConcatArray<any> , slider_mot : number , scramble_length : number , slider_number)
+    move_handler( moves: string[] , slider_mot : number , scramble_length : number , slider_number: number): void
     {
         //HANDLE NORMALE MOVES
         if( slider_mot == 0 )
@@ -171,8 +182,8 @@ export default class CUBE {
             {
                 console.log( moves );
                 var moves1 = scramble_read( moves, 0 );
-                fast_execute(this.scene, this.meshs, 5, moves1);
-                this.#current_state = movess.slice();//storing the moves done on the cube
+                fast_execute(this.scene, this.#mesh, 5, moves1);
+                this.#current_state = moves.slice();//storing the moves done on the cube
             }
             else 
             {
@@ -185,7 +196,7 @@ export default class CUBE {
                         
                         var moves1 = scramble_read( moves, 0 );
                         console.log( moves1 );
-                        fast_execute(this.scene, this.meshs, 5, moves1);
+                        fast_execute(this.scene, this.#mesh, 5, moves1);
                         this.#current_state = moves.slice();//storing the moves done on the cube
                     }
                     else if ( this.#current_state.length > 0 )
@@ -194,7 +205,7 @@ export default class CUBE {
                         //previously done moves are same on the cube
                         if( JSON.stringify(moves_check) === JSON.stringify(this.#current_state) )
                         {
-                            console.log( "**!!" );
+                            console.log( "**!!", typeof this.#mesh, this.#mesh );
                             var current_moves = moves.slice( this.#current_state.length );
                             this.liveMove(current_moves, 0);//do the current moves
                         }
@@ -228,7 +239,6 @@ export default class CUBE {
                 //USER MIGHT HAVE EDITED MOVES
                 else if ( moves.length == this.#current_state.length )
                 {
-                    console.log( JSON.stringify(moves) );
                     if(JSON.stringify(moves) !== JSON.stringify(this.#current_state))
                     {
                         console.log( JSON.stringify(moves) );
