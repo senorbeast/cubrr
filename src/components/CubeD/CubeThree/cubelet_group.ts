@@ -2,7 +2,7 @@ import * as THREE from 'three';
 
 function layer_group(
     scene: { add: any },
-    meshs: string | any[],
+    mesh: any[],
     layer: string,
     padding: number,
     dir: number,
@@ -41,11 +41,11 @@ function layer_group(
     }
     if (layer == 'D') {
         for (var qi = 0; qi < 27; qi++) {
-            meshs[qi].getWorldPosition(v1);
+            mesh[qi].getWorldPosition(v1);
 
             if (Math.round(v1.y) == -(50 + padding)) {
                 //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-                pivotD.attach(meshs[qi]);
+                pivotD.attach(mesh[qi]);
             }
         }
 
@@ -58,11 +58,11 @@ function layer_group(
 
     if (layer == 'U') {
         for (var qi = 0; qi < 27; qi++) {
-            meshs[qi].getWorldPosition(v1);
+            mesh[qi].getWorldPosition(v1);
 
             if (Math.round(v1.y) == 50 + padding) {
                 //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-                pivotU.attach(meshs[qi]);
+                pivotU.attach(mesh[qi]);
             }
         }
 
@@ -75,11 +75,11 @@ function layer_group(
 
     if (layer == 'F') {
         for (var qi = 0; qi < 27; qi++) {
-            meshs[qi].getWorldPosition(v1);
+            mesh[qi].getWorldPosition(v1);
 
             if (Math.round(v1.z) == 50 + padding) {
                 //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-                pivotF.attach(meshs[qi]);
+                pivotF.attach(mesh[qi]);
             }
         }
 
@@ -92,11 +92,11 @@ function layer_group(
 
     if (layer == 'B') {
         for (var qi = 0; qi < 27; qi++) {
-            meshs[qi].getWorldPosition(v1);
+            mesh[qi].getWorldPosition(v1);
 
             if (Math.round(v1.z) == -(50 + padding)) {
                 //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-                pivotB.attach(meshs[qi]);
+                pivotB.attach(mesh[qi]);
             }
         }
 
@@ -109,11 +109,11 @@ function layer_group(
 
     if (layer == 'R') {
         for (var qi = 0; qi < 27; qi++) {
-            meshs[qi].getWorldPosition(v1);
+            mesh[qi].getWorldPosition(v1);
 
             if (Math.round(v1.x) == 50 + padding) {
                 //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-                pivotR.attach(meshs[qi]);
+                pivotR.attach(mesh[qi]);
             }
         }
 
@@ -126,11 +126,11 @@ function layer_group(
 
     if (layer == 'L') {
         for (var qi = 0; qi < 27; qi++) {
-            meshs[qi].getWorldPosition(v1);
+            mesh[qi].getWorldPosition(v1);
 
             if (Math.round(v1.x) == -(50 + padding)) {
                 //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-                pivotL.attach(meshs[qi]);
+                pivotL.attach(mesh[qi]);
             }
         }
         scene.add(pivotL);
@@ -141,11 +141,11 @@ function layer_group(
     }
     if (layer == 'r') {
         for (var qi = 0; qi < 27; qi++) {
-            meshs[qi].getWorldPosition(v1);
+            mesh[qi].getWorldPosition(v1);
 
             if (Math.round(v1.x) != -(50 + padding)) {
                 //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-                pivotr.attach(meshs[qi]);
+                pivotr.attach(mesh[qi]);
             }
         }
 
@@ -157,11 +157,11 @@ function layer_group(
     }
     if (layer == 'l') {
         for (var qi = 0; qi < 27; qi++) {
-            meshs[qi].getWorldPosition(v1);
+            mesh[qi].getWorldPosition(v1);
 
             if (Math.round(v1.x) != 50 + padding) {
                 //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-                pivotl.attach(meshs[qi]);
+                pivotl.attach(mesh[qi]);
             }
         }
 
@@ -173,11 +173,11 @@ function layer_group(
     }
     if (layer == 'u') {
         for (var qi = 0; qi < 27; qi++) {
-            meshs[qi].getWorldPosition(v1);
+            mesh[qi].getWorldPosition(v1);
 
             if (Math.round(v1.y) != -(50 + padding)) {
                 //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-                pivotu.attach(meshs[qi]);
+                pivotu.attach(mesh[qi]);
             }
         }
 
@@ -189,11 +189,11 @@ function layer_group(
     }
     if (layer == 'd') {
         for (var qi = 0; qi < 27; qi++) {
-            meshs[qi].getWorldPosition(v1);
+            mesh[qi].getWorldPosition(v1);
 
             if (Math.round(v1.y) != 50 + padding) {
                 //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-                pivotd.attach(meshs[qi]);
+                pivotd.attach(mesh[qi]);
             }
         }
 
@@ -205,11 +205,11 @@ function layer_group(
     }
     if (layer == 'b') {
         for (var qi = 0; qi < 27; qi++) {
-            meshs[qi].getWorldPosition(v1);
+            mesh[qi].getWorldPosition(v1);
 
             if (Math.round(v1.z) != 50 + padding) {
                 //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-                pivotb.attach(meshs[qi]);
+                pivotb.attach(mesh[qi]);
             }
         }
 
@@ -221,11 +221,11 @@ function layer_group(
     }
     if (layer == 'f') {
         for (var qi = 0; qi < 27; qi++) {
-            meshs[qi].getWorldPosition(v1);
+            mesh[qi].getWorldPosition(v1);
 
             if (Math.round(v1.z) != -(50 + padding)) {
                 //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-                pivotf.attach(meshs[qi]);
+                pivotf.attach(mesh[qi]);
             }
         }
 
@@ -237,10 +237,10 @@ function layer_group(
     }
     if (layer == 'x') {
         for (var qi = 0; qi < 27; qi++) {
-            meshs[qi].getWorldPosition(v1);
+            mesh[qi].getWorldPosition(v1);
 
             //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-            pivotx.attach(meshs[qi]);
+            pivotx.attach(mesh[qi]);
         }
 
         scene.add(pivotx);
@@ -251,10 +251,10 @@ function layer_group(
     }
     if (layer == 'y') {
         for (var qi = 0; qi < 27; qi++) {
-            meshs[qi].getWorldPosition(v1);
+            mesh[qi].getWorldPosition(v1);
 
             //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-            pivoty.attach(meshs[qi]);
+            pivoty.attach(mesh[qi]);
         }
 
         scene.add(pivoty);
@@ -265,10 +265,10 @@ function layer_group(
     }
     if (layer == 'z') {
         for (var qi = 0; qi < 27; qi++) {
-            meshs[qi].getWorldPosition(v1);
+            mesh[qi].getWorldPosition(v1);
 
             //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-            pivotz.attach(meshs[qi]);
+            pivotz.attach(mesh[qi]);
         }
 
         scene.add(pivotz);
@@ -280,11 +280,11 @@ function layer_group(
 
     if (layer == 'M') {
         for (var qi = 0; qi < 27; qi++) {
-            meshs[qi].getWorldPosition(v1);
+            mesh[qi].getWorldPosition(v1);
 
             if (Math.round(v1.x * 100) / 100 == 0) {
                 //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-                pivotM.attach(meshs[qi]);
+                pivotM.attach(mesh[qi]);
             }
         }
         scene.add(pivotM);
@@ -296,11 +296,11 @@ function layer_group(
 
     if (layer == 'S') {
         for (var qi = 0; qi < 27; qi++) {
-            meshs[qi].getWorldPosition(v1);
+            mesh[qi].getWorldPosition(v1);
 
             if (Math.round(v1.z * 100) / 100 == 0) {
                 //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-                pivotS.attach(meshs[qi]);
+                pivotS.attach(mesh[qi]);
             }
         }
         scene.add(pivotS);
@@ -312,11 +312,11 @@ function layer_group(
 
     if (layer == 'E') {
         for (var qi = 0; qi < 27; qi++) {
-            meshs[qi].getWorldPosition(v1);
+            mesh[qi].getWorldPosition(v1);
 
             if (Math.round(v1.y * 100) / 100 == 0) {
                 //ADDITION OF THE CUBIES WHICH ARE CURRENTLY PRESENT IN THE LAYER
-                pivotE.attach(meshs[qi]);
+                pivotE.attach(mesh[qi]);
             }
         }
         scene.add(pivotE);

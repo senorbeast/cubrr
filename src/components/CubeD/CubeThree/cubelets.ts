@@ -1,4 +1,3 @@
-// @ts-nocheck
 import * as THREE from 'three';
 /* FUNCTION NAME: CUBELETS_FORM
    DESC : TO ADD CUBELETS TO THE 3D SCENE
@@ -27,7 +26,7 @@ function cubelets_form(
     tx5: THREE.Texture | null,
     tx6: THREE.Texture | null,
 ): THREE.Mesh<THREE.CylinderGeometry, THREE.MeshBasicMaterial>[] | THREE.Mesh<any> {
-    var meshs = [];
+    var mesh = [];
     var core = [];
     var name_plane = [];
     var ret = [];
@@ -87,7 +86,7 @@ function cubelets_form(
                 cube2.updateMatrixWorld(true);
                 cube2.matrixAutoUpdate = true;
 
-                meshs.push(cube2);
+                mesh.push(cube2);
                 //this is made true so that we can add colours
                 cube2.material.vertexColors = true;
                 cube2.geometry.verticesNeedUpdate = true;
@@ -153,7 +152,7 @@ function cubelets_form(
         scene.add(plane);
         name_plane.push(plane);
     }
-    ret[0] = meshs;
+    ret[0] = mesh;
     ret[1] = core;
     ret[2] = name_plane;
     // @ts-ignore

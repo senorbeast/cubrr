@@ -8,7 +8,7 @@ import { animate_execute } from './cube_animate_execute.js';
 
 function beg_cross(
     scene: { add: (arg0: THREE.Object3D) => void },
-    meshs: string | any[],
+    mesh: any[],
     ctx: any,
     c: any,
     padding: any,
@@ -55,15 +55,15 @@ function beg_cross(
  
         0
     );
-    fast_execute(scene, meshs, padding, scramble);
+    fast_execute(scene, mesh, padding, scramble);
     var white_edges = [4, 10, 12, 13, 14, 16, 19, 21, 22, 23, 25];
     var cube = new THREE.Object3D();
     var cross = new THREE.Object3D();
     for (var i = 0; i < white_edges.length; i++) {
-        cross.attach(meshs[white_edges[i]]);
+        cross.attach(mesh[white_edges[i]]);
     }
-    for (var j = 0; j < meshs.length; j++) {
-        cube.attach(meshs[j]);
+    for (var j = 0; j < mesh.length; j++) {
+        cube.attach(mesh[j]);
     }
     scene.add(cube);
     scene.add(cross);
@@ -76,8 +76,8 @@ function beg_cross(
         onStartParams: [scene, 'First lets scramble the cube', renderer, ctx, c, 1],
     });
     cross_time.add(tween1, 'anime1');
-    for (var k = 0; k < meshs.length; k++) {
-        var tween2 = gsap.to(meshs[k].material, {
+    for (var k = 0; k < mesh.length; k++) {
+        var tween2 = gsap.to(mesh[k].material, {
             duration: 1,
             opacity: 0.1,
             onStart: draw_text,
@@ -86,7 +86,7 @@ function beg_cross(
         cross_time.add(tween2, 'anime2');
     }
     for (var p = 0; p < white_edges.length; p++) {
-        var tween3 = gsap.to(meshs[white_edges[p]].material, {
+        var tween3 = gsap.to(mesh[white_edges[p]].material, {
             duration: 1,
             opacity: 1,
         });
@@ -102,7 +102,7 @@ function beg_cross(
             0,
         );
         console.log(sol);
-        animate_execute(scene, meshs, sol, padding, 400, 1);
+        animate_execute(scene, mesh, sol, padding, 400, 1);
     }
 }
 export { beg_cross };

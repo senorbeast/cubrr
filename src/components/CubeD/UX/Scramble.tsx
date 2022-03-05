@@ -2,8 +2,9 @@ import { Typography } from '@material-ui/core';
 import { useEffect } from 'react';
 import { ScrambleI, InTextArea1 } from './CubeElements';
 import selMode from './modes';
-import { useScra, useSetScra, useSol } from '../AlgProvider';
-
+import { useScra, useSetScra, useSol, useSetMoveNum } from '../AlgProvider';
+import getAlgs from '../Parser/getAlgs';
+import validateAlgs from '../Parser/validateAlg';
 interface propsM {
     mode: string;
 }
@@ -12,6 +13,8 @@ const Scramble = ({ mode }: propsM) => {
     let newScra = useScra();
     let newSol = useSol();
     let setScra = useSetScra();
+    let setCMovNum = useSetMoveNum();
+
     useEffect(() => {
         if (newScra != undefined) {
             console.log('URL useEffect');
@@ -45,6 +48,7 @@ const Scramble = ({ mode }: propsM) => {
         var Scra = event.target.value;
         //setnewScra(Scra);
         setScra(Scra);
+        setCMovNum(validateAlgs(getAlgs(newSol)).movesNum);
         //handleScra(Scra);
     }
 };
