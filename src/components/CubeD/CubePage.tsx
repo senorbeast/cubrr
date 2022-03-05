@@ -59,7 +59,7 @@ function CubePage(props) {
                     <Scramble mode={mode} />
                 </Suspense>
                 <Suspense fallback={<div> Loading Solution</div>}>
-                    <Solution mode={mode} />;
+                    <Solution mode={mode} />
                 </Suspense>
             </CardContainer>
         </>
