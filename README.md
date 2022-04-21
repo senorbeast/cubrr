@@ -2,7 +2,7 @@
 
 [![Azure Static Web Apps CI/CD](https://github.com/senorbeast/cubrr/actions/workflows/azure-static-web-apps-zealous-sky-085e4cf00.yml/badge.svg)](https://github.com/senorbeast/cubrr/actions/workflows/azure-static-web-apps-zealous-sky-085e4cf00.yml) [![Docker](https://github.com/senorbeast/cubrr/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/senorbeast/cubrr/actions/workflows/docker-publish.yml)  [![CodeQL](https://github.com/senorbeast/cubrr/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/senorbeast/cubrr/actions/workflows/codeql-analysis.yml) 
 ### 3D Realization of Rubik's Cube, with much more...
-[ Live Demo ](https://zealous-sky-085e4cf00.1.azurestaticapps.net/)
+<!-- [ Live Demo ](https://zealous-sky-085e4cf00.1.azurestaticapps.net/) -->
 
 ### To run the project
 
