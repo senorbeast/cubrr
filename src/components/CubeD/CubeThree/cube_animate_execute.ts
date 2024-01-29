@@ -6,7 +6,7 @@ import { layer_group } from './cubelet_group';
 var mov1 = 0;
 /* FUNCTION NAME : ANIMATE_EXECUTE
    INPUT PARAMETER : scene - 3d scene
-                     meshs - the meshs of all cubelets added
+                     mesh - the mesh of all cubelets added
                      soln - the array of moves that need to be animated
                      padding - the gaps between pieces 
                      time - the time gap between each move animation
@@ -16,35 +16,35 @@ var mov1 = 0;
 */
 function animate_execute(
     scene: { add: (arg0: Object3D) => void },
-    meshs: string | any[],
-    soln: string | string[],
+    mesh: any[],
+    soln: string[],
     padding: number,
     time: number,
     si_mu: number,
 ): void {
     if (si_mu == 0) {
-        rotate(scene, meshs, soln, padding, time);
+        rotate(scene, mesh,soln, padding, time);
     }
     if (si_mu == 1) {
-        mu_rotate(scene, meshs, soln, padding, time);
+        mu_rotate(scene, mesh, soln, padding, time);
     }
 }
 
-function comp(scene: any, meshs: any, soln: any, padding: any): void {
-    gsap.delayedCall(0.5, comp1, [scene, meshs, soln, padding]);
+function comp(scene: any, mesh: any, soln: any, padding: any): void {
+    gsap.delayedCall(0.5, comp1, [scene, mesh, soln, padding]);
 }
 
-function comp1(scene: any, meshs: any, soln: any, padding: any): void {
+function comp1(scene: any, mesh: any, soln: any, padding: any): void {
     mov1 = mov1 + 1;
 
     if (mov1 <= soln.length - 1) {
-        mu_rotate(scene, meshs, soln, padding, 400);
+        mu_rotate(scene, mesh, soln, padding, 400);
     }
 }
 
 function rotate(
     scene: { add: any },
-    meshs: string | any[],
+    mesh: any[],
     soln: string | string[],
     padding: number,
     time: number,
@@ -52,8 +52,8 @@ function rotate(
     time = time / 1000;
 
     var moves3 = soln.split('_');
-
-    var moves1 = layer_group(scene, meshs, moves3[1], padding, Number(moves3[0]), moves3[2]);
+    //!
+    var moves1 = layer_group(scene, mesh, moves3[1], padding, Number(moves3[0]), moves3[2]);
     if (
         moves3[1] == 'U' ||
         moves3[1] == 'D' ||
@@ -94,7 +94,7 @@ function rotate(
 }
 function mu_rotate(
     scene: { add: (arg0: Object3D) => void },
-    meshs: string | any[],
+    mesh: string | any[],
     soln: string | string[],
     padding: number,
     time: number,
@@ -103,7 +103,7 @@ function mu_rotate(
     console.log(soln);
     var moves3 = soln[mov1].split('_');
 
-    var moves1 = layer_group(scene, meshs, moves3[1], padding, Number(moves3[0]), moves3[2]);
+    var moves1 = layer_group(scene, mesh, moves3[1], padding, Number(moves3[0]), moves3[2]);
     if (
         moves3[1] == 'U' ||
         moves3[1] == 'D' ||
@@ -116,7 +116,7 @@ function mu_rotate(
             duration: time,
             y: moves1[0].rotation.y + moves1[2],
             onComplete: comp,
-            onCompleteParams: [scene, meshs, soln, padding],
+            onCompleteParams: [scene, mesh, soln, padding],
         });
     } else if (
         moves3[1] == 'F' ||
@@ -130,7 +130,7 @@ function mu_rotate(
             duration: time,
             z: moves1[0].rotation.z + moves1[2],
             onComplete: comp,
-            onCompleteParams: [scene, meshs, soln, padding],
+            onCompleteParams: [scene, mesh, soln, padding],
         });
     } else if (
         moves3[1] == 'R' ||
@@ -144,7 +144,7 @@ function mu_rotate(
             duration: time,
             x: moves1[0].rotation.x + moves1[2],
             onComplete: comp,
-            onCompleteParams: [scene, meshs, soln, padding],
+            onCompleteParams: [scene, mesh, soln, padding],
         });
     }
 }
